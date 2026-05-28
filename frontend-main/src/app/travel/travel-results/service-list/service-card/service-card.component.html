@@ -1,0 +1,90 @@
+<!-- src/app/components/travel/service-card/service-card.component.html -->
+
+<div class="service-card">
+  <!-- ROW 1: Operator Info + Class Badge -->
+  <div class="card-header">
+    <div class="operator-info">
+      @if (trip().type === "flight") {
+        <i class="bi bi-airplane-fill mode-icon flight"></i>
+      } @else if (trip().type === "train") {
+        <i class="bi bi-train-front-fill mode-icon train"></i>
+      } @else {
+        <i class="bi bi-bus-front-fill mode-icon bus"></i>
+      }
+      <div>
+        <span class="operator-name">{{ trip().operatorName }}</span>
+        <span class="service-number">{{ trip().serviceNumber }}</span>
+      </div>
+    </div>
+    <span class="class-badge">{{ trip().cabinClass }}</span>
+  </div>
+
+  <!-- ROW 2: Route + Time -->
+  <div class="route-section">
+    <!-- Departure -->
+    <div class="time-block">
+      <span class="time">{{ formatTime(trip().schedule.departureTime) }}</span>
+      <span class="location">{{ trip().from }}</span>
+    </div>
+
+    <!-- Connector -->
+    <div class="connector">
+      <span class="duration">{{ trip().schedule.duration }}</span>
+      <div class="connector-line">
+        @if (trip().type === "flight") {
+          <span class="line flight-line"></span>
+          <i
+            class="bi bi-airplane connector-icon"
+            style="transform: rotate(90deg)"
+          ></i>
+          <span class="line flight-line"></span>
+        } @else if (trip().type === "train") {
+          <span class="line train-line"></span>
+          <i class="bi bi-train-front connector-icon"></i>
+          <span class="line train-line"></span>
+        } @else {
+          <span class="line bus-line"></span>
+          <i class="bi bi-bus-front connector-icon"></i>
+          <span class="line bus-line"></span>
+        }
+      </div>
+    </div>
+
+    <!-- Arrival -->
+    <div class="time-block arrival">
+      <span class="time">{{ formatTime(trip().schedule.arrivalTime) }}</span>
+      <span class="location">{{ trip().to }}</span>
+    </div>
+  </div>
+
+  <!-- ROW 3: Amenities -->
+  <div class="amenities">
+    @for (amenity of trip().amenities; track amenity) {
+      <span class="amenity-pill">{{ amenity }}</span>
+    }
+  </div>
+
+  <!-- ROW 4: Price + Availability + Select -->
+  <div class="card-footer">
+    <div class="price-section">
+      <span class="fare">₹{{ trip().fare }}</span>
+      <span class="market-rate">₹{{ trip().marketRate }}</span>
+      @if (savings > 0) {
+        <span class="savings-badge">Save ₹{{ savings }}</span>
+      }
+    </div>
+
+    <div class="availability-and-action">
+      @if (isLowAvailability) {
+        <span class="seats-warning"
+          >Only {{ availableSeatsCount }} {{ seatLabel }} left!</span
+        >
+      } @else {
+        <span class="seats-info"
+          >{{ availableSeatsCount }} {{ seatLabel }} available</span
+        >
+      }
+      <button class="btn-select" (click)="onSelect()">Select</button>
+    </div>
+  </div>
+</div>

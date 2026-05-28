@@ -1,0 +1,1268 @@
+<!-- ══════ PAYMENT PROCESSING OVERLAY ══════ -->
+<div *ngIf="paymentState() !== 'idle'"
+  class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="
+    background: rgba(3, 4, 94, 0.55);
+    backdrop-filter: blur(6px);
+    z-index: 10002;
+  ">
+  <div class="bg-white rounded-4 shadow-lg text-center p-5"
+    style="min-width: 320px; max-width: 400px; animation: payPopIn 0.4s ease">
+    <ng-container *ngIf="paymentState() === 'processing'">
+      <div class="mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle"
+        style="width: 80px; height: 80px; background: #e0f7fa">
+        <i class="bi bi-arrow-repeat spin-icon" style="font-size: 2.5rem; color: #0077b6"></i>
+      </div>
+      <h5 class="fw-bold mb-1" style="color: #03045e">Processing Payment</h5>
+      <p class="text-muted small mb-3">
+        Please wait while we confirm your booking...
+      </p>
+      <div class="d-flex justify-content-center gap-2">
+        <span class="pay-dot"></span><span class="pay-dot"></span><span class="pay-dot"></span>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="paymentState() === 'confirmed'">
+      <div class="mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle" style="
+          width: 80px;
+          height: 80px;
+          background: #ecfdf5;
+          animation: popIn 0.5s ease;
+        ">
+        <i class="bi bi-check-circle-fill" style="font-size: 3rem; color: #059669"></i>
+      </div>
+      <h5 class="fw-bold text-success mb-1">Booking Confirmed!</h5>
+      <p class="text-muted small">Generating your ticket...</p>
+    </ng-container>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     CONFIRMATION TICKET  (travel-style)
+══════════════════════════════════════════════════════════════ -->
+<div *ngIf="isBooked && isLoggedIn" class="hotel-bg" style="min-height: 100vh">
+  <div class="success-page">
+    <!-- ── Success Header ── -->
+    <div class="text-center mb-4">
+      <div class="success-icon mx-auto mb-3">
+        <i class="bi bi-check-circle-fill"></i>
+      </div>
+      <h3 class="fw-bold text-success mb-1">Booking Confirmed!</h3>
+      <p class="text-muted small">Your hotel voucher is ready</p>
+    </div>
+
+    <!-- ── Ticket Card ── -->
+    <div class="ticket-card">
+      <!-- Ticket Header -->
+      <div class="ticket-header d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-2">
+          <i class="bi bi-building text-white fs-5"></i>
+          <div>
+            <span class="fw-bold text-white">{{ hotelName }}</span>
+            <small class="d-block text-white-50">{{ roomType | titlecase }} · {{ bedType | titlecase }} Bed ×
+              {{ roomCount }}</small>
+          </div>
+        </div>
+        <div class="text-end">
+          <small class="d-block text-white-50">Booking Ref</small>
+          <span class="fw-bold text-white booking-ref">{{
+            bookingReference
+            }}</span>
+        </div>
+      </div>
+
+      <!-- Tear line -->
+      <div class="tear-line">
+        <div class="tear-circle left"></div>
+        <div class="tear-dashes"></div>
+        <div class="tear-circle right"></div>
+      </div>
+
+      <!-- Ticket Body -->
+      <div class="ticket-body">
+        <!-- Check-in / Check-out route row -->
+        <div class="route-section d-flex justify-content-between align-items-center mb-3">
+          <div class="text-center">
+            <p class="route-city fw-bold mb-0">{{ checkIn | date: "d MMM" }}</p>
+            <small class="text-muted d-block">{{
+              checkIn | date: "EEE, yyyy"
+              }}</small>
+            <small class="text-muted">Check-in</small>
+          </div>
+          <div class="route-connector text-center">
+            <i class="bi bi-moon-stars-fill route-icon"></i>
+            <div class="route-line"></div>
+            <small class="text-muted">{{ nights }} Night{{ nights > 1 ? "s" : "" }}</small>
+          </div>
+          <div class="text-center">
+            <p class="route-city fw-bold mb-0">
+              {{ checkOut | date: "d MMM" }}
+            </p>
+            <small class="text-muted d-block">{{
+              checkOut | date: "EEE, yyyy"
+              }}</small>
+            <small class="text-muted">Check-out</small>
+          </div>
+        </div>
+
+        <!-- Guest Details -->
+        <div class="mb-3">
+          <small class="text-uppercase text-muted fw-semibold ls-1">Guest Details</small>
+          <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+            <div>
+              <span class="small fw-semibold">
+                {{ guestTitle }}. {{ firstName
+                }}{{ lastName ? " " + lastName : "" }}
+                <span class="badge bg-primary ms-1" style="font-size: 9px">Primary</span>
+              </span>
+              <div class="d-flex gap-2 mt-1">
+                <small class="text-muted"><i class="bi bi-phone me-1"></i>+91 {{ phone }}</small>
+              </div>
+            </div>
+            <div class="text-end">
+              <small class="d-block text-muted">Guests</small>
+              <span class="badge bg-light text-dark border fw-semibold">{{
+                totalGuests
+                }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- QR Code + Status -->
+        <div class="d-flex justify-content-between align-items-center mb-3 p-3 rounded-3 qr-section">
+          <div>
+            <small class="text-muted d-block mb-1">Booking Reference</small>
+            <span class="fw-bold ticket-id">{{ bookingReference }}</span>
+
+            <small class="text-muted d-block mt-2 mb-1">Status</small>
+            <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Confirmed</span>
+
+            <small class="text-muted d-block mt-2 mb-1">Booked On</small>
+            <span class="small fw-medium">{{
+              bookedAtDate | date: "dd MMM yyyy, hh:mm a"
+              }}</span>
+          </div>
+          <div class="text-center">
+            <img [src]="qrCodeUrl" alt="QR Code" class="qr-image" width="140" height="140" />
+            <small class="d-block text-muted mt-1" style="font-size: 10px">Scan for details</small>
+          </div>
+        </div>
+
+        <!-- Payment Summary -->
+        <div class="mb-3">
+          <small class="text-uppercase text-muted fw-semibold ls-1">Payment Summary</small>
+          <div class="d-flex justify-content-between small py-1">
+            <span>Room Charges ({{ roomCount }} room{{
+              roomCount > 1 ? "s" : ""
+              }}
+              × {{ nights }} nights)</span>
+            <span>₹{{ baseAmount | number: "1.0-0" }}</span>
+          </div>
+          <div class="d-flex justify-content-between small py-1">
+            <span>Taxes &amp; Fees ({{ taxPercent }}%)</span>
+            <span>₹{{ taxAmount | number: "1.0-0" }}</span>
+          </div>
+          <div *ngIf="couponDiscount > 0" class="d-flex justify-content-between small py-1 text-success fw-semibold">
+            <span>🏷️ Coupon ({{ couponCode }})</span>
+            <span>− ₹{{ couponDiscount | number: "1.0-0" }}</span>
+          </div>
+          <div *ngIf="coinDiscount > 0" class="d-flex justify-content-between small py-1 text-warning fw-semibold">
+            <span><i class="bi bi-coin me-1"></i>Loyalty Coins ({{
+              coinsToRedeem
+              }}
+              coins)</span>
+            <span>− ₹{{ coinDiscount | number: "1.0-0" }}</span>
+          </div>
+          <div class="d-flex justify-content-between border-top pt-2 mt-1 fw-bold">
+            <span>Total Paid</span>
+            <span>₹{{ finalTotal | number: "1.0-0" }}</span>
+          </div>
+          <div class="d-flex justify-content-between small py-1 text-muted">
+            <span>Payment Method</span>
+            <span>{{ selectedPayment | titlecase }}</span>
+          </div>
+          <div *ngIf="coinsEarned > 0" class="d-flex align-items-center gap-1 small text-success mt-1">
+            <i class="bi bi-plus-circle"></i>
+            <span>{{ coinsEarned }} loyalty coins earned from this booking</span>
+          </div>
+        </div>
+      </div>
+      <!-- /ticket-body -->
+    </div>
+    <!-- /ticket-card -->
+
+    <!-- Action Buttons -->
+    <div class="d-flex gap-2 mt-4 justify-content-center">
+      <button class="btn btn-primary px-4 py-2 d-flex align-items-center gap-2" (click)="downloadTicket()">
+        <i class="bi bi-download"></i> Download Voucher
+      </button>
+      <button class="btn btn-outline-primary px-4 py-2 d-flex align-items-center gap-2"
+        (click)="router.navigate(['/hotel/my-bookings'])">
+        <i class="bi bi-calendar2-check"></i> My Bookings
+      </button>
+      <button class="btn btn-outline-secondary px-4 py-2 d-flex align-items-center gap-2" (click)="goHome()">
+        <i class="bi bi-house"></i> Home
+      </button>
+    </div>
+
+    <p class="text-center text-muted mt-3 small">
+      <i class="bi bi-info-circle me-1"></i> Show this reference at hotel
+      check-in.
+    </p>
+  </div>
+</div>
+
+<!-- ── BOOKING FORM ── -->
+<div *ngIf="!isBooked" class="hotel-bg" style="min-height: 100vh; padding-bottom: 60px">
+  <!-- ── Page Header ── -->
+  <div style="background: var(--deep-twilight); padding: 18px 0">
+    <div class="container">
+      <div class="d-flex align-items-center gap-3">
+        <button class="btn btn-sm fw-semibold d-inline-flex align-items-center gap-1" style="
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+          " (click)="goBackToDetail()">
+          ← Back to Hotel
+        </button>
+        <div>
+          <h6 class="text-white fw-bold mb-0">Review &amp; Confirm</h6>
+          <p class="mb-0" style="color: rgba(255, 255, 255, 0.6); font-size: 12px">
+            {{ hotelName }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container py-4">
+    <!-- Toast -->
+    <div *ngIf="showToast"
+      class="position-fixed top-0 end-0 m-3 rounded-3 shadow px-4 py-3 d-flex align-items-center gap-2"
+      style="z-index: 9998; font-size: 14px; font-weight: 600"
+      [style.background]="toastType === 'success' ? '#ecfdf5' : '#fef2f2'"
+      [style.color]="toastType === 'success' ? '#065f46' : '#991b1b'" [style.border]="
+        toastType === 'success' ? '1px solid #6ee7b7' : '1px solid #fca5a5'
+      ">
+      {{ toastType === "success" ? "✅" : "⚠️" }} {{ toastMessage }}
+    </div>
+
+    <div class="row g-4 align-items-start">
+      <!-- ══════════════ LEFT COLUMN ══════════════ -->
+      <div class="col-12 col-lg-8">
+        <!-- ── 1. Your Stay ── -->
+        <div class="bg-white rounded-4 shadow-sm mb-3 overflow-hidden">
+          <div class="px-4 pt-4 pb-2 d-flex align-items-center gap-2">
+            <span class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white" style="
+                width: 26px;
+                height: 26px;
+                font-size: 13px;
+                background: var(--bright-teal-blue);
+              ">1</span>
+            <span class="fw-bold" style="color: var(--deep-twilight)">Your Stay</span>
+          </div>
+          <div class="px-4 pb-4">
+            <div class="d-flex justify-content-between align-items-start mb-3 flex-wrap gap-2">
+              <h6 class="fw-bold mb-0" style="color: var(--deep-twilight); font-size: 16px">
+                {{ hotelName }}
+              </h6>
+              <span class="badge rounded-pill px-3 py-2 text-capitalize" style="
+                  background: var(--light-cyan);
+                  color: var(--bright-teal-blue);
+                  font-size: 12px;
+                ">
+                {{ roomType }} Room · {{ roomCount }} room{{
+                roomCount > 1 ? "s" : ""
+                }}
+              </span>
+            </div>
+            <!-- Date timeline -->
+            <div class="rounded-3 p-3 d-flex align-items-center gap-3 flex-wrap"
+              style="background: #f8fafc; border: 1px solid #e2e8f0">
+              <div class="text-center">
+                <p class="text-muted mb-0" style="
+                    font-size: 11px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                  ">
+                  Check-in
+                </p>
+                <p class="fw-bold mb-0" style="color: var(--deep-twilight); font-size: 15px">
+                  {{ checkIn | date: "d MMM" }}
+                </p>
+                <p class="text-muted mb-0" style="font-size: 11px">
+                  {{ checkIn | date: "EEE, yyyy" }}
+                </p>
+              </div>
+              <div class="flex-fill text-center px-2">
+                <p class="fw-semibold mb-1" style="color: var(--bright-teal-blue); font-size: 13px">
+                  {{ nights }} Night{{ nights > 1 ? "s" : "" }}
+                </p>
+                <div style="border-top: 2px dashed var(--bright-teal-blue)"></div>
+              </div>
+              <div class="text-center">
+                <p class="text-muted mb-0" style="
+                    font-size: 11px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                  ">
+                  Check-out
+                </p>
+                <p class="fw-bold mb-0" style="color: var(--deep-twilight); font-size: 15px">
+                  {{ checkOut | date: "d MMM" }}
+                </p>
+                <p class="text-muted mb-0" style="font-size: 11px">
+                  {{ checkOut | date: "EEE, yyyy" }}
+                </p>
+              </div>
+              <div class="ms-auto text-center border-start ps-3">
+                <p class="text-muted mb-0" style="
+                    font-size: 11px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                  ">
+                  Rooms
+                </p>
+                <p class="fw-bold mb-0" style="color: var(--deep-twilight); font-size: 18px">
+                  {{ roomCount }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 2. Room Details ── -->
+        <div class="bg-white rounded-4 shadow-sm mb-3 overflow-hidden">
+          <div class="px-4 pt-4 pb-2 d-flex align-items-center gap-2">
+            <span class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white" style="
+                width: 26px;
+                height: 26px;
+                font-size: 13px;
+                background: var(--bright-teal-blue);
+              ">2</span>
+            <span class="fw-bold" style="color: var(--deep-twilight)">Room Details</span>
+          </div>
+          <div *ngIf="roomImages.length > 0" style="height: 200px; position: relative; overflow: hidden">
+            <img [src]="roomImages[activeImageIndex]" class="w-100 h-100" style="object-fit: cover"
+              [alt]="roomType + ' room'" />
+            <ng-container *ngIf="roomImages.length > 1">
+              <button (click)="prevImage()" style="
+                  position: absolute;
+                  top: 50%;
+                  left: 10px;
+                  transform: translateY(-50%);
+                  background: rgba(0, 0, 0, 0.45);
+                  color: #fff;
+                  border: none;
+                  border-radius: 50%;
+                  width: 32px;
+                  height: 32px;
+                  font-size: 18px;
+                  cursor: pointer;
+                  line-height: 1;
+                ">
+                ‹
+              </button>
+              <button (click)="nextImage()" style="
+                  position: absolute;
+                  top: 50%;
+                  right: 10px;
+                  transform: translateY(-50%);
+                  background: rgba(0, 0, 0, 0.45);
+                  color: #fff;
+                  border: none;
+                  border-radius: 50%;
+                  width: 32px;
+                  height: 32px;
+                  font-size: 18px;
+                  cursor: pointer;
+                  line-height: 1;
+                ">
+                ›
+              </button>
+              <div style="
+                  position: absolute;
+                  bottom: 10px;
+                  width: 100%;
+                  text-align: center;
+                ">
+                <span *ngFor="let img of roomImages; let i = index" style="
+                    display: inline-block;
+                    width: 7px;
+                    height: 7px;
+                    border-radius: 50%;
+                    margin: 0 3px;
+                    cursor: pointer;
+                  " [style.background]="
+                    i === activeImageIndex ? '#fff' : 'rgba(255,255,255,0.45)'
+                  " (click)="activeImageIndex = i"></span>
+              </div>
+            </ng-container>
+          </div>
+          <div class="px-4 py-3">
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+              <div>
+                <p class="fw-bold mb-0 text-capitalize" style="color: var(--deep-twilight)">
+                  {{ roomType }} Room
+                </p>
+                <p class="text-muted small mb-0">
+                  {{ bedType }} Bed · Max {{ maxOccupancy }} guest{{
+                  maxOccupancy > 1 ? "s" : ""
+                  }}
+                  per room
+                </p>
+              </div>
+              <div class="text-end">
+                <p class="text-muted mb-0" style="font-size: 11px">
+                  per room / night
+                </p>
+                <p class="fw-bold mb-0" style="color: var(--bright-teal-blue); font-size: 18px">
+                  ₹{{ pricePerNight | number }}
+                </p>
+              </div>
+            </div>
+            <div class="d-flex flex-wrap gap-2">
+              <span *ngFor="let a of roomAmenities" class="badge rounded-pill px-3 py-2" style="
+                  background: #f1f5f9;
+                  color: #475569;
+                  font-size: 11px;
+                  font-weight: 500;
+                ">{{ a }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── 3. Guest Details ── -->
+        <div class="bg-white rounded-4 shadow-sm p-4 mb-3">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <span class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white" style="
+                width: 26px;
+                height: 26px;
+                font-size: 13px;
+                background: var(--bright-teal-blue);
+              ">3</span>
+            <span class="fw-bold" style="color: var(--deep-twilight)">Guest Details</span>
+          </div>
+          <div class="rounded-3 px-3 py-2 mb-4 d-flex align-items-start gap-2"
+            style="background: #eff6ff; border-left: 3px solid #3b82f6">
+            <span style="font-size: 14px; margin-top: 1px">ℹ️</span>
+            <p class="mb-0 small" style="color: #1e40af">
+              Fill in details for the primary guest. A valid ID is required at
+              check-in.
+            </p>
+          </div>
+          <div class="row g-3">
+            <!-- Title -->
+            <div class="col-12 col-sm-2">
+              <label class="form-label small fw-semibold text-muted mb-1">Title</label>
+              <select class="form-select" style="
+                  border-radius: 10px;
+                  border-color: #e2e8f0;
+                  font-size: 14px;
+                " [(ngModel)]="guestTitle" autocomplete="honorific-prefix">
+                <option>Mr</option>
+                <option>Ms</option>
+                <option>Mrs</option>
+              </select>
+              <small style="font-size: 11px; visibility: hidden">_</small>
+            </div>
+            <!-- First Name -->
+            <div class="col-12 col-sm-5">
+              <label class="form-label small fw-semibold text-muted mb-1">First Name <span
+                  class="text-danger">*</span></label>
+              <input type="text" class="form-control" placeholder="e.g. Rahul"
+                style="border-radius: 10px; font-size: 14px" [(ngModel)]="firstName" name="firstName"
+                #firstNameRef="ngModel" (input)="onNameInput($event, 'firstName')" pattern="[A-Za-z ]+" minlength="2"
+                required autocomplete="given-name" [class.is-valid]="
+                  firstNameRef.valid &&
+                  firstNameRef.touched &&
+                  firstName.trim().length >= 2
+                " [class.is-invalid]="
+                  firstNameRef.touched &&
+                  (firstNameRef.invalid || firstName.trim().length < 2)
+                " />
+              <small class="text-danger d-block mt-1" style="font-size: 11px" [style.visibility]="
+                  firstNameRef.invalid && firstNameRef.touched
+                    ? 'visible'
+                    : 'hidden'
+                ">
+                {{
+                firstName.trim().length < 2 ? "First name must be at least 2 letters"
+                  : "Only alphabets and spaces allowed" }} </small>
+            </div>
+            <!-- Last Name (optional) -->
+            <div class="col-12 col-sm-5">
+              <label class="form-label small fw-semibold text-muted mb-1">Last Name
+                <span class="text-muted" style="font-size: 11px">(optional)</span></label>
+              <input type="text" class="form-control" placeholder="e.g. Sharma"
+                style="border-radius: 10px; font-size: 14px" [(ngModel)]="lastName" name="lastName"
+                #lastNameRef="ngModel" (input)="onNameInput($event, 'lastName')" pattern="[A-Za-z ]*"
+                autocomplete="family-name" [class.is-valid]="
+                  lastName.trim().length > 0 &&
+                  lastNameRef.valid &&
+                  lastNameRef.touched
+                " [class.is-invalid]="lastNameRef.invalid && lastNameRef.touched" />
+              <small class="text-danger d-block mt-1" style="font-size: 11px" [style.visibility]="
+                  lastNameRef.invalid && lastNameRef.touched
+                    ? 'visible'
+                    : 'hidden'
+                ">
+                Only alphabets and spaces allowed
+              </small>
+            </div>
+            <!-- Email -->
+            <div class="col-12 col-sm-6">
+              <label class="form-label small fw-semibold text-muted mb-1">Email Address <span
+                  class="text-danger">*</span></label>
+              <div class="input-group" [style.border]="
+                  emailRef.touched
+                    ? emailRef.valid
+                      ? '1.5px solid #10b981'
+                      : '1.5px solid #ef4444'
+                    : '1px solid #e2e8f0'
+                " style="border-radius: 10px; overflow: hidden">
+                <span class="input-group-text bg-white border-0 ps-3 pe-2" style="font-size: 15px">✉️</span>
+                <input type="email" class="form-control border-0 ps-0" placeholder="you@example.com"
+                  style="font-size: 14px; box-shadow: none" [(ngModel)]="email" name="email" #emailRef="ngModel"
+                  pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required autocomplete="email" />
+                <span *ngIf="emailRef.touched && emailRef.valid" class="input-group-text bg-white border-0 pe-3"
+                  style="color: #10b981; font-weight: bold">✓</span>
+                <span *ngIf="emailRef.touched && emailRef.invalid" class="input-group-text bg-white border-0 pe-3"
+                  style="color: #ef4444; font-weight: bold">✕</span>
+              </div>
+              <small class="text-danger d-block mt-1" style="font-size: 11px" [style.visibility]="
+                  emailRef.invalid && emailRef.touched ? 'visible' : 'hidden'
+                ">
+                Enter a valid email (e.g. you&#64;example.com)
+              </small>
+            </div>
+            <!-- Phone -->
+            <div class="col-12 col-sm-6">
+              <label class="form-label small fw-semibold text-muted mb-1">Mobile Number <span
+                  class="text-danger">*</span></label>
+              <div class="input-group" [style.border]="
+                  phoneRef.touched
+                    ? phoneError
+                      ? '1.5px solid #ef4444'
+                      : '1.5px solid #10b981'
+                    : '1px solid #e2e8f0'
+                " style="border-radius: 10px; overflow: hidden">
+                <span class="input-group-text bg-white border-0 px-3" style="
+                    font-size: 13px;
+                    color: #64748b;
+                    font-weight: 600;
+                    border-right: 1px solid #e2e8f0;
+                  ">+91</span>
+                <input type="tel" class="form-control border-0 ps-2" placeholder="XXXXX XXXXX" style="
+                    font-size: 14px;
+                    box-shadow: none;
+                    letter-spacing: 0.5px;
+                  " [value]="phoneFormatted" (input)="onPhoneInput($event)" name="phone" #phoneRef="ngModel"
+                  [ngModel]="phone" pattern="[6-9][0-9]{9}" maxlength="11" required autocomplete="tel" />
+                <span *ngIf="phoneRef.touched && !phoneError" class="input-group-text bg-white border-0 pe-3"
+                  style="color: #10b981; font-weight: bold">✓</span>
+                <span *ngIf="phoneRef.touched && phoneError" class="input-group-text bg-white border-0 pe-3"
+                  style="color: #ef4444; font-weight: bold">✕</span>
+              </div>
+              <small class="text-danger d-block mt-1" style="font-size: 11px" [style.visibility]="
+                  phoneRef.touched && phoneError ? 'visible' : 'hidden'
+                ">
+                {{ phoneError }}
+              </small>
+            </div>
+            <!-- Aadhaar -->
+            <div class="col-12 col-sm-6">
+              <label class="form-label small fw-semibold text-muted mb-1">Aadhaar Number <span
+                  class="text-danger">*</span></label>
+              <div class="input-group" [style.border]="
+                  aadhaarRef.touched
+                    ? aadhaarError
+                      ? '1.5px solid #ef4444'
+                      : '1.5px solid #10b981'
+                    : '1px solid #e2e8f0'
+                " style="border-radius: 10px; overflow: hidden">
+                <span class="input-group-text bg-white border-0 ps-3 pe-2" style="font-size: 15px">🪪</span>
+                <input type="text" class="form-control border-0 ps-0" placeholder="XXXX XXXX XXXX" style="
+                    font-size: 14px;
+                    box-shadow: none;
+                    letter-spacing: 0.5px;
+                  " [value]="aadhaarFormatted" (input)="onAadhaarInput($event)" name="aadhaar" #aadhaarRef="ngModel"
+                  [ngModel]="aadhaar" pattern="[2-9][0-9]{11}" maxlength="14" required autocomplete="off" />
+                <span *ngIf="aadhaarRef.touched && !aadhaarError" class="input-group-text bg-white border-0 pe-3"
+                  style="color: #10b981; font-weight: bold">✓</span>
+                <span *ngIf="aadhaarRef.touched && aadhaarError" class="input-group-text bg-white border-0 pe-3"
+                  style="color: #ef4444; font-weight: bold">✕</span>
+              </div>
+              <small class="text-danger d-block mt-1" style="font-size: 11px" [style.visibility]="
+                  aadhaarRef.touched && aadhaarError ? 'visible' : 'hidden'
+                ">
+                {{ aadhaarError }}
+              </small>
+              <small class="text-muted d-block mt-1" style="font-size: 10px">🔒 Your Aadhaar is stored securely and used
+                only for identity
+                verification</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Login prompt (left, not logged in) -->
+        <div *ngIf="!isLoggedIn" class="bg-white rounded-4 shadow-sm p-4 text-center mb-3">
+          <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
+            style="width: 60px; height: 60px; background: var(--light-cyan)">
+            <span style="font-size: 26px">🔒</span>
+          </div>
+          <p class="fw-semibold mb-1" style="color: var(--deep-twilight)">
+            Login to complete your booking
+          </p>
+          <p class="text-muted small mb-4">
+            Your booking details are saved and will be waiting for you.
+          </p>
+          <div class="d-flex justify-content-center gap-3">
+            <button class="btn btn-primary px-4 fw-semibold" (click)="goToLogin()">
+              🔑 Login
+            </button>
+            <button class="btn btn-outline-primary px-4 fw-semibold" (click)="goToSignup()">
+              👤 Sign Up
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- /left -->
+
+      <!-- ══════════ TERMS & CONDITIONS MODAL ══════════ -->
+      <div *ngIf="showTermsModal"
+        class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+        style="background: rgba(3, 4, 94, 0.6); z-index: 10000; padding: 20px" (click)="showTermsModal = false">
+        <div class="bg-white rounded-4 shadow-lg overflow-hidden" style="
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+          " (click)="$event.stopPropagation()">
+          <!-- Modal Header -->
+          <div class="d-flex justify-content-between align-items-center px-4 py-3 flex-shrink-0"
+            style="background: var(--deep-twilight); color: #fff">
+            <div>
+              <h6 class="fw-bold mb-0">
+                📋 Terms, Conditions &amp; Cancellation Policy
+              </h6>
+              <small style="opacity: 0.7">Please read carefully before confirming</small>
+            </div>
+            <button class="btn-close btn-close-white" (click)="showTermsModal = false"></button>
+          </div>
+          <!-- Modal Body (scrollable) -->
+          <div class="overflow-auto p-4" style="flex: 1; font-size: 13.5px; line-height: 1.7; color: #374151">
+            <h6 class="fw-bold mb-2" style="color: var(--deep-twilight)">
+              1. Booking Confirmation
+            </h6>
+            <ul class="ps-3 mb-3">
+              <li>
+                Your booking is confirmed only after successful payment and
+                receipt of a booking reference number.
+              </li>
+              <li>
+                The booking reference must be presented at hotel check-in along
+                with a valid government-issued photo ID.
+              </li>
+              <li>
+                All bookings are subject to room availability at the time of
+                payment.
+              </li>
+            </ul>
+
+            <h6 class="fw-bold mb-2" style="color: var(--deep-twilight)">
+              2. Check-in &amp; Check-out
+            </h6>
+            <ul class="ps-3 mb-3">
+              <li>
+                Standard check-in time is 2:00 PM and check-out time is 12:00 PM
+                (noon).
+              </li>
+              <li>
+                Early check-in or late check-out is subject to availability and
+                may attract additional charges.
+              </li>
+              <li>
+                The hotel reserves the right to deny check-in if valid ID proof
+                is not presented.
+              </li>
+            </ul>
+
+            <h6 class="fw-bold mb-2" style="color: var(--deep-twilight)">
+              3. Payment &amp; Pricing
+            </h6>
+            <ul class="ps-3 mb-3">
+              <li>
+                All prices are inclusive of applicable taxes unless stated
+                otherwise.
+              </li>
+              <li>
+                The total amount charged at the time of booking is final. No
+                hidden charges will be levied by this platform.
+              </li>
+              <li>
+                Wallet deductions are processed immediately upon booking
+                confirmation.
+              </li>
+              <li>
+                Loyalty coins earned will be credited to your account within 24
+                hours of check-out.
+              </li>
+            </ul>
+
+            <h6 class="fw-bold mb-2" style="color: var(--deep-twilight)">
+              4. Cancellation Policy
+            </h6>
+            <ul class="ps-3 mb-3">
+              <li>
+                <strong>Free Cancellation:</strong> Cancel at least 48 hours
+                before check-in for a full refund (applicable only to refundable
+                rate plans).
+              </li>
+              <li>
+                <strong>Partial Refund:</strong> Cancellations made between
+                24–48 hours before check-in are eligible for a 50% refund.
+              </li>
+              <li>
+                <strong>No Refund:</strong> Cancellations made within 24 hours
+                of check-in, no-shows, or early departures are non-refundable.
+              </li>
+              <li>
+                Non-refundable rate plans are not eligible for any cancellation
+                refund.
+              </li>
+              <li>
+                Refunds, where applicable, are processed back to the original
+                payment source within 5–7 business days.
+              </li>
+            </ul>
+
+            <h6 class="fw-bold mb-2" style="color: var(--deep-twilight)">
+              5. Guest Responsibilities
+            </h6>
+            <ul class="ps-3 mb-3">
+              <li>
+                Guests are responsible for any damage caused to hotel property
+                during their stay.
+              </li>
+              <li>
+                Smoking in non-smoking rooms may attract a cleaning fee levied
+                directly by the hotel.
+              </li>
+              <li>
+                Pets are not permitted unless explicitly stated in the hotel's
+                policy.
+              </li>
+              <li>
+                Guests must comply with the hotel's rules and local laws during
+                their stay.
+              </li>
+            </ul>
+
+            <h6 class="fw-bold mb-2" style="color: var(--deep-twilight)">
+              6. Privacy &amp; Data
+            </h6>
+            <ul class="ps-3 mb-3">
+              <li>
+                Your personal information including name, contact details, and
+                Aadhaar (masked) is used solely for booking purposes.
+              </li>
+              <li>
+                Your data is encrypted and stored securely in compliance with
+                applicable privacy laws.
+              </li>
+              <li>
+                We do not share your personal data with third parties without
+                your consent, except as required by law.
+              </li>
+            </ul>
+
+            <h6 class="fw-bold mb-2" style="color: var(--deep-twilight)">
+              7. Liability
+            </h6>
+            <ul class="ps-3 mb-3">
+              <li>
+                This platform acts as an intermediary between you and the hotel.
+                We are not liable for any service issues at the hotel property.
+              </li>
+              <li>
+                In case of disputes, the hotel's management decision shall be
+                considered final for on-property matters.
+              </li>
+              <li>
+                Force majeure events (natural disasters, pandemics, government
+                restrictions) may affect bookings; waivers will be assessed
+                case-by-case.
+              </li>
+            </ul>
+
+            <div class="rounded-3 p-3 mt-2" style="background: #f0fdf4; border: 1px solid #86efac">
+              <p class="mb-0 small fw-semibold" style="color: #065f46">
+                ✅ By checking the box, you confirm that you have read,
+                understood, and agree to all the above terms, conditions, and
+                cancellation policies.
+              </p>
+            </div>
+          </div>
+          <!-- Modal Footer -->
+          <div class="px-4 py-3 d-flex gap-2 justify-content-end flex-shrink-0" style="border-top: 1px solid #e2e8f0">
+            <button class="btn btn-outline-secondary px-4" (click)="showTermsModal = false">
+              Close
+            </button>
+            <button class="btn px-4 fw-semibold" style="background: var(--bright-teal-blue); color: #fff"
+              (click)="termsAccepted = true; showTermsModal = false">
+              ✓ I Agree
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════ RIGHT COLUMN ══════════════ -->
+      <div class="col-12 col-lg-4">
+        <div style="position: sticky; top: 76px">
+          <!-- Login prompt (right) -->
+          <div *ngIf="!isLoggedIn" class="bg-white rounded-4 shadow-sm p-4 text-center">
+            <p class="fw-semibold mb-2" style="color: var(--deep-twilight)">
+              Sign in to see your pricing
+            </p>
+            <p class="text-muted small mb-0">
+              Loyalty coins &amp; wallet balance shown after login
+            </p>
+          </div>
+
+          <div *ngIf="isLoggedIn">
+            <!-- Price Breakdown -->
+            <div class="bg-white rounded-4 shadow-sm mb-3 overflow-hidden">
+              <div class="px-4 py-3 d-flex justify-content-between align-items-center"
+                style="background: var(--deep-twilight)">
+                <span class="fw-bold text-white" style="font-size: 15px">Price Breakdown</span>
+                <span *ngIf="youSave > 0" class="badge rounded-pill px-3 py-1"
+                  style="background: #10b981; font-size: 11px">You save ₹{{ youSave | number: "1.0-0" }}</span>
+              </div>
+              <div class="px-4 py-3">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <div>
+                    <p class="mb-0 small fw-semibold" style="color: var(--deep-twilight)">
+                      Room Charges
+                    </p>
+                    <p class="mb-0 text-muted" style="font-size: 11px">
+                      ₹{{ pricePerNight | number }} × {{ roomCount }} room{{
+                      roomCount > 1 ? "s" : ""
+                      }}
+                      × {{ nights }} night{{ nights > 1 ? "s" : "" }}
+                    </p>
+                  </div>
+                  <span class="fw-semibold small">₹{{ baseAmount | number }}</span>
+                </div>
+                <div *ngIf="hasCoupon && couponDiscount > 0"
+                  class="d-flex justify-content-between align-items-center mb-2 rounded-2 px-2 py-1"
+                  style="background: #f0fdf4">
+                  <span class="small" style="color: #059669">🎟️ Coupon ({{ couponCode }})</span>
+                  <span class="small fw-bold" style="color: #059669">− ₹{{ couponDiscount | number: "1.0-0" }}</span>
+                </div>
+                <div *ngIf="coinDiscount > 0"
+                  class="d-flex justify-content-between align-items-center mb-2 rounded-2 px-2 py-1"
+                  style="background: #fffbeb">
+                  <span class="small" style="color: #92400e">🪙 Loyalty Coins</span>
+                  <span class="small fw-bold" style="color: #b45309">− ₹{{ coinDiscount | number: "1.0-0" }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-3 text-muted small">
+                  <span>Taxes &amp; Fees ({{ taxPercent }}%)</span>
+                  <span>₹{{ taxAmount | number: "1.0-0" }}</span>
+                </div>
+                <div style="border-top: 2px dashed #e2e8f0; margin-bottom: 14px"></div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="fw-bold" style="color: var(--deep-twilight)">Total Payable</span>
+                  <span class="fw-bold" style="color: var(--bright-teal-blue); font-size: 20px">₹{{ finalTotal | number:
+                    "1.0-0" }}</span>
+                </div>
+                <p *ngIf="marketRate > finalTotal" class="text-end mb-0 mt-1" style="
+                    font-size: 11px;
+                    color: #94a3b8;
+                    text-decoration: line-through;
+                  ">
+                  MRP ₹{{ marketRate | number: "1.0-0" }}
+                </p>
+              </div>
+            </div>
+
+            <!-- ── Coupon Code ── -->
+            <div class="bg-white rounded-4 shadow-sm mb-3 overflow-hidden">
+              <div class="px-4 py-3" style="border-bottom: 1px solid #f1f5f9">
+                <p class="fw-bold mb-0 small" style="
+                    color: var(--deep-twilight);
+                    text-transform: uppercase;
+                    letter-spacing: 0.8px;
+                  ">
+                  🎟️ Have a Coupon?
+                </p>
+              </div>
+
+              <!-- Coupon applied state -->
+              <div *ngIf="hasCoupon" class="px-4 py-3">
+                <div class="d-flex align-items-center justify-content-between rounded-3 px-3 py-2" style="
+                    background: linear-gradient(90deg, #ecfdf5, #d1fae5);
+                    border: 1.5px dashed #6ee7b7;
+                  ">
+                  <div class="d-flex align-items-center gap-2">
+                    <span style="font-size: 20px">✅</span>
+                    <div>
+                      <p class="fw-bold mb-0 small" style="color: #065f46">
+                        {{ couponCode }}
+                      </p>
+                      <p class="mb-0" style="font-size: 11px; color: #15803d">
+                        {{ couponDiscountPercent }}% off applied<span *ngIf="couponMinNights > 0">
+                          · Min {{ couponMinNights }} night(s)</span>
+                      </p>
+                    </div>
+                  </div>
+                  <button class="btn btn-sm fw-semibold" style="
+                      background: #fee2e2;
+                      color: #ef4444;
+                      border: none;
+                      border-radius: 8px;
+                      font-size: 12px;
+                    " (click)="removeCoupon()">
+                    ✕ Remove
+                  </button>
+                </div>
+                <p class="mb-0 mt-2 text-center" style="font-size: 12px; color: #10b981">
+                  🎉 You save ₹{{ couponDiscount | number: "1.0-0" }} with this
+                  coupon!
+                </p>
+              </div>
+
+              <!-- Coupon input state -->
+              <div *ngIf="!hasCoupon" class="px-4 py-3">
+                <div class="d-flex gap-2">
+                  <input type="text" class="form-control form-control-sm" placeholder="Enter coupon code" style="
+                      border-radius: 10px;
+                      font-size: 13px;
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                      border-color: #e2e8f0;
+                    " [(ngModel)]="couponInput" name="couponInput" (keyup.enter)="applyCoupon()"
+                    [disabled]="isCouponLoading" maxlength="20" />
+                  <button class="btn btn-sm fw-semibold flex-shrink-0" style="
+                      background: var(--bright-teal-blue);
+                      color: #fff;
+                      border: none;
+                      border-radius: 10px;
+                      padding: 0 16px;
+                      font-size: 13px;
+                    " (click)="applyCoupon()" [disabled]="isCouponLoading || !couponInput.trim()">
+                    <span *ngIf="isCouponLoading" class="spinner-border spinner-border-sm me-1"></span>
+                    {{ isCouponLoading ? "" : "Apply" }}
+                  </button>
+                </div>
+                <p *ngIf="couponError" class="mb-0 mt-2 small" style="color: #ef4444">
+                  ⚠️ {{ couponError }}
+                </p>
+                <!-- Quick pick hints -->
+                <div class="mt-2 d-flex flex-wrap gap-1">
+                  <span *ngFor="
+                      let hint of [
+                        'MONSOON20',
+                        'EARLYBIRD15',
+                        'ROYALRAJ25',
+                        'HONEYMOON10',
+                        'WORKHOTEL30',
+                      ]
+                    " class="badge rounded-pill px-2 py-1" style="
+                      background: #f1f5f9;
+                      color: #64748b;
+                      font-size: 10px;
+                      cursor: pointer;
+                      letter-spacing: 0.5px;
+                    " (click)="couponInput = hint">
+                    {{ hint }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Loyalty Coins (active) -->
+            <div *ngIf="!hasCoupon && loyaltyAccount" class="bg-white rounded-4 shadow-sm mb-3 overflow-hidden">
+              <div class="px-4 py-3 d-flex justify-content-between align-items-center"
+                style="border-bottom: 1px solid #fef3c7; background: #fffbeb">
+                <div class="d-flex align-items-center gap-2">
+                  <span style="font-size: 20px">🪙</span>
+                  <div>
+                    <p class="fw-bold mb-0 small" style="color: #92400e">
+                      Loyalty Coins
+                    </p>
+                    <p class="mb-0" style="font-size: 11px; color: #b45309">
+                      Balance:
+                      <strong [style.color]="loyaltyAccount.coinBalance < 0 ? '#e53e3e' : ''">{{
+                        loyaltyAccount.coinBalance }}</strong>
+                      <ng-container *ngIf="loyaltyAccount.coinBalance >= 0"> · Max: <strong>{{ effectiveMaxCoins
+                          }}</strong></ng-container>
+                      <ng-container *ngIf="loyaltyAccount.coinBalance < 0">
+                        <strong style="color: #dc2626"> (Debt)</strong>
+                      </ng-container>
+                    </p>
+                  </div>
+                </div>
+                <button *ngIf="loyaltyAccount.coinBalance >= 0 && coinsToRedeem === 0 && effectiveMaxCoins > 0"
+                  class="btn btn-sm fw-semibold" style="
+                    background: #f59e0b;
+                    color: #fff;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 11px;
+                  " (click)="applyMaxCoins()">
+                  Apply Max
+                </button>
+                <button *ngIf="loyaltyAccount.coinBalance >= 0 && coinsToRedeem > 0" class="btn btn-sm" style="
+                    background: #fee2e2;
+                    color: #ef4444;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 11px;
+                  " (click)="removeCoins()">
+                  Remove
+                </button>
+              </div>
+              <div class="px-4 py-3">
+                <!-- Debt warning -->
+                <div *ngIf="loyaltyAccount.coinBalance < 0" class="d-flex align-items-center gap-2 p-2 rounded-3"
+                  style="background: #fee2e2; font-size: 12px; color: #b91c1c">
+                  <span>⚠️</span>
+                  <span>Your coin balance is <strong>{{ loyaltyAccount.coinBalance }}</strong>. Redemption blocked until
+                    debt clears on your next booking.</span>
+                </div>
+                <!-- Input (only when balance ≥ 0) -->
+                <div *ngIf="loyaltyAccount.coinBalance >= 0" class="d-flex align-items-center gap-2">
+                  <input type="number" class="form-control form-control-sm" style="
+                      max-width: 110px;
+                      border-radius: 8px;
+                      border-color: #fcd34d;
+                    " [(ngModel)]="coinsToRedeem" (ngModelChange)="onCoinsChange()" (input)="onCoinsInput($event)"
+                    [max]="effectiveMaxCoins" [min]="0" [attr.disabled]="effectiveMaxCoins === 0 ? '' : null"
+                    placeholder="0" />
+                  <span class="small" style="color: #92400e">= ₹{{
+                    coinsToDiscount(coinsToRedeem) | number: "1.0-0"
+                    }}
+                    off</span>
+                </div>
+                <p *ngIf="loyaltyError" class="mb-0 mt-2 small" style="color: #ef4444">
+                  ⚠️ {{ loyaltyError }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Coins disabled notice -->
+            <div *ngIf="hasCoupon && loyaltyAccount"
+              class="bg-white rounded-4 shadow-sm mb-3 px-4 py-3 d-flex align-items-center gap-2"
+              style="border-left: 3px solid #fcd34d">
+              <span style="font-size: 18px">🪙</span>
+              <div>
+                <p class="fw-semibold mb-0 small" style="color: var(--deep-twilight)">
+                  Loyalty Coins
+                </p>
+                <p class="text-muted mb-0" style="font-size: 11px">
+                  Not combinable with coupon discount
+                </p>
+              </div>
+            </div>
+
+            <!-- Loading loyalty -->
+            <div *ngIf="!loyaltyAccount && !hasCoupon"
+              class="bg-white rounded-4 shadow-sm mb-3 px-4 py-3 d-flex align-items-center gap-2"
+              style="border-left: 3px solid #e2e8f0">
+              <span style="font-size: 18px">🪙</span>
+              <div>
+                <p class="fw-semibold mb-0 small" style="color: var(--deep-twilight)">
+                  Loyalty Coins
+                </p>
+                <p class="text-muted mb-0" style="font-size: 11px">
+                  Loading your account...
+                </p>
+              </div>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="bg-white rounded-4 shadow-sm mb-3 overflow-hidden">
+              <div class="px-4 py-3" style="border-bottom: 1px solid #f1f5f9">
+                <p class="fw-bold mb-0 small" style="
+                    color: var(--deep-twilight);
+                    text-transform: uppercase;
+                    letter-spacing: 0.8px;
+                  ">
+                  Payment Method
+                </p>
+              </div>
+
+              <!-- Virtual Wallet -->
+              <div class="px-4 py-3 d-flex align-items-center justify-content-between pay-method-row"
+                [class.pay-method-active]="selectedPayment === 'wallet'" (click)="selectedPayment = 'wallet'"
+                style="cursor: pointer; border-bottom: 1px solid #f1f5f9">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="rounded-3 d-flex align-items-center justify-content-center" style="
+                      width: 40px;
+                      height: 40px;
+                      background: var(--light-cyan);
+                      font-size: 20px;
+                    ">
+                    👛
+                  </div>
+                  <div>
+                    <p class="fw-semibold mb-0 small" style="color: var(--deep-twilight)">
+                      Virtual Wallet
+                    </p>
+                    <p class="mb-0" style="font-size: 11px; color: #64748b">
+                      Balance: ₹{{ walletBalance | number: "1.0-0" }}
+                    </p>
+                  </div>
+                </div>
+                <span class="pay-radio" [class.pay-radio-active]="selectedPayment === 'wallet'"></span>
+              </div>
+
+              <!-- Razorpay -->
+              <div class="px-4 py-3 d-flex align-items-center justify-content-between pay-method-row"
+                [class.pay-method-active]="selectedPayment === 'razorpay'" (click)="selectedPayment = 'razorpay'"
+                style="cursor: pointer; border-bottom: 1px solid #f1f5f9">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="rounded-3 d-flex align-items-center justify-content-center" style="
+                      width: 40px;
+                      height: 40px;
+                      background: #fff5f0;
+                      font-size: 20px;
+                    ">
+                    💳
+                  </div>
+                  <div>
+                    <p class="fw-semibold mb-0 small" style="color: var(--deep-twilight)">
+                      Razorpay
+                    </p>
+                    <p class="mb-0" style="font-size: 11px; color: #64748b">
+                      Cards, NetBanking, UPI &amp; Pay Later
+                    </p>
+                  </div>
+                </div>
+                <span class="pay-radio" [class.pay-radio-active]="selectedPayment === 'razorpay'"></span>
+              </div>
+
+              <!-- Disabled methods -->
+              <div *ngFor="
+                  let m of [
+                    { icon: '📱', label: 'UPI' },
+                    { icon: '🏦', label: 'Net Banking' },
+                  ]
+                " class="px-4 py-3 d-flex align-items-center gap-3" style="
+                  border-bottom: 1px solid #f1f5f9;
+                  opacity: 0.4;
+                  cursor: not-allowed;
+                ">
+                <div class="rounded-3 d-flex align-items-center justify-content-center" style="
+                    width: 40px;
+                    height: 40px;
+                    background: #f1f5f9;
+                    font-size: 20px;
+                  ">
+                  {{ m.icon }}
+                </div>
+                <div>
+                  <p class="fw-semibold mb-0 small" style="color: #94a3b8">
+                    {{ m.label }}
+                  </p>
+                  <p class="mb-0" style="font-size: 10px; color: #94a3b8">
+                    Coming soon
+                  </p>
+                </div>
+              </div>
+
+              <!-- Wallet deduction summary (wallet only) -->
+              <div *ngIf="selectedPayment === 'wallet'" class="px-4 py-3" style="background: #f8fafc">
+                <div class="d-flex justify-content-between mb-1">
+                  <span class="small text-muted">Amount to deduct</span>
+                  <span class="small fw-bold" style="color: #ef4444">₹{{ finalTotal | number: "1.0-0" }}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span class="small text-muted">Remaining balance</span>
+                  <span class="small fw-semibold" style="color: var(--deep-twilight)">₹{{ walletBalance - finalTotal |
+                    number: "1.0-0" }}</span>
+                </div>
+              </div>
+              <div *ngIf="
+                  selectedPayment === 'wallet' && walletBalance < finalTotal
+                " class="mx-4 mb-3 alert alert-danger py-2 px-3 small rounded-3">
+                ⚠️ Insufficient wallet balance — please use Razorpay
+              </div>
+            </div>
+
+            <!-- Coins earned -->
+            <div *ngIf="loyaltyAccount && coinsEarned > 0"
+              class="rounded-3 px-3 py-2 mb-3 d-flex align-items-center gap-2"
+              style="background: #f0fdf4; border: 1px solid #bbf7d0">
+              <span style="font-size: 16px">🎁</span>
+              <p class="mb-0 small" style="color: #065f46">
+                You'll earn <strong>{{ coinsEarned }} coins</strong> on this
+                booking
+              </p>
+            </div>
+
+            <!-- Terms & Conditions Checkbox -->
+            <div class="rounded-3 px-3 py-3 mb-3" style="border: 1px solid #e2e8f0; background: #fff">
+              <label class="d-flex align-items-start gap-2 mb-0" style="cursor: pointer">
+                <input type="checkbox" class="form-check-input mt-1 flex-shrink-0" [(ngModel)]="termsAccepted"
+                  name="termsAccepted" style="
+                    width: 18px;
+                    height: 18px;
+                    accent-color: var(--bright-teal-blue);
+                  " />
+                <span style="font-size: 13px; color: #374151; line-height: 1.5">
+                  I agree to the
+                  <span class="fw-semibold text-decoration-underline"
+                    style="color: var(--bright-teal-blue); cursor: pointer"
+                    (click)="$event.preventDefault(); showTermsModal = true">Terms &amp; Conditions</span>
+                  and
+                  <span class="fw-semibold text-decoration-underline"
+                    style="color: var(--bright-teal-blue); cursor: pointer"
+                    (click)="$event.preventDefault(); showTermsModal = true">Cancellation Policy</span>.
+                </span>
+              </label>
+            </div>
+
+            <!-- Confirm CTA -->
+            <button class="btn w-100 py-3 fw-bold rounded-3 border-0 mb-2" style="
+                font-size: 16px;
+                letter-spacing: 0.3px;
+                transition: all 0.2s;
+              " [style.background]="
+                formValid
+                  ? 'linear-gradient(135deg,#0077b6,#00b4d8)'
+                  : '#cbd5e1'
+              " [style.color]="formValid ? '#fff' : '#94a3b8'" [style.box-shadow]="
+                formValid ? '0 4px 18px rgba(0,119,182,0.35)' : 'none'
+              " [style.cursor]="formValid ? 'pointer' : 'not-allowed'" [disabled]="!formValid || isLoading"
+              (click)="confirmBooking()">
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+              {{
+              isLoading
+              ? "Processing..."
+              : "🏨 Confirm " +
+              roomCount +
+              " Room" +
+              (roomCount > 1 ? "s" : "") +
+              " · ₹" +
+              (finalTotal | number: "1.0-0")
+              }}
+            </button>
+            <p *ngIf="!termsAccepted" class="text-center mt-1 mb-2" style="font-size: 12px; color: #ef4444">
+              ⚠️ Please accept the Terms &amp; Conditions to proceed
+            </p>
+            <p class="text-center text-muted mb-0" style="font-size: 11px">
+              🔒 256-bit SSL encrypted &amp; secure payment
+            </p>
+          </div>
+          <!-- /isLoggedIn -->
+        </div>
+        <!-- /sticky -->
+      </div>
+      <!-- /right -->
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div>

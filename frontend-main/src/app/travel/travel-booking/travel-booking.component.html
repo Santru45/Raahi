@@ -1,0 +1,93 @@
+<div class="travel-bg">
+  <div class="booking-page">
+    @if (transportService.selectedTrip()) {
+      <button class="btn-back" (click)="onBack()">
+        <i class="bi bi-arrow-left"></i>
+        @if (
+          currentStep() === "seat" ||
+          (currentStep() === "passenger" &&
+            transportService.selectedMode() === "train")
+        ) {
+          Back to Results
+        } @else {
+          Back
+        }
+      </button>
+      <!-- Trip Summary Card -->
+      <div class="trip-summary-card">
+        <div class="trip-header">
+          <div class="trip-operator">
+            @if (transportService.selectedMode() === "flight") {
+              <i class="bi bi-airplane-fill"></i>
+            } @else if (transportService.selectedMode() === "train") {
+              <i class="bi bi-train-front-fill"></i>
+            } @else {
+              <i class="bi bi-bus-front-fill"></i>
+            }
+            {{ transportService.selectedTrip()?.operatorName }} -
+            {{ transportService.selectedTrip()?.serviceNumber }}
+          </div>
+          <span class="trip-class">{{
+            transportService.selectedTrip()?.cabinClass
+          }}</span>
+        </div>
+        <div class="trip-route">
+          <span class="route-city">{{
+            transportService.selectedTrip()?.from
+          }}</span>
+          <i class="bi bi-arrow-right"></i>
+          <span class="route-city">{{
+            transportService.selectedTrip()?.to
+          }}</span>
+        </div>
+
+        <div class="trip-fare">
+          <span>₹{{ transportService.selectedTrip()?.fare }}</span>
+          <span class="trip-duration">{{
+            transportService.selectedTrip()?.schedule?.duration
+          }}</span>
+        </div>
+      </div>
+
+      <!-- Progress Indicator -->
+      <div class="progress-bar">
+        @for (step of steps; track step; let i = $index) {
+          <div class="progress-step" [class.active]="i <= currentStepIndex">
+            <span class="step-dot">{{ i + 1 }}</span>
+            <span class="step-label">{{ step }}</span>
+          </div>
+          @if (i < steps.length - 1) {
+            <div class="step-line" [class.active]="i < currentStepIndex"></div>
+          }
+        }
+      </div>
+      @if (currentStep() === "seat") {
+        <app-seat-selection (seatConfirmed)="onSeatConfirmed($event)" />
+      }
+
+      <!-- STEP: Boarding Points (bus only) -->
+      @if (currentStep() === "boarding") {
+        <app-boarding-point (pointsConfirmed)="onPointsConfirmed($event)" />
+      }
+
+      <!-- STEP: Passenger Form -->
+      @if (currentStep() === "passenger") {
+        <app-passenger-form (submitted)="onPassengersSubmitted()" />
+      }
+
+      <!-- STEP: Booking Summary -->
+      @if (currentStep() === "summary") {
+        <app-booking-summary />
+      }
+    } @else {
+      <!-- No trip selected -->
+      <div class="no-trip">
+        <i class="bi bi-exclamation-circle"></i>
+        <p>No trip selected. Please search and select a route first.</p>
+        <button class="btn-back" (click)="onBackToResults()">
+          <i class="bi bi-arrow-left"></i> Go to Search
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,9 @@
+
+--scripts
+1. json server : npm run jserver
+
+    "jserver": "json-server --watch ./src/app/shared/data/db.json --port 4000 --id _id"   id changed
+
+-- to do
+1. add to script and style
+1. index.html link tag added for lock icon

@@ -1,0 +1,98 @@
+﻿<div class="hotel-bg review-form-page">
+  <div class="container py-5">
+    <div class="review-form-card">
+
+      <!-- Card Header -->
+      <div class="review-form-header">
+        <div class="header-icon">&#9733;</div>
+        <div>
+          <h4 class="mb-0">Write a Review</h4>
+          <p class="mb-0 header-sub">Share your experience to help fellow travellers</p>
+        </div>
+      </div>
+
+      <form #form="ngForm" (ngSubmit)="onsubmit(form)" class="review-form-body">
+
+        <!-- Category Ratings -->
+        <div class="section-label">
+          <span class="section-dot"></span> Rate your experience
+        </div>
+
+        <div class="ratings-grid">
+          <div class="rating-item" *ngFor="let category of categories"
+            [class.rating-item--error]="hasRatingError && subratings[category] === 0"
+            [class.rating-item--filled]="subratings[category] > 0">
+            <span class="rating-category">{{ category | titlecase }}</span>
+            <star-rating (rated)="subratings[category] = $event; hasRatingError = false">
+            </star-rating>
+          </div>
+        </div>
+
+        <div *ngIf="hasRatingError" class="field-error mt-2">
+          <i class="bi bi-exclamation-circle me-1"></i>
+          Please rate all categories before submitting.
+        </div>
+
+        <!-- Review Text -->
+        <div class="section-label mt-4">
+          <span class="section-dot"></span> Your review
+        </div>
+
+        <textarea id="comment" name="comment" ngModel class="review-textarea" rows="4"
+          placeholder="Tell us what you loved, what could be better, and any tips for future guests..." required
+          minlength="15" #comment="ngModel">
+        </textarea>
+
+        <div *ngIf="comment.invalid && (comment.dirty || comment.touched)" class="field-error mt-1">
+          <div *ngIf="comment.errors?.['required']">Review is required.</div>
+          <div *ngIf="comment.errors?.['minlength']">Review must be at least 15 characters long.</div>
+        </div>
+
+        <!-- Photos -->
+        <div class="section-label mt-4">
+          <span class="section-dot"></span> Add photos
+          <span class="section-optional">optional</span>
+        </div>
+
+        <label class="photo-upload-label" for="photo">
+          <span class="photo-icon">&#128247;</span>
+          <span class="photo-text">Click to upload photos</span>
+          <span class="photo-hint">JPG, PNG up to 5 MB each</span>
+          <input type="file" id="photo" accept="image/*" multiple (change)="onImageSelect($event)"
+            class="photo-input" />
+        </label>
+
+        <div *ngIf="imageError" class="field-error mt-2">{{ imageError }}</div>
+
+        <div class="preview-row" *ngIf="imageBase64s.length > 0">
+          <div class="preview-thumb" *ngFor="let img of imageBase64s; let i = index">
+            <img [src]="img" alt="preview" />
+            <button type="button" class="remove-image-btn" (click)="removeImage(i)" title="Remove image">
+              <i class="bi bi-x-circle-fill"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="submit-btn mt-4" [disabled]="form.invalid || hasRatingError">
+          Submit Review
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Success Modal -->
+<div *ngIf="showSuccessModal" class="success-modal-overlay">
+  <div class="success-modal">
+    <div class="success-icon">
+      <i class="bi bi-check-circle-fill"></i>
+    </div>
+    <h3 class="success-title">Review Submitted!</h3>
+    <p class="success-message">Thank you for sharing your experience.</p>
+    <div class="success-loader">
+      <div class="spinner"></div>
+      <span>Redirecting...</span>
+    </div>
+  </div>
+</div>

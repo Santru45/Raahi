@@ -1,0 +1,41 @@
+<!-- Success Stories -->
+    <div class="mb-4">
+      <h5 class="fw-bold mb-3" style="color: var(--deep-twilight)">
+        Platform Highlights
+      </h5>
+      <div class="row g-3">
+        @for (card of highlightCards; track $index) {
+          <div class="col-12 col-sm-6 col-lg-3">
+            <div
+              class="card border-0 shadow-sm rounded-4 h-100"
+              [style.background-color]="card.color"
+            >
+              <div class="card-body p-4">
+                <i class="bi {{ card.icon }} fs-3 text-white mb-3 d-block"></i>
+
+                @if (card.type == 'hotel') {
+                  <!-- Top Hotel -->
+                  <h4 class="fw-bold text-white mb-1">
+                    {{topHotelName() || 'N/A'}}
+                  </h4>
+                } @else if (card.type == 'number') {
+                  <h3 class="fw-bold text-white mb-1">
+                    {{ getValue(card.key) | number }}
+                  </h3>
+                } @else {
+                  <!-- Currency -->
+                  <h3 class="fw-bold text-white mb-1">
+                    {{
+                      getValue(card.key)
+                        | currency: "INR" : "symbol" : "1.0-0"
+                    }}
+                  </h3>
+                }
+
+                <small class="text-white opacity-75">{{ card.label }}</small>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>

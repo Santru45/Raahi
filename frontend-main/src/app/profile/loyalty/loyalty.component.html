@@ -1,0 +1,178 @@
+<!-- Loading state -->
+<div *ngIf="!account && !noAccount" class="text-center p-4">
+  <div class="spinner-border" style="color: var(--bright-teal-blue)"></div>
+  <p class="mt-2 text-muted">Loading loyalty account...</p>
+</div>
+
+<!-- No account found -->
+<div *ngIf="noAccount" class="text-center p-4">
+  <p class="text-muted">No loyalty account found.</p>
+</div>
+
+<!-- Main card — only renders when account is loaded -->
+<div *ngIf="account">
+  <div class="card border-0 shadow-sm rounded-4 my-4">
+    <div class="card-body p-4">
+      <!-- Header -->
+      <div class="d-flex align-items-center justify-content-between mb-4">
+        <h5 class="fw-bold mb-0" style="color: var(--deep-twilight)">
+          <i class="bi bi-coin me-2" style="color: var(--bright-teal-blue)"></i>
+          Loyalty Rewards
+        </h5>
+        <span class="badge rounded-pill px-3 py-2" style="background-color: var(--bright-teal-blue)">
+          {{ account.tier | titlecase }}
+        </span>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="row text-center mb-4">
+        <div class="col">
+          <i class="bi bi-coin fs-1 text-warning"></i>
+          <div class="fw-semibold">Coin Balance</div>
+          <div class="fs-4" style="color: var(--bright-teal-blue)">
+            {{ account.coinBalance }}
+          </div>
+        </div>
+        <div class="col">
+          <i class="bi bi-trophy fs-1 text-success"></i>
+          <div class="fw-semibold">Total Earned</div>
+          <div class="fs-4 text-success">{{ account.totalEarned }}</div>
+        </div>
+        <div class="col">
+          <i class="bi bi-gift fs-1" style="color: var(--turquoise-surf)"></i>
+          <div class="fw-semibold">Next Tier At</div>
+          <div class="fs-6 text-secondary" *ngIf="nextMilestone">
+            Earn <strong>{{ remainingToNext }}</strong> more coins for
+            <strong>{{ nextMilestone.label }}</strong>
+          </div>
+          <div class="fs-6 fw-semibold text-success" *ngIf="!nextMilestone">
+            Max Tier Reached!
+          </div>
+        </div>
+        <div class="col">
+          <i class="bi bi-lightning-charge fs-1 text-danger"></i>
+          <div class="fw-semibold">Earn Multiplier</div>
+          <div class="fs-4 text-danger">{{ account.earnMultiplier }}x</div>
+        </div>
+      </div>
+
+      <!-- Milestone Icons -->
+      <div class="d-flex justify-content-between mb-1 px-1">
+        <small class="text-center d-flex flex-column align-items-center" *ngFor="let m of milestones">
+          <i [class]="'bi ' + m.icon + ' fs-4'" [class.text-warning]="isReached(m.minCoins)"
+            [class.text-secondary]="!isReached(m.minCoins)">
+          </i>
+          <span>{{ m.label }}</span>
+          <span class="text-muted">{{ m.minCoins }} coins</span>
+        </small>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress position-relative mt-1" style="height: 18px">
+        <div class="progress-bar" role="progressbar" [style.width.%]="progressPercent"
+          [style.background-color]="'var(--bright-teal-blue)'" [attr.aria-valuenow]="account.totalEarned"
+          aria-valuemin="0" [attr.aria-valuemax]="1500"></div>
+        <span class="position-absolute translate-middle-y top-50 small fw-semibold" style="color: var(--deep-twilight)"
+          [style.left.%]="progressPercent">
+          {{ account.totalEarned }}
+        </span>
+      </div>
+
+      <p class="mt-3 text-center fst-italic text-secondary" *ngIf="nextMilestone">
+        Earn <strong>{{ remainingToNext }}</strong> more coins to reach
+        <strong>{{ nextMilestone.label }}</strong>
+        and get <strong>{{ nextMilestone.multiplier }}x</strong> earn rate!
+      </p>
+
+      <!-- Transaction History -->
+      <h6 class="mt-4 fw-semibold" style="color: var(--bright-teal-blue)">
+        <i class="bi bi-clock-history me-1"></i> Transaction History
+      </h6>
+
+      <!-- Filter Buttons -->
+      <div class="d-flex gap-2 mb-3 flex-wrap">
+        <button class="btn btn-sm" [class.btn-primary]="transactionFilter === 'all'"
+          [class.btn-outline-secondary]="transactionFilter !== 'all'" (click)="setFilter('all')">
+          <i class="bi bi-list-ul me-1"></i>All
+        </button>
+        <button class="btn btn-sm" [class.btn-success]="transactionFilter === 'earned'"
+          [class.btn-outline-secondary]="transactionFilter !== 'earned'" (click)="setFilter('earned')">
+          <i class="bi bi-plus-circle me-1"></i>Earned
+        </button>
+        <button class="btn btn-sm" [class.btn-warning]="transactionFilter === 'redeemed'"
+          [class.btn-outline-secondary]="transactionFilter !== 'redeemed'" (click)="setFilter('redeemed')">
+          <i class="bi bi-dash-circle me-1"></i>Redeemed
+        </button>
+        <button class="btn btn-sm" [class.btn-danger]="transactionFilter === 'deducted'"
+          [class.btn-outline-secondary]="transactionFilter !== 'deducted'" (click)="setFilter('deducted')">
+          <i class="bi bi-exclamation-triangle me-1"></i>Deducted
+        </button>
+      </div>
+
+      <ng-container *ngIf="account.ledger && account.ledger.length > 0; else noHistory">
+        <div class="txn-list">
+          <div class="txn-row" *ngFor="let entry of filteredTransactions" [class.txn-row--credit]="
+              entry.action === 'earned' || entry.action === 'refunded'
+            " [class.txn-row--debit]="
+              entry.action === 'redeemed' || entry.action === 'clawback'
+            ">
+            <div class="txn-icon">
+              <i class="bi" [class.bi-plus-circle-fill]="entry.action === 'earned'"
+                [class.bi-arrow-counterclockwise]="entry.action === 'refunded'"
+                [class.bi-dash-circle-fill]="entry.action === 'redeemed'" [class.bi-exclamation-triangle-fill]="
+                  entry.action === 'clawback'
+                "></i>
+            </div>
+            <div class="txn-body">
+              <div class="d-flex align-items-center gap-2 flex-wrap">
+                <span class="txn-action-badge" [attr.data-action]="entry.action">{{
+                  entry.action === "clawback"
+                  ? "Deducted"
+                  : (entry.action | titlecase)
+                  }}</span>
+                <span class="txn-type">{{
+                  entry.bookingType | titlecase
+                  }}</span>
+                <span class="txn-ref">{{ entry.bookingReference }}</span>
+              </div>
+              <div class="txn-note" *ngIf="entry.note">{{ entry.note }}</div>
+              <div class="txn-expiry" *ngIf="entry.expiresAt">
+                <i class="bi bi-hourglass-split me-1"></i>Expires
+                {{ entry.expiresAt | date: "mediumDate" }}
+              </div>
+            </div>
+            <div class="txn-right">
+              <div class="txn-coins" [class.txn-coins--credit]="
+                  entry.action === 'earned' || entry.action === 'refunded'
+                " [class.txn-coins--debit]="
+                  entry.action === 'redeemed' || entry.action === 'clawback'
+                ">
+                {{
+                entry.action === "earned" || entry.action === "refunded"
+                ? "+"
+                : "-"
+                }}{{ entry.coins }} <i class="bi bi-coin ms-1"></i>
+              </div>
+              <div class="txn-balance">
+                Balance: {{ entry.balanceAfter }} 🪙
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noHistory>
+        <div class="text-center text-muted py-4">No transaction history.</div>
+      </ng-template>
+
+      <!-- Redeem Info -->
+      <div class="mt-3 mb-0 p-3 rounded-3 small text-center"
+        style="background-color: var(--light-cyan); color: var(--deep-twilight)">
+        <i class="bi bi-info-circle me-1"></i>
+        You can redeem up to <strong>{{ account.maxRedeemPercent }}%</strong> of
+        your booking value using coins at checkout. 1 coin =
+        <strong>₹0.50</strong> discount &nbsp;|&nbsp; Every
+        <strong>₹100</strong> spent earns <strong>1 coin</strong>
+      </div>
+    </div>
+  </div>
+</div>

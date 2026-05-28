@@ -1,0 +1,384 @@
+// ── Page Background ────────────────────────────────────────────────────────────
+:host {
+  display: block;
+}
+
+// ── Profile Hero Banner ────────────────────────────────────────────────────────
+.profile-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 56px 24px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  &__avatar {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  }
+
+  &__label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    opacity: 0.85;
+  }
+
+  &__name {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 800;
+    margin-bottom: 4px;
+    color: #fff;
+    line-height: 1.15;
+  }
+
+  &__sub {
+    font-size: 0.88rem;
+    opacity: 0.7;
+    margin: 0;
+    color: #fff;
+  }
+
+  &__shapes {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &__shape {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  // ── User variant
+  &--user {
+    background: linear-gradient(135deg, #0077b6 0%, #023e8a 55%, #03045e 100%);
+
+    .profile-hero__avatar {
+      background: rgba(72, 202, 228, 0.22);
+      color: #caf0f8;
+    }
+
+    .profile-hero__label {
+      color: #90e0ef;
+    }
+
+    .profile-hero__shape--1 {
+      width: 300px;
+      height: 300px;
+      background: #48cae4;
+      opacity: 0.1;
+      top: -90px;
+      right: -70px;
+    }
+    .profile-hero__shape--2 {
+      width: 180px;
+      height: 180px;
+      background: #00b4d8;
+      opacity: 0.1;
+      bottom: -50px;
+      left: 8%;
+    }
+    .profile-hero__shape--3 {
+      width: 110px;
+      height: 110px;
+      background: #caf0f8;
+      opacity: 0.06;
+      top: 16px;
+      left: 42%;
+    }
+  }
+
+  // ── Admin variant
+  &--admin {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+
+    .profile-hero__avatar {
+      background: rgba(245, 197, 24, 0.15);
+      color: #f5c518;
+      font-size: 1.9rem;
+      border-color: rgba(245, 197, 24, 0.3);
+    }
+
+    .profile-hero__label {
+      color: #f5c518;
+    }
+
+    .profile-hero__shape--1 {
+      width: 340px;
+      height: 340px;
+      background: #e5a00d;
+      opacity: 0.07;
+      top: -130px;
+      right: -90px;
+    }
+    .profile-hero__shape--2 {
+      width: 200px;
+      height: 200px;
+      background: transparent;
+      opacity: 1;
+      border: 2px solid rgba(245, 197, 24, 0.1);
+      bottom: -70px;
+      left: 4%;
+    }
+    .profile-hero__shape--3 {
+      width: 90px;
+      height: 90px;
+      background: #f5c518;
+      opacity: 0.05;
+      top: 24px;
+      left: 36%;
+    }
+  }
+}
+
+/* ── Replace ALL wallet styles in profile.component.scss ────────── */
+
+.wallet-success-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  padding: 0 0.85rem;
+  margin-bottom: 0;
+  border-radius: 10px;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #e0f7fa;
+  background: #0a3d4a;
+  border: 1px solid transparent;
+  transition:
+    max-height 0.35s ease,
+    opacity 0.3s ease,
+    margin-bottom 0.35s ease,
+    padding 0.35s ease,
+    border-color 0.3s ease;
+  pointer-events: none;
+
+  i {
+    font-size: 0.92rem;
+    color: #48cae4;
+    flex-shrink: 0;
+  }
+
+  &--visible {
+    max-height: 2.5rem;
+    opacity: 1;
+    padding: 0.4rem 0.85rem;
+    margin-bottom: 0.55rem;
+    border-color: rgba(72, 202, 228, 0.35);
+    pointer-events: auto;
+  }
+}
+
+.wallet-balance-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background: linear-gradient(
+    135deg,
+    var(--deep-twilight, #1a2a4a) 0%,
+    var(--bright-teal-blue, #0ea5e9) 100%
+  );
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  width: 100%;
+
+  @media (max-width: 480px) {
+    font-size: 0.82rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  i.bi-wallet2 {
+    font-size: 1rem;
+    opacity: 0.85;
+    flex-shrink: 0;
+  }
+}
+
+.wallet-balance-amount {
+  letter-spacing: 0.01em;
+  flex: 1;
+}
+
+.wallet-history-btn,
+.wallet-topup-btn {
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  color: #fff;
+  border-radius: 50px;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  transition: background 0.18s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.32);
+  }
+}
+
+.wallet-topup-btn {
+  font-weight: 600;
+}
+
+/* ── Smooth expand / collapse ──────────────────────────────────── */
+/*
+   IMPORTANT: Do NOT use @if on these panels in the template.
+   Keep them always in the DOM and toggle .wallet-expand-col--open.
+   @if destroys the element so the closing transition never runs.
+*/
+.wallet-expand-col {
+  max-height: 0;
+  overflow: hidden; /* hides content when collapsed          */
+  opacity: 0;
+  transition:
+    max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s ease;
+
+  &.wallet-expand-col--open {
+    /* large enough to fit content; scroll happens INSIDE the child   */
+    max-height: 500px;
+    overflow: visible; /* allow child's own scrollbar to show   */
+    opacity: 1;
+  }
+}
+
+/* Top-up panel */
+.wallet-topup-panel {
+  background: #fff;
+  margin-top: 0.5rem;
+
+  @media (max-width: 480px) {
+    padding: 0.75rem !important;
+  }
+
+  .btn-topup-preset {
+    font-size: 0.78rem;
+    background: var(--frosted-blue-light, #e8f4ff);
+    color: var(--deep-twilight, #1a2a4a);
+    border: 1px solid transparent;
+
+    &:hover {
+      border-color: var(--bright-teal-blue, #0ea5e9);
+      color: var(--bright-teal-blue, #0ea5e9);
+    }
+  }
+
+  .btn-topup-active {
+    font-size: 0.78rem;
+    background: var(--bright-teal-blue, #0ea5e9);
+    color: #fff;
+    border: 1px solid transparent;
+  }
+}
+
+/* Transaction panel wrapper */
+.wallet-txn-panel {
+  margin-top: 0.5rem;
+}
+
+/* Scrollable transaction list — this is where overflow:auto lives */
+.wallet-txn-scroll {
+  max-height: 240px;
+  overflow-y: auto; /* always reserve scrollbar space        */
+  padding-right: 4px;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--frosted-blue, #b3d4f5) transparent;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--frosted-blue, #b3d4f5);
+    border-radius: 4px;
+  }
+}
+
+.wallet-txn-row {
+  transition: box-shadow 0.15s ease;
+  flex-shrink: 0; /* prevent rows from collapsing          */
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  }
+}
+
+// ── Validation message pill (same as auth forms) ──────────────────────────────
+.field-error {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 6px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  background-color: rgba(220, 53, 69, 0.07);
+  border-left: 3px solid #dc3545;
+  color: #b91c1c;
+
+  i {
+    font-size: 13px;
+    flex-shrink: 0;
+    color: #dc3545;
+  }
+
+  &--enter {
+    animation: errorIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@keyframes errorIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+    max-height: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    max-height: 60px;
+  }
+}

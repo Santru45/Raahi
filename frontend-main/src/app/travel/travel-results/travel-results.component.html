@@ -1,0 +1,197 @@
+<!-- src/app/components/travel/travel-results/travel-results.component.html -->
+
+<div class="results-page travel-bg">
+  <!-- Search Summary Bar -->
+  <div class="search-summary-bar">
+    <div class="summary-info">
+      <span class="summary-mode">
+        @if (transportService.selectedMode() === "flight") {
+          <i class="bi bi-airplane-fill"></i>
+        } @else if (transportService.selectedMode() === "train") {
+          <i class="bi bi-train-front-fill"></i>
+        } @else {
+          <i class="bi bi-bus-front-fill"></i>
+        }
+      </span>
+      @if (transportService.availableTrips().length > 0) {
+        <span class="summary-route">
+          {{ transportService.availableTrips()[0].from }}
+          <i class="bi bi-arrow-right"></i>
+          {{ transportService.availableTrips()[0].to }}
+        </span>
+        <span class="summary-count">
+          {{ filteredTrips().length }} of
+          {{ transportService.availableTrips().length }} results
+        </span>
+      } @else {
+        <span class="summary-count">No results found</span>
+      }
+    </div>
+    <div class="summary-actions">
+      <button class="btn-filter" (click)="showFilters.set(!showFilters())">
+        <i class="bi bi-funnel-fill"></i> Filters
+        @if (activeFilterCount > 0) {
+          <span class="filter-badge">{{ activeFilterCount }}</span>
+        }
+      </button>
+      <button class="btn-modify" (click)="onModifySearch()">
+        <i class="bi bi-pencil-square"></i> Modify
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Layout: Filters + Results -->
+  <div class="results-layout">
+    <!-- ═══════ FILTER SIDEBAR ═══════ -->
+    <aside class="filter-sidebar" [class.open]="showFilters()">
+      <div class="filter-header">
+        <h6 class="fw-bold mb-0"><i class="bi bi-sliders me-2"></i>Filters</h6>
+        <button
+          class="btn-clear"
+          (click)="clearFilters()"
+          *ngIf="activeFilterCount > 0"
+        >
+          Clear All
+        </button>
+      </div>
+
+      <!-- Sort By -->
+      <div class="filter-section">
+        <h6 class="filter-title">Sort By</h6>
+        <div class="sort-chips">
+          <button
+            class="sort-chip"
+            [class.active]="sortBy() === 'price-asc'"
+            (click)="sortBy.set('price-asc')"
+          >
+            <i class="bi bi-arrow-up"></i> Price Low
+          </button>
+          <button
+            class="sort-chip"
+            [class.active]="sortBy() === 'price-desc'"
+            (click)="sortBy.set('price-desc')"
+          >
+            <i class="bi bi-arrow-down"></i> Price High
+          </button>
+          <button
+            class="sort-chip"
+            [class.active]="sortBy() === 'departure'"
+            (click)="sortBy.set('departure')"
+          >
+            <i class="bi bi-clock"></i> Departure
+          </button>
+          <button
+            class="sort-chip"
+            [class.active]="sortBy() === 'duration'"
+            (click)="sortBy.set('duration')"
+          >
+            <i class="bi bi-hourglass-split"></i> Duration
+          </button>
+          <button
+            class="sort-chip"
+            [class.active]="sortBy() === 'seats'"
+            (click)="sortBy.set('seats')"
+          >
+            <i class="bi bi-person"></i> Seats
+          </button>
+        </div>
+      </div>
+
+      <!-- Price Range -->
+      <div class="filter-section">
+        <h6 class="filter-title">Price Range</h6>
+        <div class="price-range-wrapper">
+          <input
+            type="range"
+            class="form-range"
+            [min]="priceExtent().min"
+            [max]="priceExtent().max"
+            [step]="50"
+            [ngModel]="priceRange()"
+            (ngModelChange)="priceRange.set($event)"
+          />
+          <div class="price-labels">
+            <span>₹{{ priceExtent().min | number: "1.0-0" }}</span>
+            <span
+              class="fw-bold"
+              style="color: var(--bright-teal-blue, #0d6efd)"
+            >
+              ≤ ₹{{ priceRange() | number: "1.0-0" }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Departure Time -->
+      <div class="filter-section">
+        <h6 class="filter-title">Departure Time</h6>
+        <div class="time-slots">
+          <div
+            class="time-slot"
+            [class.active]="selectedDepartures().has('early')"
+            (click)="toggleDeparture('early')"
+          >
+            <i class="bi bi-moon-stars"></i>
+            <span>Early<br /><small>00–06</small></span>
+          </div>
+          <div
+            class="time-slot"
+            [class.active]="selectedDepartures().has('morning')"
+            (click)="toggleDeparture('morning')"
+          >
+            <i class="bi bi-sunrise"></i>
+            <span>Morning<br /><small>06–12</small></span>
+          </div>
+          <div
+            class="time-slot"
+            [class.active]="selectedDepartures().has('afternoon')"
+            (click)="toggleDeparture('afternoon')"
+          >
+            <i class="bi bi-sun"></i>
+            <span>Afternoon<br /><small>12–18</small></span>
+          </div>
+          <div
+            class="time-slot"
+            [class.active]="selectedDepartures().has('night')"
+            (click)="toggleDeparture('night')"
+          >
+            <i class="bi bi-moon"></i>
+            <span>Night<br /><small>18–00</small></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Operators -->
+      @if (operators().length > 0) {
+        <div class="filter-section">
+          <h6 class="filter-title">Operators</h6>
+          <div class="operator-list">
+            @for (op of operators(); track op) {
+              <label class="operator-item">
+                <input
+                  type="checkbox"
+                  [checked]="selectedOperators().has(op)"
+                  (change)="toggleOperator(op)"
+                />
+                <span>{{ op }}</span>
+              </label>
+            }
+          </div>
+        </div>
+      }
+
+      <!-- Mobile Close -->
+      <button class="btn-close-filters" (click)="showFilters.set(false)">
+        Apply Filters
+      </button>
+    </aside>
+
+    <!-- ═══════ RESULTS LIST ═══════ -->
+    <div class="results-container">
+      <app-service-list
+        [trips]="filteredTrips()"
+        (tripSelected)="onTripSelected($event)"
+      />
+    </div>
+  </div>
+</div>

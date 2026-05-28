@@ -1,0 +1,95 @@
+// ── Validation message pill ────────────────────────────────────────────────────
+.field-error {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 6px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  background-color: rgba(220, 53, 69, 0.07);
+  border-left: 3px solid #dc3545;
+  color: #b91c1c;
+
+  i { font-size: 13px; flex-shrink: 0; color: #dc3545; }
+
+  // Persistent errors — smooth spring entrance
+  &--enter {
+    animation: errorIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  // Timed errors — spring in, then fade softly out
+  &--timed {
+    animation:
+      errorIn  0.45s cubic-bezier(0.16, 1, 0.3, 1) both,
+      errorOut 0.55s cubic-bezier(0.4,  0, 0.6, 1) 2.5s both;
+  }
+}
+
+@keyframes errorIn {
+  0%   { opacity: 0; transform: translateY(-8px) scale(0.95); max-height: 0;    }
+  40%  { opacity: 1;                                                             }
+  100% { opacity: 1; transform: translateY(0)    scale(1);    max-height: 60px; }
+}
+
+@keyframes errorOut {
+  0%   { opacity: 1; transform: translateY(0)    scale(1);    max-height: 60px; }
+  100% { opacity: 0; transform: translateY(-5px) scale(0.96); max-height: 0;    }
+}
+
+// ── Password strength checklist ───────────────────────────────────────────────
+.pw-checklist {
+  margin-top: 10px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #f8fbff;
+  border: 1px solid #d0e8f8;
+  overflow: hidden;
+
+  // Smooth expand-in on appear
+  animation: checklistIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 16px;
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__rule {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12.5px;
+    font-weight: 500;
+    // Smooth color transition as rules are met/unmet
+    color: #94a3b8;
+    transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &--met {
+      color: #16a34a;
+    }
+
+    i {
+      font-size: 13px;
+      flex-shrink: 0;
+      transition:
+        color     0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.4s  cubic-bezier(0.34, 1.56, 0.64, 1); // slight bounce on tick
+    }
+
+    &--met i {
+      color: #16a34a;
+      transform: scale(1.2) rotate(0deg);
+    }
+  }
+}
+
+@keyframes checklistIn {
+  0%   { opacity: 0; transform: translateY(-6px); max-height: 0;     padding: 0 14px; }
+  100% { opacity: 1; transform: translateY(0);    max-height: 200px; padding: 12px 14px; }
+}

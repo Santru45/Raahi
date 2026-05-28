@@ -1,0 +1,155 @@
+<!-- Loading State -->
+<div *ngIf="!offer" class="od-loading">
+  <div class="od-loading__spinner">
+    <div class="spinner-border" style="color: #48cae4; width: 2.5rem; height: 2.5rem;"></div>
+    <p class="mt-3 mb-0" style="color: #90e0ef; font-size: 0.9rem; letter-spacing: 0.5px;">Loading offer...</p>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div *ngIf="offer" class="od-page">
+
+   
+  <div class="od-hero">
+    <img [src]="offer.image" [alt]="offer.title" class="od-hero__img" />
+    <div class="od-hero__overlay"></div>
+
+    <!-- Back button -->
+    <button class="od-hero__back" onclick="history.back()">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+
+    <!-- Discount badge -->
+    <div class="od-hero__discount">
+      <span class="od-hero__discount-pct">{{ offer.discountPercent }}%</span>
+      <span class="od-hero__discount-label">OFF</span>
+    </div>
+
+    <!-- Title area -->
+    <div class="od-hero__content">
+      <span class="od-hero__badge">
+        <i class="bi bi-fire me-1"></i>{{ offer.badgeLabel }}
+      </span>
+      <h1 class="od-hero__title">{{ offer.title }}</h1>
+      <p class="od-hero__desc">{{ offer.description }}</p>
+    </div>
+  </div>
+
+  
+  <div class="od-body container">
+
+    <!-- Coupon strip -->
+    <div class="od-coupon">
+      <div class="od-coupon__left">
+        <i class="bi bi-ticket-perforated-fill od-coupon__icon"></i>
+        <div>
+          <p class="od-coupon__label">Your Coupon Code</p>
+          <p class="od-coupon__code">{{ offer.couponCode }}</p>
+        </div>
+      </div>
+      <button class="od-coupon__copy" onclick="navigator.clipboard.writeText(this.dataset.code)" [attr.data-code]="offer.couponCode">
+        <i class="bi bi-copy me-1"></i> Copy
+      </button>
+    </div>
+
+    <!-- Stats row -->
+    <div class="od-stats">
+      <div class="od-stat">
+        <div class="od-stat__icon od-stat__icon--teal">
+          <i class="bi bi-moon-stars-fill"></i>
+        </div>
+        <p class="od-stat__label">Min Nights</p>
+        <p class="od-stat__value">{{ offer.minNights }}<span class="od-stat__unit"> nights</span></p>
+      </div>
+      <div class="od-stat">
+        <div class="od-stat__icon od-stat__icon--green">
+          <i class="bi bi-calendar-check-fill"></i>
+        </div>
+        <p class="od-stat__label">Valid From</p>
+        <p class="od-stat__value">{{ offer.validFrom | date:'MMM d, y' }}</p>
+      </div>
+      <div class="od-stat">
+        <div class="od-stat__icon od-stat__icon--red">
+          <i class="bi bi-calendar-x-fill"></i>
+        </div>
+        <p class="od-stat__label">Valid Until</p>
+        <p class="od-stat__value">{{ offer.validTo | date:'MMM d, y' }}</p>
+      </div>
+      <div class="od-stat">
+        <div class="od-stat__icon od-stat__icon--blue">
+          <i class="bi bi-percent"></i>
+        </div>
+        <p class="od-stat__label">Discount</p>
+        <p class="od-stat__value">{{ offer.discountPercent }}<span class="od-stat__unit">%</span></p>
+      </div>
+    </div>
+
+    <!-- Applicable hotel types -->
+    <div class="od-types">
+      <p class="od-types__heading">
+        <i class="bi bi-building-check me-2"></i>Applicable Hotel Types
+      </p>
+      <div class="od-types__chips">
+        <span *ngFor="let type of offer.applicableHotelTypes" class="od-type-chip">
+          <i class="bi bi-check2 me-1"></i>{{ type }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Section divider -->
+    <div class="od-section-header">
+      <div class="od-section-header__line"></div>
+      <div class="od-section-header__text">
+        <i class="bi bi-hotel me-2"></i>Select a Hotel to Apply This Offer
+      </div>
+      <div class="od-section-header__line"></div>
+    </div>
+
+    <!-- Hotels loading -->
+    <div *ngIf="hotels.length === 0" class="od-hotels-loading">
+      <div class="spinner-border spinner-border-sm" style="color: #48cae4;"></div>
+      <p class="mt-2 mb-0 small" style="color: #90e0ef;">Loading eligible hotels...</p>
+    </div>
+
+    <!-- Hotels grid -->
+    <div class="od-hotels" *ngIf="hotels.length > 0">
+      <div class="od-hotel-card" *ngFor="let hotel of hotels" (click)="goToHotel(hotel._id ?? hotel.id)">
+
+        <div class="od-hotel-card__img-wrap">
+          <img [src]="hotel.images[0]" [alt]="hotel.name" class="od-hotel-card__img" />
+          <span class="od-hotel-card__type">{{ hotel.hotelType }}</span>
+          <span class="od-hotel-card__stars">
+            <i class="bi bi-star-fill me-1" style="font-size: 0.7rem;"></i>{{ hotel.starRating }}
+          </span>
+        </div>
+
+        <div class="od-hotel-card__body">
+          <h6 class="od-hotel-card__name">{{ hotel.name }}</h6>
+          <p class="od-hotel-card__location">
+            <i class="bi bi-geo-alt-fill me-1"></i>{{ hotel.location.city }}, {{ hotel.location.state }}
+          </p>
+
+          <div class="od-hotel-card__footer">
+            <div>
+              <ng-container *ngIf="hotel.rooms && hotel.rooms.length > 0">
+                <p class="od-hotel-card__price">
+                  {{ hotel.rooms[0].basePricePerNight | currency:'INR':'symbol':'1.0-0' }}
+                  <span class="od-hotel-card__per">/night</span>
+                </p>
+              </ng-container>
+              <ng-container *ngIf="!hotel.rooms || hotel.rooms.length === 0">
+                <p class="od-hotel-card__price-na">Price on request</p>
+              </ng-container>
+            </div>
+            <button class="od-hotel-card__btn"
+                    (click)="$event.stopPropagation(); goToHotel(hotel._id ?? hotel.id)">
+              Book Now <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /od-body -->
+</div><!-- /od-page -->

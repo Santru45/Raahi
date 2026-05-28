@@ -1,0 +1,691 @@
+// ─── navbar.component.scss ────────────────────────────────────────────────────
+.raahi-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(
+    135deg,
+    rgba(3, 4, 94, 0.96) 0%,
+    rgba(0, 53, 102, 0.96) 100%
+  );
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(72, 202, 228, 0.12);
+  transition:
+    background 0.3s,
+    box-shadow 0.3s;
+
+  &--scrolled {
+    background: linear-gradient(
+      135deg,
+      rgba(2, 3, 60, 0.98) 0%,
+      rgba(0, 40, 80, 0.98) 100%
+    );
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  &__brand {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition:
+      opacity 0.2s,
+      transform 0.2s;
+    &:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+  }
+
+  &__logo {
+    height: 40px;
+    width: auto;
+    display: block;
+    overflow: visible;
+  }
+
+  &__links {
+    gap: 2px;
+  }
+
+  &__link {
+    color: rgba(255, 255, 255, 0.72);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border-radius: 999px;
+    transition:
+      color 0.2s,
+      background 0.2s;
+    letter-spacing: 0.1px;
+    &:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    &.active {
+      color: #48cae4;
+      background: rgba(72, 202, 228, 0.12);
+      font-weight: 600;
+    }
+  }
+
+  &__tooltip-wrap {
+    position: relative;
+    align-self: center;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -10px;
+      height: 10px;
+    }
+    &:hover .raahi-nav__tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: none;
+    }
+  }
+
+  &__tooltip {
+    position: absolute;
+    top: calc(100% + 0px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-4px);
+    background: rgba(2, 3, 60, 0.95);
+    color: #fff;
+    font-size: 11.5px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 0.18s,
+      transform 0.18s;
+    border: 1px solid rgba(72, 202, 228, 0.2);
+    z-index: 200;
+  }
+
+  &__chip {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.85);
+    white-space: nowrap;
+
+    &--coins {
+      border-color: rgba(251, 191, 36, 0.35);
+      background: rgba(251, 191, 36, 0.08);
+      color: #fbbf24;
+    }
+
+    &--wallet {
+      border-color: rgba(72, 202, 228, 0.35);
+      background: rgba(72, 202, 228, 0.08);
+      color: #48cae4;
+      text-decoration: none;
+      cursor: pointer;
+      &:hover {
+        background: rgba(72, 202, 228, 0.18);
+        border-color: rgba(72, 202, 228, 0.6);
+        color: #7ed8ec;
+      }
+    }
+  }
+
+  &__chip-icon {
+    font-size: 14px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__chip-val {
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__chip-label {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  &__chip-add {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(72, 202, 228, 0.25);
+    border: 1px solid rgba(72, 202, 228, 0.5);
+    color: #48cae4;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    margin-left: 2px;
+    transition:
+      background 0.2s,
+      border-color 0.2s;
+    &:hover {
+      background: rgba(72, 202, 228, 0.45);
+      border-color: #48cae4;
+      color: #fff;
+    }
+  }
+
+  &__btn-signin {
+    color: rgba(255, 255, 255, 0.75);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition:
+      border-color 0.2s,
+      color 0.2s,
+      background 0.2s;
+    &:hover {
+      border-color: rgba(72, 202, 228, 0.5);
+      color: #48cae4;
+      background: rgba(72, 202, 228, 0.07);
+    }
+  }
+
+  &__btn-signup {
+    color: #fff;
+    border: 1.5px solid rgba(72, 202, 228, 0.7);
+    background: rgba(72, 202, 228, 0.15);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition:
+      border-color 0.2s,
+      background 0.2s,
+      color 0.2s;
+    &:hover {
+      background: rgba(72, 202, 228, 0.28);
+      border-color: #48cae4;
+      color: #48cae4;
+    }
+  }
+
+  &__avatar {
+    display: flex;
+    align-items: center;
+    background: rgba(72, 202, 228, 0.1);
+    border: 1.5px solid rgba(72, 202, 228, 0.3);
+    color: #fff;
+    border-radius: 999px;
+    padding: 7px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition:
+      background 0.2s,
+      border-color 0.2s;
+    &:hover {
+      background: rgba(72, 202, 228, 0.2);
+      border-color: rgba(72, 202, 228, 0.6);
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding-top: 8px;
+    background: transparent;
+    z-index: 100;
+    min-width: 210px;
+
+    &-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(3, 4, 94, 0.18);
+      padding: 12px 8px 8px 8px;
+      border: 1px solid rgba(72, 202, 228, 0.12);
+      animation: dropdownIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+  }
+
+  // ── Wallet popup ──────────────────────────────────────────────
+  &__wallet-popup {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding-top: 8px;
+    z-index: 200;
+    min-width: 260px;
+  }
+
+  &__wallet-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(3, 4, 94, 0.18);
+    padding: 20px;
+    border: 1px solid rgba(72, 202, 228, 0.12);
+    animation: dropdownIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  &__wallet-close {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+    transition:
+      color 0.15s,
+      background 0.15s;
+    &:hover {
+      color: #dc3545;
+      background: rgba(220, 53, 69, 0.06);
+    }
+  }
+
+  &__wallet-balance {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px 0 4px;
+  }
+
+  &__wallet-currency {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--deep-twilight, #1a2a4a);
+  }
+
+  &__wallet-amount {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--deep-twilight, #1a2a4a);
+    letter-spacing: -0.5px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__wallet-topup-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(
+      135deg,
+      var(--bright-teal-blue, #0ea5e9),
+      var(--deep-twilight, #1a2a4a)
+    );
+    border: none;
+    cursor: pointer;
+    transition:
+      opacity 0.2s,
+      transform 0.2s;
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      color: #fff;
+    }
+  }
+
+  &__wallet-success {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    padding: 0 10px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #16a34a;
+    background: rgba(22, 163, 74, 0.08);
+    border: 1px solid transparent;
+    transition:
+      max-height 0.35s ease,
+      opacity 0.3s ease,
+      margin 0.35s ease,
+      padding 0.35s ease,
+      border-color 0.3s ease;
+    i {
+      color: #16a34a;
+    }
+    &--visible {
+      max-height: 2.2rem;
+      opacity: 1;
+      padding: 6px 10px;
+      margin-bottom: 8px;
+      border-color: rgba(22, 163, 74, 0.25);
+    }
+  }
+
+  &__wallet-form {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding-top: 12px;
+    margin-top: 4px;
+  }
+
+  &__wallet-preset {
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    color: var(--deep-twilight, #1a2a4a);
+    cursor: pointer;
+    transition:
+      border-color 0.15s,
+      background 0.15s;
+    &:hover {
+      border-color: var(--bright-teal-blue, #0ea5e9);
+      color: var(--bright-teal-blue, #0ea5e9);
+    }
+    &--active {
+      background: var(--bright-teal-blue, #0ea5e9);
+      color: #fff;
+      border-color: transparent;
+    }
+  }
+
+  &__wallet-error {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    background: rgba(220, 53, 69, 0.07);
+    border-left: 3px solid #dc3545;
+    color: #b91c1c;
+    animation: dropdownIn 0.25s ease both;
+    i {
+      color: #dc3545;
+      font-size: 12px;
+    }
+  }
+
+  &__wallet-pay-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #fff;
+    background: #2d81f7;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    &:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+    &:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+  }
+
+  &__wallet-cancel-btn {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #64748b;
+    background: transparent;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+    transition: background 0.15s;
+    &:hover {
+      background: #f1f5f9;
+    }
+  }
+
+  &__dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 10px;
+    color: var(--deep-twilight);
+    font-size: 14px;
+    text-decoration: none;
+    transition:
+      background 0.15s,
+      color 0.15s;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    &:hover {
+      background: #f0f9ff;
+      color: var(--bright-teal-blue);
+    }
+    &--danger {
+      color: #ef4444 !important;
+      &:hover {
+        background: #fff0f0;
+      }
+    }
+  }
+
+  &__hamburger {
+    background: rgba(72, 202, 228, 0.1);
+    border: 1.5px solid rgba(72, 202, 228, 0.25);
+    color: #fff;
+    border-radius: 10px;
+    padding: 6px 12px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+    &:hover {
+      background: rgba(72, 202, 228, 0.22);
+    }
+  }
+
+  &__mobile {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(
+      180deg,
+      rgba(2, 3, 70, 0.99) 0%,
+      rgba(0, 30, 70, 0.99) 100%
+    );
+    backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(72, 202, 228, 0.1);
+
+    &--open {
+      max-height: 600px;
+    }
+  }
+
+  &__mobile-inner {
+    padding: 8px 16px 20px;
+  }
+
+  &__mobile-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__mobile-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 10px 0;
+  }
+
+  &__mobile-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition:
+      background 0.2s,
+      color 0.2s;
+    cursor: pointer;
+
+    i {
+      font-size: 16px;
+      width: 18px;
+      text-align: center;
+    }
+
+    &:hover {
+      color: #48cae4;
+      background: rgba(72, 202, 228, 0.1);
+    }
+
+    &--danger {
+      color: #f87171 !important;
+      &:hover {
+        background: rgba(248, 113, 113, 0.1) !important;
+      }
+    }
+  }
+}
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// ── Sign-Out Confirmation Modal ──────────────────────────────────────────────
+.raahi-logout-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.15s ease;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+.raahi-logout-modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 2rem 1.5rem;
+  width: min(400px, 90vw);
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.2s ease;
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #fff3f3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+
+    i {
+      font-size: 1.6rem;
+      color: #e53935;
+    }
+  }
+
+  &__title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 0.5rem;
+  }
+
+  &__body {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  &__btn {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition:
+      opacity 0.15s,
+      transform 0.15s;
+
+    &:hover {
+      opacity: 0.88;
+      transform: translateY(-1px);
+    }
+
+    &--cancel {
+      background: #f1f1f1;
+      color: #444;
+    }
+
+    &--confirm {
+      background: #e53935;
+      color: #fff;
+    }
+  }
+}

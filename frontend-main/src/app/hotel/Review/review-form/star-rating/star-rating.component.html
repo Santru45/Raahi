@@ -1,0 +1,15 @@
+ 
+  
+ <div class="star-container"> 
+  <ng-container *ngFor="let star of [1,2,3,4,5]"> 
+<span  
+      class="star"
+      (mousemove)="onHover(star, $event)"
+      (mouseleave)="hover=0"
+      (click)="onClick(star, $event)"
+      [class.filled]="star <= floor(hover || selected)"
+      [class.half]="star === ceil(hover || selected) && (hover || selected) % 1 === 0.5">
+  ★
+</span>
+</ng-container>
+</div>

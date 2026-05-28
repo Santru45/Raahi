@@ -1,0 +1,184 @@
+<div class="my-4 min-vh-100 d-flex align-items-center justify-content-center">
+  <div class="bg-white rounded-4 p-4 shadow col-8 col-md-5">
+    <div class="text-center mb-3">
+      <div
+        class="d-inline-flex align-items-center justify-content-center rounded-3 p-3 mb-3"
+        style="background-color: var(--bright-teal-blue)"
+      >
+        <i class="bi bi-lock-fill text-white fs-4"></i>
+      </div>
+      <h2 class="fw-bold" style="color: var(--deep-twilight)">Welcome Back</h2>
+      <p class="text-muted">Sign in to your account</p>
+    </div>
+
+    <form #loginForm="ngForm" (ngSubmit)="handleFormSubmit()">
+      <!-- Email field -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Email Address</label>
+        <div class="input-group">
+          <span class="input-group-text bg-white">
+            <i
+              class="bi bi-envelope"
+              style="color: var(--bright-teal-blue)"
+            ></i>
+          </span>
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="formData.email"
+            #emailRef="ngModel"
+            email
+            class="form-control border-start-0"
+            placeholder="your@email.com"
+            (ngModelChange)="clearError(); clearEmailRequired()"
+          />
+        </div>
+
+        <!-- CHANGED: only shown when submit is clicked on empty field,
+             uses --timed class so it animates in then fades out after 2.6s -->
+        @if (showEmailRequired) {
+          <div class="field-error field-error--timed">
+            <i class="bi bi-exclamation-circle-fill"></i>Email is required
+          </div>
+        }
+
+        <!-- Format error — shown on blur as before, uses --enter class -->
+        @if (emailRef.touched && emailRef.errors?.["email"] && formData.email) {
+          <div class="field-error field-error--enter">
+            <i class="bi bi-exclamation-circle-fill"></i>Invalid email address
+          </div>
+        }
+
+        <!-- Service error: email not in database -->
+        @if (authService.authError() === "email-not-found") {
+          <div class="field-error field-error--enter">
+            <i class="bi bi-person-x-fill"></i>This email is not registered
+          </div>
+        }
+      </div>
+
+      <!-- Password field -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Password</label>
+        <div class="input-group">
+          <span class="input-group-text bg-white">
+            <i class="bi bi-lock" style="color: var(--bright-teal-blue)"></i>
+          </span>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            name="password"
+            [(ngModel)]="formData.password"
+            #passwordRef="ngModel"
+            class="form-control border-start-0 border-end-0"
+            placeholder="Enter your password"
+            (ngModelChange)="clearError(); clearPasswordRequired()"
+          />
+          <button
+            type="button"
+            class="input-group-text bg-white"
+            (click)="togglePassword()"
+            tabindex="-1"
+            style="cursor: pointer; border-left: 0"
+          >
+            <i
+              class="bi"
+              [class.bi-eye]="!showPassword"
+              [class.bi-eye-slash]="showPassword"
+              style="color: var(--bright-teal-blue)"
+            ></i>
+          </button>
+        </div>
+
+        <!-- CHANGED: only shown when submit is clicked on empty field,
+             uses --timed class so it animates in then fades out after 2.6s -->
+        @if (showPasswordRequired) {
+          <div class="field-error field-error--timed">
+            <i class="bi bi-exclamation-circle-fill"></i>Password is required
+          </div>
+        }
+
+        @if (
+          passwordRef.touched &&
+          passwordRef.errors?.["minlength"] &&
+          formData.password
+        ) {
+          <div class="field-error field-error--enter">
+            <i class="bi bi-exclamation-circle-fill"></i>Password must be at
+            least 6 characters
+          </div>
+        }
+
+        <!-- Service error: wrong password -->
+        @if (authService.authError() === "wrong-password") {
+          <div class="field-error field-error--enter">
+            <i class="bi bi-shield-x-fill"></i>Incorrect password
+          </div>
+        }
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="remember"
+            name="remember"
+            [(ngModel)]="rememberMe"
+          />
+          <label class="form-check-label" for="remember">Remember me</label>
+        </div>
+        <a
+          routerLink="/forgot-password"
+          style="
+            color: var(--bright-teal-blue);
+            text-decoration: none;
+            cursor: pointer;
+          "
+        >
+          Forgot password?
+        </a>
+      </div>
+
+      @if (authService.authError() === "server-error") {
+        <div class="field-error field-error--enter mb-3">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          Unable to connect to the server. Please try again later.
+        </div>
+      }
+
+      <!-- Submit button -->
+      <button
+        type="submit"
+        class="btn w-100 rounded-3 py-3 fw-bold border-0 text-white mb-2"
+        [disabled]="authService.isLoading()"
+        [style.background-color]="'var(--bright-teal-blue)'"
+      >
+        @if (authService.isLoading()) {
+          <div class="d-flex justify-content-center align-items-center gap-1">
+            @for (item of [1, 2, 3]; track $index) {
+              <div
+                class="spinner-grow spinner-grow-sm"
+                style="color: white"
+                role="status"
+              >
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            }
+          </div>
+        } @else {
+          Sign In
+        }
+      </button>
+    </form>
+
+    <p class="text-center mt-3 text-muted">
+      Don't have an account?
+      <a
+        routerLink="/signup"
+        style="color: var(--bright-teal-blue); text-decoration: none"
+        class="fw-semibold"
+        >Sign up</a
+      >
+    </p>
+  </div>
+</div>

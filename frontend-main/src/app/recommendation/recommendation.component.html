@@ -1,0 +1,15 @@
+<section class="py-3">
+  <h5 class="suggestions__title mb-3 ps-1">Suggestions for you</h5>
+  <div *ngIf="!isLoading && hotels.length === 0" 
+     class="text-center py-3 text-muted small">
+  No suggestions available right now.
+</div>
+  <div class="suggestions__window"
+       (mouseenter)="onMouseEnter()"
+       (mouseleave)="onMouseLeave()">
+    <div class="suggestions__track gap-3" #scrollRef>
+      <app-hotel-card *ngFor="let item of hotels" [item]="item"></app-hotel-card>
+      <app-hotel-card *ngFor="let item of hotels" [item]="item" aria-hidden="true" tabindex="-1"></app-hotel-card>
+    </div>
+  </div>
+</section>

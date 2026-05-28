@@ -1,0 +1,83 @@
+<!-- src/app/components/travel/travel-main/travel-main.component.html -->
+
+<div class="travel-layout-wrapper travel-bg">
+  <!-- ── HERO SECTION ── -->
+  <div
+    class="position-relative overflow-hidden"
+    style="height: 50vh; min-height: 350px"
+  >
+    <!-- Dynamic Background image based on selected mode -->
+    <img
+      [src]="backgroundImage()"
+      class="w-100 h-100"
+      style="
+        object-fit: cover;
+        object-position: center;
+        transition: opacity 0.5s ease;
+      "
+      alt="Travel Hero"
+    />
+
+    <!-- Dark overlay — readable text on top -->
+    <div
+      class="position-absolute top-0 start-0 w-100 h-100"
+      style="
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 30, 60, 0.5) 0%,
+          rgba(0, 30, 60, 0.25) 50%,
+          rgba(240, 249, 255, 0) 100%
+        );
+      "
+    ></div>
+
+    <!-- Heading -->
+    <div
+      class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center"
+      style="padding-bottom: 45px"
+    >
+      <h2
+        class="fw-bold text-white mb-2 text-center"
+        style="
+          font-size: clamp(1.6rem, 4vw, 2.6rem);
+          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+        "
+      >
+        Book Your <span style="color: #48cae4">Journey</span> Today!
+      </h2>
+      <p
+        class="text-center mb-0"
+        style="
+          color: rgba(255, 255, 255, 0.85);
+          font-size: 15px;
+          text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+        "
+      >
+        Search flights, trains, and buses across India
+      </p>
+    </div>
+
+    <!-- Bottom fade — dissolves into .travel-bg background color -->
+    <div
+      class="position-absolute bottom-0 start-0 w-100"
+      style="
+        height: 80px;
+        background: linear-gradient(
+          to bottom,
+          rgba(240, 249, 255, 0) 0%,
+          rgba(240, 249, 255, 0.5) 35%,
+          rgba(240, 249, 255, 0.85) 65%,
+          #f0f9ff 100%
+        );
+      "
+    ></div>
+  </div>
+
+  <!-- ── SEARCH FORM — overlaps hero ── -->
+  <div
+    class="search-wrapper"
+    style="margin-top: -80px; position: relative; z-index: 10"
+  >
+    <app-travel-search />
+  </div>
+</div>

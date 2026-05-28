@@ -1,0 +1,155 @@
+<!-- src/app/components/travel/seat-selection/seat-selection.component.html -->
+
+<div class="seat-container">
+  <h3 class="section-title">
+    @if (mode === "flight") {
+      <i class="bi bi-airplane-fill"></i> Select Your Seats
+    } @else {
+      <i class="bi bi-bus-front-fill"></i> Select Your Seats
+    }
+  </h3>
+
+  <!-- Seat Counter -->
+  <div class="seat-counter">
+    @if (allSeatsSelected) {
+      <span class="counter-done">All {{ maxSeats }} seats selected!</span>
+    } @else if (selectedSeats.length === 0) {
+      <span class="counter-pending"
+        >Select {{ maxSeats }} {{ maxSeats === 1 ? "seat" : "seats" }}</span
+      >
+    } @else {
+      <span class="counter-pending"
+        >Select {{ seatsRemaining }} more
+        {{ seatsRemaining === 1 ? "seat" : "seats" }}</span
+      >
+    }
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <span class="legend-item">
+      <span class="legend-box available"></span> Available
+    </span>
+    <span class="legend-item">
+      <span class="legend-box taken"></span> Taken
+    </span>
+    @if (mode === "bus") {
+      <span class="legend-item">
+        <span class="legend-box taken-female"></span> Women
+      </span>
+    }
+    <span class="legend-item">
+      <span class="legend-box selected"></span> Selected
+    </span>
+  </div>
+
+  <!-- Lower Deck (or only deck for seater/flight) -->
+  @if (isSleeper) {
+    <div class="deck-label">Lower Deck</div>
+  }
+
+  <div class="seat-grid">
+    <div class="column-headers">
+      @for (col of config.columns; track col; let i = $index) {
+        <span class="col-label">{{ col }}</span>
+        @if (isAisleAfter(i)) {
+          <span class="aisle-gap"></span>
+        }
+      }
+    </div>
+
+    @for (row of lowerDeck; track $index) {
+      <div class="seat-row">
+        <span class="row-number">{{ $index + 1 }}</span>
+        @for (seat of row; track seat.id; let i = $index) {
+          <button
+            class="seat"
+            [class.available]="seat.status === 'available'"
+            [class.taken]="seat.status === 'taken'"
+            [class.taken-female]="seat.status === 'taken-female'"
+            [class.selected]="seat.status === 'selected'"
+            [class.disabled-max]="
+              selectedSeats.length >= maxSeats && seat.status === 'available'
+            "
+            [disabled]="
+              seat.status === 'taken' ||
+              seat.status === 'taken-female' ||
+              (selectedSeats.length >= maxSeats && seat.status !== 'selected')
+            "
+            (click)="selectSeat(seat)"
+          >
+            {{ seat.id }}
+          </button>
+          @if (isAisleAfter(i)) {
+            <span class="aisle-gap"></span>
+          }
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Upper Deck (sleeper only) -->
+  @if (isSleeper) {
+    <div class="deck-label upper">Upper Deck</div>
+
+    <div class="seat-grid">
+      <div class="column-headers">
+        @for (col of config.columns; track col; let i = $index) {
+          <span class="col-label">{{ col }}</span>
+          @if (isAisleAfter(i)) {
+            <span class="aisle-gap"></span>
+          }
+        }
+      </div>
+
+      @for (row of upperDeck; track $index) {
+        <div class="seat-row">
+          <span class="row-number">{{ $index + 1 }}</span>
+          @for (seat of row; track seat.id; let i = $index) {
+            <button
+              class="seat"
+              [class.available]="seat.status === 'available'"
+              [class.taken]="seat.status === 'taken'"
+              [class.taken-female]="seat.status === 'taken-female'"
+              [class.selected]="seat.status === 'selected'"
+              [class.disabled-max]="
+                selectedSeats.length >= maxSeats && seat.status === 'available'
+              "
+              [disabled]="
+                seat.status === 'taken' ||
+                seat.status === 'taken-female' ||
+                (selectedSeats.length >= maxSeats && seat.status !== 'selected')
+              "
+              (click)="selectSeat(seat)"
+            >
+              {{ seat.id }}
+            </button>
+            @if (isAisleAfter(i)) {
+              <span class="aisle-gap"></span>
+            }
+          }
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Selected Seats Display -->
+  @if (selectedSeats.length > 0) {
+    <div class="selected-info">
+      <span>Selected:</span>
+      @for (seatId of selectedSeats; track seatId) {
+        <span class="selected-badge">{{ seatId }}</span>
+      }
+    </div>
+  }
+
+  <!-- Confirm Button -->
+  <button
+    class="btn-confirm-seat"
+    [disabled]="selectedSeats.length < maxSeats"
+    (click)="onConfirmSeat()"
+  >
+    Confirm {{ maxSeats }} {{ maxSeats === 1 ? "Seat" : "Seats" }}
+    <i class="bi bi-arrow-right"></i>
+  </button>
+</div>

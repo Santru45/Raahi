@@ -1,0 +1,139 @@
+<div class="bg-white rounded-4 shadow p-4">
+  <!-- Title -->
+  <div><i class="bi bi-funnel-fill me-2"></i> Filters</div>
+
+  <!-- Search -->
+  <div class="mt-4">
+    <input
+      type="text"
+      placeholder="Search by hotel name"
+      class="form-control py-2"
+      style="font-size: small"
+      [(ngModel)]="searchText"
+      (ngModelChange)="onFilterChange()"
+    />
+  </div>
+
+  <!-- Price Range -->
+  <div class="mt-4">
+    <label class="form-label fw-medium text-muted small">
+      Price Range: ₹500 - ₹{{ maxPrice }}
+    </label>
+    <input
+      type="range"
+      max="20000"
+      min="1000"
+      [(ngModel)]="maxPrice"
+      (ngModelChange)="onFilterChange()"
+      style="width: 100%; display: block; margin: 0"
+    />
+  </div>
+
+  <!-- Star Rating -->
+  <div class="mt-4">
+    <label class="form-label fw-medium text-muted small">Minimum Rating</label>
+    <div class="d-flex gap-2">
+      <input
+        type="radio"
+        class="btn-check"
+        name="ratingFilter"
+        id="ratingAny"
+        [checked]="selectedStar === null"
+        (change)="selectedStar = null; onFilterChange()"
+        autocomplete="off"
+      />
+      <label class="btn btn-outline-primary" for="ratingAny">Any</label>
+
+      <input
+        type="radio"
+        class="btn-check"
+        name="ratingFilter"
+        id="rating3"
+        [checked]="selectedStar === 3"
+        (change)="selectedStar = 3; onFilterChange()"
+        autocomplete="off"
+      />
+      <label class="btn btn-outline-primary" for="rating3">3★</label>
+
+      <input
+        type="radio"
+        class="btn-check"
+        name="ratingFilter"
+        id="rating4"
+        [checked]="selectedStar === 4"
+        (change)="selectedStar = 4; onFilterChange()"
+        autocomplete="off"
+      />
+      <label class="btn btn-outline-primary" for="rating4">4★</label>
+
+      <input
+        type="radio"
+        class="btn-check"
+        name="ratingFilter"
+        id="rating5"
+        [checked]="selectedStar === 5"
+        (change)="selectedStar = 5; onFilterChange()"
+        autocomplete="off"
+      />
+      <label class="btn btn-outline-primary" for="rating5">5★</label>
+    </div>
+  </div>
+
+  <!-- Hotel Type -->
+  <div class="mt-4">
+    <label class="form-label fw-medium text-muted small">Hotel Type</label>
+    <div class="d-flex flex-column gap-2 mt-2">
+      <div *ngFor="let type of visibleHotelTypes" class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          [id]="'type_' + type"
+          [checked]="selectedHotelTypes.includes(type)"
+          (change)="toggleHotelType(type)"
+        />
+        <label class="form-check-label small" [for]="'type_' + type">
+          {{ type }}
+        </label>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button
+        class="btn btn-sm mt-2 p-0"
+        style="color: var(--bright-teal-blue); background: none; border: none"
+        *ngIf="hotelTypes.length > 4"
+        (click)="showAllHotelTypes = !showAllHotelTypes"
+      >
+        {{ showAllHotelTypes ? "Show Less ▲" : "Show More ▼" }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Amenities -->
+  <div class="mt-4">
+    <label class="form-label fw-medium text-muted small">Amenities</label>
+    <div class="d-flex flex-column gap-2 mt-2">
+      <div *ngFor="let amenity of visibleAmenities" class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          [id]="'amenity_' + amenity"
+          [checked]="selectedAmenities.includes(amenity)"
+          (change)="toggleAmenity(amenity)"
+        />
+        <label class="form-check-label small" [for]="'amenity_' + amenity">
+          {{ amenity }}
+        </label>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button
+        class="btn btn-sm mt-2 p-0"
+        style="color: var(--bright-teal-blue); background: none; border: none"
+        *ngIf="amenities.length > 4"
+        (click)="showAllAmenities = !showAllAmenities"
+      >
+        {{ showAllAmenities ? "Show Less ▲" : "Show More ▼" }}
+      </button>
+    </div>
+  </div>
+</div>

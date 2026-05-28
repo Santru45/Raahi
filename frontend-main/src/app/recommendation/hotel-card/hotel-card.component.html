@@ -1,0 +1,70 @@
+<!-- ── HOTEL card ── -->
+<div *ngIf="item.kind === 'hotel' && item.hotel as h"
+     class="card overflow-hidden">
+
+  <img [src]="h.images[0]" [alt]="h.name"
+       class="card-img-top object-fit-cover" style="height:210px;" />
+
+  <div class="card-body d-flex flex-column justify-content-between">
+    <div>
+      <div class="d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0 text-truncate me-2 fs-6"
+            style="color:var(--french-blue)">{{ h.name }}</h5>
+        <span class="badge bg-success">⭐ {{ h.starRating }}</span>
+      </div>
+      <span class="badge mt-1 text-capitalize"
+            style="background:var(--light-cyan);color:var(--french-blue)">
+        {{ h.hotelType }}
+      </span>
+      <p class="card-text mt-2 small" style="color:var(--blue-green)">
+        {{ h.location.city }}, {{ h.location.state }}
+      </p>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mt-2">
+     <!-- replace the price h6 in hotel-card.component.html -->
+<h6 class="mb-0 fs-6" style="color:var(--french-blue)">
+  <ng-container *ngIf="h.rooms && h.rooms.length > 0">
+    {{ h.rooms[0].basePricePerNight | currency:'INR':'symbol':'1.0-0' }}
+    <span class="small" style="color:var(--blue-green)">/night</span>
+  </ng-container>
+  <ng-container *ngIf="!h.rooms || h.rooms.length === 0">
+    <span class="small" style="color:var(--blue-green)">Price on request</span>
+  </ng-container>
+</h6>
+      <button class="btn btn-primary btn-sm" (click)="viewdetail(h)">View Detail</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── OFFER card ── -->
+<div *ngIf="item.kind === 'offer' && item.offer as o"
+     class="card overflow-hidden">
+
+  <div class="position-relative" style="height:210px; overflow:hidden;">
+    <img [src]="o.image" [alt]="o.title"
+         class="object-fit-cover w-100 h-100" />
+    <span class="badge bg-danger position-absolute top-0 end-0 m-2">
+      {{ o.badgeLabel }}
+    </span>
+  </div>
+
+  <div class="card-body d-flex flex-column justify-content-between">
+    <div>
+      <div class="d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0 text-truncate me-2 fs-6"
+            style="color:var(--french-blue)">{{ o.title }}</h5>
+        <span class="badge bg-primary">{{ o.discountPercent }}% OFF</span>
+      </div>
+      <p class="card-text mt-2 small" style="color:var(--blue-green)">
+        {{ o.description }}
+      </p>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mt-2">
+      <span class="badge border"
+            style="background:var(--light-cyan);border-color:var(--turquoise-surf)!important;color:var(--french-blue)">
+        🎟 {{ o.couponCode }}
+      </span>
+      <button class="btn btn-outline-primary btn-sm" (click)="grabdeal(o)">Grab Deal</button>
+    </div>
+  </div>
+</div>

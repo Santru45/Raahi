@@ -1,0 +1,22 @@
+﻿<!-- Review Prompt slides down from top -->
+<div *ngIf="show && prompt" class="review-prompt-bar">
+  <div class="container">
+    <div class="review-prompt-inner">
+      <div class="d-flex align-items-center gap-3 flex-grow-1 min-w-0">
+        <div class="prompt-avatar"><span>&#127976;</span></div>
+        <div class="min-w-0">
+          <p class="prompt-title mb-0">How was your stay at <strong>{{ prompt.hotelName }}</strong>?</p>
+          <div class="prompt-stars mt-1">
+            <span *ngFor="let s of [1,2,3,4,5]" class="star-hint" (click)="writeReview()">&#9733;</span>
+            <span class="prompt-sub ms-2">Tap a star to rate</span>
+          </div>
+        </div>
+      </div>
+      <div class="prompt-actions">
+        <button class="btn-review" (click)="writeReview()">&#9998; Write a Review</button>
+        <button class="btn-later" (click)="later()">Later</button>
+        <button class="btn-dismiss" (click)="notInterested()" title="Not interested">&#x2715;</button>
+      </div>
+    </div>
+  </div>
+</div>

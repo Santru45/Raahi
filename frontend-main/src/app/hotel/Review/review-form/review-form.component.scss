@@ -1,0 +1,384 @@
+﻿/* ── Page wrapper uses hotel-bg from styles.scss ─────────────── */
+.review-form-page {
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+/* ── Card ────────────────────────────────────────────────────── */
+.review-form-card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(3, 4, 94, 0.12);
+  overflow: hidden;
+  animation: fadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Card Header ─────────────────────────────────────────────── */
+.review-form-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 28px 20px;
+  background: linear-gradient(135deg, #03045e 0%, #0077b6 60%, #00b4d8 100%);
+  color: #fff;
+}
+
+.header-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  color: #fbbf24;
+}
+
+.review-form-header h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.header-sub {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ── Form body ───────────────────────────────────────────────── */
+.review-form-body {
+  padding: 24px 28px 28px;
+}
+
+/* ── Section labels ──────────────────────────────────────────── */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #03045e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.section-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0077b6;
+  flex-shrink: 0;
+}
+
+.section-optional {
+  font-size: 11px;
+  font-weight: 400;
+  color: #94a3b8;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: 4px;
+}
+
+/* ── Ratings grid ────────────────────────────────────────────── */
+.ratings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 480px) {
+  .ratings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.rating-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+
+.rating-item--filled {
+  border-color: #caf0f8;
+  background: #f0fbff;
+}
+
+.rating-item--error {
+  border-color: #fca5a5;
+  background: #fff5f5;
+}
+
+.rating-category {
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* ── Textarea ────────────────────────────────────────────────── */
+.review-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #1e293b;
+  background: #f8fafc;
+  resize: vertical;
+  outline: none;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+  font-family: inherit;
+  line-height: 1.6;
+
+  &::placeholder {
+    color: #94a3b8;
+    font-size: 13.5px;
+  }
+
+  &:focus {
+    border-color: #0077b6;
+    box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.1);
+    background: #fff;
+  }
+}
+
+/* ── Photo upload ─────────────────────────────────────────────── */
+.photo-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 20px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+  position: relative;
+  text-align: center;
+
+  &:hover {
+    border-color: #0077b6;
+    background: #f0fbff;
+  }
+}
+
+.photo-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.photo-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.photo-text {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0077b6;
+}
+
+.photo-hint {
+  font-size: 11.5px;
+  color: #94a3b8;
+}
+
+/* ── Preview thumbnails ──────────────────────────────────────── */
+.preview-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.preview-thumb {
+  position: relative;
+  display: inline-block;
+}
+
+.preview-thumb img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: #ef4444;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.remove-image-btn:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
+
+.remove-image-btn i {
+  pointer-events: none;
+}
+
+/* ── Errors ──────────────────────────────────────────────────── */
+.field-error {
+  font-size: 12px;
+  color: #dc2626;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── Submit button ───────────────────────────────────────────── */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0077b6, #00b4d8);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    opacity 0.15s,
+    transform 0.15s,
+    box-shadow 0.15s;
+  box-shadow: 0 4px 16px rgba(0, 119, 182, 0.35);
+  letter-spacing: 0.3px;
+
+  &:hover:not(:disabled) {
+    opacity: 0.92;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 119, 182, 0.45);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* ── Entrance animation ──────────────────────────────────────── */
+@keyframes fadeUp {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ── Success Modal ────────────────────────────────────────────── */
+.success-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+.success-modal {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  max-width: 400px;
+  animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.success-icon {
+  font-size: 72px;
+  color: #10b981;
+  margin-bottom: 20px;
+}
+
+.success-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #03045e;
+  margin-bottom: 12px;
+}
+
+.success-message {
+  font-size: 16px;
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.success-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #0077b6;
+  font-size: 14px;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #0077b6;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

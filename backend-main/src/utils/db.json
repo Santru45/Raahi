@@ -1,0 +1,5997 @@
+{
+  "users": [
+    {
+      "_id": "usr_001",
+      "name": "Aarav Sharma",
+      "email": "aarav.sharma@gmail.com",
+      "passwordHash": "Paltu@123",
+      "phone": "9876543210",
+      "role": "customer",
+      "loyaltyAccountId": "lty_001",
+      "isActive": true
+    },
+    {
+      "_id": "usr_003",
+      "name": "Admin User",
+      "email": "admin@travelapp.com",
+      "passwordHash": "Paltu@123",
+      "phone": "9000000000",
+      "role": "admin",
+      "loyaltyAccountId": null,
+      "isActive": true
+    },
+    {
+      "_id": "usr_005",
+      "name": "Sneha Iyer",
+      "email": "sneha@gmail.com",
+      "phone": "9876543212",
+      "role": "customer",
+      "loyaltyAccountId": "lty_005",
+      "isActive": true,
+      "passwordHash": "Sneha@123"
+    },
+    {
+      "_id": "usr_006",
+      "name": "Amit Patel",
+      "email": "amit@gmail.com",
+      "phone": "9876543213",
+      "role": "customer",
+      "loyaltyAccountId": "lty_006",
+      "isActive": true,
+      "passwordHash": "Amit@123"
+    },
+    {
+      "_id": "usr_008",
+      "name": "Divya Nair",
+      "email": "divya@gmail.com",
+      "phone": "9876543214",
+      "role": "customer",
+      "loyaltyAccountId": "lty_008",
+      "isActive": true,
+      "passwordHash": "Divya@123"
+    },
+    {
+      "_id": "usr_009",
+      "name": "Karan Mehta",
+      "email": "karan@gmail.com",
+      "phone": "9876543215",
+      "role": "customer",
+      "loyaltyAccountId": "lty_009",
+      "isActive": true,
+      "passwordHash": "Karan@123"
+    },
+    {
+      "_id": "usr_010",
+      "name": "Pooja Singh",
+      "email": "pooja@gmail.com",
+      "phone": "9876543216",
+      "role": "customer",
+      "loyaltyAccountId": "lty_010",
+      "isActive": true,
+      "passwordHash": "Pooja@123"
+    },
+    {
+      "_id": "odW7-IM",
+      "name": "Test User",
+      "email": "1@gmail.co",
+      "phone": "987654321",
+      "passwordHash": "987654321",
+      "role": "customer",
+      "isActive": true,
+      "loyaltyAccountId": "GFLcWCu"
+    },
+    {
+      "name": "dlasjdlkaj",
+      "email": "klasjdlka@ksajdl.in",
+      "phone": "9876543211",
+      "passwordHash": "Paltu@123",
+      "role": "customer",
+      "isActive": true,
+      "loyaltyAccountId": "L4IDa6u",
+      "_id": "683A96N"
+    },
+    {
+      "name": "lkjdsflk",
+      "email": "aljsd@lskjadk.com",
+      "phone": "6543211234",
+      "passwordHash": "Paltu@123",
+      "role": "customer",
+      "isActive": true,
+      "loyaltyAccountId": "ro-tNLc",
+      "_id": "qToZGHU"
+    },
+    {
+      "name": "sujal",
+      "email": "sujal@s.com",
+      "phone": "9876543212",
+      "passwordHash": "L@jus204",
+      "role": "customer",
+      "isActive": true,
+      "loyaltyAccountId": null,
+      "_id": "wXjJK0V"
+    },
+    {
+      "name": "sujal",
+      "email": "sujal1@s.com",
+      "phone": "9876543212",
+      "passwordHash": "L@jus204",
+      "role": "customer",
+      "isActive": true,
+      "loyaltyAccountId": "oKeonEJ",
+      "_id": "Ue88gqd"
+    },
+    {
+      "name": "Rinku",
+      "email": "rinku@gmail.com",
+      "phone": "9875456887",
+      "passwordHash": "Rinku@5",
+      "role": "customer",
+      "isActive": true,
+      "loyaltyAccountId": "GdPD5Wy",
+      "_id": "EEhejF6"
+    }
+  ],
+  "loyaltyAccounts": [
+    {
+      "_id": "lty_001",
+      "userId": "usr_001",
+      "coinBalance": 1375,
+      "totalEarned": 2151,
+      "tier": "platinum",
+      "earnMultiplier": 3,
+      "maxRedeemPercent": 10,
+      "nextTierAt": 0,
+      "ledger": [
+        {
+          "_id": "led_001",
+          "bookingReference": "HTL-M3X9A-KZ2P",
+          "bookingType": "hotel",
+          "action": "earned",
+          "coins": 300,
+          "balanceAfter": 300,
+          "expiresAt": "2027-03-01T00:00:00.000Z",
+          "note": "Hotel booking reward"
+        },
+        {
+          "_id": "led_002",
+          "bookingReference": "TRV-N4Y1A-KL3W",
+          "bookingType": "travel",
+          "action": "earned",
+          "coins": 150,
+          "balanceAfter": 450,
+          "expiresAt": "2027-03-01T00:00:00.000Z",
+          "note": "Flight booking reward"
+        },
+        {
+          "_id": "led_003",
+          "bookingReference": "HTL-P5Z2B-ST7A",
+          "bookingType": "hotel",
+          "action": "redeemed",
+          "coins": 130,
+          "balanceAfter": 320,
+          "note": "Redeemed at checkout"
+        },
+        {
+          "_id": "led_004",
+          "bookingReference": "HTL-MNQH9BX7-N67U",
+          "bookingType": "hotel",
+          "action": "redeemed",
+          "coins": 320,
+          "note": "Redeemed at checkout",
+          "balanceAfter": 2080
+        },
+        {
+          "_id": "led_005",
+          "bookingReference": "HTL-MNQI1TA4-HXBI",
+          "bookingType": "hotel",
+          "action": "earned",
+          "coins": 326,
+          "note": "hotel booking reward",
+          "balanceAfter": 2406
+        },
+        {
+          "_id": "led_006",
+          "bookingReference": "HTL-MNQI61KM-IARQ",
+          "bookingType": "hotel",
+          "action": "redeemed",
+          "coins": 2406,
+          "note": "Redeemed at checkout",
+          "balanceAfter": 0
+        },
+        {
+          "_id": "led_007",
+          "bookingReference": "HTL-MNQI61KM-IARQ",
+          "bookingType": "hotel",
+          "action": "earned",
+          "coins": 290,
+          "expiresAt": "2027-04-08T20:30:39.905Z",
+          "note": "Hotel booking reward",
+          "balanceAfter": 290
+        },
+        {
+          "_id": "led_008",
+          "bookingReference": "HTL-MNQJTUM1-603H",
+          "bookingType": "hotel",
+          "action": "earned",
+          "coins": 460,
+          "expiresAt": "2027-04-08T21:17:10.196Z",
+          "note": "Hotel booking reward",
+          "balanceAfter": 750
+        },
+        {
+          "_id": "led_009",
+          "bookingReference": "HTL-MNQJY7JV-4VP5",
+          "bookingType": "hotel",
+          "action": "earned",
+          "coins": 345,
+          "expiresAt": "2027-04-08T21:20:33.575Z",
+          "note": "Hotel booking reward",
+          "balanceAfter": 1095
+        },
+        {
+          "_id": "led_010",
+          "bookingReference": "TRV-8SUAC",
+          "bookingType": "travel",
+          "action": "earned",
+          "coins": 163,
+          "note": "travel booking reward",
+          "balanceAfter": 1258
+        },
+        {
+          "_id": "led_011",
+          "bookingReference": "HTL-MNQXPA2X-XRED",
+          "bookingType": "hotel",
+          "action": "earned",
+          "coins": 117,
+          "expiresAt": "2027-04-09T03:45:31.611Z",
+          "note": "Hotel booking reward",
+          "balanceAfter": 1375
+        }
+      ]
+    },
+    {
+      "_id": "lty_002",
+      "userId": "usr_002",
+      "coinBalance": 1200,
+      "totalEarned": 1200,
+      "tier": "silver",
+      "earnMultiplier": 1.5,
+      "maxRedeemPercent": 15,
+      "nextTierAt": 5000,
+      "ledger": [
+        {
+          "_id": "led_l002_001",
+          "bookingReference": "ITN-Q6A3A-WX9C",
+          "bookingType": "itinerary",
+          "action": "earned",
+          "coins": 1200,
+          "balanceAfter": 1200,
+          "expiresAt": "2027-03-18T00:00:00.000Z",
+          "note": "Itinerary booking reward"
+        }
+      ]
+    },
+    {
+      "_id": "GFLcWCu",
+      "userId": "odW7-IM",
+      "coinBalance": 54,
+      "totalEarned": 54,
+      "tier": "bronze",
+      "earnMultiplier": 1,
+      "maxRedeemPercent": 10,
+      "nextTierAt": 200,
+      "ledger": [
+        {
+          "_id": "led_g001",
+          "bookingReference": "TRV-GQOPJ",
+          "bookingType": "travel",
+          "action": "earned",
+          "coins": 54,
+          "balanceAfter": 54,
+          "note": "Travel booking reward"
+        }
+      ]
+    },
+    {
+      "_id": "lty_005",
+      "userId": "usr_005",
+      "coinBalance": 820,
+      "totalEarned": 1620,
+      "tier": "gold",
+      "earnMultiplier": 2,
+      "maxRedeemPercent": 15,
+      "nextTierAt": 2000,
+      "ledger": [
+        {
+          "_id": "led_l005_001",
+          "bookingReference": "HTL-USR5A-001",
+          "bookingType": "hotel",
+          "action": "earned",
+          "coins": 400,
+          "balanceAfter": 400,
+          "expiresAt": "2027-06-01T00:00:00.000Z",
+          "note": "Hotel booking reward"
+        },
+        {
+          "_id": "led_l005_002",
+          "bookingReference": "TRV-USR5B-001",
+          "bookingType": "travel",
+          "action": "earned",
+          "coins": 220,
+          "balanceAfter": 620,
+          "expiresAt": "2027-07-01T00:00:00.000Z",
+          "note": "Flight booking reward"
+        },
+        {
+          "_id": "led_l005_003",
+          "bookingReference": "HTL-USR5A-001",
+          "bookingType": "hotel",
+          "action": "redeemed",
+          "coins": 200,
+          "balanceAfter": 420,
+          "note": "Redeemed at checkout"
+        },
+        {
+          "_id": "led_l005_004",
+          "bookingReference": "TRV-USR5C-001",
+          "bookingType": "travel",
+          "action": "earned",
+          "coins": 400,
+          "balanceAfter": 820,
+          "expiresAt": "2027-08-01T00:00:00.000Z",
+          "note": "Train booking reward"
+        }
+      ]
+    },
+    {
+      "_id": "lty_006",
+      "userId": "usr_006",
+      "coinBalance": 2340,
+      "totalEarned": 3540,
+      "tier": "platinum",
+      "earnMultiplier": 3,
+      "maxRedeemPercent": 10,
+      "nextTierAt": 0,
+      "ledger": [
+        {
+          "_id": "led_l006_001",
+          "bookingReference": "HTL-USR6A-001",
+          "bookingType": "hotel",
+          "action": "earned",
+          "coins": 900,
+          "balanceAfter": 900,
+          "expiresAt": "2027-05-01T00:00:00.000Z",
+          "note": "Hotel booking reward"
+        },
+        {
+          "_id": "led_l006_002",
+          "bookingReference": "ITN-USR6B-001",
+          "bookingType": "itinerary",
+          "action": "earned",
+          "coins": 1500,
+          "balanceAfter": 2400,
+          "expiresAt": "2027-09-01T00:00:00.000Z",
+          "note": "Itinerary booking reward"
+        },
+        {
+          "_id": "led_l006_003",
+          "bookingReference": "HTL-USR6C-001",
+          "bookingType": "hotel",
+          "action": "redeemed",
+          "coins": 1200,
+          "balanceAfter": 1200,
+          "note": "Redeemed at checkout"
+        },
+        {
+          "_id": "led_l006_004",
+          "bookingReference": "TRV-USR6D-001",
+          "bookingType": "travel",
+          "action": "earned",
+          "coins": 540,
+          "balanceAfter": 1740,
+          "expiresAt": "2027-10-01T00:00:00.000Z",
+          "note": "Travel booking reward"
+        },
+        {
+          "_id": "led_l006_005",
+          "bookingReference": "HTL-USR6E-001",
+          "bookingType": "hotel",
+          "action": "earned",
+          "coins": 600,
+          "balanceAfter": 2340,
+          "expiresAt": "2027-11-01T00:00:00.000Z",
+          "note": "Hotel booking reward"
+        }
+      ]
+    },
+    {
+      "_id": "lty_008",
+      "userId": "usr_008",
+      "coinBalance": 480,
+      "totalEarned": 780,
+      "tier": "silver",
+      "earnMultiplier": 1.5,
+      "maxRedeemPercent": 15,
+      "nextTierAt": 4000,
+      "ledger": [
+        {
+          "_id": "led_l008_001",
+          "bookingReference": "TRV-USR8A-001",
+          "bookingType": "travel",
+          "action": "earned",
+          "coins": 300,
+          "balanceAfter": 300,
+          "expiresAt": "2027-05-01T00:00:00.000Z",
+          "note": "Flight booking reward"
+        },
+        {
+          "_id": "led_l008_002",
+          "bookingReference": "HTL-USR8B-001",
+          "bookingType": "hotel",
+          "action": "earned",
+          "coins": 480,
+          "balanceAfter": 780,
+          "expiresAt": "2027-08-01T00:00:00.000Z",
+          "note": "Hotel booking reward"
+        },
+        {
+          "_id": "led_l008_003",
+          "bookingReference": "HTL-USR8B-001",
+          "bookingType": "hotel",
+          "action": "redeemed",
+          "coins": 300,
+          "balanceAfter": 480,
+          "note": "Redeemed at checkout"
+        }
+      ]
+    },
+    {
+      "_id": "lty_009",
+      "userId": "usr_009",
+      "coinBalance": 1100,
+      "totalEarned": 2200,
+      "tier": "gold",
+      "earnMultiplier": 2,
+      "maxRedeemPercent": 15,
+      "nextTierAt": 1500,
+      "ledger": [
+        {
+          "_id": "led_l009_001",
+          "bookingReference": "ITN-USR9A-001",
+          "bookingType": "itinerary",
+          "action": "earned",
+          "coins": 800,
+          "balanceAfter": 800,
+          "expiresAt": "2027-06-01T00:00:00.000Z",
+          "note": "Itinerary booking reward"
+        },
+        {
+          "_id": "led_l009_002",
+          "bookingReference": "TRV-USR9B-001",
+          "bookingType": "travel",
+          "action": "earned",
+          "coins": 420,
+          "balanceAfter": 1220,
+          "expiresAt": "2027-07-01T00:00:00.000Z",
+          "note": "Flight booking reward"
+        },
+        {
+          "_id": "led_l009_003",
+          "bookingReference": "HTL-USR9C-001",
+          "bookingType": "hotel",
+          "action": "earned",
+          "coins": 580,
+          "balanceAfter": 1800,
+          "expiresAt": "2027-08-01T00:00:00.000Z",
+          "note": "Hotel booking reward"
+        },
+        {
+          "_id": "led_l009_004",
+          "bookingReference": "HTL-USR9C-001",
+          "bookingType": "hotel",
+          "action": "redeemed",
+          "coins": 700,
+          "balanceAfter": 1100,
+          "note": "Redeemed at checkout"
+        }
+      ]
+    },
+    {
+      "_id": "lty_010",
+      "userId": "usr_010",
+      "coinBalance": 250,
+      "totalEarned": 250,
+      "tier": "bronze",
+      "earnMultiplier": 1,
+      "maxRedeemPercent": 10,
+      "nextTierAt": 1000,
+      "ledger": [
+        {
+          "_id": "led_l010_001",
+          "bookingReference": "TRV-USR10A-001",
+          "bookingType": "travel",
+          "action": "earned",
+          "coins": 250,
+          "balanceAfter": 250,
+          "expiresAt": "2027-06-01T00:00:00.000Z",
+          "note": "Travel booking reward"
+        }
+      ]
+    },
+    {
+      "userId": "683A96N",
+      "coinBalance": 0,
+      "totalEarned": 0,
+      "tier": "bronze",
+      "earnMultiplier": 1,
+      "maxRedeemPercent": 10,
+      "nextTierAt": 1000,
+      "ledger": [],
+      "_id": "L4IDa6u"
+    },
+    {
+      "userId": "qToZGHU",
+      "coinBalance": 0,
+      "totalEarned": 0,
+      "tier": "bronze",
+      "earnMultiplier": 1,
+      "maxRedeemPercent": 10,
+      "nextTierAt": 1000,
+      "ledger": [],
+      "_id": "ro-tNLc"
+    },
+    {
+      "userId": "wXjJK0V",
+      "coinBalance": 0,
+      "totalEarned": 0,
+      "tier": "bronze",
+      "earnMultiplier": 1,
+      "maxRedeemPercent": 10,
+      "nextTierAt": 1000,
+      "ledger": [],
+      "_id": "ZdtdmgW"
+    },
+    {
+      "userId": "Ue88gqd",
+      "coinBalance": 0,
+      "totalEarned": 0,
+      "tier": "bronze",
+      "earnMultiplier": 1,
+      "maxRedeemPercent": 10,
+      "nextTierAt": 1000,
+      "ledger": [],
+      "_id": "oKeonEJ"
+    },
+    {
+      "userId": "EEhejF6",
+      "coinBalance": 0,
+      "totalEarned": 0,
+      "tier": "bronze",
+      "earnMultiplier": 1,
+      "maxRedeemPercent": 10,
+      "nextTierAt": 1000,
+      "ledger": [],
+      "_id": "GdPD5Wy"
+    }
+  ],
+  "virtualWallets": [
+    {
+      "_id": "wlt_001",
+      "userId": "usr_001",
+      "balance": 170529.74,
+      "currency": "INR",
+      "isActive": true,
+      "transactions": [
+        {
+          "_id": "txn_001",
+          "type": "topup",
+          "amount": 2000,
+          "balanceAfter": 2000,
+          "description": "Wallet top-up via UPI"
+        },
+        {
+          "_id": "txn_002",
+          "bookingReference": "HTL-M3X9A-KZ2P",
+          "type": "debit",
+          "amount": 500,
+          "balanceAfter": 1500,
+          "description": "Hotel booking payment"
+        },
+        {
+          "_id": "txn_1775635750001",
+          "bookingReference": "HTL-MNPROH8P-917V",
+          "type": "debit",
+          "amount": 21240,
+          "balanceAfter": 128760,
+          "description": "Hotel booking payment"
+        },
+        {
+          "_id": "txn_1775637628487",
+          "bookingReference": "HTL-MNPSSQPC-MAMS",
+          "type": "debit",
+          "amount": 14514,
+          "balanceAfter": 114246,
+          "description": "Hotel booking payment"
+        },
+        {
+          "_id": "txn_1775678713291",
+          "bookingReference": "HTL-MNQH9BX7-N67U",
+          "type": "debit",
+          "amount": 15930,
+          "balanceAfter": 98316,
+          "description": "Hotel booking payment"
+        },
+        {
+          "_id": "txn_1775680042131",
+          "bookingReference": "HTL-MNQI1TA4-HXBI",
+          "type": "debit",
+          "amount": 21782.8,
+          "balanceAfter": 76533.2,
+          "description": "Hotel booking payment"
+        },
+        {
+          "_id": "txn_1775680239519",
+          "bookingReference": "HTL-MNQI61KM-IARQ",
+          "type": "debit",
+          "amount": 14510.46,
+          "balanceAfter": 62022.74,
+          "description": "Hotel booking payment"
+        },
+        {
+          "_id": "txn_1775683029848",
+          "bookingReference": "HTL-MNQJTUM1-603H",
+          "type": "debit",
+          "amount": 23010,
+          "balanceAfter": 39012.74,
+          "description": "Hotel booking payment"
+        },
+        {
+          "_id": "txn_1775683233252",
+          "bookingReference": "HTL-MNQJY7JV-4VP5",
+          "type": "debit",
+          "amount": 11505,
+          "balanceAfter": 27507.74,
+          "description": "Hotel booking payment"
+        },
+        {
+          "_id": "txn_1775705617486",
+          "bookingReference": "TRV-8SUAC",
+          "type": "debit",
+          "amount": 5460,
+          "balanceAfter": 22047.74,
+          "description": "flight booking: Chennai to Mumbai"
+        },
+        {
+          "_id": "txn_1775706331258",
+          "bookingReference": "HTL-MNQXPA2X-XRED",
+          "type": "debit",
+          "amount": 3920,
+          "balanceAfter": 18127.74,
+          "description": "Hotel booking payment"
+        },
+        {
+          "_id": "txn_1776051391095",
+          "type": "topup",
+          "amount": 5000,
+          "balanceAfter": 23127.74,
+          "description": "Wallet top-up via NEFT"
+        },
+        {
+          "_id": "txn_1776051416110",
+          "type": "topup",
+          "amount": 100000,
+          "balanceAfter": 123127.74,
+          "description": "Wallet top-up via NEFT"
+        },
+        {
+          "_id": "txn_1776051946433",
+          "type": "topup",
+          "amount": 20000,
+          "balanceAfter": 143127.74,
+          "description": "Wallet top-up via UPI"
+        },
+        {
+          "_id": "txn_1776052101334",
+          "type": "topup",
+          "amount": 2000,
+          "balanceAfter": 145127.74,
+          "description": "Wallet top-up via UPI"
+        },
+        {
+          "_id": "txn_1776052140779",
+          "type": "topup",
+          "amount": 10,
+          "balanceAfter": 145137.74,
+          "description": "Wallet top-up via UPI"
+        },
+        {
+          "_id": "txn_1776052149049",
+          "type": "topup",
+          "amount": 1000,
+          "balanceAfter": 146137.74,
+          "description": "Wallet top-up via UPI"
+        },
+        {
+          "_id": "txn_1776052153416",
+          "type": "topup",
+          "amount": 1000,
+          "balanceAfter": 147137.74,
+          "description": "Wallet top-up via UPI"
+        },
+        {
+          "_id": "txn_1776052211167",
+          "type": "topup",
+          "amount": 1000,
+          "balanceAfter": 148137.74,
+          "description": "Wallet top-up via UPI"
+        },
+        {
+          "_id": "txn_1776057353863",
+          "type": "topup",
+          "amount": 10000,
+          "balanceAfter": 158137.74,
+          "description": "Wallet top-up via UPI"
+        },
+        {
+          "_id": "txn_1776069055611",
+          "type": "topup",
+          "amount": 12392,
+          "balanceAfter": 170529.74,
+          "description": "Wallet top-up via UPI"
+        }
+      ]
+    },
+    {
+      "_id": "wlt_002",
+      "userId": "usr_002",
+      "balance": 3200,
+      "currency": "INR",
+      "isActive": true,
+      "transactions": [
+        {
+          "_id": "txn_003",
+          "type": "topup",
+          "amount": 5000,
+          "balanceAfter": 5000,
+          "description": "Wallet top-up via Net Banking"
+        },
+        {
+          "_id": "txn_004",
+          "bookingReference": "ITN-Q6A3A-WX9C",
+          "type": "debit",
+          "amount": 1800,
+          "balanceAfter": 3200,
+          "description": "Itinerary booking payment"
+        }
+      ]
+    },
+    {
+      "_id": "6QEQPuc",
+      "userId": "odW7-IM",
+      "balance": 977267.5,
+      "currency": "INR",
+      "isActive": true,
+      "transactions": [
+        {
+          "_id": "txn_1775644549625",
+          "bookingReference": "TRV-CE7DW",
+          "type": "debit",
+          "amount": 5460,
+          "balanceAfter": 994540,
+          "description": "Flight booking: Chennai to Mumbai"
+        },
+        {
+          "_id": "txn_1775644573355",
+          "bookingReference": "TRV-S2WUD",
+          "type": "debit",
+          "amount": 5460,
+          "balanceAfter": 989080,
+          "description": "Flight booking: Chennai to Mumbai"
+        },
+        {
+          "_id": "txn_1775644578957",
+          "bookingReference": "TRV-L6MEQ",
+          "type": "debit",
+          "amount": 5460,
+          "balanceAfter": 983620,
+          "description": "Flight booking: Chennai to Mumbai"
+        },
+        {
+          "_id": "txn_1775644839334",
+          "bookingReference": "TRV-YCV9N",
+          "type": "debit",
+          "amount": 892.5,
+          "balanceAfter": 982727.5,
+          "description": "Bus booking: Chennai to Bangalore"
+        },
+        {
+          "_id": "txn_1775645216208",
+          "bookingReference": "TRV-GQOPJ",
+          "type": "debit",
+          "amount": 5460,
+          "balanceAfter": 977267.5,
+          "description": "Flight booking: Chennai to Mumbai"
+        }
+      ]
+    },
+    {
+      "_id": "wlt_005",
+      "userId": "usr_005",
+      "balance": 12450,
+      "currency": "INR",
+      "isActive": true,
+      "transactions": [
+        {
+          "_id": "txn_wlt5_001",
+          "type": "topup",
+          "amount": 20000,
+          "balanceAfter": 20000,
+          "description": "Wallet top-up via UPI"
+        },
+        {
+          "_id": "txn_wlt5_002",
+          "bookingReference": "HTL-USR5A-001",
+          "type": "debit",
+          "amount": 5750,
+          "balanceAfter": 14250,
+          "description": "Hotel booking payment"
+        },
+        {
+          "_id": "txn_wlt5_003",
+          "bookingReference": "TRV-USR5B-001",
+          "type": "debit",
+          "amount": 4725,
+          "balanceAfter": 9525,
+          "description": "Flight booking: Bangalore to Goa"
+        },
+        {
+          "_id": "txn_wlt5_004",
+          "type": "topup",
+          "amount": 8000,
+          "balanceAfter": 17525,
+          "description": "Wallet top-up via Net Banking"
+        },
+        {
+          "_id": "txn_wlt5_005",
+          "bookingReference": "TRV-USR5C-001",
+          "type": "debit",
+          "amount": 1837.5,
+          "balanceAfter": 15688,
+          "description": "Train booking: Bangalore to Chennai"
+        },
+        {
+          "_id": "txn_wlt5_006",
+          "bookingReference": "HTL-USR5D-001",
+          "type": "debit",
+          "amount": 3238,
+          "balanceAfter": 12450,
+          "description": "Hotel booking payment"
+        }
+      ]
+    },
+    {
+      "_id": "wlt_006",
+      "userId": "usr_006",
+      "balance": 28600,
+      "currency": "INR",
+      "isActive": true,
+      "transactions": [
+        {
+          "_id": "txn_wlt6_001",
+          "type": "topup",
+          "amount": 50000,
+          "balanceAfter": 50000,
+          "description": "Wallet top-up via NEFT"
+        },
+        {
+          "_id": "txn_wlt6_002",
+          "bookingReference": "HTL-USR6A-001",
+          "type": "debit",
+          "amount": 8900,
+          "balanceAfter": 41100,
+          "description": "Hotel booking at Rambagh Palace"
+        },
+        {
+          "_id": "txn_wlt6_003",
+          "bookingReference": "ITN-USR6B-001",
+          "type": "debit",
+          "amount": 48000,
+          "balanceAfter": -6900,
+          "description": "Itinerary booking: Royal Rajasthan"
+        },
+        {
+          "_id": "txn_wlt6_004",
+          "type": "topup",
+          "amount": 40000,
+          "balanceAfter": 33100,
+          "description": "Wallet top-up via UPI"
+        },
+        {
+          "_id": "txn_wlt6_005",
+          "bookingReference": "HTL-USR6C-001",
+          "type": "debit",
+          "amount": 13200,
+          "balanceAfter": 19900,
+          "description": "Hotel booking at Taj Mumbai"
+        },
+        {
+          "_id": "txn_wlt6_006",
+          "bookingReference": "TRV-USR6D-001",
+          "type": "debit",
+          "amount": 5460,
+          "balanceAfter": 14440,
+          "description": "Flight booking: Jaipur to Mumbai"
+        },
+        {
+          "_id": "txn_wlt6_007",
+          "bookingReference": "HTL-USR6E-001",
+          "type": "debit",
+          "amount": 8400,
+          "balanceAfter": 6040,
+          "description": "Hotel booking at Lemon Tree"
+        },
+        {
+          "_id": "txn_wlt6_008",
+          "type": "topup",
+          "amount": 22560,
+          "balanceAfter": 28600,
+          "description": "Wallet top-up via UPI"
+        }
+      ]
+    },
+    {
+      "_id": "wlt_008",
+      "userId": "usr_008",
+      "balance": 7320,
+      "currency": "INR",
+      "isActive": true,
+      "transactions": [
+        {
+          "_id": "txn_wlt8_001",
+          "type": "topup",
+          "amount": 15000,
+          "balanceAfter": 15000,
+          "description": "Wallet top-up via UPI"
+        },
+        {
+          "_id": "txn_wlt8_002",
+          "bookingReference": "TRV-USR8A-001",
+          "type": "debit",
+          "amount": 4830,
+          "balanceAfter": 10170,
+          "description": "Flight booking: Hyderabad to Kochi"
+        },
+        {
+          "_id": "txn_wlt8_003",
+          "bookingReference": "HTL-USR8B-001",
+          "type": "debit",
+          "amount": 5850,
+          "balanceAfter": 4320,
+          "description": "Hotel booking payment"
+        },
+        {
+          "_id": "txn_wlt8_004",
+          "type": "topup",
+          "amount": 3000,
+          "balanceAfter": 7320,
+          "description": "Wallet top-up via Net Banking"
+        }
+      ]
+    },
+    {
+      "_id": "wlt_009",
+      "userId": "usr_009",
+      "balance": 19800,
+      "currency": "INR",
+      "isActive": true,
+      "transactions": [
+        {
+          "_id": "txn_wlt9_001",
+          "type": "topup",
+          "amount": 30000,
+          "balanceAfter": 30000,
+          "description": "Wallet top-up via NEFT"
+        },
+        {
+          "_id": "txn_wlt9_002",
+          "bookingReference": "ITN-USR9A-001",
+          "type": "debit",
+          "amount": 40000,
+          "balanceAfter": -10000,
+          "description": "Itinerary: Leh-Ladakh Adventure"
+        },
+        {
+          "_id": "txn_wlt9_003",
+          "type": "topup",
+          "amount": 35000,
+          "balanceAfter": 25000,
+          "description": "Wallet top-up via UPI"
+        },
+        {
+          "_id": "txn_wlt9_004",
+          "bookingReference": "TRV-USR9B-001",
+          "type": "debit",
+          "amount": 6090,
+          "balanceAfter": 18910,
+          "description": "Flight booking: Mumbai to Leh"
+        },
+        {
+          "_id": "txn_wlt9_005",
+          "bookingReference": "HTL-USR9C-001",
+          "type": "debit",
+          "amount": 11410,
+          "balanceAfter": 7500,
+          "description": "Hotel booking at Samode Haveli"
+        },
+        {
+          "_id": "txn_wlt9_006",
+          "type": "topup",
+          "amount": 12300,
+          "balanceAfter": 19800,
+          "description": "Wallet top-up via Net Banking"
+        }
+      ]
+    },
+    {
+      "_id": "wlt_010",
+      "userId": "usr_010",
+      "balance": 4870,
+      "currency": "INR",
+      "isActive": true,
+      "transactions": [
+        {
+          "_id": "txn_wlt10_001",
+          "type": "topup",
+          "amount": 10000,
+          "balanceAfter": 10000,
+          "description": "Wallet top-up via UPI"
+        },
+        {
+          "_id": "txn_wlt10_002",
+          "bookingReference": "TRV-USR10A-001",
+          "type": "debit",
+          "amount": 5130,
+          "balanceAfter": 4870,
+          "description": "Bus booking: Hyderabad to Bangalore"
+        }
+      ]
+    },
+    {
+      "userId": "683A96N",
+      "balance": 0,
+      "currency": "INR",
+      "isActive": true,
+      "transactions": [],
+      "_id": "s7XTXac"
+    },
+    {
+      "userId": "qToZGHU",
+      "balance": 0,
+      "currency": "INR",
+      "isActive": true,
+      "transactions": [],
+      "_id": "9-jQVLa"
+    },
+    {
+      "userId": "Ue88gqd",
+      "balance": 0,
+      "currency": "INR",
+      "isActive": true,
+      "transactions": [],
+      "_id": "JVjv3yJ"
+    },
+    {
+      "userId": "EEhejF6",
+      "balance": 0,
+      "currency": "INR",
+      "isActive": true,
+      "transactions": [],
+      "_id": "b4v4JuA"
+    }
+  ],
+  "hotels": [
+    {
+      "_id": "htl_001",
+      "name": "The Imperial New Delhi",
+      "hotelType": "heritage",
+      "starRating": 5,
+      "description": "A living legend in the heart of Lutyens' Delhi, The Imperial has defined gracious hospitality since 1936. Its white colonnaded façade, art deco interiors, and a collection of over 5,000 rare artworks make it one of Asia's finest heritage properties. Home to celebrated restaurants 1911 and Spice Route, a tranquil spa, and lushly landscaped gardens — every stay is a journey through India's colonial grandeur.",
+      "location": {
+        "address": "Janpath, Connaught Place",
+        "city": "New Delhi",
+        "state": "Delhi",
+        "country": "India",
+        "coordinates": {
+          "lat": 28.6139,
+          "lng": 77.209
+        }
+      },
+      "amenities": [
+        "Free WiFi",
+        "Outdoor Pool",
+        "Fitness Centre",
+        "Full-Service Spa",
+        "Multiple Restaurants",
+        "24-Hour Room Service",
+        "Concierge",
+        "Valet Parking",
+        "Airport Transfer",
+        "Business Centre",
+        "Laundry Service",
+        "Doctor on Call"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800&q=80",
+        "https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80",
+        "https://images.unsplash.com/photo-1561361058-c24cecae35ca?w=800&q=80"
+      ],
+      "checkInTime": "14:00",
+      "checkOutTime": "12:00",
+      "contactPhone": "+91-11-23341234",
+      "contactEmail": "reservations@theimperialindia.com",
+      "seasonalMultiplier": 1.2,
+      "taxPercent": 18,
+      "marketRate": 22000,
+      "isActive": true
+    },
+    {
+      "_id": "htl_002",
+      "name": "Taj Holiday Village Resort & Spa",
+      "hotelType": "resort",
+      "starRating": 5,
+      "description": "Nestled between swaying coconut palms and the golden sands of Calangute Beach, Taj Holiday Village is Goa's most beloved resort destination. Portuguese-style cottages with private verandahs dot the 26-acre property, while three pools, a world-class Jiva Spa, and six dining outlets ensure there is never a dull moment. The resort blends Goan warmth with Taj's legendary service to create an unmatched coastal escape.",
+      "location": {
+        "address": "Calangute-Candolim Road, Sinquerim",
+        "city": "Goa",
+        "state": "Goa",
+        "country": "India",
+        "coordinates": {
+          "lat": 15.5524,
+          "lng": 73.7783
+        }
+      },
+      "amenities": [
+        "Free WiFi",
+        "3 Outdoor Pools",
+        "Private Beach Access",
+        "Jiva Spa",
+        "6 Restaurants & Bars",
+        "Water Sports",
+        "Kids Club",
+        "24-Hour Room Service",
+        "Concierge",
+        "Valet Parking",
+        "Laundry Service",
+        "Yoga & Meditation",
+        "Cycling"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1614082242765-7c98ca0f3df3?w=800&q=80",
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+        "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=800&q=80"
+      ],
+      "checkInTime": "14:00",
+      "checkOutTime": "12:00",
+      "contactPhone": "+91-832-6645858",
+      "contactEmail": "tajholidayvillage.goa@tajhotels.com",
+      "seasonalMultiplier": 1.5,
+      "taxPercent": 18,
+      "marketRate": 28000,
+      "isActive": true
+    },
+    {
+      "_id": "htl_003",
+      "name": "Lemon Tree Hotel Candolim, Goa",
+      "hotelType": "business",
+      "starRating": 3,
+      "description": "Bright, cheerful, and refreshingly affordable — Lemon Tree Hotel Candolim is the smart traveller's choice in Goa. Located just 10 minutes from Calangute Beach and close to major highway connections, it serves both leisure and business guests with well-appointed rooms, a rooftop pool, and the signature Citrus Café. The hotel's vibrant yellow-and-green interiors bring Goa's sunny spirit indoors.",
+      "location": {
+        "address": "H.No 1/176A, Escrivao Vaddo, Candolim",
+        "city": "Goa",
+        "state": "Goa",
+        "country": "India",
+        "coordinates": {
+          "lat": 15.4909,
+          "lng": 73.8278
+        }
+      },
+      "amenities": [
+        "Free WiFi",
+        "Rooftop Pool",
+        "Citrus Café Restaurant",
+        "Bar",
+        "Parking",
+        "24-Hour Front Desk",
+        "Room Service",
+        "Laundry",
+        "Tour Desk"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80",
+        "https://images.unsplash.com/photo-1486946255434-2466348c2166?w=800&q=80",
+        "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800&q=80"
+      ],
+      "checkInTime": "14:00",
+      "checkOutTime": "12:00",
+      "contactPhone": "+91-832-6641234",
+      "contactEmail": "goa@lemontreehotels.com",
+      "seasonalMultiplier": 1.1,
+      "taxPercent": 12,
+      "marketRate": 6500,
+      "isActive": true
+    },
+    {
+      "_id": "htl_004",
+      "name": "Zostel Goa (Anjuna)",
+      "hotelType": "hostel",
+      "starRating": 2,
+      "description": "India's most loved hostel brand, Zostel Anjuna is where backpackers become friends. Set 200 metres from the legendary Anjuna Flea Market and a short walk to the beach, the hostel offers private rooms, mixed and female-only dorms, a buzzing common area, hammock garden, and a café serving all-day food and drinks. Free walking tours, surf lessons, and evening bonfires make every stay an adventure.",
+      "location": {
+        "address": "H.No 894, Anjuna Beach Road, Near Flea Market",
+        "city": "Goa",
+        "state": "Goa",
+        "country": "India",
+        "coordinates": {
+          "lat": 15.5736,
+          "lng": 73.7378
+        }
+      },
+      "amenities": [
+        "Free WiFi",
+        "Common Kitchen",
+        "Lockers",
+        "Café & Bar",
+        "Hammock Garden",
+        "Free Walking Tours",
+        "Laundry (Paid)",
+        "24-Hour Reception",
+        "Luggage Storage"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&q=80",
+        "https://images.unsplash.com/photo-1520277739336-7bf67541ace6?w=800&q=80",
+        "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800&q=80"
+      ],
+      "checkInTime": "13:00",
+      "checkOutTime": "11:00",
+      "contactPhone": "+91-832-6649876",
+      "contactEmail": "goa@zostel.com",
+      "seasonalMultiplier": 1,
+      "taxPercent": 12,
+      "marketRate": 2500,
+      "isActive": true
+    },
+    {
+      "_id": "htl_005",
+      "name": "Novotel New Delhi Aerocity",
+      "hotelType": "luxury",
+      "starRating": 5,
+      "description": "The closest 5-star hotel to Indira Gandhi International Airport, Novotel Aerocity combines contemporary luxury with seamless connectivity. Its 390 elegantly designed rooms offer stunning runway views, while the award-winning SpaNovotel, a rooftop infinity pool, and five dining outlets cater to every taste. The hotel's sky bridge connects directly to the Aerocity Metro Station, making it the ultimate transit hub for the discerning traveller.",
+      "location": {
+        "address": "Asset No. 7, Hospitality Zone, Aerocity",
+        "city": "New Delhi",
+        "state": "Delhi",
+        "country": "India",
+        "coordinates": {
+          "lat": 28.5562,
+          "lng": 77.0999
+        }
+      },
+      "amenities": [
+        "Free WiFi",
+        "Rooftop Infinity Pool",
+        "SpaNovotel",
+        "Fitness Centre",
+        "5 Restaurants & Bars",
+        "24-Hour Room Service",
+        "Airport Shuttle",
+        "Direct Metro Access",
+        "Business Centre",
+        "Valet Parking",
+        "Concierge",
+        "Laundry",
+        "Doctor on Call"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=800&q=80",
+        "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80",
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80"
+      ],
+      "checkInTime": "14:00",
+      "checkOutTime": "12:00",
+      "contactPhone": "+91-11-71556000",
+      "contactEmail": "H8883@accor.com",
+      "seasonalMultiplier": 1.3,
+      "taxPercent": 18,
+      "marketRate": 18000,
+      "isActive": true
+    },
+    {
+      "_id": "htl_006",
+      "name": "Taj Mahal Palace, Mumbai",
+      "hotelType": "luxury",
+      "starRating": 5,
+      "description": "Standing majestically at the Gateway of India since 1903, the Taj Mahal Palace is more than a hotel — it is a national icon. Its Indo-Saracenic dome, stunning harbour views, and legendary service have welcomed royalty, heads of state, and discerning travellers for over a century. The Palace wing houses museum-quality antiques and original artwork, while Harbour Bar — India's oldest licensed bar — remains a Mumbai institution. Recognised as one of the Leading Hotels of the World.",
+      "location": {
+        "address": "Apollo Bunder, Colaba",
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "country": "India",
+        "coordinates": {
+          "lat": 18.922,
+          "lng": 72.8347
+        }
+      },
+      "amenities": [
+        "Free WiFi",
+        "Outdoor Pool",
+        "Jiva Spa",
+        "Fitness Centre",
+        "6 Restaurants & Bars",
+        "24-Hour Butler Service",
+        "Concierge",
+        "Valet Parking",
+        "Harbour View Rooms",
+        "Business Centre",
+        "Laundry",
+        "Doctor on Call",
+        "Yacht Charter",
+        "Limousine Service"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
+        "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80",
+        "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=800&q=80"
+      ],
+      "checkInTime": "14:00",
+      "checkOutTime": "12:00",
+      "contactPhone": "+91-22-66653366",
+      "contactEmail": "tmhp.bombay@tajhotels.com",
+      "seasonalMultiplier": 1.3,
+      "taxPercent": 18,
+      "marketRate": 35000,
+      "isActive": true
+    },
+    {
+      "_id": "htl_007",
+      "name": "ITC Maratha, a Luxury Collection Hotel, Mumbai",
+      "hotelType": "business",
+      "starRating": 5,
+      "description": "A tribute to the valour and splendour of the Maratha Empire, ITC Maratha rises 10 storeys near Mumbai's international airport. The hotel's hand-painted murals, traditional Maratha motifs, and locally sourced teak furniture tell the story of Maharashtra's rich heritage. The award-winning Dum Pukht Maratha restaurant specialises in slow-cooked Mughlai cuisine, while Peshwa offers an extensive global buffet. A member of Marriott's Luxury Collection.",
+      "location": {
+        "address": "Sahar Road, Andheri East",
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "country": "India",
+        "coordinates": {
+          "lat": 19.099,
+          "lng": 72.8679
+        }
+      },
+      "amenities": [
+        "Free WiFi",
+        "Outdoor Pool",
+        "Kaya Kalp Spa",
+        "24-Hour Fitness Centre",
+        "4 Restaurants & Bars",
+        "24-Hour Room Service",
+        "Airport Shuttle (3 min)",
+        "Business Centre",
+        "Valet Parking",
+        "Concierge",
+        "Executive Lounge",
+        "Laundry",
+        "Doctor on Call"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
+        "https://images.unsplash.com/photo-1497366754035-f200968a7ece?w=800&q=80",
+        "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80"
+      ],
+      "checkInTime": "14:00",
+      "checkOutTime": "12:00",
+      "contactPhone": "+91-22-28303030",
+      "contactEmail": "itcmaratha@itchotels.in",
+      "seasonalMultiplier": 1.2,
+      "taxPercent": 18,
+      "marketRate": 22000,
+      "isActive": true
+    },
+    {
+      "_id": "htl_008",
+      "name": "Rambagh Palace, Jaipur",
+      "hotelType": "heritage",
+      "starRating": 5,
+      "description": "Once the hunting lodge of Ram Singh II and later the official residence of the last Maharaja of Jaipur, Rambagh Palace is the crown jewel of Rajasthan's palace hotels. Set within 47 acres of Mughal gardens, its regal suites showcase original royal antiques, hand-embroidered fabrics, and ornate carved marble. The Suvarna Mahal restaurant — once the royal ballroom — offers an unrivalled fine-dining experience beneath gilded ceilings. Conde Nast Traveller's No. 1 Hotel in India.",
+      "location": {
+        "address": "Bhawani Singh Road",
+        "city": "Jaipur",
+        "state": "Rajasthan",
+        "country": "India",
+        "coordinates": {
+          "lat": 26.8926,
+          "lng": 75.8085
+        }
+      },
+      "amenities": [
+        "Free WiFi",
+        "Outdoor Pool",
+        "Jiva Spa",
+        "Fitness Centre",
+        "3 Restaurants & Bars",
+        "24-Hour Butler Service",
+        "Elephant & Camel Rides",
+        "Polo Ground",
+        "Heritage Walks",
+        "Cultural Performances",
+        "Valet Parking",
+        "Concierge",
+        "Laundry",
+        "Doctor on Call"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&q=80",
+        "https://images.unsplash.com/photo-1477587458883-47145ed31c3e?w=800&q=80",
+        "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800&q=80"
+      ],
+      "checkInTime": "14:00",
+      "checkOutTime": "12:00",
+      "contactPhone": "+91-141-2385700",
+      "contactEmail": "rambagh.jaipur@tajhotels.com",
+      "seasonalMultiplier": 1.4,
+      "taxPercent": 18,
+      "marketRate": 45000,
+      "isActive": true
+    },
+    {
+      "_id": "htl_009",
+      "name": "Samode Haveli, Jaipur",
+      "hotelType": "boutique",
+      "starRating": 4,
+      "description": "Hidden behind a centuries-old gateway in the narrow lanes of old Jaipur, Samode Haveli is a jewel of Rajput architecture. This 475-year-old mansion, once home to the Prime Minister of Jaipur State, has been lovingly restored by the Samode family who still live here. Its hand-painted frescoes, mirrored Sheesh Mahal, courtyard plunge pool, and rooftop terrace with pink city views make it one of Rajasthan's most intimate heritage stays. Recognised by Condé Nast Traveller and Travel + Leisure.",
+      "location": {
+        "address": "Gangapole, Near City Palace",
+        "city": "Jaipur",
+        "state": "Rajasthan",
+        "country": "India",
+        "coordinates": {
+          "lat": 26.926,
+          "lng": 75.8235
+        }
+      },
+      "amenities": [
+        "Free WiFi",
+        "Courtyard Pool",
+        "Rooftop Terrace",
+        "Ayurvedic Spa",
+        "Restaurant & Bar",
+        "Heritage Tours",
+        "Cooking Classes",
+        "Cultural Performances",
+        "Concierge",
+        "Parking",
+        "Laundry",
+        "Room Service"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800&q=80",
+        "https://images.unsplash.com/photo-1464082354059-27db6ce50048?w=800&q=80",
+        "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80"
+      ],
+      "checkInTime": "13:00",
+      "checkOutTime": "11:00",
+      "contactPhone": "+91-141-2632407",
+      "contactEmail": "reservations@samode.com",
+      "seasonalMultiplier": 1.2,
+      "taxPercent": 18,
+      "marketRate": 18000,
+      "isActive": true
+    }
+  ],
+  "rooms": [
+    {
+      "_id": "room_001",
+      "hotelId": "htl_001",
+      "roomNumber": "101",
+      "type": "deluxe",
+      "bedType": "king",
+      "maxOccupancy": 2,
+      "basePricePerNight": 3200,
+      "floorNumber": 1,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "42\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Daily Newspaper",
+        "Turndown Service"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_001b",
+      "hotelId": "htl_001",
+      "roomNumber": "102",
+      "type": "suite",
+      "bedType": "king",
+      "maxOccupancy": 3,
+      "basePricePerNight": 5500,
+      "floorNumber": 2,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "55\" LED TV",
+        "Free WiFi",
+        "Fully Stocked Minibar",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Separate Living Room",
+        "Walk-in Wardrobe",
+        "Jacuzzi",
+        "Butler Service",
+        "Daily Newspaper",
+        "Evening Turndown"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+        "https://images.unsplash.com/photo-1631049421450-348ccd7f8949?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_001c",
+      "hotelId": "htl_001",
+      "roomNumber": "103",
+      "type": "standard",
+      "bedType": "double",
+      "maxOccupancy": 2,
+      "basePricePerNight": 2000,
+      "floorNumber": 1,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "40\" LED TV",
+        "Free WiFi",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Work Desk",
+        "Daily Newspaper"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+        "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_001d",
+      "hotelId": "htl_001",
+      "roomNumber": "104",
+      "type": "deluxe",
+      "bedType": "king",
+      "maxOccupancy": 2,
+      "basePricePerNight": 3000,
+      "floorNumber": 1,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "42\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Garden View",
+        "Daily Newspaper",
+        "Turndown Service"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_001e",
+      "hotelId": "htl_001",
+      "roomNumber": "105",
+      "type": "deluxe",
+      "bedType": "king",
+      "maxOccupancy": 2,
+      "basePricePerNight": 3500,
+      "floorNumber": 2,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "42\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Pool View",
+        "Daily Newspaper",
+        "Turndown Service"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_001f",
+      "hotelId": "htl_001",
+      "roomNumber": "106",
+      "type": "standard",
+      "bedType": "twin",
+      "maxOccupancy": 2,
+      "basePricePerNight": 1800,
+      "floorNumber": 1,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "40\" LED TV",
+        "Free WiFi",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Work Desk"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+        "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_001g",
+      "hotelId": "htl_001",
+      "roomNumber": "107",
+      "type": "standard",
+      "bedType": "double",
+      "maxOccupancy": 2,
+      "basePricePerNight": 2000,
+      "floorNumber": 2,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "40\" LED TV",
+        "Free WiFi",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Work Desk",
+        "Garden View"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+        "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_002",
+      "hotelId": "htl_002",
+      "roomNumber": "201",
+      "type": "suite",
+      "bedType": "king",
+      "maxOccupancy": 3,
+      "basePricePerNight": 6000,
+      "floorNumber": 2,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "55\" LED TV",
+        "Free WiFi",
+        "Fully Stocked Minibar",
+        "Electronic Safe",
+        "Outdoor Shower",
+        "Private Plunge Pool",
+        "Sea View Balcony",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Butler Service",
+        "Jacuzzi",
+        "Evening Turndown"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+        "https://images.unsplash.com/photo-1631049421450-348ccd7f8949?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_002b",
+      "hotelId": "htl_002",
+      "roomNumber": "202",
+      "type": "deluxe",
+      "bedType": "queen",
+      "maxOccupancy": 2,
+      "basePricePerNight": 3800,
+      "floorNumber": 2,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "42\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Private Balcony",
+        "Sea View",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Turndown Service"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_002c",
+      "hotelId": "htl_002",
+      "roomNumber": "203",
+      "type": "standard",
+      "bedType": "double",
+      "maxOccupancy": 2,
+      "basePricePerNight": 2200,
+      "floorNumber": 1,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "40\" LED TV",
+        "Free WiFi",
+        "Electronic Safe",
+        "Private Balcony",
+        "Garden View",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+        "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_002d",
+      "hotelId": "htl_002",
+      "roomNumber": "204",
+      "type": "suite",
+      "bedType": "king",
+      "maxOccupancy": 3,
+      "basePricePerNight": 5800,
+      "floorNumber": 3,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "55\" LED TV",
+        "Free WiFi",
+        "Fully Stocked Minibar",
+        "Electronic Safe",
+        "Sea View Balcony",
+        "Jacuzzi",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Butler Service",
+        "Evening Turndown"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+        "https://images.unsplash.com/photo-1631049421450-348ccd7f8949?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_002e",
+      "hotelId": "htl_002",
+      "roomNumber": "205",
+      "type": "standard",
+      "bedType": "twin",
+      "maxOccupancy": 2,
+      "basePricePerNight": 1900,
+      "floorNumber": 1,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "40\" LED TV",
+        "Free WiFi",
+        "Electronic Safe",
+        "Garden View",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+        "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_002f",
+      "hotelId": "htl_002",
+      "roomNumber": "206",
+      "type": "deluxe",
+      "bedType": "queen",
+      "maxOccupancy": 2,
+      "basePricePerNight": 3500,
+      "floorNumber": 2,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "42\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Pool View Balcony",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Turndown Service"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_002g",
+      "hotelId": "htl_002",
+      "roomNumber": "207",
+      "type": "deluxe",
+      "bedType": "king",
+      "maxOccupancy": 2,
+      "basePricePerNight": 3800,
+      "floorNumber": 3,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "42\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Sea View Balcony",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Turndown Service"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_002h",
+      "hotelId": "htl_002",
+      "roomNumber": "208",
+      "type": "standard",
+      "bedType": "double",
+      "maxOccupancy": 2,
+      "basePricePerNight": 2000,
+      "floorNumber": 1,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "40\" LED TV",
+        "Free WiFi",
+        "Electronic Safe",
+        "Courtyard View",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+        "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_002i",
+      "hotelId": "htl_002",
+      "roomNumber": "209",
+      "type": "standard",
+      "bedType": "double",
+      "maxOccupancy": 2,
+      "basePricePerNight": 2000,
+      "floorNumber": 1,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "40\" LED TV",
+        "Free WiFi",
+        "Electronic Safe",
+        "Garden View",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+        "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_003",
+      "hotelId": "htl_003",
+      "roomNumber": "301",
+      "type": "standard",
+      "bedType": "double",
+      "maxOccupancy": 2,
+      "basePricePerNight": 1800,
+      "floorNumber": 3,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "32\" LED TV",
+        "Free WiFi",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Tea/Coffee Maker",
+        "Work Desk",
+        "Daily Housekeeping"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+        "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_003b",
+      "hotelId": "htl_003",
+      "roomNumber": "302",
+      "type": "deluxe",
+      "bedType": "king",
+      "maxOccupancy": 2,
+      "basePricePerNight": 2800,
+      "floorNumber": 3,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "40\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Tea/Coffee Maker",
+        "Work Desk",
+        "Pool View",
+        "Daily Housekeeping"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_004",
+      "hotelId": "htl_004",
+      "roomNumber": "101",
+      "type": "standard",
+      "bedType": "single",
+      "maxOccupancy": 1,
+      "basePricePerNight": 1500,
+      "floorNumber": 1,
+      "status": "available",
+      "amenities": [
+        "Ceiling Fan",
+        "Free WiFi",
+        "Personal Locker",
+        "Reading Light",
+        "Power Outlet per Bunk",
+        "Shared Bathroom"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&q=80",
+        "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_004b",
+      "hotelId": "htl_004",
+      "roomNumber": "102",
+      "type": "standard",
+      "bedType": "double",
+      "maxOccupancy": 2,
+      "basePricePerNight": 1800,
+      "floorNumber": 1,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "Free WiFi",
+        "Personal Lockers",
+        "Shared Bathroom",
+        "Reading Light",
+        "Power Outlets"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+        "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_005",
+      "hotelId": "htl_005",
+      "roomNumber": "501",
+      "type": "deluxe",
+      "bedType": "king",
+      "maxOccupancy": 2,
+      "basePricePerNight": 3200,
+      "floorNumber": 5,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "49\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Runway View",
+        "Work Desk",
+        "Turndown Service"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_005b",
+      "hotelId": "htl_005",
+      "roomNumber": "502",
+      "type": "suite",
+      "bedType": "king",
+      "maxOccupancy": 4,
+      "basePricePerNight": 5800,
+      "floorNumber": 6,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "65\" LED TV + 42\" Bedroom TV",
+        "Free WiFi",
+        "Fully Stocked Minibar",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Separate Living Room",
+        "Jacuzzi",
+        "Walk-in Wardrobe",
+        "Butler Service",
+        "Panoramic City View"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+        "https://images.unsplash.com/photo-1631049421450-348ccd7f8949?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_005c",
+      "hotelId": "htl_005",
+      "roomNumber": "503",
+      "type": "executive",
+      "bedType": "queen",
+      "maxOccupancy": 2,
+      "basePricePerNight": 4200,
+      "floorNumber": 5,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "49\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Executive Lounge Access",
+        "Evening Cocktails & Canapes",
+        "Business Centre Access",
+        "Pressing Service"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80",
+        "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_005d",
+      "hotelId": "htl_005",
+      "roomNumber": "504",
+      "type": "deluxe",
+      "bedType": "king",
+      "maxOccupancy": 2,
+      "basePricePerNight": 3200,
+      "floorNumber": 5,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "49\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Pool View",
+        "Work Desk",
+        "Turndown Service"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_005e",
+      "hotelId": "htl_005",
+      "roomNumber": "505",
+      "type": "deluxe",
+      "bedType": "twin",
+      "maxOccupancy": 2,
+      "basePricePerNight": 3000,
+      "floorNumber": 6,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "49\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "City View",
+        "Work Desk",
+        "Turndown Service"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_006",
+      "hotelId": "htl_006",
+      "roomNumber": "601",
+      "type": "deluxe",
+      "bedType": "king",
+      "maxOccupancy": 2,
+      "basePricePerNight": 3800,
+      "floorNumber": 6,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "55\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Harbour View",
+        "Marble Bathroom",
+        "Turndown Service",
+        "Daily Newspaper"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_006b",
+      "hotelId": "htl_006",
+      "roomNumber": "602",
+      "type": "suite",
+      "bedType": "king",
+      "maxOccupancy": 3,
+      "basePricePerNight": 6000,
+      "floorNumber": 7,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "65\" LED TV + 42\" Bedroom TV",
+        "Free WiFi",
+        "Fully Stocked Minibar",
+        "Electronic Safe",
+        "Marble Bathroom with Jacuzzi",
+        "Harbour View",
+        "Separate Living & Dining",
+        "Walk-in Wardrobe",
+        "Butler Service",
+        "Evening Turndown",
+        "Personalised Stationery",
+        "Limousine Transfer"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+        "https://images.unsplash.com/photo-1631049421450-348ccd7f8949?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_006c",
+      "hotelId": "htl_006",
+      "roomNumber": "603",
+      "type": "standard",
+      "bedType": "double",
+      "maxOccupancy": 2,
+      "basePricePerNight": 2200,
+      "floorNumber": 5,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "42\" LED TV",
+        "Free WiFi",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Marble Bathroom",
+        "City View",
+        "Work Desk"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+        "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_007",
+      "hotelId": "htl_007",
+      "roomNumber": "701",
+      "type": "deluxe",
+      "bedType": "king",
+      "maxOccupancy": 2,
+      "basePricePerNight": 3500,
+      "floorNumber": 7,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "49\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "City/Pool View",
+        "Work Desk",
+        "Turndown Service",
+        "ITC One Bath Amenities"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_007b",
+      "hotelId": "htl_007",
+      "roomNumber": "702",
+      "type": "executive",
+      "bedType": "king",
+      "maxOccupancy": 2,
+      "basePricePerNight": 4500,
+      "floorNumber": 8,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "55\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Executive Lounge Access",
+        "Evening Cocktails",
+        "Business Centre",
+        "Dedicated Check-in",
+        "Pressing on Arrival"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80",
+        "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_007c",
+      "hotelId": "htl_007",
+      "roomNumber": "703",
+      "type": "standard",
+      "bedType": "double",
+      "maxOccupancy": 2,
+      "basePricePerNight": 2000,
+      "floorNumber": 6,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "40\" LED TV",
+        "Free WiFi",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Work Desk",
+        "Daily Housekeeping"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+        "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_008",
+      "hotelId": "htl_008",
+      "roomNumber": "801",
+      "type": "suite",
+      "bedType": "king",
+      "maxOccupancy": 3,
+      "basePricePerNight": 6000,
+      "floorNumber": 1,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "55\" LED TV",
+        "Free WiFi",
+        "Fully Stocked Minibar",
+        "Electronic Safe",
+        "Antique Furnishings",
+        "Marble Bathroom with Jacuzzi",
+        "Private Garden View",
+        "Separate Sitting Room",
+        "Butler Service",
+        "Evening Turndown",
+        "Jiva Spa Welcome Amenity",
+        "Daily Fresh Flowers"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+        "https://images.unsplash.com/photo-1631049421450-348ccd7f8949?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_008b",
+      "hotelId": "htl_008",
+      "roomNumber": "802",
+      "type": "deluxe",
+      "bedType": "king",
+      "maxOccupancy": 2,
+      "basePricePerNight": 4000,
+      "floorNumber": 1,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "49\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Antique Furnishings",
+        "Marble Bathroom",
+        "Garden View",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Turndown Service",
+        "Heritage Artifact Display"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_008c",
+      "hotelId": "htl_008",
+      "roomNumber": "803",
+      "type": "standard",
+      "bedType": "double",
+      "maxOccupancy": 2,
+      "basePricePerNight": 2500,
+      "floorNumber": 1,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "42\" LED TV",
+        "Free WiFi",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Marble Bathroom",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Courtyard View",
+        "Work Desk"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+        "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_009",
+      "hotelId": "htl_009",
+      "roomNumber": "901",
+      "type": "suite",
+      "bedType": "king",
+      "maxOccupancy": 2,
+      "basePricePerNight": 5500,
+      "floorNumber": 2,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "42\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Hand-Painted Frescoes",
+        "Private Balcony",
+        "Courtyard & City View",
+        "Marble Bathroom",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Evening Turndown",
+        "Heritage Welcome Kit"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+        "https://images.unsplash.com/photo-1631049421450-348ccd7f8949?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_009b",
+      "hotelId": "htl_009",
+      "roomNumber": "902",
+      "type": "deluxe",
+      "bedType": "queen",
+      "maxOccupancy": 2,
+      "basePricePerNight": 3500,
+      "floorNumber": 1,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "40\" LED TV",
+        "Free WiFi",
+        "Minibar",
+        "Electronic Safe",
+        "Hand-Painted Frescoes",
+        "Courtyard View",
+        "Marble Bathroom",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Turndown Service"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+        "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80"
+      ]
+    },
+    {
+      "_id": "room_009c",
+      "hotelId": "htl_009",
+      "roomNumber": "903",
+      "type": "standard",
+      "bedType": "double",
+      "maxOccupancy": 2,
+      "basePricePerNight": 2200,
+      "floorNumber": 1,
+      "status": "available",
+      "amenities": [
+        "Air Conditioning",
+        "32\" LED TV",
+        "Free WiFi",
+        "Electronic Safe",
+        "Hair Dryer",
+        "Bathrobes & Slippers",
+        "Tea/Coffee Maker",
+        "Inner Courtyard View"
+      ],
+      "images": [
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+        "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=800&q=80"
+      ]
+    }
+  ],
+  "ratePlans": [
+    {
+      "_id": "rtp_001",
+      "hotelId": "htl_001",
+      "planName": "Room Only (EP)",
+      "includesBreakfast": false,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": false,
+      "freeCancellationHours": 0,
+      "description": "Best flexible rate with no meals included."
+    },
+    {
+      "_id": "rtp_001b",
+      "hotelId": "htl_001",
+      "planName": "Bed & Breakfast (CP)",
+      "includesBreakfast": true,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": true,
+      "freeCancellationHours": 24,
+      "description": "Start your day with a lavish buffet breakfast at 1911 Restaurant. Free cancellation up to 24 hours before arrival."
+    },
+    {
+      "_id": "rtp_001c",
+      "hotelId": "htl_001",
+      "planName": "Half Board (MAP)",
+      "includesBreakfast": true,
+      "includesLunch": false,
+      "includesDinner": true,
+      "isRefundable": true,
+      "freeCancellationHours": 48,
+      "description": "Breakfast and dinner at 1911 included. Free cancellation up to 48 hours before arrival."
+    },
+    {
+      "_id": "rtp_002",
+      "hotelId": "htl_002",
+      "planName": "Room Only (EP)",
+      "includesBreakfast": false,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": false,
+      "freeCancellationHours": 0,
+      "description": "Best available rate. Non-refundable."
+    },
+    {
+      "_id": "rtp_002b",
+      "hotelId": "htl_002",
+      "planName": "Bed & Breakfast (CP)",
+      "includesBreakfast": true,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": true,
+      "freeCancellationHours": 24,
+      "description": "Full tropical breakfast by the pool. Free cancellation up to 24 hours."
+    },
+    {
+      "_id": "rtp_002c",
+      "hotelId": "htl_002",
+      "planName": "All Inclusive (AP)",
+      "includesBreakfast": true,
+      "includesLunch": true,
+      "includesDinner": true,
+      "isRefundable": false,
+      "freeCancellationHours": 72,
+      "description": "All meals and select beverages included at resort restaurants. Non-refundable."
+    },
+    {
+      "_id": "rtp_003",
+      "hotelId": "htl_003",
+      "planName": "Room Only (EP)",
+      "includesBreakfast": false,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": true,
+      "freeCancellationHours": 12,
+      "description": "Flexible rate. Cancel up to 12 hours before arrival."
+    },
+    {
+      "_id": "rtp_003b",
+      "hotelId": "htl_003",
+      "planName": "Bed & Breakfast (CP)",
+      "includesBreakfast": true,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": true,
+      "freeCancellationHours": 24,
+      "description": "Buffet breakfast at Citrus Café included. Free cancellation up to 24 hours."
+    },
+    {
+      "_id": "rtp_004",
+      "hotelId": "htl_004",
+      "planName": "Bed Only",
+      "includesBreakfast": false,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": false,
+      "freeCancellationHours": 0,
+      "description": "Basic bed-only rate. Non-refundable. Café discounts available for guests."
+    },
+    {
+      "_id": "rtp_005",
+      "hotelId": "htl_005",
+      "planName": "Room Only (EP)",
+      "includesBreakfast": false,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": false,
+      "freeCancellationHours": 0,
+      "description": "Best non-refundable rate."
+    },
+    {
+      "_id": "rtp_005b",
+      "hotelId": "htl_005",
+      "planName": "Bed & Breakfast (CP)",
+      "includesBreakfast": true,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": true,
+      "freeCancellationHours": 24,
+      "description": "International buffet breakfast included. Free cancellation up to 24 hours."
+    },
+    {
+      "_id": "rtp_005c",
+      "hotelId": "htl_005",
+      "planName": "Half Board (MAP)",
+      "includesBreakfast": true,
+      "includesLunch": false,
+      "includesDinner": true,
+      "isRefundable": true,
+      "freeCancellationHours": 48,
+      "description": "Breakfast and dinner included. Free cancellation up to 48 hours."
+    },
+    {
+      "_id": "rtp_006",
+      "hotelId": "htl_006",
+      "planName": "Room Only (EP)",
+      "includesBreakfast": false,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": false,
+      "freeCancellationHours": 0,
+      "description": "Best available non-refundable rate."
+    },
+    {
+      "_id": "rtp_006b",
+      "hotelId": "htl_006",
+      "planName": "Bed & Breakfast (CP)",
+      "includesBreakfast": true,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": true,
+      "freeCancellationHours": 48,
+      "description": "Breakfast at Shamiana or Sea Lounge. Free cancellation up to 48 hours."
+    },
+    {
+      "_id": "rtp_006c",
+      "hotelId": "htl_006",
+      "planName": "Full Board (AP)",
+      "includesBreakfast": true,
+      "includesLunch": true,
+      "includesDinner": true,
+      "isRefundable": false,
+      "freeCancellationHours": 72,
+      "description": "All meals at participating outlets. Non-refundable."
+    },
+    {
+      "_id": "rtp_007",
+      "hotelId": "htl_007",
+      "planName": "Room Only (EP)",
+      "includesBreakfast": false,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": true,
+      "freeCancellationHours": 12,
+      "description": "Flexible rate. Free cancellation up to 12 hours before arrival."
+    },
+    {
+      "_id": "rtp_007b",
+      "hotelId": "htl_007",
+      "planName": "Bed & Breakfast (CP)",
+      "includesBreakfast": true,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": true,
+      "freeCancellationHours": 24,
+      "description": "Breakfast at Peshwa buffet included. Free cancellation up to 24 hours."
+    },
+    {
+      "_id": "rtp_008",
+      "hotelId": "htl_008",
+      "planName": "Room Only (EP)",
+      "includesBreakfast": false,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": false,
+      "freeCancellationHours": 0,
+      "description": "Best available rate. Non-refundable."
+    },
+    {
+      "_id": "rtp_008b",
+      "hotelId": "htl_008",
+      "planName": "Bed & Breakfast (CP)",
+      "includesBreakfast": true,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": true,
+      "freeCancellationHours": 48,
+      "description": "Regal breakfast at Suvarna Mahal or Rajput Room. Free cancellation up to 48 hours."
+    },
+    {
+      "_id": "rtp_008c",
+      "hotelId": "htl_008",
+      "planName": "Full Board (AP)",
+      "includesBreakfast": true,
+      "includesLunch": true,
+      "includesDinner": true,
+      "isRefundable": false,
+      "freeCancellationHours": 72,
+      "description": "All meals included at palace restaurants. Non-refundable."
+    },
+    {
+      "_id": "rtp_009",
+      "hotelId": "htl_009",
+      "planName": "Room Only (EP)",
+      "includesBreakfast": false,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": true,
+      "freeCancellationHours": 24,
+      "description": "Flexible rate. Free cancellation up to 24 hours before arrival."
+    },
+    {
+      "_id": "rtp_009b",
+      "hotelId": "htl_009",
+      "planName": "Bed & Breakfast (CP)",
+      "includesBreakfast": true,
+      "includesLunch": false,
+      "includesDinner": false,
+      "isRefundable": true,
+      "freeCancellationHours": 48,
+      "description": "Breakfast at the courtyard restaurant. Heritage welcome drink on arrival. Free cancellation up to 48 hours."
+    },
+    {
+      "_id": "rtp_009c",
+      "hotelId": "htl_009",
+      "planName": "Half Board (MAP)",
+      "includesBreakfast": true,
+      "includesLunch": false,
+      "includesDinner": true,
+      "isRefundable": true,
+      "freeCancellationHours": 48,
+      "description": "Breakfast and dinner included. Traditional Rajasthani dinner experience. Free cancellation up to 48 hours."
+    }
+  ],
+  "hotelBookings": [
+    {
+      "_id": "hbk_001",
+      "userId": "usr_001",
+      "hotelId": "htl_001",
+      "roomId": "room_001",
+      "checkIn": "2026-04-10T14:00:00.000Z",
+      "checkOut": "2026-04-12T11:00:00.000Z",
+      "numNights": 2,
+      "numAdults": 2,
+      "numChildren": 0,
+      "hotelName": "The Imperial New Delhi",
+      "guests": [
+        {
+          "firstName": "Aarav",
+          "lastName": "Sharma",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "XXXX-XXXX-1234"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 16000,
+        "taxAmount": 2880,
+        "discountAmount": 0,
+        "loyaltyDiscount": 130,
+        "totalAmount": 18750,
+        "marketRate": 20000,
+        "currency": "INR"
+      },
+      "walletAmountUsed": 500,
+      "coinsRedeemed": 130,
+      "coinsEarned": 300,
+      "couponCode": null,
+      "bookingReference": "HTL-M3X9A-KZ2P",
+      "bookingStatus": "cancelled",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-03-01T10:00:00.000Z"
+    },
+    {
+      "_id": "hbk_002",
+      "userId": "usr_001",
+      "hotelId": "htl_001",
+      "roomId": "room_001",
+      "checkIn": "2026-04-08",
+      "checkOut": "2026-04-10",
+      "numNights": 2,
+      "numAdults": 1,
+      "hotelName": "The Imperial New Delhi",
+      "guests": [
+        {
+          "firstName": "RINKU",
+          "lastName": "HARYANVI",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "456789867897"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 16000,
+        "taxAmount": 2880,
+        "discountAmount": 0,
+        "totalAmount": 22656,
+        "currency": "INR"
+      },
+      "coinsRedeemed": 0,
+      "coinsEarned": 0,
+      "bookingReference": "HTL-MNOMPO9I-J8B6",
+      "bookingStatus": "cancelled",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-07T13:02:21.462Z"
+    },
+    {
+      "_id": "hbk_003",
+      "userId": "usr_001",
+      "hotelId": "htl_001",
+      "roomId": "room_001c",
+      "checkIn": "2026-04-08",
+      "checkOut": "2026-04-10",
+      "numNights": 2,
+      "numAdults": 1,
+      "hotelName": "The Imperial New Delhi",
+      "guests": [
+        {
+          "firstName": "RINKU",
+          "lastName": "HARYANVI",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "765432345678"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 12000,
+        "taxAmount": 1944,
+        "discountAmount": 1200,
+        "totalAmount": 12744,
+        "currency": "INR"
+      },
+      "coinsRedeemed": 2400,
+      "coinsEarned": 120,
+      "bookingReference": "HTL-MNPOT9M6-O1FK",
+      "bookingStatus": "cancelled",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-08T06:48:54.510Z"
+    },
+    {
+      "_id": "hbk_004",
+      "userId": "usr_001",
+      "hotelId": "htl_002",
+      "roomId": "room_002",
+      "checkIn": "2026-04-08",
+      "checkOut": "2026-04-09",
+      "numNights": 1,
+      "numAdults": 1,
+      "hotelName": "Taj Holiday Village Resort",
+      "guests": [
+        {
+          "firstName": "RINKU",
+          "lastName": "HARYANVI",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "798765434567"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 18000,
+        "taxAmount": 3240,
+        "discountAmount": 0,
+        "totalAmount": 21240,
+        "currency": "INR"
+      },
+      "coinsRedeemed": 0,
+      "coinsEarned": 180,
+      "bookingReference": "HTL-MNPROH8P-917V",
+      "bookingStatus": "cancelled",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-08T08:09:09.961Z"
+    },
+    {
+      "_id": "hbk_005",
+      "userId": "usr_001",
+      "hotelId": "htl_002",
+      "roomId": "room_002b",
+      "checkIn": "2026-04-08",
+      "checkOut": "2026-04-09",
+      "numNights": 1,
+      "numAdults": 1,
+      "hotelName": "Taj Holiday Village Resort",
+      "guests": [
+        {
+          "firstName": "RINKU",
+          "lastName": "HARYANVI",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "987654327898"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 13500,
+        "taxAmount": 2214,
+        "discountAmount": 1200,
+        "totalAmount": 14514,
+        "currency": "INR"
+      },
+      "coinsRedeemed": 2400,
+      "coinsEarned": 135,
+      "bookingReference": "HTL-MNPSSQPC-MAMS",
+      "bookingStatus": "cancelled",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-08T08:40:28.464Z"
+    },
+    {
+      "_id": "SRAZPUI",
+      "userId": "usr_001",
+      "hotelId": "htl_002",
+      "roomId": "room_002b",
+      "checkIn": "2026-04-09",
+      "checkOut": "2026-04-10",
+      "numNights": 1,
+      "numAdults": 1,
+      "hotelName": "Taj Holiday Village Resort",
+      "guests": [
+        {
+          "firstName": "RINKU",
+          "lastName": "HARYANVI",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "987654323456"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 13500,
+        "taxAmount": 2430,
+        "discountAmount": 0,
+        "totalAmount": 15930,
+        "currency": "INR"
+      },
+      "coinsRedeemed": 2400,
+      "coinsEarned": 159,
+      "bookingReference": "HTL-MNQH9BX7-N67U",
+      "bookingStatus": "cancelled",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-08T20:05:13.243Z"
+    },
+    {
+      "_id": "e11a0JH",
+      "userId": "usr_001",
+      "hotelId": "htl_002",
+      "roomId": "room_002c",
+      "checkIn": "2026-04-08",
+      "checkOut": "2026-04-10",
+      "numNights": 2,
+      "numAdults": 1,
+      "hotelName": "Taj Holiday Village Resort",
+      "guests": [
+        {
+          "firstName": "RINKU",
+          "lastName": "HARYANVI",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "987631234567"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 19500,
+        "taxAmount": 3322.8,
+        "discountAmount": 1040,
+        "totalAmount": 21782.8,
+        "currency": "INR"
+      },
+      "couponCode": null,
+      "couponDiscount": 0,
+      "coinsRedeemed": 2080,
+      "coinsEarned": 326,
+      "bookingReference": "HTL-MNQI1TA4-HXBI",
+      "bookingStatus": "cancelled",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-08T20:27:22.109Z"
+    },
+    {
+      "_id": "4Kd5d5x",
+      "userId": "usr_001",
+      "hotelId": "htl_002",
+      "roomId": "room_002b",
+      "checkIn": "2026-04-09",
+      "checkOut": "2026-04-10",
+      "numNights": 1,
+      "numAdults": 1,
+      "hotelName": "Taj Holiday Village Resort",
+      "guests": [
+        {
+          "firstName": "RINKU",
+          "lastName": "HARYANVI",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "876543234567"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 13500,
+        "taxAmount": 2213.46,
+        "discountAmount": 1203,
+        "totalAmount": 14510.46,
+        "currency": "INR"
+      },
+      "couponCode": null,
+      "couponDiscount": 0,
+      "coinsRedeemed": 2406,
+      "coinsEarned": 290,
+      "bookingReference": "HTL-MNQI61KM-IARQ",
+      "bookingStatus": "cancelled",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-08T20:30:39.479Z"
+    },
+    {
+      "_id": "ATM7s_D",
+      "userId": "usr_001",
+      "hotelId": "htl_002",
+      "hotelName": "Taj Holiday Village Resort",
+      "checkIn": "2026-04-09",
+      "checkOut": "2026-04-10",
+      "numNights": 1,
+      "numAdults": 4,
+      "rooms": [
+        {
+          "roomId": "room_002h",
+          "roomType": "standard",
+          "bedType": "double",
+          "pricePerNight": 9750
+        },
+        {
+          "roomId": "room_002c",
+          "roomType": "standard",
+          "bedType": "double",
+          "pricePerNight": 9750
+        }
+      ],
+      "guests": [
+        {
+          "firstName": "RINKU",
+          "lastName": "HARYANVI",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "987654345678"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 19500,
+        "taxAmount": 3510,
+        "discountAmount": 0,
+        "totalAmount": 23010,
+        "currency": "INR"
+      },
+      "couponCode": null,
+      "couponDiscount": 0,
+      "coinsRedeemed": 0,
+      "coinsEarned": 460,
+      "bookingReference": "HTL-MNQJTUM1-603H",
+      "bookingStatus": "cancelled",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-08T21:17:09.817Z"
+    },
+    {
+      "_id": "Iz-2_Va",
+      "userId": "usr_001",
+      "hotelId": "htl_002",
+      "hotelName": "Taj Holiday Village Resort",
+      "checkIn": "2026-04-09",
+      "checkOut": "2026-04-10",
+      "numNights": 1,
+      "numAdults": 2,
+      "rooms": [
+        {
+          "roomId": "room_002h",
+          "roomType": "standard",
+          "bedType": "double",
+          "pricePerNight": 9750
+        }
+      ],
+      "guests": [
+        {
+          "firstName": "RINKU",
+          "lastName": "HARYANVI",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "987654345678"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 9750,
+        "taxAmount": 1755,
+        "discountAmount": 0,
+        "totalAmount": 11505,
+        "currency": "INR"
+      },
+      "couponCode": null,
+      "couponDiscount": 0,
+      "coinsRedeemed": 0,
+      "coinsEarned": 345,
+      "bookingReference": "HTL-MNQJY7JV-4VP5",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-08T21:20:33.211Z"
+    },
+    {
+      "_id": "y33NC6V",
+      "userId": "usr_001",
+      "hotelId": "htl_003",
+      "hotelName": "Lemon Tree Hotel",
+      "checkIn": "2026-04-09",
+      "checkOut": "2026-04-10",
+      "numNights": 1,
+      "numAdults": 2,
+      "rooms": [
+        {
+          "roomId": "room_003",
+          "roomType": "standard",
+          "bedType": "double",
+          "pricePerNight": 3500
+        }
+      ],
+      "guests": [
+        {
+          "firstName": "asjdalk",
+          "lastName": "asjdla",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "987654321123"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 3500,
+        "taxAmount": 420,
+        "discountAmount": 0,
+        "totalAmount": 3920,
+        "currency": "INR"
+      },
+      "couponCode": null,
+      "couponDiscount": 0,
+      "coinsRedeemed": 0,
+      "coinsEarned": 117,
+      "bookingReference": "HTL-MNQXPA2X-XRED",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-09T03:45:31.209Z"
+    },
+    {
+      "_id": "hbk_usr5_001",
+      "userId": "usr_005",
+      "hotelId": "htl_005",
+      "hotelName": "Novotel Mumbai Juhu Beach",
+      "checkIn": "2026-02-14",
+      "checkOut": "2026-02-17",
+      "numNights": 3,
+      "numAdults": 2,
+      "rooms": [
+        {
+          "roomId": "room_005",
+          "roomType": "deluxe",
+          "bedType": "king",
+          "pricePerNight": 8500
+        }
+      ],
+      "guests": [
+        {
+          "firstName": "Sneha",
+          "lastName": "Iyer",
+          "isPrimary": true,
+          "idType": "Passport",
+          "idNumber": "Z1234567"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 25500,
+        "taxAmount": 4590,
+        "discountAmount": 0,
+        "totalAmount": 30090,
+        "currency": "INR"
+      },
+      "couponCode": null,
+      "couponDiscount": 0,
+      "coinsRedeemed": 0,
+      "coinsEarned": 400,
+      "bookingReference": "HTL-USR5A-001",
+      "bookingStatus": "completed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-02-01T10:20:00.000Z"
+    },
+    {
+      "_id": "hbk_usr5_002",
+      "userId": "usr_005",
+      "hotelId": "htl_003",
+      "hotelName": "Lemon Tree Hotel Candolim, Goa",
+      "checkIn": "2026-05-10",
+      "checkOut": "2026-05-13",
+      "numNights": 3,
+      "numAdults": 1,
+      "rooms": [
+        {
+          "roomId": "room_003",
+          "roomType": "standard",
+          "bedType": "double",
+          "pricePerNight": 3500
+        }
+      ],
+      "guests": [
+        {
+          "firstName": "Sneha",
+          "lastName": "Iyer",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "234567890123"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 10500,
+        "taxAmount": 1260,
+        "discountAmount": 0,
+        "totalAmount": 11760,
+        "currency": "INR"
+      },
+      "couponCode": null,
+      "couponDiscount": 0,
+      "coinsRedeemed": 0,
+      "coinsEarned": 180,
+      "bookingReference": "HTL-USR5D-001",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-15T08:00:00.000Z"
+    },
+    {
+      "_id": "hbk_usr6_001",
+      "userId": "usr_006",
+      "hotelId": "htl_008",
+      "hotelName": "Rambagh Palace, Jaipur",
+      "checkIn": "2026-01-20",
+      "checkOut": "2026-01-23",
+      "numNights": 3,
+      "numAdults": 2,
+      "rooms": [
+        {
+          "roomId": "room_008",
+          "roomType": "deluxe",
+          "bedType": "king",
+          "pricePerNight": 12000
+        }
+      ],
+      "guests": [
+        {
+          "firstName": "Amit",
+          "lastName": "Patel",
+          "isPrimary": true,
+          "idType": "Passport",
+          "idNumber": "A7654321"
+        },
+        {
+          "firstName": "Riya",
+          "lastName": "Patel",
+          "isPrimary": false,
+          "idType": "Aadhaar",
+          "idNumber": "345678901234"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 36000,
+        "taxAmount": 6480,
+        "discountAmount": 0,
+        "totalAmount": 42480,
+        "currency": "INR"
+      },
+      "couponCode": null,
+      "couponDiscount": 0,
+      "coinsRedeemed": 0,
+      "coinsEarned": 900,
+      "bookingReference": "HTL-USR6A-001",
+      "bookingStatus": "completed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2025-12-28T14:30:00.000Z"
+    },
+    {
+      "_id": "hbk_usr6_002",
+      "userId": "usr_006",
+      "hotelId": "htl_006",
+      "hotelName": "Taj Mahal Palace, Mumbai",
+      "checkIn": "2026-03-05",
+      "checkOut": "2026-03-07",
+      "numNights": 2,
+      "numAdults": 2,
+      "rooms": [
+        {
+          "roomId": "room_006",
+          "roomType": "deluxe",
+          "bedType": "king",
+          "pricePerNight": 22000
+        }
+      ],
+      "guests": [
+        {
+          "firstName": "Amit",
+          "lastName": "Patel",
+          "isPrimary": true,
+          "idType": "Passport",
+          "idNumber": "A7654321"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 44000,
+        "taxAmount": 7920,
+        "discountAmount": 3300,
+        "totalAmount": 48620,
+        "currency": "INR"
+      },
+      "couponCode": "EARLYBIRD15",
+      "couponDiscount": 3300,
+      "coinsRedeemed": 0,
+      "coinsEarned": 0,
+      "bookingReference": "HTL-USR6C-001",
+      "bookingStatus": "cancelled",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-02-03T09:00:00.000Z"
+    },
+    {
+      "_id": "hbk_usr6_003",
+      "userId": "usr_006",
+      "hotelId": "htl_003",
+      "hotelName": "Lemon Tree Hotel Candolim, Goa",
+      "checkIn": "2026-04-01",
+      "checkOut": "2026-04-03",
+      "numNights": 2,
+      "numAdults": 1,
+      "rooms": [
+        {
+          "roomId": "room_003",
+          "roomType": "standard",
+          "bedType": "double",
+          "pricePerNight": 3500
+        }
+      ],
+      "guests": [
+        {
+          "firstName": "Amit",
+          "lastName": "Patel",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "345678901234"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 7000,
+        "taxAmount": 840,
+        "discountAmount": 0,
+        "totalAmount": 7840,
+        "currency": "INR"
+      },
+      "couponCode": null,
+      "couponDiscount": 0,
+      "coinsRedeemed": 600,
+      "coinsEarned": 200,
+      "bookingReference": "HTL-USR6E-001",
+      "bookingStatus": "completed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-03-10T11:00:00.000Z"
+    },
+    {
+      "_id": "hbk_usr8_001",
+      "userId": "usr_008",
+      "hotelId": "htl_009",
+      "hotelName": "Samode Haveli, Jaipur",
+      "checkIn": "2026-03-15",
+      "checkOut": "2026-03-18",
+      "numNights": 3,
+      "numAdults": 2,
+      "rooms": [
+        {
+          "roomId": "room_009",
+          "roomType": "suite",
+          "bedType": "king",
+          "pricePerNight": 8000
+        }
+      ],
+      "guests": [
+        {
+          "firstName": "Divya",
+          "lastName": "Nair",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "456789012345"
+        },
+        {
+          "firstName": "Rahul",
+          "lastName": "Nair",
+          "isPrimary": false,
+          "idType": "Aadhaar",
+          "idNumber": "567890123456"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 24000,
+        "taxAmount": 4320,
+        "discountAmount": 0,
+        "totalAmount": 28320,
+        "currency": "INR"
+      },
+      "couponCode": null,
+      "couponDiscount": 0,
+      "coinsRedeemed": 0,
+      "coinsEarned": 480,
+      "bookingReference": "HTL-USR8B-001",
+      "bookingStatus": "completed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-02-20T15:00:00.000Z"
+    },
+    {
+      "_id": "hbk_usr9_001",
+      "userId": "usr_009",
+      "hotelId": "htl_009",
+      "hotelName": "Samode Haveli, Jaipur",
+      "checkIn": "2026-04-20",
+      "checkOut": "2026-04-23",
+      "numNights": 3,
+      "numAdults": 2,
+      "rooms": [
+        {
+          "roomId": "room_009b",
+          "roomType": "deluxe",
+          "bedType": "king",
+          "pricePerNight": 9500
+        }
+      ],
+      "guests": [
+        {
+          "firstName": "Karan",
+          "lastName": "Mehta",
+          "isPrimary": true,
+          "idType": "Passport",
+          "idNumber": "M9087654"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 28500,
+        "taxAmount": 5130,
+        "discountAmount": 1425,
+        "totalAmount": 32205,
+        "currency": "INR"
+      },
+      "couponCode": "ROYALRAJ25",
+      "couponDiscount": 1425,
+      "coinsRedeemed": 1400,
+      "coinsEarned": 580,
+      "bookingReference": "HTL-USR9C-001",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-01T09:30:00.000Z"
+    }
+  ],
+  "roomInventory": [
+    {
+      "_id": "inv_001",
+      "hotelId": "htl_001",
+      "roomId": "room_001",
+      "date": "2026-04-10",
+      "totalRooms": 1,
+      "bookedRooms": 1,
+      "blockedRooms": 0
+    },
+    {
+      "_id": "inv_002",
+      "hotelId": "htl_002",
+      "roomId": "room_002",
+      "date": "2026-05-01",
+      "totalRooms": 1,
+      "bookedRooms": 0,
+      "blockedRooms": 0
+    }
+  ],
+  "roomPricing": [
+    {
+      "_id": "rpc_001",
+      "hotelId": "htl_001",
+      "roomId": "room_001",
+      "date": "2026-04-10",
+      "price": 9600
+    },
+    {
+      "_id": "rpc_002",
+      "hotelId": "htl_002",
+      "roomId": "room_002",
+      "date": "2026-05-01",
+      "price": 18000
+    }
+  ],
+  "travelServices": [
+    {
+      "_id": "tsv_001",
+      "type": "flight",
+      "operatorName": "IndiGo",
+      "serviceNumber": "6E-204",
+      "from": "Chennai",
+      "to": "New Delhi",
+      "schedule": {
+        "departureTime": "2026-04-10T06:00:00.000Z",
+        "arrivalTime": "2026-04-10T08:30:00.000Z",
+        "duration": "2h 30m"
+      },
+      "fare": 4500,
+      "marketRate": 6000,
+      "totalSeats": 180,
+      "availableSeats": 42,
+      "cabinClass": "economy",
+      "amenities": [
+        "Meal",
+        "Charging Port"
+      ],
+      "taxPercent": 5,
+      "isActive": true
+    },
+    {
+      "_id": "tsv_002",
+      "type": "flight",
+      "operatorName": "Air India",
+      "serviceNumber": "AI-560",
+      "from": "Chennai",
+      "to": "Mumbai",
+      "schedule": {
+        "departureTime": "2026-04-10T10:15:00.000Z",
+        "arrivalTime": "2026-04-10T12:30:00.000Z",
+        "duration": "2h 15m"
+      },
+      "fare": 5200,
+      "marketRate": 7100,
+      "totalSeats": 220,
+      "availableSeats": 8,
+      "cabinClass": "economy",
+      "amenities": [
+        "Meal",
+        "Entertainment",
+        "Blanket"
+      ],
+      "taxPercent": 5,
+      "isActive": true
+    },
+    {
+      "_id": "tsv_003",
+      "type": "flight",
+      "operatorName": "Vistara",
+      "serviceNumber": "UK-824",
+      "from": "Bangalore",
+      "to": "Kolkata",
+      "schedule": {
+        "departureTime": "2026-04-11T14:00:00.000Z",
+        "arrivalTime": "2026-04-11T16:45:00.000Z",
+        "duration": "2h 45m"
+      },
+      "fare": 5800,
+      "marketRate": 6500,
+      "totalSeats": 160,
+      "availableSeats": 28,
+      "cabinClass": "premium economy",
+      "amenities": [
+        "Meal",
+        "Wi-Fi",
+        "Extra Legroom",
+        "Priority Boarding"
+      ],
+      "taxPercent": 5,
+      "isActive": true
+    },
+    {
+      "_id": "tsv_004",
+      "type": "train",
+      "operatorName": "Indian Railways",
+      "serviceNumber": "Gatimaan Express",
+      "from": "New Delhi",
+      "to": "Agra",
+      "schedule": {
+        "departureTime": "2026-04-12T14:00:00.000Z",
+        "arrivalTime": "2026-04-12T16:30:00.000Z",
+        "duration": "2h 30m"
+      },
+      "fare": 800,
+      "marketRate": 1000,
+      "totalSeats": 200,
+      "availableSeats": 80,
+      "cabinClass": "ac",
+      "amenities": [
+        "Meal"
+      ],
+      "taxPercent": 5,
+      "isActive": true
+    },
+    {
+      "_id": "tsv_005",
+      "type": "train",
+      "operatorName": "Indian Railways",
+      "serviceNumber": "12621 Tamil Nadu Exp",
+      "from": "Chennai",
+      "to": "New Delhi",
+      "schedule": {
+        "departureTime": "2026-04-12T18:00:00.000Z",
+        "arrivalTime": "2026-04-13T22:30:00.000Z",
+        "duration": "28h 30m"
+      },
+      "fare": 1850,
+      "marketRate": 2100,
+      "totalSeats": 72,
+      "availableSeats": 16,
+      "cabinClass": "3ac",
+      "amenities": [
+        "Pantry Car",
+        "Charging Point",
+        "Bedroll"
+      ],
+      "taxPercent": 5,
+      "isActive": true
+    },
+    {
+      "_id": "tsv_006",
+      "type": "train",
+      "operatorName": "Indian Railways",
+      "serviceNumber": "22625 Shatabdi Exp",
+      "from": "Bangalore",
+      "to": "Chennai",
+      "schedule": {
+        "departureTime": "2026-04-13T06:00:00.000Z",
+        "arrivalTime": "2026-04-13T11:00:00.000Z",
+        "duration": "5h 00m"
+      },
+      "fare": 750,
+      "marketRate": 900,
+      "totalSeats": 120,
+      "availableSeats": 55,
+      "cabinClass": "cc",
+      "amenities": [
+        "Charging Point",
+        "Catering"
+      ],
+      "taxPercent": 5,
+      "isActive": true
+    },
+    {
+      "_id": "tsv_007",
+      "type": "bus",
+      "operatorName": "KPN Travels",
+      "serviceNumber": "KPN-501",
+      "from": "Chennai",
+      "to": "Bangalore",
+      "schedule": {
+        "departureTime": "2026-04-14T22:00:00.000Z",
+        "arrivalTime": "2026-04-15T05:30:00.000Z",
+        "duration": "7h 30m"
+      },
+      "fare": 850,
+      "marketRate": 1000,
+      "totalSeats": 36,
+      "availableSeats": 6,
+      "cabinClass": "multi-axle sleeper",
+      "amenities": [
+        "Blanket",
+        "Water Bottle",
+        "Charging Point"
+      ],
+      "taxPercent": 5,
+      "isActive": true
+    },
+    {
+      "_id": "tsv_008",
+      "type": "bus",
+      "operatorName": "SRS Travels",
+      "serviceNumber": "SRS-302",
+      "from": "Chennai",
+      "to": "Madurai",
+      "schedule": {
+        "departureTime": "2026-04-14T21:30:00.000Z",
+        "arrivalTime": "2026-04-15T05:00:00.000Z",
+        "duration": "7h 30m"
+      },
+      "fare": 650,
+      "marketRate": 800,
+      "totalSeats": 40,
+      "availableSeats": 22,
+      "cabinClass": "ac sleeper",
+      "amenities": [
+        "Blanket",
+        "Water Bottle"
+      ],
+      "taxPercent": 5,
+      "isActive": true
+    },
+    {
+      "_id": "tsv_009",
+      "type": "bus",
+      "operatorName": "Orange Travels",
+      "serviceNumber": "OT-910",
+      "from": "Hyderabad",
+      "to": "Bangalore",
+      "schedule": {
+        "departureTime": "2026-04-15T20:00:00.000Z",
+        "arrivalTime": "2026-04-16T06:00:00.000Z",
+        "duration": "10h 00m"
+      },
+      "fare": 950,
+      "marketRate": 1100,
+      "totalSeats": 30,
+      "availableSeats": 8,
+      "cabinClass": "volvo ac seater",
+      "amenities": [
+        "Wi-Fi",
+        "Entertainment",
+        "Snacks",
+        "Charging Point"
+      ],
+      "taxPercent": 5,
+      "isActive": true
+    },
+    {
+      "_id": "tsv_010",
+      "type": "flight",
+      "operatorName": "SpiceJet",
+      "serviceNumber": "SG-142",
+      "from": "Chennai",
+      "to": "New Delhi",
+      "schedule": {
+        "departureTime": "2026-04-10T09:30:00.000Z",
+        "arrivalTime": "2026-04-10T12:15:00.000Z",
+        "duration": "2h 45m"
+      },
+      "fare": 3800,
+      "marketRate": 5500,
+      "totalSeats": 189,
+      "availableSeats": 65,
+      "cabinClass": "economy",
+      "amenities": [
+        "Charging Port"
+      ],
+      "taxPercent": 5,
+      "isActive": true
+    },
+    {
+      "_id": "tsv_011",
+      "type": "flight",
+      "operatorName": "Air India",
+      "serviceNumber": "AI-143",
+      "from": "Chennai",
+      "to": "New Delhi",
+      "schedule": {
+        "departureTime": "2026-04-10T14:00:00.000Z",
+        "arrivalTime": "2026-04-10T16:40:00.000Z",
+        "duration": "2h 40m"
+      },
+      "fare": 5800,
+      "marketRate": 7200,
+      "totalSeats": 200,
+      "availableSeats": 198,
+      "cabinClass": "business",
+      "amenities": [
+        "Meal",
+        "Wi-Fi",
+        "Lounge Access",
+        "Extra Legroom"
+      ],
+      "taxPercent": 5,
+      "isActive": true
+    },
+    {
+      "_id": "tsv_012",
+      "type": "flight",
+      "operatorName": "Vistara",
+      "serviceNumber": "UK-770",
+      "from": "Chennai",
+      "to": "New Delhi",
+      "schedule": {
+        "departureTime": "2026-04-10T18:45:00.000Z",
+        "arrivalTime": "2026-04-10T21:20:00.000Z",
+        "duration": "2h 35m"
+      },
+      "fare": 4200,
+      "marketRate": 5800,
+      "totalSeats": 170,
+      "availableSeats": 34,
+      "cabinClass": "premium economy",
+      "amenities": [
+        "Meal",
+        "Entertainment",
+        "Priority Boarding"
+      ],
+      "taxPercent": 5,
+      "isActive": true
+    },
+    {
+      "_id": "tsv_013",
+      "type": "flight",
+      "operatorName": "IndiGo",
+      "serviceNumber": "6E-518",
+      "from": "Chennai",
+      "to": "New Delhi",
+      "schedule": {
+        "departureTime": "2026-04-10T22:00:00.000Z",
+        "arrivalTime": "2026-04-11T00:30:00.000Z",
+        "duration": "2h 30m"
+      },
+      "fare": 3500,
+      "marketRate": 4800,
+      "totalSeats": 180,
+      "availableSeats": 5,
+      "cabinClass": "economy",
+      "amenities": [
+        "Charging Port"
+      ],
+      "taxPercent": 5,
+      "isActive": true
+    }
+  ],
+  "travelBookings": [
+    {
+      "_id": "tbk_001",
+      "userId": "usr_001",
+      "serviceId": "tsv_001",
+      "serviceSnapshot": {
+        "type": "flight",
+        "operatorName": "IndiGo",
+        "serviceNumber": "6E-204",
+        "from": "Chennai",
+        "to": "New Delhi",
+        "departureTime": "2026-04-10T06:00:00.000Z",
+        "arrivalTime": "2026-04-10T08:30:00.000Z",
+        "cabinClass": "economy"
+      },
+      "passengers": [
+        {
+          "firstName": "Aarav",
+          "lastName": "Sharma",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "XXXX-XXXX-1234",
+          "seatNumber": "12A",
+          "pnr": "PNR4521879630"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 4500,
+        "taxAmount": 225,
+        "discountAmount": 0,
+        "loyaltyDiscount": 0,
+        "totalAmount": 4725,
+        "marketRate": 6000,
+        "currency": "INR"
+      },
+      "walletAmountUsed": 0,
+      "coinsRedeemed": 0,
+      "coinsEarned": 150,
+      "couponCode": null,
+      "ticketId": "TKT-6E204-001",
+      "bookingReference": "TRV-N4Y1A-KL3W",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "upi",
+      "bookedAt": "2026-03-05T11:00:00.000Z"
+    },
+    {
+      "_id": "tbk_1775644548922",
+      "userId": "odW7-IM",
+      "serviceId": "tsv_002",
+      "serviceSnapshot": {
+        "type": "flight",
+        "operatorName": "Air India",
+        "serviceNumber": "AI-560",
+        "from": "Chennai",
+        "to": "Mumbai",
+        "departureTime": "2026-04-10T10:15:00.000Z",
+        "arrivalTime": "2026-04-10T12:30:00.000Z",
+        "cabinClass": "economy"
+      },
+      "passengers": [
+        {
+          "firstName": "asdlksa",
+          "lastName": "lskajd",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "123456789090",
+          "seatNumber": "1D",
+          "pnr": "PNR1275164188"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 5200,
+        "taxAmount": 260,
+        "discountAmount": 0,
+        "loyaltyDiscount": 0,
+        "totalAmount": 5460,
+        "marketRate": 7100,
+        "currency": "INR"
+      },
+      "walletAmountUsed": 5460,
+      "coinsRedeemed": 0,
+      "coinsEarned": 54,
+      "couponCode": null,
+      "ticketId": "TKT-AI-560-835",
+      "bookingReference": "TRV-CE7DW",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-08T10:35:48.922Z"
+    },
+    {
+      "_id": "tbk_1775645216011",
+      "userId": "odW7-IM",
+      "serviceId": "tsv_002",
+      "serviceSnapshot": {
+        "type": "flight",
+        "operatorName": "Air India",
+        "serviceNumber": "AI-560",
+        "from": "Chennai",
+        "to": "Mumbai",
+        "departureTime": "2026-04-10T10:15:00.000Z",
+        "arrivalTime": "2026-04-10T12:30:00.000Z",
+        "cabinClass": "economy"
+      },
+      "passengers": [
+        {
+          "firstName": "asdhk",
+          "lastName": "kashd",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "098765432190",
+          "seatNumber": "1E",
+          "pnr": "PNR6772563945"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 5200,
+        "taxAmount": 260,
+        "discountAmount": 0,
+        "loyaltyDiscount": 0,
+        "totalAmount": 5460,
+        "marketRate": 7100,
+        "currency": "INR"
+      },
+      "walletAmountUsed": 5460,
+      "coinsRedeemed": 0,
+      "coinsEarned": 54,
+      "couponCode": null,
+      "ticketId": "TKT-AI-560-324",
+      "bookingReference": "TRV-GQOPJ",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-08T10:46:56.011Z"
+    },
+    {
+      "_id": "tbk_1775705615194",
+      "userId": "usr_001",
+      "serviceId": "tsv_002",
+      "serviceSnapshot": {
+        "type": "flight",
+        "operatorName": "Air India",
+        "serviceNumber": "AI-560",
+        "from": "Chennai",
+        "to": "Mumbai",
+        "departureTime": "2026-04-10T10:15:00.000Z",
+        "arrivalTime": "2026-04-10T12:30:00.000Z",
+        "cabinClass": "economy"
+      },
+      "passengers": [
+        {
+          "firstName": "lsakjd",
+          "lastName": "lkajsd",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "324232342343",
+          "seatNumber": "1F",
+          "pnr": "PNR6332181192"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 5200,
+        "taxAmount": 260,
+        "discountAmount": 0,
+        "loyaltyDiscount": 0,
+        "totalAmount": 5460,
+        "marketRate": 7100,
+        "currency": "INR"
+      },
+      "walletAmountUsed": 5460,
+      "coinsRedeemed": 0,
+      "coinsEarned": 54,
+      "couponCode": null,
+      "ticketId": "TKT-AI-560-354",
+      "bookingReference": "TRV-8SUAC",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-09T03:33:35.194Z"
+    },
+    {
+      "_id": "tbk_usr5_001",
+      "userId": "usr_005",
+      "serviceId": "tsv_003",
+      "serviceSnapshot": {
+        "type": "flight",
+        "operatorName": "IndiGo",
+        "serviceNumber": "6E-840",
+        "from": "Bangalore",
+        "to": "Goa",
+        "departureTime": "2026-05-10T07:30:00.000Z",
+        "arrivalTime": "2026-05-10T09:00:00.000Z",
+        "cabinClass": "economy"
+      },
+      "passengers": [
+        {
+          "firstName": "Sneha",
+          "lastName": "Iyer",
+          "isPrimary": true,
+          "idType": "Passport",
+          "idNumber": "Z1234567",
+          "seatNumber": "14C",
+          "pnr": "PNR5544332211"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 4500,
+        "taxAmount": 225,
+        "discountAmount": 0,
+        "loyaltyDiscount": 0,
+        "totalAmount": 4725,
+        "marketRate": 6500,
+        "currency": "INR"
+      },
+      "walletAmountUsed": 4725,
+      "coinsRedeemed": 0,
+      "coinsEarned": 220,
+      "couponCode": null,
+      "ticketId": "TKT-6E840-USR5",
+      "bookingReference": "TRV-USR5B-001",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-15T08:05:00.000Z"
+    },
+    {
+      "_id": "tbk_usr5_002",
+      "userId": "usr_005",
+      "serviceId": "tsv_006",
+      "serviceSnapshot": {
+        "type": "train",
+        "operatorName": "Indian Railways",
+        "serviceNumber": "22625 Shatabdi Exp",
+        "from": "Bangalore",
+        "to": "Chennai",
+        "departureTime": "2026-04-13T06:00:00.000Z",
+        "arrivalTime": "2026-04-13T11:00:00.000Z",
+        "cabinClass": "cc"
+      },
+      "passengers": [
+        {
+          "firstName": "Sneha",
+          "lastName": "Iyer",
+          "isPrimary": true,
+          "idType": "Passport",
+          "idNumber": "Z1234567",
+          "seatNumber": "C3",
+          "pnr": "PNR7788990011"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 750,
+        "taxAmount": 37.5,
+        "discountAmount": 0,
+        "loyaltyDiscount": 0,
+        "totalAmount": 787.5,
+        "marketRate": 900,
+        "currency": "INR"
+      },
+      "walletAmountUsed": 787.5,
+      "coinsRedeemed": 0,
+      "coinsEarned": 60,
+      "couponCode": null,
+      "ticketId": "TKT-22625-USR5",
+      "bookingReference": "TRV-USR5C-001",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-10T09:00:00.000Z"
+    },
+    {
+      "_id": "tbk_usr6_001",
+      "userId": "usr_006",
+      "serviceId": "tsv_002",
+      "serviceSnapshot": {
+        "type": "flight",
+        "operatorName": "Air India",
+        "serviceNumber": "AI-560",
+        "from": "Jaipur",
+        "to": "Mumbai",
+        "departureTime": "2026-01-24T08:00:00.000Z",
+        "arrivalTime": "2026-01-24T10:00:00.000Z",
+        "cabinClass": "business"
+      },
+      "passengers": [
+        {
+          "firstName": "Amit",
+          "lastName": "Patel",
+          "isPrimary": true,
+          "idType": "Passport",
+          "idNumber": "A7654321",
+          "seatNumber": "2A",
+          "pnr": "PNR1122334455"
+        },
+        {
+          "firstName": "Riya",
+          "lastName": "Patel",
+          "isPrimary": false,
+          "idType": "Passport",
+          "idNumber": "B1234567",
+          "seatNumber": "2B",
+          "pnr": "PNR1122334456"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 10400,
+        "taxAmount": 520,
+        "discountAmount": 0,
+        "loyaltyDiscount": 0,
+        "totalAmount": 10920,
+        "marketRate": 14200,
+        "currency": "INR"
+      },
+      "walletAmountUsed": 10920,
+      "coinsRedeemed": 0,
+      "coinsEarned": 540,
+      "couponCode": null,
+      "ticketId": "TKT-AI560-USR6",
+      "bookingReference": "TRV-USR6D-001",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-01-10T12:00:00.000Z"
+    },
+    {
+      "_id": "tbk_usr8_001",
+      "userId": "usr_008",
+      "serviceId": "tsv_001",
+      "serviceSnapshot": {
+        "type": "flight",
+        "operatorName": "IndiGo",
+        "serviceNumber": "6E-620",
+        "from": "Hyderabad",
+        "to": "Kochi",
+        "departureTime": "2026-03-14T11:30:00.000Z",
+        "arrivalTime": "2026-03-14T13:00:00.000Z",
+        "cabinClass": "economy"
+      },
+      "passengers": [
+        {
+          "firstName": "Divya",
+          "lastName": "Nair",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "456789012345",
+          "seatNumber": "18B",
+          "pnr": "PNR9988776655"
+        },
+        {
+          "firstName": "Rahul",
+          "lastName": "Nair",
+          "isPrimary": false,
+          "idType": "Aadhaar",
+          "idNumber": "567890123456",
+          "seatNumber": "18C",
+          "pnr": "PNR9988776656"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 9200,
+        "taxAmount": 460,
+        "discountAmount": 0,
+        "loyaltyDiscount": 0,
+        "totalAmount": 9660,
+        "marketRate": 13000,
+        "currency": "INR"
+      },
+      "walletAmountUsed": 9660,
+      "coinsRedeemed": 0,
+      "coinsEarned": 300,
+      "couponCode": null,
+      "ticketId": "TKT-6E620-USR8",
+      "bookingReference": "TRV-USR8A-001",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-02-18T07:00:00.000Z"
+    },
+    {
+      "_id": "tbk_usr9_001",
+      "userId": "usr_009",
+      "serviceId": "tsv_011",
+      "serviceSnapshot": {
+        "type": "flight",
+        "operatorName": "Air India",
+        "serviceNumber": "AI-470",
+        "from": "Mumbai",
+        "to": "Leh",
+        "departureTime": "2026-07-10T06:00:00.000Z",
+        "arrivalTime": "2026-07-10T08:30:00.000Z",
+        "cabinClass": "economy"
+      },
+      "passengers": [
+        {
+          "firstName": "Karan",
+          "lastName": "Mehta",
+          "isPrimary": true,
+          "idType": "Passport",
+          "idNumber": "M9087654",
+          "seatNumber": "11A",
+          "pnr": "PNR5566778899"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 5800,
+        "taxAmount": 290,
+        "discountAmount": 0,
+        "loyaltyDiscount": 0,
+        "totalAmount": 6090,
+        "marketRate": 8000,
+        "currency": "INR"
+      },
+      "walletAmountUsed": 6090,
+      "coinsRedeemed": 0,
+      "coinsEarned": 420,
+      "couponCode": null,
+      "ticketId": "TKT-AI470-USR9",
+      "bookingReference": "TRV-USR9B-001",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-06-15T10:00:00.000Z"
+    },
+    {
+      "_id": "tbk_usr10_001",
+      "userId": "usr_010",
+      "serviceId": "tsv_009",
+      "serviceSnapshot": {
+        "type": "bus",
+        "operatorName": "Orange Travels",
+        "serviceNumber": "OT-910",
+        "from": "Hyderabad",
+        "to": "Bangalore",
+        "departureTime": "2026-04-15T20:00:00.000Z",
+        "arrivalTime": "2026-04-16T06:00:00.000Z",
+        "cabinClass": "volvo ac seater"
+      },
+      "passengers": [
+        {
+          "firstName": "Pooja",
+          "lastName": "Singh",
+          "isPrimary": true,
+          "idType": "Aadhaar",
+          "idNumber": "678901234567",
+          "seatNumber": "8A",
+          "pnr": "PNR3344556677"
+        }
+      ],
+      "pricing": {
+        "baseAmount": 950,
+        "taxAmount": 47.5,
+        "discountAmount": 0,
+        "loyaltyDiscount": 0,
+        "totalAmount": 997.5,
+        "marketRate": 1100,
+        "currency": "INR"
+      },
+      "walletAmountUsed": 997.5,
+      "coinsRedeemed": 0,
+      "coinsEarned": 250,
+      "couponCode": null,
+      "ticketId": "TKT-OT910-USR10",
+      "bookingReference": "TRV-USR10A-001",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-04-10T14:00:00.000Z"
+    }
+  ],
+  "bookedSeats": [
+    {
+      "_id": "bs_1775644548972_58d",
+      "serviceId": "tsv_002",
+      "seatId": "1D",
+      "gender": "male",
+      "bookingReference": "TRV-CE7DW"
+    },
+    {
+      "_id": "bs_1775645216052_rwk",
+      "serviceId": "tsv_002",
+      "seatId": "1E",
+      "gender": "male",
+      "bookingReference": "TRV-GQOPJ"
+    },
+    {
+      "_id": "bs_1775705615820_rkk",
+      "serviceId": "tsv_002",
+      "seatId": "1F",
+      "gender": "male",
+      "bookingReference": "TRV-8SUAC"
+    },
+    {
+      "_id": "bs_usr5_001",
+      "serviceId": "tsv_003",
+      "seatId": "14C",
+      "gender": "female",
+      "bookingReference": "TRV-USR5B-001"
+    },
+    {
+      "_id": "bs_usr5_002",
+      "serviceId": "tsv_006",
+      "seatId": "C3",
+      "gender": "female",
+      "bookingReference": "TRV-USR5C-001"
+    },
+    {
+      "_id": "bs_usr6_001",
+      "serviceId": "tsv_002",
+      "seatId": "2A",
+      "gender": "male",
+      "bookingReference": "TRV-USR6D-001"
+    },
+    {
+      "_id": "bs_usr6_002",
+      "serviceId": "tsv_002",
+      "seatId": "2B",
+      "gender": "female",
+      "bookingReference": "TRV-USR6D-001"
+    },
+    {
+      "_id": "bs_usr8_001",
+      "serviceId": "tsv_001",
+      "seatId": "18B",
+      "gender": "female",
+      "bookingReference": "TRV-USR8A-001"
+    },
+    {
+      "_id": "bs_usr8_002",
+      "serviceId": "tsv_001",
+      "seatId": "18C",
+      "gender": "male",
+      "bookingReference": "TRV-USR8A-001"
+    },
+    {
+      "_id": "bs_usr9_001",
+      "serviceId": "tsv_011",
+      "seatId": "11A",
+      "gender": "male",
+      "bookingReference": "TRV-USR9B-001"
+    },
+    {
+      "_id": "bs_usr10_001",
+      "serviceId": "tsv_009",
+      "seatId": "8A",
+      "gender": "female",
+      "bookingReference": "TRV-USR10A-001"
+    }
+  ],
+  "locations": [
+    {
+      "_id": "loc_f01",
+      "name": "Chennai International Airport",
+      "code": "MAA",
+      "type": "flight",
+      "city": "Chennai"
+    },
+    {
+      "_id": "loc_f02",
+      "name": "Indira Gandhi International Airport",
+      "code": "DEL",
+      "type": "flight",
+      "city": "New Delhi"
+    },
+    {
+      "_id": "loc_f03",
+      "name": "Chhatrapati Shivaji Maharaj Airport",
+      "code": "BOM",
+      "type": "flight",
+      "city": "Mumbai"
+    },
+    {
+      "_id": "loc_f04",
+      "name": "Kempegowda International Airport",
+      "code": "BLR",
+      "type": "flight",
+      "city": "Bangalore"
+    },
+    {
+      "_id": "loc_f05",
+      "name": "Rajiv Gandhi International Airport",
+      "code": "HYD",
+      "type": "flight",
+      "city": "Hyderabad"
+    },
+    {
+      "_id": "loc_f06",
+      "name": "Netaji Subhas Chandra Bose Airport",
+      "code": "CCU",
+      "type": "flight",
+      "city": "Kolkata"
+    },
+    {
+      "_id": "loc_f07",
+      "name": "Cochin International Airport",
+      "code": "COK",
+      "type": "flight",
+      "city": "Kochi"
+    },
+    {
+      "_id": "loc_f08",
+      "name": "Sardar Vallabhbhai Patel Airport",
+      "code": "AMD",
+      "type": "flight",
+      "city": "Ahmedabad"
+    },
+    {
+      "_id": "loc_f09",
+      "name": "Dabolim Airport",
+      "code": "GOI",
+      "type": "flight",
+      "city": "Goa"
+    },
+    {
+      "_id": "loc_f10",
+      "name": "Coimbatore International Airport",
+      "code": "CJB",
+      "type": "flight",
+      "city": "Coimbatore"
+    },
+    {
+      "_id": "loc_t01",
+      "name": "Chennai Central",
+      "code": "MAS",
+      "type": "train",
+      "city": "Chennai"
+    },
+    {
+      "_id": "loc_t02",
+      "name": "Chennai Egmore",
+      "code": "MS",
+      "type": "train",
+      "city": "Chennai"
+    },
+    {
+      "_id": "loc_t03",
+      "name": "New Delhi Railway Station",
+      "code": "NDLS",
+      "type": "train",
+      "city": "New Delhi"
+    },
+    {
+      "_id": "loc_t04",
+      "name": "Mumbai CST",
+      "code": "CSTM",
+      "type": "train",
+      "city": "Mumbai"
+    },
+    {
+      "_id": "loc_t05",
+      "name": "Bangalore City Junction",
+      "code": "SBC",
+      "type": "train",
+      "city": "Bangalore"
+    },
+    {
+      "_id": "loc_t06",
+      "name": "Secunderabad Junction",
+      "code": "SC",
+      "type": "train",
+      "city": "Hyderabad"
+    },
+    {
+      "_id": "loc_t07",
+      "name": "Howrah Junction",
+      "code": "HWH",
+      "type": "train",
+      "city": "Kolkata"
+    },
+    {
+      "_id": "loc_t08",
+      "name": "Agra Cantt",
+      "code": "AGC",
+      "type": "train",
+      "city": "Agra"
+    },
+    {
+      "_id": "loc_t09",
+      "name": "Madurai Junction",
+      "code": "MDU",
+      "type": "train",
+      "city": "Madurai"
+    },
+    {
+      "_id": "loc_t10",
+      "name": "Coimbatore Junction",
+      "code": "CBE",
+      "type": "train",
+      "city": "Coimbatore"
+    },
+    {
+      "_id": "loc_b01",
+      "name": "Chennai CMBT",
+      "code": "CMBT",
+      "type": "bus",
+      "city": "Chennai"
+    },
+    {
+      "_id": "loc_b02",
+      "name": "Chennai Koyambedu",
+      "code": "KYM",
+      "type": "bus",
+      "city": "Chennai"
+    },
+    {
+      "_id": "loc_b03",
+      "name": "Bangalore Majestic",
+      "code": "MJS",
+      "type": "bus",
+      "city": "Bangalore"
+    },
+    {
+      "_id": "loc_b04",
+      "name": "Hyderabad MGBS",
+      "code": "MGBS",
+      "type": "bus",
+      "city": "Hyderabad"
+    },
+    {
+      "_id": "loc_b05",
+      "name": "Madurai Periyar",
+      "code": "MDPR",
+      "type": "bus",
+      "city": "Madurai"
+    },
+    {
+      "_id": "loc_b06",
+      "name": "Coimbatore Gandhipuram",
+      "code": "GNP",
+      "type": "bus",
+      "city": "Coimbatore"
+    },
+    {
+      "_id": "loc_b07",
+      "name": "Trichy Central Bus Stand",
+      "code": "TCB",
+      "type": "bus",
+      "city": "Trichy"
+    },
+    {
+      "_id": "loc_b08",
+      "name": "Salem New Bus Stand",
+      "code": "SLM",
+      "type": "bus",
+      "city": "Salem"
+    },
+    {
+      "_id": "loc_b09",
+      "name": "Pondicherry Bus Stand",
+      "code": "PDY",
+      "type": "bus",
+      "city": "Pondicherry"
+    },
+    {
+      "_id": "loc_b10",
+      "name": "Tirupati Bus Stand",
+      "code": "TPT",
+      "type": "bus",
+      "city": "Tirupati"
+    }
+  ],
+  "boardingPoints": [
+    {
+      "_id": "bp_001",
+      "serviceId": "tsv_007",
+      "type": "boarding",
+      "points": [
+        {
+          "name": "Koyambedu CMBT",
+          "time": "22:00",
+          "landmark": "Near CMBT Metro Station"
+        },
+        {
+          "name": "Tambaram",
+          "time": "22:30",
+          "landmark": "Tambaram Railway Station"
+        },
+        {
+          "name": "Guindy",
+          "time": "22:15",
+          "landmark": "Guindy Race Course"
+        }
+      ]
+    },
+    {
+      "_id": "bp_002",
+      "serviceId": "tsv_007",
+      "type": "dropping",
+      "points": [
+        {
+          "name": "Majestic Bus Stand",
+          "time": "05:30",
+          "landmark": "Kempegowda Bus Station"
+        },
+        {
+          "name": "Electronic City",
+          "time": "05:00",
+          "landmark": "Infosys Gate"
+        },
+        {
+          "name": "Silk Board",
+          "time": "05:15",
+          "landmark": "Silk Board Junction"
+        }
+      ]
+    },
+    {
+      "_id": "bp_003",
+      "serviceId": "tsv_008",
+      "type": "boarding",
+      "points": [
+        {
+          "name": "Koyambedu CMBT",
+          "time": "21:30",
+          "landmark": "Near CMBT Metro Station"
+        },
+        {
+          "name": "Vadapalani",
+          "time": "21:45",
+          "landmark": "Vadapalani Bus Depot"
+        }
+      ]
+    },
+    {
+      "_id": "bp_004",
+      "serviceId": "tsv_008",
+      "type": "dropping",
+      "points": [
+        {
+          "name": "Madurai Periyar",
+          "time": "05:00",
+          "landmark": "Periyar Bus Stand"
+        },
+        {
+          "name": "Madurai Mattuthavani",
+          "time": "04:45",
+          "landmark": "Mattuthavani Bus Stand"
+        }
+      ]
+    },
+    {
+      "_id": "bp_005",
+      "serviceId": "tsv_009",
+      "type": "boarding",
+      "points": [
+        {
+          "name": "MGBS Hyderabad",
+          "time": "20:00",
+          "landmark": "Mahatma Gandhi Bus Station"
+        },
+        {
+          "name": "Miyapur",
+          "time": "20:30",
+          "landmark": "Miyapur Metro Station"
+        },
+        {
+          "name": "Kukatpally",
+          "time": "20:20",
+          "landmark": "KPHB Colony"
+        }
+      ]
+    },
+    {
+      "_id": "bp_006",
+      "serviceId": "tsv_009",
+      "type": "dropping",
+      "points": [
+        {
+          "name": "Majestic Bus Stand",
+          "time": "06:00",
+          "landmark": "Kempegowda Bus Station"
+        },
+        {
+          "name": "Hebbal",
+          "time": "05:30",
+          "landmark": "Hebbal Flyover"
+        }
+      ]
+    }
+  ],
+  "itineraries": [
+    {
+      "_id": "itn_001",
+      "user_id": null,
+      "trip_name": "Golden Triangle India",
+      "start_date": "2026-04-10",
+      "end_date": "2026-04-17",
+      "type": "std",
+      "images": [
+        "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1524492707947-2f85a64b67ad?auto=format&fit=crop&w=800&q=80"
+      ],
+      "created_at": "2026-01-15T09:00:00.000Z"
+    },
+    {
+      "_id": "itn_002",
+      "user_id": "usr_001",
+      "trip_name": "My Delhi Trip",
+      "start_date": "2026-04-10",
+      "end_date": "2026-04-14",
+      "type": "custom",
+      "images": [
+        "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=600&auto=format&fit=crop&q=60"
+      ],
+      "created_at": "2026-03-01T09:00:00.000Z"
+    },
+    {
+      "_id": "itn_003",
+      "user_id": null,
+      "trip_name": "Backwaters of Kerala",
+      "start_date": "2026-08-15",
+      "end_date": "2026-08-22",
+      "type": "std",
+      "images": [
+        "https://images.unsplash.com/photo-1593179241557-bce1eb92e47e?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80"
+      ],
+      "created_at": "2026-01-20T10:00:00.000Z"
+    },
+    {
+      "_id": "itn_004",
+      "user_id": "usr_002",
+      "trip_name": "Goa Beach Hopping",
+      "start_date": "2026-11-10",
+      "end_date": "2026-11-15",
+      "type": "custom",
+      "images": [
+        "https://images.unsplash.com/photo-1512789172734-7b0997a39a05?auto=format&fit=crop&w=800&q=80"
+      ],
+      "created_at": "2026-03-10T14:30:00.000Z"
+    },
+    {
+      "_id": "itn_005",
+      "user_id": null,
+      "trip_name": "Royal Rajasthan Heritage",
+      "start_date": "2026-12-01",
+      "end_date": "2026-12-10",
+      "type": "std",
+      "images": [
+        "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1477587458883-47145ed31c3e?auto=format&fit=crop&w=800&q=80"
+      ],
+      "created_at": "2026-02-05T08:00:00.000Z"
+    },
+    {
+      "_id": "itn_006",
+      "user_id": "usr_001",
+      "trip_name": "Manali Adventure Week",
+      "start_date": "2026-06-05",
+      "end_date": "2026-06-12",
+      "type": "custom",
+      "images": [
+        "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80"
+      ],
+      "created_at": "2026-03-15T11:20:00.000Z"
+    },
+    {
+      "_id": "itn_007",
+      "user_id": null,
+      "trip_name": "Spiritual Varanasi & Sarnath",
+      "start_date": "2026-10-20",
+      "end_date": "2026-10-24",
+      "type": "std",
+      "images": [
+        "https://images.unsplash.com/photo-1561359313-0639aad49ca6?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=800&q=80"
+      ],
+      "created_at": "2026-02-15T09:45:00.000Z"
+    },
+    {
+      "_id": "itn_008",
+      "user_id": "usr_001",
+      "trip_name": "Mumbai City Lights",
+      "start_date": "2026-09-01",
+      "end_date": "2026-09-05",
+      "type": "custom",
+      "images": [
+        "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?auto=format&fit=crop&w=800&q=80"
+      ],
+      "created_at": "2026-03-20T12:00:00.000Z"
+    },
+    {
+      "_id": "itn_009",
+      "user_id": null,
+      "trip_name": "Hampi Historical Trail",
+      "start_date": "2026-10-15",
+      "end_date": "2026-10-20",
+      "type": "std",
+      "images": [
+        "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80"
+      ],
+      "created_at": "2026-02-10T09:00:00.000Z"
+    },
+    {
+      "_id": "itn_010",
+      "user_id": "usr_002",
+      "trip_name": "Leh-Ladakh Adventure",
+      "start_date": "2026-07-10",
+      "end_date": "2026-07-20",
+      "type": "custom",
+      "images": [
+        "https://images.unsplash.com/photo-1581791534721-e599df4417f7?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80"
+      ],
+      "created_at": "2026-03-22T15:30:00.000Z"
+    },
+    {
+      "_id": "itn_011",
+      "user_id": null,
+      "trip_name": "Mysore & Coorg Escape",
+      "start_date": "2026-11-01",
+      "end_date": "2026-11-07",
+      "type": "std",
+      "images": [
+        "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=800&q=80"
+      ],
+      "created_at": "2026-01-30T10:15:00.000Z"
+    },
+    {
+      "_id": "itn_012",
+      "user_id": "usr_001",
+      "trip_name": "Rajasthan",
+      "start_date": "2026-04-14",
+      "end_date": "2026-04-18",
+      "type": "custom",
+      "images": [
+        "https://plus.unsplash.com/premium_photo-1697729844084-c03db2377161?w=600&auto=format&fit=crop&q=60"
+      ],
+      "created_at": "2026-04-06T09:54:54.988Z"
+    },
+    {
+      "_id": "itn_013",
+      "user_id": "usr_001",
+      "trip_name": "Pondicherry",
+      "start_date": "2026-04-15",
+      "end_date": "2026-04-18",
+      "type": "custom",
+      "images": [
+        "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=800&q=80"
+      ],
+      "created_at": "2026-04-08T08:37:14.820Z"
+    }
+  ],
+  "itinerary_items": [
+    {
+      "_id": "itm_001",
+      "itinerary_id": "itn_002",
+      "category": "travel",
+      "title": "Flight to Delhi",
+      "location": "Chennai → New Delhi",
+      "date": "2026-04-10",
+      "notes": "IndiGo 6E-204. Web check-in done.",
+      "status": "confirmed",
+      "sort_order": 1,
+      "source_booking_ref": "TRV-N4Y1A-KL3W",
+      "created_at": "2026-03-01T09:10:00.000Z"
+    },
+    {
+      "_id": "itm_002",
+      "itinerary_id": "itn_002",
+      "category": "hotel",
+      "title": "Check-in: The Imperial New Delhi",
+      "location": "New Delhi",
+      "date": "2026-04-10",
+      "notes": "Deluxe King room. Breakfast included.",
+      "status": "confirmed",
+      "sort_order": 2,
+      "source_booking_ref": "HTL-M3X9A-KZ2P",
+      "created_at": "2026-03-01T09:15:00.000Z"
+    },
+    {
+      "_id": "itm_003",
+      "itinerary_id": "itn_002",
+      "category": "activity",
+      "title": "Taj Mahal Visit",
+      "location": "Agra",
+      "date": "2026-04-11",
+      "notes": "Sunrise visit. Carry valid ID.",
+      "status": "pending",
+      "sort_order": 3,
+      "created_at": "2026-03-01T09:20:00.000Z"
+    },
+    {
+      "_id": "itm_gt_001",
+      "itinerary_id": "itn_001",
+      "category": "travel",
+      "title": "Fly into New Delhi",
+      "location": "Indira Gandhi International Airport",
+      "notes": "Arrive at Terminal 3. Pre-book airport transfer to hotel.",
+      "status": "confirmed",
+      "sort_order": 1
+    },
+    {
+      "_id": "itm_gt_002",
+      "itinerary_id": "itn_001",
+      "category": "activity",
+      "title": "Guided Tour of Red Fort",
+      "location": "Old Delhi",
+      "notes": "Meet guide at Gate 1. Wear comfortable shoes.",
+      "status": "confirmed",
+      "sort_order": 2
+    },
+    {
+      "_id": "itm_gt_003",
+      "itinerary_id": "itn_001",
+      "category": "activity",
+      "title": "Explore Qutub Minar & Humayun's Tomb",
+      "location": "South Delhi",
+      "notes": "UNESCO World Heritage Sites. Best visited in the morning.",
+      "status": "confirmed",
+      "sort_order": 3
+    },
+    {
+      "_id": "itm_gt_004",
+      "itinerary_id": "itn_001",
+      "category": "travel",
+      "title": "Train to Agra",
+      "location": "New Delhi Railway Station",
+      "notes": "Gatimaan Express. Duration: 1h 40m. Arrives Agra Cantonment.",
+      "status": "confirmed",
+      "sort_order": 4
+    },
+    {
+      "_id": "itm_gt_005",
+      "itinerary_id": "itn_001",
+      "category": "activity",
+      "title": "Taj Mahal Sunrise Visit",
+      "location": "Agra",
+      "notes": "Entry opens at 6am. Book tickets online in advance. Avoid Fridays.",
+      "status": "confirmed",
+      "sort_order": 5
+    },
+    {
+      "_id": "itm_gt_006",
+      "itinerary_id": "itn_001",
+      "category": "activity",
+      "title": "Agra Fort & Mehtab Bagh",
+      "location": "Agra",
+      "notes": "Agra Fort is a 15-min drive from Taj Mahal. Mehtab Bagh offers sunset views.",
+      "status": "confirmed",
+      "sort_order": 6
+    },
+    {
+      "_id": "itm_gt_007",
+      "itinerary_id": "itn_001",
+      "category": "travel",
+      "title": "Drive to Jaipur",
+      "location": "Agra → Jaipur Highway",
+      "notes": "Approx 4h drive. Stop at Fatehpur Sikri en route.",
+      "status": "confirmed",
+      "sort_order": 7
+    },
+    {
+      "_id": "itm_gt_008",
+      "itinerary_id": "itn_001",
+      "category": "activity",
+      "title": "Amber Fort Elephant Ride & Tour",
+      "location": "Amer, Jaipur",
+      "notes": "Book elephant ride slot early. Guided tour included.",
+      "status": "confirmed",
+      "sort_order": 8
+    },
+    {
+      "_id": "itm_gt_009",
+      "itinerary_id": "itn_001",
+      "category": "activity",
+      "title": "City Palace & Hawa Mahal",
+      "location": "Pink City, Jaipur",
+      "notes": "Hawa Mahal best photographed from across the street at sunrise.",
+      "status": "confirmed",
+      "sort_order": 9
+    },
+    {
+      "_id": "itm_kl_001",
+      "itinerary_id": "itn_003",
+      "category": "travel",
+      "title": "Fly into Kochi",
+      "location": "Cochin International Airport",
+      "notes": "Air India recommended. Terminal 2 for domestic arrivals.",
+      "status": "confirmed",
+      "sort_order": 1
+    },
+    {
+      "_id": "itm_kl_002",
+      "itinerary_id": "itn_003",
+      "category": "activity",
+      "title": "Fort Kochi Walking Tour",
+      "location": "Fort Kochi",
+      "notes": "See Chinese fishing nets, St. Francis Church & Dutch Palace.",
+      "status": "confirmed",
+      "sort_order": 2
+    },
+    {
+      "_id": "itm_kl_003",
+      "itinerary_id": "itn_003",
+      "category": "activity",
+      "title": "Kathakali Performance",
+      "location": "Kerala Kathakali Centre, Kochi",
+      "notes": "Evening show at 6:30pm. Arrive 30 mins early for makeup demo.",
+      "status": "confirmed",
+      "sort_order": 3
+    },
+    {
+      "_id": "itm_kl_004",
+      "itinerary_id": "itn_003",
+      "category": "travel",
+      "title": "Drive to Alleppey",
+      "location": "Kochi → Alleppey",
+      "notes": "1.5h drive. Check in to houseboat by 12pm.",
+      "status": "confirmed",
+      "sort_order": 4
+    },
+    {
+      "_id": "itm_kl_005",
+      "itinerary_id": "itn_003",
+      "category": "hotel",
+      "title": "Houseboat Stay on Vembanad Lake",
+      "location": "Alleppey Backwaters",
+      "notes": "Full board meal plan. Sunset cruise included. AC cabin recommended.",
+      "status": "confirmed",
+      "sort_order": 5
+    },
+    {
+      "_id": "itm_kl_006",
+      "itinerary_id": "itn_003",
+      "category": "activity",
+      "title": "Canoe Ride through Village Canals",
+      "location": "Alleppey",
+      "notes": "Early morning 6am slot recommended. Spot local village life.",
+      "status": "confirmed",
+      "sort_order": 6
+    },
+    {
+      "_id": "itm_kl_007",
+      "itinerary_id": "itn_003",
+      "category": "activity",
+      "title": "Kumarakom Bird Sanctuary",
+      "location": "Kumarakom",
+      "notes": "Best time: early morning. Spot migratory birds Nov–Feb.",
+      "status": "confirmed",
+      "sort_order": 7
+    },
+    {
+      "_id": "itm_rj_001",
+      "itinerary_id": "itn_005",
+      "category": "travel",
+      "title": "Shatabdi Express to Jaipur",
+      "location": "New Delhi Railway Station",
+      "notes": "Executive Class. Meal served on board. Duration: 4.5h.",
+      "status": "confirmed",
+      "sort_order": 1
+    },
+    {
+      "_id": "itm_rj_002",
+      "itinerary_id": "itn_005",
+      "category": "activity",
+      "title": "Amber Fort Sightseeing",
+      "location": "Amer Fort, Jaipur",
+      "notes": "Local guide provided. Carry water and hats.",
+      "status": "confirmed",
+      "sort_order": 2
+    },
+    {
+      "_id": "itm_rj_003",
+      "itinerary_id": "itn_005",
+      "category": "activity",
+      "title": "Jantar Mantar & City Palace",
+      "location": "Pink City, Jaipur",
+      "notes": "UNESCO site. Combo ticket available at the gate.",
+      "status": "confirmed",
+      "sort_order": 3
+    },
+    {
+      "_id": "itm_rj_004",
+      "itinerary_id": "itn_005",
+      "category": "travel",
+      "title": "Drive to Jodhpur",
+      "location": "Jaipur → Jodhpur",
+      "notes": "5h drive. Stop at Ajmer Sharif Dargah en route.",
+      "status": "confirmed",
+      "sort_order": 4
+    },
+    {
+      "_id": "itm_rj_005",
+      "itinerary_id": "itn_005",
+      "category": "activity",
+      "title": "Mehrangarh Fort & Jaswant Thada",
+      "location": "Jodhpur",
+      "notes": "One of India's largest forts. Audio guide available at entrance.",
+      "status": "confirmed",
+      "sort_order": 5
+    },
+    {
+      "_id": "itm_rj_006",
+      "itinerary_id": "itn_005",
+      "category": "travel",
+      "title": "Drive to Udaipur",
+      "location": "Jodhpur → Udaipur",
+      "notes": "5h scenic drive through Rajasthan countryside.",
+      "status": "confirmed",
+      "sort_order": 6
+    },
+    {
+      "_id": "itm_rj_007",
+      "itinerary_id": "itn_005",
+      "category": "activity",
+      "title": "City Palace & Lake Pichola Boat Ride",
+      "location": "Udaipur",
+      "notes": "Evening boat ride recommended for views of Jag Mandir palace.",
+      "status": "confirmed",
+      "sort_order": 7
+    },
+    {
+      "_id": "itm_vr_001",
+      "itinerary_id": "itn_007",
+      "category": "travel",
+      "title": "Fly into Varanasi",
+      "location": "Lal Bahadur Shastri Airport",
+      "notes": "Short 20 min drive to ghats area. Pre-book hotel near Assi Ghat.",
+      "status": "confirmed",
+      "sort_order": 1
+    },
+    {
+      "_id": "itm_vr_002",
+      "itinerary_id": "itn_007",
+      "category": "activity",
+      "title": "Sunrise Boat Ride on the Ganges",
+      "location": "Dashashwamedh Ghat",
+      "notes": "Start at 5:30am. Witness the morning aarti and daily rituals.",
+      "status": "confirmed",
+      "sort_order": 2
+    },
+    {
+      "_id": "itm_vr_003",
+      "itinerary_id": "itn_007",
+      "category": "activity",
+      "title": "Kashi Vishwanath Temple Visit",
+      "location": "Varanasi Old City",
+      "notes": "One of the 12 Jyotirlingas. Dress modestly. No phones inside.",
+      "status": "confirmed",
+      "sort_order": 3
+    },
+    {
+      "_id": "itm_vr_004",
+      "itinerary_id": "itn_007",
+      "category": "travel",
+      "title": "Drive to Sarnath",
+      "location": "Varanasi → Sarnath",
+      "notes": "13km, 30 min drive. Where Buddha gave his first sermon.",
+      "status": "confirmed",
+      "sort_order": 4
+    },
+    {
+      "_id": "itm_vr_005",
+      "itinerary_id": "itn_007",
+      "category": "activity",
+      "title": "Dhamek Stupa & Sarnath Museum",
+      "location": "Sarnath",
+      "notes": "Museum has the original Ashoka Lion Capital. Opens at 9am.",
+      "status": "confirmed",
+      "sort_order": 5
+    },
+    {
+      "_id": "itm_vr_006",
+      "itinerary_id": "itn_007",
+      "category": "activity",
+      "title": "Ganga Aarti Ceremony",
+      "location": "Dashashwamedh Ghat, Varanasi",
+      "notes": "Evening aarti at 7pm. Arrive by 6:30pm for a good spot.",
+      "status": "confirmed",
+      "sort_order": 6
+    },
+    {
+      "_id": "itm_hp_001",
+      "itinerary_id": "itn_009",
+      "category": "travel",
+      "title": "Overnight Train to Hospet",
+      "location": "Bengaluru → Hospet Junction",
+      "notes": "Hampi Express departs 10pm. 9h journey. Book sleeper class.",
+      "status": "confirmed",
+      "sort_order": 1
+    },
+    {
+      "_id": "itm_hp_002",
+      "itinerary_id": "itn_009",
+      "category": "activity",
+      "title": "Virupaksha Temple & Hampi Bazaar",
+      "location": "Hampi",
+      "notes": "Still an active temple. Morning puja at 6am. Remove footwear.",
+      "status": "confirmed",
+      "sort_order": 2
+    },
+    {
+      "_id": "itm_hp_003",
+      "itinerary_id": "itn_009",
+      "category": "activity",
+      "title": "Vittala Temple & Stone Chariot",
+      "location": "Hampi",
+      "notes": "Musical pillars and iconic stone chariot. Best in morning light.",
+      "status": "confirmed",
+      "sort_order": 3
+    },
+    {
+      "_id": "itm_hp_004",
+      "itinerary_id": "itn_009",
+      "category": "activity",
+      "title": "Royal Enclosure & Elephant Stables",
+      "location": "Hampi",
+      "notes": "Zenana enclosure and Lotus Mahal also nearby. Allow 3 hours.",
+      "status": "confirmed",
+      "sort_order": 4
+    },
+    {
+      "_id": "itm_hp_005",
+      "itinerary_id": "itn_009",
+      "category": "activity",
+      "title": "Matanga Hill Sunrise Trek",
+      "location": "Matanga Hill, Hampi",
+      "notes": "45 min climb. Start by 5:30am. Panoramic views of ruins.",
+      "status": "confirmed",
+      "sort_order": 5
+    },
+    {
+      "_id": "itm_mc_001",
+      "itinerary_id": "itn_011",
+      "category": "travel",
+      "title": "Drive from Bengaluru to Mysore",
+      "location": "Bengaluru → Mysore",
+      "notes": "3h drive on Mysore Road. KSRTC bus also available.",
+      "status": "confirmed",
+      "sort_order": 1
+    },
+    {
+      "_id": "itm_mc_002",
+      "itinerary_id": "itn_011",
+      "category": "activity",
+      "title": "Mysore Palace Tour",
+      "location": "Mysore Palace, Mysore",
+      "notes": "Palace is illuminated on Sundays and public holidays. Stunning sight.",
+      "status": "confirmed",
+      "sort_order": 2
+    },
+    {
+      "_id": "itm_mc_003",
+      "itinerary_id": "itn_011",
+      "category": "activity",
+      "title": "Chamundi Hills & Nandi Statue",
+      "location": "Chamundi Hills, Mysore",
+      "notes": "1000 steps to the top. Auto available from halfway point.",
+      "status": "confirmed",
+      "sort_order": 3
+    },
+    {
+      "_id": "itm_mc_004",
+      "itinerary_id": "itn_011",
+      "category": "travel",
+      "title": "Drive to Coorg",
+      "location": "Mysore → Madikeri, Coorg",
+      "notes": "2.5h scenic drive through coffee and spice plantations.",
+      "status": "confirmed",
+      "sort_order": 4
+    },
+    {
+      "_id": "itm_mc_005",
+      "itinerary_id": "itn_011",
+      "category": "activity",
+      "title": "Abbey Falls & Coffee Plantation Walk",
+      "location": "Madikeri, Coorg",
+      "notes": "Short 1km walk to falls. Coffee estate tour available nearby.",
+      "status": "confirmed",
+      "sort_order": 5
+    },
+    {
+      "_id": "itm_mc_006",
+      "itinerary_id": "itn_011",
+      "category": "activity",
+      "title": "Dubare Elephant Camp",
+      "location": "Dubare, Coorg",
+      "notes": "Feed and bathe elephants. Morning session 8–10am only.",
+      "status": "confirmed",
+      "sort_order": 6
+    },
+    {
+      "_id": "a4DxMyD",
+      "itinerary_id": "itn_006",
+      "category": "travel",
+      "title": "Air India AI-560 — Chennai to Mumbai",
+      "location": "Chennai",
+      "date": "2026-04-10",
+      "notes": "Cabin: economy. Ref: TRV-8SUAC",
+      "status": "confirmed",
+      "source_booking_ref": "TRV-8SUAC"
+    },
+    {
+      "_id": "Nfp8hfJ",
+      "itinerary_id": "itn_008",
+      "category": "hotel",
+      "title": "Hotel Check-in — Taj Holiday Village Resort",
+      "location": "Goa",
+      "date": "2026-04-09",
+      "notes": "1 nights. Ref: HTL-MNQJY7JV-4VP5",
+      "status": "confirmed",
+      "source_booking_ref": "HTL-MNQJY7JV-4VP5"
+    },
+    {
+      "_id": "BfwSFaC",
+      "itinerary_id": "itn_006",
+      "category": "hotel",
+      "title": "Hotel Check-in — Lemon Tree Hotel",
+      "location": "Goa",
+      "date": "2026-04-09",
+      "notes": "1 nights. Ref: HTL-MNQXPA2X-XRED",
+      "status": "confirmed",
+      "source_booking_ref": "HTL-MNQXPA2X-XRED"
+    },
+    {
+      "_id": "tTdlurt",
+      "itinerary_id": "itn_002",
+      "category": "hotel",
+      "title": "Taj Holiday Village Resort",
+      "location": "Goa",
+      "date": "2026-04-10",
+      "notes": "",
+      "status": "confirmed"
+    },
+    {
+      "_id": "5HwOV05",
+      "itinerary_id": "itn_006",
+      "category": "hotel",
+      "title": "Lemon Tree Hotel",
+      "location": "Goa",
+      "date": "2026-06-06",
+      "notes": "",
+      "status": "confirmed"
+    },
+    {
+      "_id": "itm_usr9_001",
+      "itinerary_id": "itn_010",
+      "category": "travel",
+      "title": "Fly to Leh",
+      "location": "Mumbai → Leh",
+      "date": "2026-07-10",
+      "notes": "Air India AI-470. Early morning flight. Acclimatize on arrival.",
+      "status": "confirmed",
+      "sort_order": 1,
+      "source_booking_ref": "TRV-USR9B-001",
+      "created_at": "2026-06-01T09:10:00.000Z"
+    },
+    {
+      "_id": "itm_usr9_002",
+      "itinerary_id": "itn_010",
+      "category": "hotel",
+      "title": "Check-in: The Grand Dragon, Leh",
+      "location": "Leh",
+      "date": "2026-07-10",
+      "notes": "Rest day for acclimatization. Do not exert.",
+      "status": "confirmed",
+      "sort_order": 2,
+      "created_at": "2026-06-01T09:15:00.000Z"
+    },
+    {
+      "_id": "itm_usr9_003",
+      "itinerary_id": "itn_010",
+      "category": "activity",
+      "title": "Visit Shanti Stupa & Leh Palace",
+      "location": "Leh",
+      "date": "2026-07-11",
+      "notes": "Early morning visit to Shanti Stupa for sunrise. Leh Palace gives panoramic views.",
+      "status": "confirmed",
+      "sort_order": 3,
+      "created_at": "2026-06-01T09:20:00.000Z"
+    },
+    {
+      "_id": "itm_usr9_004",
+      "itinerary_id": "itn_010",
+      "category": "activity",
+      "title": "Pangong Lake Day Trip",
+      "location": "Pangong Tso",
+      "date": "2026-07-13",
+      "notes": "5h drive each way. Carry warm clothes. Overnight camping optional.",
+      "status": "pending",
+      "sort_order": 4,
+      "created_at": "2026-06-01T09:25:00.000Z"
+    },
+    {
+      "_id": "itm_usr9_005",
+      "itinerary_id": "itn_010",
+      "category": "activity",
+      "title": "Nubra Valley via Khardung La",
+      "location": "Nubra Valley",
+      "date": "2026-07-15",
+      "notes": "Highest motorable road. Double hump Bactrian camels at Hunder.",
+      "status": "pending",
+      "sort_order": 5,
+      "created_at": "2026-06-01T09:30:00.000Z"
+    },
+    {
+      "_id": "itm_usr6_001",
+      "itinerary_id": "itn_005",
+      "category": "travel",
+      "title": "Fly to Jaipur",
+      "location": "Mumbai → Jaipur",
+      "date": "2026-01-20",
+      "notes": "Morning flight. Transfer to Rambagh Palace.",
+      "status": "confirmed",
+      "sort_order": 1,
+      "created_at": "2025-12-20T10:00:00.000Z"
+    },
+    {
+      "_id": "itm_usr6_002",
+      "itinerary_id": "itn_005",
+      "category": "hotel",
+      "title": "Check-in: Rambagh Palace",
+      "location": "Jaipur",
+      "date": "2026-01-20",
+      "notes": "3 nights. Ref: HTL-USR6A-001",
+      "status": "confirmed",
+      "sort_order": 2,
+      "source_booking_ref": "HTL-USR6A-001",
+      "created_at": "2025-12-20T10:05:00.000Z"
+    },
+    {
+      "_id": "itm_usr6_003",
+      "itinerary_id": "itn_005",
+      "category": "activity",
+      "title": "Amber Fort & City Palace",
+      "location": "Jaipur",
+      "date": "2026-01-21",
+      "notes": "Full day sightseeing. Book elephant ride in advance.",
+      "status": "confirmed",
+      "sort_order": 3,
+      "created_at": "2025-12-20T10:10:00.000Z"
+    },
+    {
+      "_id": "itm_usr6_004",
+      "itinerary_id": "itn_005",
+      "category": "activity",
+      "title": "Hawa Mahal & Jantar Mantar",
+      "location": "Jaipur",
+      "date": "2026-01-22",
+      "notes": "Evening at Chokhi Dhani cultural village.",
+      "status": "confirmed",
+      "sort_order": 4,
+      "created_at": "2025-12-20T10:15:00.000Z"
+    }
+  ],
+  "itineraryBookings": [
+    {
+      "_id": "ibk_001",
+      "userId": "usr_002",
+      "itineraryId": "itn_001",
+      "itinerarySnapshot": {
+        "trip_name": "Golden Triangle India",
+        "start_date": "2026-04-10",
+        "end_date": "2026-04-17",
+        "duration": 7,
+        "price": 25000
+      },
+      "numTravelers": 2,
+      "travelDate": "2026-04-10T00:00:00.000Z",
+      "pricing": {
+        "baseAmount": 50000,
+        "taxAmount": 2500,
+        "discountAmount": 0,
+        "loyaltyDiscount": 0,
+        "totalAmount": 52500,
+        "marketRate": 60000,
+        "currency": "INR"
+      },
+      "walletAmountUsed": 1800,
+      "coinsRedeemed": 0,
+      "coinsEarned": 1200,
+      "couponCode": null,
+      "bookingReference": "ITN-Q6A3A-WX9C",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-03-18T11:00:00.000Z"
+    },
+    {
+      "_id": "ibk_usr6_001",
+      "userId": "usr_006",
+      "itineraryId": "itn_005",
+      "itinerarySnapshot": {
+        "trip_name": "Royal Rajasthan Heritage",
+        "start_date": "2026-01-20",
+        "end_date": "2026-01-29",
+        "duration": 9,
+        "price": 16000
+      },
+      "numTravelers": 3,
+      "travelDate": "2026-01-20T00:00:00.000Z",
+      "pricing": {
+        "baseAmount": 48000,
+        "taxAmount": 2400,
+        "discountAmount": 0,
+        "loyaltyDiscount": 0,
+        "totalAmount": 50400,
+        "marketRate": 58000,
+        "currency": "INR"
+      },
+      "walletAmountUsed": 48000,
+      "coinsRedeemed": 0,
+      "coinsEarned": 1500,
+      "couponCode": "ROYALRAJ25",
+      "bookingReference": "ITN-USR6B-001",
+      "bookingStatus": "completed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2025-12-20T10:00:00.000Z"
+    },
+    {
+      "_id": "ibk_usr9_001",
+      "userId": "usr_009",
+      "itineraryId": "itn_010",
+      "itinerarySnapshot": {
+        "trip_name": "Leh-Ladakh Adventure",
+        "start_date": "2026-07-10",
+        "end_date": "2026-07-20",
+        "duration": 10,
+        "price": 22000
+      },
+      "numTravelers": 2,
+      "travelDate": "2026-07-10T00:00:00.000Z",
+      "pricing": {
+        "baseAmount": 44000,
+        "taxAmount": 2200,
+        "discountAmount": 0,
+        "loyaltyDiscount": 0,
+        "totalAmount": 46200,
+        "marketRate": 55000,
+        "currency": "INR"
+      },
+      "walletAmountUsed": 44000,
+      "coinsRedeemed": 0,
+      "coinsEarned": 800,
+      "couponCode": null,
+      "bookingReference": "ITN-USR9A-001",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "paymentMethod": "wallet",
+      "bookedAt": "2026-06-01T09:00:00.000Z"
+    }
+  ],
+  "reviews": [
+    {
+      "_id": "rev_001",
+      "userId": "usr_002",
+      "entityId": "htl_001",
+      "entityType": "heritage",
+      "rating": 4.8,
+      "comment": "Absolutely stunning heritage property. Service was impeccable.",
+      "year": 2026,
+      "images": [],
+      "isVerified": true,
+      "createdAt": "2026-04-02T08:58:20.601Z",
+      "subRatings": {
+        "cleanliness": 5,
+        "service": 5,
+        "location": 5,
+        "food": 4,
+        "facilities": 5,
+        "staff": 4.5
+      }
+    },
+    {
+      "_id": "rev_002",
+      "userId": "usr_002",
+      "entityId": "htl_002",
+      "entityType": "resort",
+      "rating": 4.8,
+      "comment": "Perfect beach resort. Loved every moment.",
+      "year": 2026,
+      "images": [],
+      "isVerified": true,
+      "createdAt": "2026-04-06T08:46:47.108Z",
+      "subRatings": {
+        "cleanliness": 4.5,
+        "service": 5,
+        "location": 5,
+        "food": 5,
+        "facilities": 5,
+        "staff": 4.5
+      }
+    },
+    {
+      "_id": "rev_003",
+      "userId": "usr_003",
+      "entityId": "htl_003",
+      "entityType": "business",
+      "rating": 4.3,
+      "comment": "Great location. Rooms are spacious and very clean.",
+      "year": 2026,
+      "images": [],
+      "isVerified": true,
+      "createdAt": "2026-02-14T11:00:00.000Z",
+      "subRatings": {
+        "cleanliness": 5,
+        "service": 4,
+        "location": 5,
+        "food": 3,
+        "facilities": 4,
+        "staff": 4
+      }
+    },
+    {
+      "_id": "rev_004",
+      "userId": "usr_005",
+      "entityId": "htl_005",
+      "entityType": "luxury",
+      "rating": 4.9,
+      "comment": "Exceptional experience at Novotel. The airport convenience is unmatched.",
+      "year": 2026,
+      "images": [],
+      "isVerified": true,
+      "createdAt": "2026-01-18T06:00:00.000Z",
+      "subRatings": {
+        "cleanliness": 5,
+        "service": 5,
+        "location": 5,
+        "food": 5,
+        "facilities": 5,
+        "staff": 4
+      }
+    },
+    {
+      "_id": "rev_005",
+      "userId": "usr_001",
+      "entityId": "htl_001",
+      "entityType": "heritage",
+      "rating": 3.6,
+      "comment": "Beautiful property but service could be improved.",
+      "year": 2026,
+      "images": [],
+      "isVerified": true,
+      "createdAt": "2026-04-08T03:40:37.856Z",
+      "subRatings": {
+        "cleanliness": 4.5,
+        "service": 3.5,
+        "location": 5,
+        "food": 3,
+        "facilities": 4,
+        "staff": 1.5
+      }
+    },
+    {
+      "_id": "SiogaNG",
+      "userId": "usr_001",
+      "entityId": "htl_002",
+      "entityType": "resort",
+      "rating": 3.8,
+      "comment": "Great hotel to stay and enjoy the view",
+      "year": 2026,
+      "images": [],
+      "isVerified": true,
+      "createdAt": "2026-04-08T18:53:06.397Z",
+      "subrating": {
+        "cleanliness": 3.5,
+        "service": 4,
+        "location": 4,
+        "food": 3.5,
+        "facilities": 4,
+        "staff": 4
+      }
+    },
+    {
+      "_id": "rev_usr5_001",
+      "userId": "usr_005",
+      "entityId": "htl_005",
+      "entityType": "luxury",
+      "rating": 4.7,
+      "comment": "Loved the beachside location and the sunset views from the room. Staff were very attentive. Will definitely come back!",
+      "year": 2026,
+      "images": [],
+      "isVerified": true,
+      "createdAt": "2026-02-18T09:00:00.000Z",
+      "subRatings": {
+        "cleanliness": 5,
+        "service": 4.5,
+        "location": 5,
+        "food": 4.5,
+        "facilities": 4.5,
+        "staff": 4.5
+      }
+    },
+    {
+      "_id": "rev_usr5_002",
+      "userId": "usr_005",
+      "entityId": "tsv_006",
+      "entityType": "train",
+      "rating": 4.2,
+      "comment": "Shatabdi was clean and on time. Catering was decent. Great way to travel Bangalore to Chennai.",
+      "year": 2026,
+      "images": [],
+      "isVerified": true,
+      "createdAt": "2026-04-13T12:00:00.000Z",
+      "subRatings": {
+        "cleanliness": 4,
+        "service": 4,
+        "location": 4.5,
+        "food": 4,
+        "facilities": 4,
+        "staff": 4.5
+      }
+    },
+    {
+      "_id": "rev_usr6_001",
+      "userId": "usr_006",
+      "entityId": "htl_008",
+      "entityType": "heritage",
+      "rating": 5,
+      "comment": "A truly royal experience. The Rambagh Palace is in a class of its own. Every detail, from the antique furniture to the butler service, was impeccable. Worth every rupee.",
+      "year": 2026,
+      "images": [],
+      "isVerified": true,
+      "createdAt": "2026-01-24T10:00:00.000Z",
+      "subRatings": {
+        "cleanliness": 5,
+        "service": 5,
+        "location": 5,
+        "food": 5,
+        "facilities": 5,
+        "staff": 5
+      }
+    },
+    {
+      "_id": "rev_usr6_002",
+      "userId": "usr_006",
+      "entityId": "htl_003",
+      "entityType": "business",
+      "rating": 4,
+      "comment": "Good budget option in Goa. Rooms were clean and the rooftop pool was a nice touch. Location is slightly inland but manageable.",
+      "year": 2026,
+      "images": [],
+      "isVerified": true,
+      "createdAt": "2026-04-04T08:30:00.000Z",
+      "subRatings": {
+        "cleanliness": 4,
+        "service": 4,
+        "location": 3.5,
+        "food": 4,
+        "facilities": 4,
+        "staff": 4.5
+      }
+    },
+    {
+      "_id": "rev_usr8_001",
+      "userId": "usr_008",
+      "entityId": "htl_009",
+      "entityType": "boutique",
+      "rating": 4.8,
+      "comment": "Samode Haveli is a hidden gem. The frescoes, the courtyard pool, the rooftop views — it felt like stepping back in time. The food was also excellent.",
+      "year": 2026,
+      "images": [],
+      "isVerified": true,
+      "createdAt": "2026-03-19T11:00:00.000Z",
+      "subRatings": {
+        "cleanliness": 5,
+        "service": 4.5,
+        "location": 4.5,
+        "food": 5,
+        "facilities": 4.5,
+        "staff": 5
+      }
+    },
+    {
+      "_id": "rev_usr9_001",
+      "userId": "usr_009",
+      "entityId": "htl_009",
+      "entityType": "boutique",
+      "rating": 4.6,
+      "comment": "Beautiful heritage stay. Great ambience and warm hospitality. The Rajasthani dinner was a highlight!",
+      "year": 2026,
+      "images": [],
+      "isVerified": true,
+      "createdAt": "2026-04-24T09:00:00.000Z",
+      "subRatings": {
+        "cleanliness": 4.5,
+        "service": 5,
+        "location": 4.5,
+        "food": 4.5,
+        "facilities": 4.5,
+        "staff": 5
+      }
+    },
+    {
+      "_id": "rev_usr10_001",
+      "userId": "usr_010",
+      "entityId": "tsv_009",
+      "entityType": "bus",
+      "rating": 4.3,
+      "comment": "Orange Travels was comfortable and punctual. The Volvo bus had good AC and the seats were spacious. Would use again.",
+      "year": 2026,
+      "images": [],
+      "isVerified": true,
+      "createdAt": "2026-04-16T08:00:00.000Z",
+      "subRatings": {
+        "cleanliness": 4,
+        "service": 4.5,
+        "location": 4,
+        "food": 3.5,
+        "facilities": 4.5,
+        "staff": 4.5
+      }
+    }
+  ],
+  "popularOffers": [
+    {
+      "_id": "offer_001",
+      "title": "Monsoon Magic Getaway",
+      "description": "Escape the heat with 3 nights at a handpicked resort. Includes breakfast and a welcome drink.",
+      "discountPercent": 20,
+      "offerType": "seasonal",
+      "applicableHotelIds": [
+        "htl_002",
+        "htl_008"
+      ],
+      "applicableHotelTypes": [
+        "palace",
+        "resort"
+      ],
+      "applicableRoomTypes": [
+        "suite",
+        "villa"
+      ],
+      "validFrom": "2026-03-01",
+      "validTo": "2026-09-30",
+      "couponCode": "MONSOON20",
+      "minNights": 3,
+      "isActive": true,
+      "badgeLabel": "Limited Time",
+      "image": "https://images.unsplash.com/photo-1440778303588-435521a205bc?w=600"
+    },
+    {
+      "_id": "offer_002",
+      "title": "Early Bird Weekend Deal",
+      "description": "Book 30 days in advance and save 15% on any weekend stay.",
+      "discountPercent": 15,
+      "offerType": "early_bird",
+      "applicableHotelIds": [
+        "htl_001",
+        "htl_003"
+      ],
+      "applicableHotelTypes": [
+        "heritage",
+        "luxury",
+        "business"
+      ],
+      "applicableRoomTypes": [
+        "deluxe",
+        "executive"
+      ],
+      "validFrom": "2026-04-01",
+      "validTo": "2026-12-31",
+      "couponCode": "EARLYBIRD15",
+      "minNights": 2,
+      "isActive": true,
+      "badgeLabel": "Best Seller",
+      "image": "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=600"
+    },
+    {
+      "_id": "offer_003",
+      "title": "Royal Rajasthan Package",
+      "description": "Stay 4 nights in Rajasthan's finest palaces with all meals and a heritage tour included.",
+      "discountPercent": 25,
+      "offerType": "package",
+      "applicableHotelIds": [
+        "htl_008",
+        "htl_009"
+      ],
+      "applicableHotelTypes": [
+        "palace",
+        "boutique",
+        "heritage"
+      ],
+      "applicableRoomTypes": [
+        "suite",
+        "palace suite",
+        "haveli suite"
+      ],
+      "validFrom": "2026-03-01",
+      "validTo": "2027-02-28",
+      "couponCode": "ROYALRAJ25",
+      "minNights": 4,
+      "isActive": true,
+      "badgeLabel": "Top Pick",
+      "image": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600"
+    },
+    {
+      "_id": "offer_004",
+      "title": "Honeymoon Bliss",
+      "description": "Romance package with private pool villa, candlelit dinner, spa for two, and late checkout.",
+      "discountPercent": 10,
+      "offerType": "romance",
+      "applicableHotelIds": [
+        "htl_005",
+        "htl_006",
+        "htl_008"
+      ],
+      "applicableHotelTypes": [
+        "luxury",
+        "resort",
+        "boutique"
+      ],
+      "applicableRoomTypes": [
+        "villa",
+        "premiere",
+        "haveli suite"
+      ],
+      "validFrom": "2026-04-01",
+      "validTo": "2027-03-31",
+      "couponCode": "HONEYMOON10",
+      "minNights": 3,
+      "isActive": true,
+      "badgeLabel": "Popular",
+      "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600"
+    },
+    {
+      "_id": "offer_005",
+      "title": "Work From Hotel",
+      "description": "Extended stay deal for remote workers. 30% off on 7+ nights with high-speed WiFi and meeting room access.",
+      "discountPercent": 30,
+      "offerType": "long_stay",
+      "applicableHotelIds": [
+        "htl_001",
+        "htl_004",
+        "htl_007"
+      ],
+      "applicableHotelTypes": [
+        "heritage",
+        "business"
+      ],
+      "applicableRoomTypes": [
+        "deluxe",
+        "executive"
+      ],
+      "validFrom": "2026-04-01",
+      "validTo": "2026-12-31",
+      "couponCode": "WORKHOTEL30",
+      "minNights": 7,
+      "isActive": true,
+      "badgeLabel": "New",
+      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

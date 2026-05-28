@@ -1,0 +1,68 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Angular
+.angular/
+dist/
+build/
+
+# Frontend coverage
+frontend-main/coverage/
+frontend-main/lcov.info
+
+# Backend coverage
+backend-main/coverage/
+backend-main/mochawesome-report/
+backend-main/lcov.info
+
+# Environment variables and sensitive information
+.env
+.env.local
+.env.*.local
+.environment.ts
+.environment.prod.ts
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS files
+.DS_Store
+Thumbs.db
+.env.example
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Build artifacts
+dist/
+build/
+out/
+
+# Logs
+logs/
+*.log
+
+# Secrets and sensitive data
+secrets/
+*.key
+*.pem
+.npmrc
+
+# OS-specific
+.env.*.private
+
+# Cache
+.cache/
+*.cache

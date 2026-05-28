@@ -1,0 +1,502 @@
+<!-- ── Profile Hero Banner ───────────────────────────────────────── -->
+@if (user?.role === "admin") {
+  <div class="profile-hero profile-hero--admin">
+    <div class="profile-hero__shapes">
+      <span class="profile-hero__shape profile-hero__shape--1"></span>
+      <span class="profile-hero__shape profile-hero__shape--2"></span>
+      <span class="profile-hero__shape profile-hero__shape--3"></span>
+    </div>
+    <div class="profile-hero__content">
+      <div class="profile-hero__avatar">
+        <i class="bi bi-shield-fill-check"></i>
+      </div>
+      <div>
+        <p class="profile-hero__label">Administrator</p>
+        <h2 class="profile-hero__name">{{ user?.name | titlecase }}</h2>
+        <p class="profile-hero__sub">
+          Full system access · All controls unlocked
+        </p>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="profile-hero profile-hero--user">
+    <div class="profile-hero__shapes">
+      <span class="profile-hero__shape profile-hero__shape--1"></span>
+      <span class="profile-hero__shape profile-hero__shape--2"></span>
+      <span class="profile-hero__shape profile-hero__shape--3"></span>
+    </div>
+    <div class="profile-hero__content">
+      <div class="profile-hero__avatar">
+        {{ user?.name?.charAt(0)?.toUpperCase() }}
+      </div>
+      <div>
+        <h2 class="profile-hero__name">Welcome {{ user?.name | titlecase }}</h2>
+        <p class="profile-hero__sub">Your adventures, all in one place</p>
+      </div>
+    </div>
+  </div>
+}
+
+<div class="container-fluid py-5 hotel-bg">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-xl-8">
+      <div class="card border-0 shadow-sm rounded-4 mb-4">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <div>
+              <h5 class="fw-bold mb-0" style="color: var(--deep-twilight)">
+                {{ user?.name | titlecase }}
+              </h5>
+              <small class="text-muted">{{ user?.email }}</small>
+            </div>
+          </div>
+
+          <hr class="text-muted opacity-25" />
+
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <small class="text-muted fw-semibold d-block mb-1"
+                >Full Name</small
+              >
+              <div class="d-flex align-items-center gap-2">
+                <i
+                  class="bi bi-person"
+                  style="color: var(--bright-teal-blue)"
+                ></i>
+                <span class="fw-medium">{{ user?.name | titlecase }}</span>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <small class="text-muted fw-semibold d-block mb-1"
+                >Email Address</small
+              >
+              <div class="d-flex align-items-center gap-2">
+                <i
+                  class="bi bi-envelope"
+                  style="color: var(--bright-teal-blue)"
+                ></i>
+                <span class="fw-medium">{{ user?.email }}</span>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <small class="text-muted fw-semibold d-block mb-1"
+                >Phone Number</small
+              >
+              <div class="d-flex align-items-center gap-2">
+                <i
+                  class="bi bi-telephone"
+                  style="color: var(--bright-teal-blue)"
+                ></i>
+                <span class="fw-medium">{{ user?.phone }}</span>
+              </div>
+            </div>
+
+            <!-- ── Virtual Wallet (balance pill + controls) ──────── -->
+            @if (user?.role === "customer") {
+              <div class="col-12 col-md-6" id="wallet-section">
+                <small class="text-muted fw-semibold d-block mb-1"
+                  >Virtual Wallet</small
+                >
+
+                @if (walletLoading) {
+                  <div class="d-flex align-items-center gap-2">
+                    <div
+                      class="spinner-border spinner-border-sm"
+                      style="color: var(--bright-teal-blue)"
+                      role="status"
+                    >
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <span class="text-muted small">Loading wallet…</span>
+                  </div>
+                } @else if (wallet) {
+                  <div
+                    class="wallet-success-banner"
+                    [class.wallet-success-banner--visible]="topUpSuccess"
+                  >
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span>{{ topUpSuccess }}</span>
+                  </div>
+                  <div class="wallet-balance-pill">
+                    <i class="bi bi-wallet2"></i>
+                    <span class="wallet-balance-amount">
+                      ₹{{ wallet.balance | number: "1.2-2" }}
+                    </span>
+                    <button
+                      class="wallet-history-btn"
+                      (click)="showTransactions = !showTransactions"
+                      [title]="
+                        showTransactions ? 'Hide history' : 'View history'
+                      "
+                    >
+                      <i
+                        class="bi"
+                        [ngClass]="
+                          showTransactions
+                            ? 'bi-chevron-up'
+                            : 'bi-clock-history'
+                        "
+                      ></i>
+                    </button>
+                    <button
+                      class="wallet-topup-btn"
+                      (click)="showTopUp = !showTopUp; showTransactions = false"
+                      title="Add money"
+                    >
+                      <i class="bi bi-plus-lg"></i> Add
+                    </button>
+                  </div>
+                } @else {
+                  <span class="text-muted small">No wallet found.</span>
+                }
+              </div>
+
+              <!-- ── Full-width expandable panels ─────────────────── -->
+              @if (wallet) {
+                <!-- Top-up panel (always in DOM, CSS drives open/close) -->
+                <div
+                  class="col-12 wallet-expand-col"
+                  [class.wallet-expand-col--open]="showTopUp"
+                >
+                  <div
+                    class="wallet-topup-panel p-3 rounded-3 border"
+                    style="border-color: var(--frosted-blue-light) !important"
+                  >
+                    <p
+                      class="fw-semibold mb-2 small"
+                      style="color: var(--deep-twilight)"
+                    >
+                      <i
+                        class="bi bi-plus-circle me-1"
+                        style="color: var(--bright-teal-blue)"
+                      ></i>
+                      Add Money to Wallet
+                    </p>
+                    <div class="d-flex flex-wrap gap-2 mb-2">
+                      @for (preset of [500, 1000, 2000, 5000]; track preset) {
+                        <button
+                          class="btn btn-sm rounded-3 py-1 px-2"
+                          [ngClass]="
+                            topUpAmount === preset
+                              ? 'btn-topup-active'
+                              : 'btn-topup-preset'
+                          "
+                          (click)="topUpAmount = (topUpAmount || 0) + preset"
+                        >
+                          ₹{{ preset | number }}
+                        </button>
+                      }
+                    </div>
+                    <div class="input-group input-group-sm mb-2">
+                      <span class="input-group-text bg-white border-end-0"
+                        >₹</span
+                      >
+                      <input
+                        type="number"
+                        class="form-control border-start-0 rounded-end-3"
+                        [class.border-danger]="
+                          topUpAmount !== null &&
+                          (topUpAmount <= 0 || topUpAmount > 100000)
+                        "
+                        placeholder="Enter amount (max ₹1,00,000)"
+                        [(ngModel)]="topUpAmount"
+                        min="1"
+                        max="100000"
+                      />
+                    </div>
+                    @if (topUpAmount !== null && topUpAmount <= 0) {
+                      <div class="field-error field-error--enter mb-2">
+                        <i class="bi bi-exclamation-circle-fill"></i>Please
+                        enter a valid amount
+                      </div>
+                    }
+                    @if (topUpAmount !== null && topUpAmount > 100000) {
+                      <div class="field-error field-error--enter mb-2">
+                        <i class="bi bi-exclamation-circle-fill"></i>Maximum
+                        top-up is ₹1,00,000 at a time
+                      </div>
+                    }
+                    @if (topUpError) {
+                      <div class="field-error field-error--enter mb-2">
+                        <i class="bi bi-exclamation-circle-fill"></i
+                        >{{ topUpError }}
+                      </div>
+                    }
+                    <div class="d-flex gap-2">
+                      <button
+                        class="btn btn-sm rounded-3 fw-semibold text-white border-0 flex-grow-1 d-flex align-items-center justify-content-center gap-2"
+                        style="background-color: #2d81f7"
+                        (click)="openRazorpayCheckout()"
+                        [disabled]="
+                          topUpLoading ||
+                          !topUpAmount ||
+                          topUpAmount <= 0 ||
+                          topUpAmount > 100000
+                        "
+                      >
+                        @if (topUpLoading) {
+                          <span
+                            class="spinner-border spinner-border-sm"
+                            role="status"
+                          ></span>
+                        } @else {
+                          <img
+                            src="https://razorpay.com/favicon.png"
+                            width="16"
+                            height="16"
+                            alt="Razorpay"
+                            style="border-radius: 3px"
+                          />
+                        }
+                        Pay with Razorpay
+                      </button>
+                      <button
+                        class="btn btn-sm btn-outline-secondary rounded-3"
+                        (click)="cancelTopUp()"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Transaction history panel -->
+                <div
+                  class="col-12 wallet-expand-col"
+                  [class.wallet-expand-col--open]="showTransactions"
+                >
+                  <div
+                    class="wallet-txn-panel p-3 rounded-3"
+                    style="background: var(--frosted-blue-light, #f0f6ff)"
+                  >
+                    <p
+                      class="fw-semibold small mb-2"
+                      style="color: var(--deep-twilight)"
+                    >
+                      <i
+                        class="bi bi-clock-history me-1"
+                        style="color: var(--bright-teal-blue)"
+                      ></i>
+                      Transaction History
+                    </p>
+                    @if (
+                      !wallet.transactions || wallet.transactions.length === 0
+                    ) {
+                      <p class="text-muted small mb-0">No transactions yet.</p>
+                    } @else {
+                      <div class="wallet-txn-scroll d-flex flex-column gap-2">
+                        @for (
+                          txn of wallet.transactions.slice().reverse();
+                          track txn._id
+                        ) {
+                          <div
+                            class="wallet-txn-row d-flex justify-content-between align-items-center p-2 rounded-3 bg-white"
+                          >
+                            <div>
+                              <p
+                                class="mb-0 fw-medium"
+                                style="
+                                  color: var(--deep-twilight);
+                                  font-size: 0.83rem;
+                                "
+                              >
+                                {{ txn.description }}
+                              </p>
+                              @if (txn.bookingReference) {
+                                <small
+                                  class="text-muted"
+                                  style="font-size: 0.74rem"
+                                  >Ref: {{ txn.bookingReference }}</small
+                                >
+                              }
+                            </div>
+                            <span
+                              class="fw-bold ms-3 text-nowrap"
+                              style="font-size: 0.85rem"
+                              [style.color]="
+                                txn.type === 'topup' || txn.type === 'refund'
+                                  ? 'var(--bright-teal-blue)'
+                                  : 'var(--coral-red, #dc3545)'
+                              "
+                            >
+                              {{
+                                txn.type === "topup" || txn.type === "refund"
+                                  ? "+"
+                                  : "-"
+                              }}₹{{ txn.amount | number: "1.0-2" }}
+                            </span>
+                          </div>
+                        }
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+            }
+            <!-- ── End Wallet ──────────────────────────────────────── -->
+          </div>
+
+          @if (user?.role === "admin") {
+            <div class="mt-4">
+              <a
+                routerLink="/dashboard"
+                class="btn w-100 rounded-3 py-2 fw-bold text-white border-0"
+                style="background-color: var(--deep-twilight)"
+              >
+                <i class="bi bi-speedometer2 me-2"></i>
+                Go to Admin Dashboard
+              </a>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Loyalty Module -->
+      @if (user?.role === "customer" && user?._id) {
+        <app-loyalty [userId]="user!._id"></app-loyalty>
+      }
+
+      @if (user?.role === "customer") {
+        <div class="card border-0 shadow-sm rounded-4">
+          <div class="card-body p-4">
+            <h5 class="fw-bold mb-4" style="color: var(--deep-twilight)">
+              <i class="bi bi-clock-history me-2"></i>
+              Recent Bookings
+            </h5>
+
+            @if (isLoading) {
+              <div class="d-flex justify-content-center py-4">
+                <div
+                  class="spinner-border"
+                  style="color: var(--bright-teal-blue)"
+                  role="status"
+                >
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            }
+            @if (!isLoading && bookingError) {
+              <div class="text-center py-4">
+                <i
+                  class="bi bi-exclamation-triangle-fill fs-1 d-block mb-2 text-danger"
+                ></i>
+                <p class="text-danger fw-semibold mb-0">{{ bookingError }}</p>
+              </div>
+            }
+            @if (!isLoading && !bookingError && customerBookings.length === 0) {
+              <div class="text-center py-4 text-muted">
+                <i
+                  class="bi bi-calendar-x fs-1 d-block mb-2"
+                  style="color: var(--frosted-blue)"
+                ></i>
+                <p class="mb-0">No bookings found</p>
+              </div>
+            }
+
+            @if (!isLoading && customerBookings.length > 0) {
+              <div
+                class="d-flex flex-column gap-3 scroll-container"
+                style="max-height: 280px; overflow-y: auto"
+              >
+                @for (
+                  booking of customerBookings;
+                  track booking.bookingReference
+                ) {
+                  <div
+                    class="d-flex justify-content-between align-items-center p-3 rounded-3 border"
+                    style="border-color: var(--frosted-blue-light) !important"
+                  >
+                    <div>
+                      <p
+                        class="fw-semibold mb-1"
+                        style="color: var(--deep-twilight)"
+                      >
+                        @if (booking.type === "hotel") {
+                          {{ booking.destination }}
+                        } @else {
+                          {{ booking.type | titlecase }} to
+                          {{ booking.destination }}
+                        }
+                      </p>
+                      <small class="text-muted">
+                        <i class="bi bi-calendar3 me-1"></i>
+                        {{ booking.startDate | date: "MMM d, y" }}
+                        @if (booking.startDate !== booking.endDate) {
+                          — {{ booking.endDate | date: "MMM d, y" }}
+                        }
+                      </small>
+                    </div>
+
+                    <span
+                      class="badge rounded-pill px-3 py-2"
+                      [style.background-color]="
+                        booking.status === 'upcoming'
+                          ? 'var(--bright-teal-blue)'
+                          : booking.status === 'completed'
+                            ? 'var(--frosted-blue)'
+                            : 'var(--coral-red, #dc3545)'
+                      "
+                    >
+                      {{ booking.status | titlecase }}
+                    </span>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Delete Account -->
+        @if (user?.role === "customer") {
+          <div class="card border-0 shadow-sm rounded-4 mt-4">
+            <div class="card-body p-4">
+              <p class="text-muted small mb-3">
+                Once you delete your account all your data will be permanently
+                removed.
+              </p>
+
+              @if (!showDeleteConfirm) {
+                <button
+                  class="btn btn-danger rounded-3"
+                  (click)="showDeleteConfirm = true"
+                >
+                  <i class="bi bi-trash me-2"></i>
+                  Delete My Account
+                </button>
+              } @else {
+                <div class="alert alert-danger py-3">
+                  <p class="fw-semibold mb-2">
+                    Are you sure? This cannot be undone.
+                  </p>
+                  <div class="d-flex gap-2">
+                    <button
+                      class="btn btn-danger btn-sm rounded-3"
+                      (click)="deleteAccount()"
+                    >
+                      Yes, delete my account
+                    </button>
+                    <button
+                      class="btn btn-outline-secondary btn-sm rounded-3"
+                      (click)="showDeleteConfirm = false"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                  @if (deleteError) {
+                    <p class="text-danger small fw-semibold mt-2 mb-0">
+                      <i class="bi bi-exclamation-circle-fill me-1"></i
+                      >{{ deleteError }}
+                    </p>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>

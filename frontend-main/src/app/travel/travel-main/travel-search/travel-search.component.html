@@ -1,0 +1,205 @@
+<!-- src/app/components/travel/travel-search/travel-search.component.html -->
+
+<div class="search-container">
+  <!-- Mode Toggle -->
+  <div class="travelMode">
+    <button type="button" [class.active]="transportService.selectedMode() === 'flight'" (click)="selectMode('flight')">
+      <i class="bi bi-airplane-fill"></i> Flight
+    </button>
+
+    <button type="button" [class.active]="transportService.selectedMode() === 'train'" (click)="selectMode('train')">
+      <i class="bi bi-train-front-fill"></i> Train
+    </button>
+
+    <button type="button" [class.active]="transportService.selectedMode() === 'bus'" (click)="selectMode('bus')">
+      <i class="bi bi-bus-front-fill"></i> Bus
+    </button>
+  </div>
+
+  <!-- Search Form -->
+  <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+    <!-- Row 1: Origin + Destination + Date -->
+    <div class="row">
+      <!-- Origin -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            @if (transportService.selectedMode() === "flight") {
+            Departure Airport
+            } @else if (transportService.selectedMode() === "train") {
+            From Station
+            } @else {
+            Pickup Point
+            }
+          </label>
+          <input type="text" formControlName="origin" class="form-control"
+            [class.is-invalid]="searchForm.get('origin')?.invalid && searchForm.get('origin')?.touched"
+            placeholder="From" (input)="onOriginInput($event)" />
+          @if (searchForm.get('origin')?.invalid && searchForm.get('origin')?.touched) {
+          <div class="invalid-feedback d-block">
+            <i class="bi bi-exclamation-circle me-1"></i>Please enter a departure location.
+          </div>
+          }
+          @if (originSuggestions.length > 0) {
+          <ul class="suggestions">
+            @for (loc of originSuggestions; track loc._id) {
+            <li (click)="selectOrigin(loc)">
+              {{ loc.name }} ({{ loc.code }})
+            </li>
+            }
+          </ul>
+          }
+        </div>
+      </div>
+
+      <!-- Destination -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>
+            @if (transportService.selectedMode() === "flight") {
+            Arrival Airport
+            } @else if (transportService.selectedMode() === "train") {
+            To Station
+            } @else {
+            Drop Point
+            }
+          </label>
+          <input type="text" formControlName="destination" class="form-control"
+            [class.is-invalid]="searchForm.get('destination')?.invalid && searchForm.get('destination')?.touched"
+            placeholder="To" (input)="onDestInput($event)" />
+          @if (searchForm.get('destination')?.invalid && searchForm.get('destination')?.touched) {
+          <div class="invalid-feedback d-block">
+            <i class="bi bi-exclamation-circle me-1"></i>Please enter a destination.
+          </div>
+          }
+          @if (destSuggestions.length > 0) {
+          <ul class="suggestions">
+            @for (loc of destSuggestions; track loc._id) {
+            <li (click)="selectDest(loc)">
+              {{ loc.name }} ({{ loc.code }})
+            </li>
+            }
+          </ul>
+          }
+        </div>
+      </div>
+
+      <!-- Date -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" formControlName="date" class="form-control"
+            [class.is-invalid]="searchForm.get('date')?.invalid && searchForm.get('date')?.touched" [min]="today" />
+          @if (searchForm.get('date')?.touched) {
+          @if (searchForm.get('date')?.hasError('required')) {
+          <div class="invalid-feedback d-block">
+            <i class="bi bi-exclamation-circle me-1"></i>Please select a date.
+          </div>
+          }
+          @if (searchForm.get('date')?.hasError('pastDate')) {
+          <div class="invalid-feedback d-block">
+            <i class="bi bi-exclamation-circle me-1"></i>Date cannot be in the past.
+          </div>
+          }
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: Passengers + Mode-Specific Extras -->
+    <div class="row">
+      <!-- Passengers -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Passengers</label>
+          <div class="passenger-counter">
+            <button type="button" class="counter-btn" [disabled]="searchForm.get('passengers')?.value <= 1"
+              (click)="decrementPassengers()">
+              <i class="bi bi-dash"></i>
+            </button>
+            <span class="counter-value">{{
+              searchForm.get("passengers")?.value
+              }}</span>
+            <button type="button" class="counter-btn" [disabled]="searchForm.get('passengers')?.value >= 9"
+              (click)="incrementPassengers()">
+              <i class="bi bi-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flight: Cabin Class -->
+      @if (transportService.selectedMode() === "flight") {
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Cabin Class</label>
+          <select formControlName="cabinClass" class="form-control">
+            <option value="">All Classes</option>
+            <option value="economy">Economy</option>
+            <option value="premium economy">Premium Economy</option>
+            <option value="business">Business</option>
+          </select>
+        </div>
+      </div>
+      }
+
+      <!-- Train: Class + Quota -->
+      @if (transportService.selectedMode() === "train") {
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Class</label>
+          <select formControlName="travelClass" class="form-control">
+            <option value="">All Classes</option>
+            <option value="sleeper">Sleeper</option>
+            <option value="3ac">3AC</option>
+            <option value="2ac">2AC</option>
+            <option value="1ac">1AC</option>
+            <option value="cc">CC</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Quota</label>
+          <select formControlName="quota" class="form-control">
+            <option value="">Select Quota</option>
+            <option value="General">General</option>
+            <option value="Tatkal">Tatkal</option>
+            <option value="Ladies">Ladies</option>
+          </select>
+        </div>
+      </div>
+      }
+
+      <!-- Bus: Bus Type -->
+      @if (transportService.selectedMode() === "bus") {
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>Bus Type</label>
+          <select formControlName="busType" class="form-control">
+            <option value="">All Types</option>
+            <option value="sleeper">Sleeper</option>
+            <option value="seater">Seater</option>
+          </select>
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- Same route error -->
+    @if (sameRouteError) {
+    <div class="text-danger small mt-2 mb-2" style="font-weight:600;">
+      <i class="bi bi-exclamation-circle me-1"></i>
+      Source and destination cannot be the same.
+    </div>
+    }
+
+    <!-- Search Button -->
+    <div class="search-action">
+      <button type="submit" [disabled]="searchForm.invalid" class="btn btn-primary">
+        SEARCH JOURNEY
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,405 @@
+<div class="my-5 min-vh-100 d-flex align-items-center justify-content-center">
+  <div class="bg-white rounded-4 p-4 shadow col-8 col-md-5">
+    <div class="text-center mb-3">
+      <div
+        class="d-inline-flex align-items-center justify-content-center rounded-3 p-3 mb-3"
+        style="background-color: var(--bright-teal-blue)"
+      >
+        <i class="bi bi-person-plus-fill text-white fs-4"></i>
+      </div>
+      <h2 class="fw-bold" style="color: var(--deep-twilight)">
+        Create Account
+      </h2>
+      <p class="text-muted">Sign up to get started</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- Name -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Full Name</label>
+        <div class="input-group">
+          <span
+            class="input-group-text bg-white"
+            [class.border-danger]="nameControl?.invalid && nameControl?.touched"
+          >
+            <i class="bi bi-person" style="color: var(--bright-teal-blue)"></i>
+          </span>
+          <input
+            type="text"
+            formControlName="name"
+            [class.border-danger]="nameControl?.invalid && nameControl?.touched"
+            class="form-control border-start-0"
+            placeholder="Your full name"
+            (input)="onlyLetters($event)"
+            maxlength="50"
+          />
+        </div>
+        <!-- CHANGED: required only on submit, auto-dismisses -->
+        @if (showNameRequired) {
+          <div class="field-error field-error--timed">
+            <i class="bi bi-exclamation-circle-fill"></i>Full name is required
+          </div>
+        }
+        @if (
+          nameControl?.touched &&
+          nameControl?.errors?.["nameTooShort"] &&
+          nameControl?.value
+        ) {
+          <div class="field-error field-error--enter">
+            <i class="bi bi-exclamation-circle-fill"></i>Name must be at least 2
+            characters
+          </div>
+        }
+        @if (
+          nameControl?.touched &&
+          nameControl?.errors?.["nameTooLong"] &&
+          nameControl?.value
+        ) {
+          <div class="field-error field-error--enter">
+            <i class="bi bi-exclamation-circle-fill"></i>Name cannot exceed 50
+            characters
+          </div>
+        }
+        @if (
+          nameControl?.touched &&
+          nameControl?.errors?.["nameInvalid"] &&
+          nameControl?.value
+        ) {
+          <div class="field-error field-error--enter">
+            <i class="bi bi-exclamation-circle-fill"></i>Name can only contain
+            letters and spaces
+          </div>
+        }
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Email Address</label>
+        <div class="input-group">
+          <span
+            class="input-group-text bg-white"
+            [class.border-danger]="
+              emailControl?.invalid && emailControl?.touched
+            "
+          >
+            <i
+              class="bi bi-envelope"
+              style="color: var(--bright-teal-blue)"
+            ></i>
+          </span>
+          <input
+            type="text"
+            formControlName="email"
+            [class.border-danger]="
+              emailControl?.invalid && emailControl?.touched
+            "
+            class="form-control border-start-0"
+            placeholder="your@email.com"
+          />
+        </div>
+        <!-- CHANGED: required only on submit -->
+        @if (showEmailRequired) {
+          <div class="field-error field-error--timed">
+            <i class="bi bi-exclamation-circle-fill"></i>Email is required
+          </div>
+        }
+        <!-- Format error — persistent on blur -->
+        @if (
+          emailControl?.touched &&
+          emailControl?.errors?.["invalidEmail"] &&
+          emailControl?.value
+        ) {
+          <div class="field-error field-error--enter">
+            <i class="bi bi-exclamation-circle-fill"></i>Invalid email address
+          </div>
+        }
+        <!-- Email already taken -->
+        @if (
+          authService.authError() ===
+          "An account with this email already exists"
+        ) {
+          <div class="field-error field-error--enter">
+            <i class="bi bi-person-x-fill"></i>An account with this email
+            already exists
+          </div>
+        }
+      </div>
+
+      <!-- Phone -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Phone Number</label>
+        <div class="input-group">
+          <span
+            class="input-group-text bg-white"
+            [class.border-danger]="
+              phoneControl?.invalid && phoneControl?.touched
+            "
+          >
+            <i
+              class="bi bi-telephone"
+              style="color: var(--bright-teal-blue)"
+            ></i>
+          </span>
+          <input
+            type="tel"
+            formControlName="phone"
+            [class.border-danger]="
+              phoneControl?.invalid && phoneControl?.touched
+            "
+            class="form-control border-start-0"
+            placeholder="10-digit mobile number"
+            (input)="onlyNumbers($event)"
+            maxlength="10"
+          />
+        </div>
+        @if (showPhoneRequired) {
+          <div class="field-error field-error--timed">
+            <i class="bi bi-exclamation-circle-fill"></i>Phone number is
+            required
+          </div>
+        }
+        @if (
+          phoneControl?.touched &&
+          phoneControl?.errors?.["invalidPhone"] &&
+          phoneControl?.value
+        ) {
+          <div class="field-error field-error--enter">
+            <i class="bi bi-exclamation-circle-fill"></i>Enter a valid 10-digit
+            Indian mobile number (starts with 6–9)
+          </div>
+        }
+        <!-- Phone already taken -->
+        @if (
+          authService.authError() ===
+          "An account with this phone number already exists"
+        ) {
+          <div class="field-error field-error--enter">
+            <i class="bi bi-telephone-x-fill"></i>An account with this phone
+            number already exists
+          </div>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Password</label>
+        <div class="input-group">
+          <span
+            class="input-group-text bg-white"
+            [class.border-danger]="
+              passwordControl?.invalid &&
+              passwordControl?.touched &&
+              !showPasswordChecklist
+            "
+          >
+            <i class="bi bi-lock" style="color: var(--bright-teal-blue)"></i>
+          </span>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            [class.border-danger]="
+              passwordControl?.invalid &&
+              passwordControl?.touched &&
+              !showPasswordChecklist
+            "
+            class="form-control border-start-0 border-end-0"
+            placeholder="Min. 6 characters"
+            (focus)="showPasswordChecklist = true"
+            (blur)="showPasswordChecklist = !allRulesMet ? true : false"
+          />
+          <!-- CHANGED: eye toggle button -->
+          <button
+            type="button"
+            class="input-group-text bg-white"
+            (click)="showPassword = !showPassword"
+            tabindex="-1"
+            style="cursor: pointer; border-left: 0"
+          >
+            <i
+              class="bi"
+              [class.bi-eye]="!showPassword"
+              [class.bi-eye-slash]="showPassword"
+              style="color: var(--bright-teal-blue)"
+            ></i>
+          </button>
+        </div>
+
+        @if (showPasswordRequired) {
+          <div class="field-error field-error--timed">
+            <i class="bi bi-exclamation-circle-fill"></i>Password is required
+          </div>
+        }
+
+        <!-- CHANGED: live password checklist — shows on focus, each rule ticks green as met -->
+        @if (showPasswordChecklist && passwordControl?.value) {
+          <div class="pw-checklist">
+            <div class="pw-checklist__grid">
+              <div
+                class="pw-checklist__rule"
+                [class.pw-checklist__rule--met]="ruleMinLength"
+              >
+                <i
+                  class="bi"
+                  [class.bi-check-circle-fill]="ruleMinLength"
+                  [class.bi-circle]="!ruleMinLength"
+                ></i>
+                At least 6 characters
+              </div>
+              <div
+                class="pw-checklist__rule"
+                [class.pw-checklist__rule--met]="ruleUpper"
+              >
+                <i
+                  class="bi"
+                  [class.bi-check-circle-fill]="ruleUpper"
+                  [class.bi-circle]="!ruleUpper"
+                ></i>
+                One uppercase letter
+              </div>
+              <div
+                class="pw-checklist__rule"
+                [class.pw-checklist__rule--met]="ruleLower"
+              >
+                <i
+                  class="bi"
+                  [class.bi-check-circle-fill]="ruleLower"
+                  [class.bi-circle]="!ruleLower"
+                ></i>
+                One lowercase letter
+              </div>
+              <div
+                class="pw-checklist__rule"
+                [class.pw-checklist__rule--met]="ruleNumber"
+              >
+                <i
+                  class="bi"
+                  [class.bi-check-circle-fill]="ruleNumber"
+                  [class.bi-circle]="!ruleNumber"
+                ></i>
+                One number
+              </div>
+              <div
+                class="pw-checklist__rule"
+                [class.pw-checklist__rule--met]="ruleSpecial"
+              >
+                <i
+                  class="bi"
+                  [class.bi-check-circle-fill]="ruleSpecial"
+                  [class.bi-circle]="!ruleSpecial"
+                ></i>
+                One special character
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="mb-4">
+        <label class="form-label fw-semibold">Confirm Password</label>
+        <div class="input-group">
+          <span
+            class="input-group-text bg-white"
+            [class.border-danger]="
+              (confirmPasswordControl?.invalid &&
+                confirmPasswordControl?.touched) ||
+              passwordMismatch
+            "
+          >
+            <i
+              class="bi bi-lock-fill"
+              style="color: var(--bright-teal-blue)"
+            ></i>
+          </span>
+          <!-- CHANGED: show/hide on confirm password too -->
+          <input
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            formControlName="confirmPassword"
+            [class.border-danger]="
+              (confirmPasswordControl?.invalid &&
+                confirmPasswordControl?.touched) ||
+              passwordMismatch
+            "
+            class="form-control border-start-0 border-end-0"
+            placeholder="Re-enter your password"
+          />
+          <button
+            type="button"
+            class="input-group-text bg-white"
+            (click)="showConfirmPassword = !showConfirmPassword"
+            tabindex="-1"
+            style="cursor: pointer; border-left: 0"
+          >
+            <i
+              class="bi"
+              [class.bi-eye]="!showConfirmPassword"
+              [class.bi-eye-slash]="showConfirmPassword"
+              style="color: var(--bright-teal-blue)"
+            ></i>
+          </button>
+        </div>
+        @if (showConfirmPasswordRequired) {
+          <div class="field-error field-error--timed">
+            <i class="bi bi-exclamation-circle-fill"></i>Please confirm your
+            password
+          </div>
+        }
+        @if (passwordMismatch) {
+          <div class="field-error field-error--enter">
+            <i class="bi bi-exclamation-circle-fill"></i>Passwords do not match
+          </div>
+        }
+      </div>
+
+      <!-- signup.component.html -->
+
+      @if (
+        authService.authError() &&
+        authService.authError() !==
+          "An account with this email already exists" &&
+        authService.authError() !==
+          "An account with this phone number already exists"
+      ) {
+        <div class="field-error field-error--enter mb-3">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          {{ authService.authError() }}
+        </div>
+      }
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="btn w-100 rounded-3 py-3 fw-bold border-0 text-white mb-2"
+        [disabled]="authService.isLoading()"
+        style="background-color: var(--bright-teal-blue)"
+      >
+        @if (authService.isLoading()) {
+          <div class="d-flex justify-content-center align-items-center gap-1">
+            @for (item of [1, 2, 3]; track $index) {
+              <div
+                class="spinner-grow spinner-grow-sm"
+                style="color: white"
+                role="status"
+              >
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            }
+          </div>
+        } @else {
+          Create Account →
+        }
+      </button>
+    </form>
+
+    <p class="text-center mt-3 text-muted">
+      Already have an account?
+      <a
+        routerLink="/login"
+        style="color: var(--bright-teal-blue); text-decoration: none"
+        class="fw-semibold"
+      >
+        Sign in
+      </a>
+    </p>
+  </div>
+</div>

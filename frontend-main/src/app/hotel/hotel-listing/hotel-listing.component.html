@@ -1,0 +1,125 @@
+<div class="hotel-bg" style="min-height: 100vh; padding-bottom: 40px;">
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <div class="col" *ngFor="let hotel of hotels">
+    <div
+      class="card h-100 border-0 shadow-sm rounded-4"
+      style="cursor: pointer; transition: transform 0.2s ease;"
+      (mouseenter)="$any($event.currentTarget).style.transform='translateY(-4px)'"
+      (mouseleave)="$any($event.currentTarget).style.transform='none'"
+      (click)="viewDetail(hotel)">
+
+      <!-- Image + badges -->
+      <div style="height: 200px; border-radius: 16px 16px 0 0;
+                  overflow: hidden; position: relative;">
+        <img [src]="hotel.images[0]" class="w-100 h-100" style="object-fit: cover;" />
+
+        <!-- Top-left: Top Rated / Best Value badge -->
+        <div style="position: absolute; top: 12px; left: 12px;">
+          <span *ngIf="hotel.starRating >= 5"
+            class="badge px-2 py-1"
+            style="background: linear-gradient(135deg, #f59e0b, #ef4444);
+                   color: #fff; font-size: 10px; border-radius: 6px;">
+            ⭐ Top Rated
+          </span>
+          <span *ngIf="hotel.starRating === 3 || hotel.starRating === 4"
+            class="badge px-2 py-1"
+            style="background: linear-gradient(135deg, #10b981, #0891b2);
+                   color: #fff; font-size: 10px; border-radius: 6px;">
+            ✅ Best Value
+          </span>
+        </div>
+
+        <!-- Top-right: hotel type -->
+        <div style="position: absolute; top: 12px; right: 12px;">
+          <span class="badge px-2 py-1 text-capitalize"
+            style="background: rgba(0,0,0,0.45); backdrop-filter: blur(4px);
+                   color: #fff; font-size: 10px; border-radius: 6px;">
+            {{ hotel.hotelType }}
+          </span>
+        </div>
+
+        <!-- Bottom gradient -->
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 60px;
+                    background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);">
+        </div>
+      </div>
+
+      <!-- Card body -->
+      <div class="card-body pb-2">
+
+        <!-- Name + stars -->
+        <div class="d-flex justify-content-between align-items-start mb-1">
+          <h6 class="fw-bold mb-0" style="color: var(--deep-twilight); font-size: 15px;">
+            {{ hotel.name }}
+          </h6>
+          <div class="d-flex align-items-center gap-1 ms-2 flex-shrink-0">
+            <ng-container *ngFor="let s of [1,2,3,4,5]">
+              <span [style.color]="s <= hotel.starRating ? '#f59e0b' : '#d1d5db'"
+                style="font-size: 12px;">★</span>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <p class="text-muted small mb-2">📍 {{ hotel.location.city }}</p>
+
+        <!-- User rating + reviews -->
+        <div class="d-flex align-items-center gap-1 mb-2">
+          <span style="color: #f59e0b; font-size: 12px;">★</span>
+          <span class="fw-semibold small" style="color: var(--deep-twilight);">
+            {{ hotel.userRating || '4.0' }}
+          </span>
+          <span class="text-muted small">
+            · {{ reviewCounts[hotel._id] || 0 }} review{{ reviewCounts[hotel._id] !== 1 ? 's' : '' }}
+          </span>
+        </div>
+
+        <!-- Amenity pills -->
+        <div class="d-flex flex-wrap gap-1">
+          <span *ngFor="let a of hotel.amenities.slice(0, 3)"
+            class="badge rounded-pill px-2 py-1"
+            style="background-color: var(--light-cyan);
+                   color: var(--bright-teal-blue); font-size: 10px;">
+            {{ a }}
+          </span>
+          <span *ngIf="hotel.amenities.length > 3"
+            class="badge rounded-pill px-2 py-1"
+            style="background-color: #f1f5f9; color: #64748b; font-size: 10px;">
+            +{{ hotel.amenities.length - 3 }} more
+          </span>
+        </div>
+      </div>
+
+      <!-- Card footer -->
+      <div class="card-footer bg-white border-0 pt-0 pb-3 px-3">
+        <hr class="my-2" />
+        <div class="d-flex justify-content-between align-items-end">
+
+          <!-- Price block -->
+          <div>
+            <div>
+              <span class="fw-bold" style="font-size: 18px; color: var(--deep-twilight);">
+                {{ getTotalStartingPrice(hotel) | currency:'INR':'symbol':'1.0-0' }}
+              </span>
+              <span class="text-muted small"> /night</span>
+            </div>
+            <!-- Guest + room context line -->
+            <p class="text-muted mb-0" style="font-size: 11px;">
+              {{ rooms }} room{{ rooms > 1 ? 's' : '' }} ·
+              {{ adults }} adult{{ adults > 1 ? 's' : '' }}<ng-container *ngIf="children > 0">, {{ children }} child{{ children > 1 ? 'ren' : '' }}</ng-container><ng-container *ngIf="infants > 0">, {{ infants }} infant{{ infants > 1 ? 's' : '' }}</ng-container>
+            </p>
+          </div>
+
+          <button
+            class="btn btn-primary btn-sm px-3 py-1 fw-semibold"
+            style="border-radius: 20px; font-size: 13px;"
+            (click)="viewDetail(hotel); $event.stopPropagation()">
+            View Details →
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

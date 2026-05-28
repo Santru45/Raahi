@@ -1,0 +1,59 @@
+<div class="rounded-4 p-3 mb-3" style="background-color: #f8f9fa; border: 1px solid #e9ecef;">
+
+  <div class="d-flex justify-content-between align-items-start mb-2">
+
+    <!-- Left — avatar + name + verified + date -->
+    <div class="d-flex align-items-center gap-3">
+      <!-- Avatar circle -->
+      <div class="d-flex align-items-center justify-content-center rounded-circle fw-bold flex-shrink-0" style="width: 42px; height: 42px;
+                  background-color: var(--light-cyan);
+                  color: var(--bright-teal-blue); font-size: 16px;">
+        {{ review.name.charAt(0).toUpperCase() }}
+      </div>
+      <div>
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+          <span class="fw-semibold" style="color: var(--deep-twilight);">{{ review.name }}</span>
+          <span class="badge px-2 py-1 rounded-pill"
+            style="background-color: #d1fae5; color: #065f46; font-size: 10px; white-space: nowrap;">
+            ✔ Verified
+          </span>
+        </div>
+        <p class="text-muted mb-0" style="font-size: 11px;">{{ review.createdAt | date:'dd MMM yyyy' }}</p>
+      </div>
+    </div>
+
+    <!-- Right — stars + rating number -->
+    <div class="d-flex align-items-center gap-1 px-2 py-1 rounded-3 flex-shrink-0 ms-2"
+      style="background-color: var(--light-cyan);">
+      <ng-container *ngFor="let star of [1,2,3,4,5]">
+        <span *ngIf="star <= floor(review.rating)" style="color: #f59e0b; font-size: 13px;">★</span>
+        <span *ngIf="hasHalfStar(review.rating, star)" style="color: #f59e0b; font-size: 13px; opacity: 0.6;">★</span>
+        <span *ngIf="star > ceil(review.rating)" style="color: #d1d5db; font-size: 13px;">★</span>
+      </ng-container>
+      <span class="fw-bold ms-1" style="font-size: 12px; color: var(--deep-twilight);">
+        {{ review.rating }}
+      </span>
+    </div>
+
+  </div>
+
+  <!-- Comment -->
+  <p class="text-muted small mb-2 ms-1">{{ review.comment }}</p>
+
+  <!-- Images if any -->
+  <div class="d-flex flex-wrap gap-2 ms-1" *ngIf="review.images && review.images.length > 0">
+    <img *ngFor="let img of review.images" [src]="img" alt="review image" (click)="openImage(img)" style="width: 65px; height: 65px; object-fit: cover;
+                border-radius: 8px; border: 1px solid #e2e8f0; cursor: pointer;" />
+  </div>
+
+</div>
+
+<!-- Image Lightbox Modal -->
+<div *ngIf="selectedImage" class="lightbox-overlay" (click)="closeImage()">
+  <div class="lightbox-content" (click)="$event.stopPropagation()">
+    <button class="lightbox-close" (click)="closeImage()">
+      <i class="bi bi-x-lg"></i>
+    </button>
+    <img [src]="selectedImage" alt="Full size image" class="lightbox-image" />
+  </div>
+</div>

@@ -1,0 +1,260 @@
+<!-- booking-success.component.html -->
+
+@if (booking) {
+  <div class="travel-bg">
+    <div class="success-page">
+      <!-- ═══════════ SUCCESS HEADER ═══════════ -->
+      <div class="text-center mb-4">
+        <div class="success-icon mx-auto mb-3">
+          <i class="bi bi-check-circle-fill"></i>
+        </div>
+        <h3 class="fw-bold text-success mb-1">Booking Confirmed!</h3>
+        <p class="text-muted small">Your digital ticket is ready</p>
+      </div>
+
+      <!-- ═══════════ TICKET CARD ═══════════ -->
+      <div class="ticket-card">
+        <!-- Ticket Header: Mode + Booking Ref -->
+        <div
+          class="ticket-header d-flex justify-content-between align-items-center"
+        >
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi {{ modeIcon }} text-white fs-5"></i>
+            <div>
+              <span class="fw-bold text-white">{{
+                snapshot.operatorName
+              }}</span>
+              <small class="d-block text-white-50">{{
+                snapshot.serviceNumber
+              }}</small>
+            </div>
+          </div>
+          <div class="text-end">
+            <small class="d-block text-white-50">Booking Ref</small>
+            <span class="fw-bold text-white booking-ref">{{
+              booking.bookingReference
+            }}</span>
+          </div>
+        </div>
+
+        <!-- Tear line -->
+        <div class="tear-line">
+          <div class="tear-circle left"></div>
+          <div class="tear-dashes"></div>
+          <div class="tear-circle right"></div>
+        </div>
+
+        <!-- Ticket Body -->
+        <div class="ticket-body">
+          <!-- Route Section -->
+          <div
+            class="route-section d-flex justify-content-between align-items-center mb-3"
+          >
+            <div class="text-center">
+              <p class="route-city fw-bold mb-0">{{ snapshot.from }}</p>
+              <small class="text-muted">{{
+                snapshot.departureTime | date: "HH:mm"
+              }}</small>
+
+              <small class="text-muted">{{
+                snapshot.departureTime | date: "dd MMM yyyy"
+              }}</small>
+            </div>
+
+            <div class="route-connector text-center">
+              <i class="bi {{ modeIcon }} route-icon"></i>
+              <div class="route-line"></div>
+              <small class="text-muted">{{
+                snapshot.cabinClass | titlecase
+              }}</small>
+            </div>
+
+            <div class="text-center">
+              <p class="route-city fw-bold mb-0">{{ snapshot.to }}</p>
+              <small class="text-muted">{{
+                snapshot.arrivalTime | date: "HH:mm"
+              }}</small>
+
+              <small class="text-muted">{{
+                snapshot.arrivalTime | date: "dd MMM yyyy"
+              }}</small>
+            </div>
+          </div>
+
+          <!-- Boarding & Drop Points (Bus only) -->
+          @if (hasBoardingPoint) {
+            <div
+              class="d-flex justify-content-between small mb-3 p-2 rounded-2"
+              style="background: #f0fdf4"
+            >
+              <div>
+                <small class="text-muted d-block">Boarding Point</small>
+                <span class="fw-semibold">{{ booking.boardingPoint }}</span>
+              </div>
+              <div class="text-end">
+                <small class="text-muted d-block">Drop Point</small>
+                <span class="fw-semibold">{{ booking.dropPoint }}</span>
+              </div>
+            </div>
+          }
+
+          <!-- Passenger Details -->
+          <div class="mb-3">
+            <small class="text-uppercase text-muted fw-semibold ls-1"
+              >Passengers</small
+            >
+            @for (p of passengers; track $index) {
+              <div
+                class="d-flex justify-content-between align-items-center py-2 border-bottom"
+              >
+                <div>
+                  <span class="small fw-semibold">
+                    {{ p.firstName }} {{ p.lastName }}
+                    @if (p.isPrimary) {
+                      <span class="badge bg-primary ms-1" style="font-size: 9px"
+                        >Primary</span
+                      >
+                    }
+                  </span>
+                  <div class="d-flex gap-2 mt-1">
+                    <small class="text-muted">
+                      <i class="bi bi-person-vcard me-1"></i>{{ p.idType }}:
+                      {{ p.idNumber }}
+                    </small>
+                  </div>
+                </div>
+                <div class="text-end">
+                  <small class="d-block text-muted">Seat</small>
+                  <span class="badge bg-light text-dark border fw-semibold">{{
+                    p.seatNumber
+                  }}</span>
+                  @if (p.berthPreference) {
+                    <small class="d-block text-muted mt-1"
+                      >Berth: {{ p.berthPreference }}</small
+                    >
+                  }
+                </div>
+              </div>
+            }
+          </div>
+
+          <!-- QR Code + Ticket ID Section -->
+          <div
+            class="d-flex justify-content-between align-items-center mb-3 p-3 rounded-3 qr-section"
+          >
+            <div>
+              <small class="text-muted d-block mb-1">Ticket ID</small>
+              <span class="fw-bold ticket-id">{{ booking.ticketId }}</span>
+
+              <small class="text-muted d-block mt-2 mb-1">Status</small>
+              <span class="badge bg-success">
+                <i class="bi bi-check-circle me-1"></i
+                >{{ booking.bookingStatus | titlecase }}
+              </span>
+
+              <small class="text-muted d-block mt-2 mb-1">Booked On</small>
+              <span class="small fw-medium">{{
+                booking.bookedAt | date: "dd MMM yyyy, hh:mm a"
+              }}</span>
+            </div>
+            <div class="text-center">
+              <img
+                [src]="qrCodeUrl"
+                alt="QR Code"
+                class="qr-image"
+                width="140"
+                height="140"
+              />
+              <small class="d-block text-muted mt-1" style="font-size: 10px"
+                >Scan for details</small
+              >
+            </div>
+          </div>
+
+          <!-- Price Summary -->
+          <div class="mb-3">
+            <small class="text-uppercase text-muted fw-semibold ls-1"
+              >Payment Summary</small
+            >
+            <div class="d-flex justify-content-between small py-1">
+              <span>Base Fare ({{ passengers.length }} pax)</span>
+              <span>₹{{ pricing.baseAmount }}</span>
+            </div>
+            <div class="d-flex justify-content-between small py-1">
+              <span>Tax</span>
+              <span>₹{{ pricing.taxAmount }}</span>
+            </div>
+            @if (hasLoyaltyDiscount) {
+              <div
+                class="d-flex justify-content-between small py-1 text-warning fw-semibold"
+              >
+                <span
+                  ><i class="bi bi-coin me-1"></i>Loyalty Discount ({{
+                    booking.coinsRedeemed
+                  }}
+                  coins)</span
+                >
+                <span>- ₹{{ pricing.loyaltyDiscount }}</span>
+              </div>
+            }
+            <div
+              class="d-flex justify-content-between border-top pt-2 mt-1 fw-bold"
+            >
+              <span>Total Paid</span>
+              <span>₹{{ pricing.totalAmount }}</span>
+            </div>
+            <div class="d-flex justify-content-between small py-1 text-muted">
+              <span>Payment Method</span>
+              <span>{{ booking.paymentMethod | titlecase }}</span>
+            </div>
+            @if (booking.coinsEarned > 0) {
+              <div
+                class="d-flex align-items-center gap-1 small text-success mt-1"
+              >
+                <i class="bi bi-plus-circle"></i>
+                <span
+                  >{{ booking.coinsEarned }} loyalty coins earned from this
+                  booking</span
+                >
+              </div>
+            }
+          </div>
+
+          <!-- PNR List -->
+          <div class="mb-2">
+            <small class="text-uppercase text-muted fw-semibold ls-1"
+              >PNR Numbers</small
+            >
+            @for (p of passengers; track $index) {
+              <div class="d-flex justify-content-between small py-1">
+                <span>{{ p.firstName }} {{ p.lastName }}</span>
+                <span class="fw-bold font-monospace">{{ p.pnr }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ ACTION BUTTONS ═══════════ -->
+      <div class="d-flex gap-2 mt-4 justify-content-center">
+        <button
+          class="btn btn-primary px-4 py-2 d-flex align-items-center gap-2"
+          (click)="downloadTicket()"
+        >
+          <i class="bi bi-download"></i> Download Ticket
+        </button>
+        <button
+          class="btn btn-outline-primary px-4 py-2 d-flex align-items-center gap-2"
+          (click)="bookAnother()"
+        >
+          <i class="bi bi-plus-circle"></i> Book Another
+        </button>
+      </div>
+
+      <p class="text-center text-muted mt-3 small">
+        <i class="bi bi-info-circle me-1"></i> A confirmation has been sent to
+        your registered email.
+      </p>
+    </div>
+  </div>
+}

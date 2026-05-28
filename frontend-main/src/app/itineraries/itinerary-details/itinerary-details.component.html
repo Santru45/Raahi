@@ -1,0 +1,528 @@
+﻿<div class="details-layout">
+
+  <!-- LEFT PANEL -->
+  <aside class="info-panel">
+    <div class="cover-wrap">
+      <img class="cover-img" [src]="currentTrip?.image_url || currentTrip?.images?.[0] || ''" alt="Trip cover"
+        (error)="$any($event.target).style.display='none'"
+        [style.display]="(currentTrip?.image_url || currentTrip?.images?.[0]) ? 'block' : 'none'" />
+      <div class="cover-fallback">
+        <div class="cover-fallback__hint">
+          <i class="bi bi-camera"></i>
+          <span>Add a cover image</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW MODE -->
+    <ng-container *ngIf="!isEditingTrip">
+      <h2 class="panel-title">{{ currentTrip?.trip_name || 'My Trip' }}</h2>
+      <p class="panel-destination" *ngIf="currentTrip?.destination">
+        <i class="bi bi-geo-alt-fill me-1"></i>{{ currentTrip.destination }}
+      </p>
+      <p class="panel-dates" *ngIf="currentTrip?.type === 'custom' && currentTrip?.start_date && currentTrip?.end_date">
+        <i class="bi bi-calendar3 me-1"></i>
+        {{ currentTrip.start_date | date:'mediumDate' }} — {{ currentTrip.end_date | date:'mediumDate' }}
+      </p>
+      <p class="panel-dates fst-italic"
+        *ngIf="currentTrip?.type === 'custom' && (!currentTrip?.start_date || !currentTrip?.end_date)">
+        <i class="bi bi-calendar-x me-1"></i>No activities planned yet
+      </p>
+      <span class="std-badge" *ngIf="currentTrip?.type === 'std'">
+        <i class="bi bi-stars me-1"></i>Curated trip idea
+      </span>
+      <hr class="panel-divider" />
+
+      <!-- Edit / Delete row -->
+      <div class="trip-meta-actions mb-2" *ngIf="currentTrip?.type === 'custom'">
+        <button class="btn btn-sm btn-outline-primary rounded-3 flex-grow-1" (click)="openEditTrip()">
+          <i class="bi bi-pencil me-1"></i> Edit Trip
+        </button>
+        <button class="btn btn-sm btn-outline-danger rounded-3" (click)="deleteTrip()">
+          <i class="bi bi-trash3"></i>
+        </button>
+      </div>
+
+      <div class="panel-actions" *ngIf="currentTrip?.type === 'custom'">
+        <button class="btn btn-primary w-100 rounded-3 fw-semibold" (click)="toggleForm()">
+          {{ showAddForm ? '✕ Close Form' : '+ Add Activity' }}
+        </button>
+        <button class="btn btn-outline-info w-100 rounded-3" (click)="openSyncPanel()">
+          <i class="bi bi-arrow-repeat me-1"></i> Sync Bookings
+        </button>
+        <button class="btn btn-outline-secondary w-100 rounded-3" (click)="downloadItinerary()">
+          <i class="bi bi-download me-1"></i> Download Itinerary
+        </button>
+        <button class="btn btn-outline-secondary w-100 rounded-3" (click)="exportToCalendar()">
+          <i class="bi bi-calendar-event me-1"></i> Export to Calendar
+        </button>
+      </div>
+
+    </ng-container>
+
+    <!-- EDIT MODE -->
+    <ng-container *ngIf="isEditingTrip">
+      <form [formGroup]="editForm" (ngSubmit)="saveEditTrip()" class="edit-trip-form">
+        <div class="mb-3">
+          <label class="form-label small fw-semibold">Trip Name</label>
+          <input type="text" formControlName="trip_name" class="form-control rounded-3"
+            [class.is-invalid]="editForm.get('trip_name')?.invalid && editForm.get('trip_name')?.touched"
+            placeholder="e.g. Paris Adventure" />
+          @if (editForm.get('trip_name')?.touched) {
+          @if (editForm.get('trip_name')?.hasError('required')) {
+          <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Trip name is required.
+          </div>
+          } @else if (editForm.get('trip_name')?.hasError('minlength')) {
+          <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Trip name must be at least
+            2 characters.</div>
+          } @else if (editForm.get('trip_name')?.hasError('maxlength')) {
+          <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Trip name cannot exceed 60
+            characters.</div>
+          }
+          }
+        </div>
+        <div class="mb-3">
+          <label class="form-label small fw-semibold">Destination <span
+              class="text-muted fw-normal">(optional)</span></label>
+          <input type="text" formControlName="destination" class="form-control rounded-3"
+            [class.is-invalid]="editForm.get('destination')?.invalid && editForm.get('destination')?.touched"
+            placeholder="e.g. Goa, India" />
+          @if (editForm.get('destination')?.touched && editForm.get('destination')?.hasError('maxlength')) {
+          <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Destination cannot exceed
+            80 characters.</div>
+          }
+        </div>
+        <div class="mb-3">
+          <label class="form-label small fw-semibold">Cover Image URL</label>
+          <input type="text" formControlName="image_url" class="form-control rounded-3"
+            [class.is-invalid]="editForm.get('image_url')?.invalid && editForm.get('image_url')?.touched"
+            placeholder="https://..." />
+          @if (editForm.get('image_url')?.touched && editForm.get('image_url')?.hasError('pattern')) {
+          <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Please enter a valid URL
+            starting with http:// or https://.</div>
+          }
+        </div>
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-primary flex-grow-1 rounded-3 fw-semibold" [disabled]="editForm.invalid">
+            <i class="bi bi-check2 me-1"></i> Save
+          </button>
+          <button type="button" class="btn btn-outline-secondary rounded-3" (click)="cancelEditTrip()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </ng-container>
+  </aside>
+
+  <!-- RIGHT COLUMN -->
+  <main class="timeline-col">
+    <div class="add-form-card card border-0 rounded-4 shadow-sm bg-white p-4 mb-4" *ngIf="showAddForm">
+      <h5 class="fw-semibold mb-3">New Activity</h5>
+      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()" class="row g-3">
+
+        <!-- Category always visible -->
+        <div class="col-12 col-md-4">
+          <label class="form-label small fw-semibold">Category</label>
+          <select formControlName="category" class="form-select rounded-3">
+            <option value="travel">Travel</option>
+            <option value="hotel">Hotel</option>
+            <option value="activity">Activity</option>
+          </select>
+        </div>
+
+        <!-- ── TRAVEL ── -->
+        <ng-container *ngIf="currentCategory === 'travel'">
+          <div class="col-12 col-md-4">
+            <label class="form-label small fw-semibold">Mode of Transport</label>
+            <select formControlName="transport" class="form-select rounded-3">
+              <option value="flight">✈️ Flight</option>
+              <option value="train">🚆 Train</option>
+              <option value="bus">🚌 Bus</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-4">
+            <label class="form-label small fw-semibold">Operator / Airline <span
+                class="text-muted fw-normal">(optional)</span></label>
+            <input type="text" formControlName="operator" class="form-control rounded-3"
+              placeholder="e.g. IndiGo, IRCTC" />
+          </div>
+          <div class="col-12 col-md-4">
+            <label class="form-label small fw-semibold">From</label>
+            <input type="text" formControlName="from" class="form-control rounded-3"
+              [class.is-invalid]="itemForm.get('from')?.invalid && itemForm.get('from')?.touched"
+              placeholder="e.g. Delhi" />
+            @if (itemForm.get('from')?.touched) {
+            @if (itemForm.get('from')?.hasError('required')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Departure city is
+              required.</div>
+            } @else if (itemForm.get('from')?.hasError('maxlength')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Cannot exceed 80
+              characters.</div>
+            }
+            }
+          </div>
+          <div class="col-12 col-md-4">
+            <label class="form-label small fw-semibold">To</label>
+            <input type="text" formControlName="to" class="form-control rounded-3"
+              [class.is-invalid]="itemForm.get('to')?.invalid && itemForm.get('to')?.touched"
+              placeholder="e.g. Mumbai" />
+            @if (itemForm.get('to')?.touched) {
+            @if (itemForm.get('to')?.hasError('required')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Arrival city is required.
+            </div>
+            } @else if (itemForm.get('to')?.hasError('maxlength')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Cannot exceed 80
+              characters.</div>
+            }
+            }
+          </div>
+          <div class="col-12 col-md-2">
+            <label class="form-label small fw-semibold">Departure Date</label>
+            <input type="date" formControlName="date" class="form-control rounded-3"
+              [class.is-invalid]="itemForm.get('date')?.invalid && itemForm.get('date')?.touched" [min]="today" />
+            @if (itemForm.get('date')?.touched) {
+            @if (itemForm.get('date')?.hasError('required')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Departure date is
+              required.</div>
+            } @else if (itemForm.get('date')?.hasError('pastDate')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Date cannot be in the
+              past.</div>
+            }
+            }
+          </div>
+          <div class="col-12 col-md-2">
+            <label class="form-label small fw-semibold">Time <span
+                class="text-muted fw-normal">(optional)</span></label>
+            <input type="time" formControlName="depTime" class="form-control rounded-3" />
+          </div>
+          <div class="col-12">
+            <label class="form-label small fw-semibold">Notes <span
+                class="text-muted fw-normal">(optional)</span></label>
+            <input type="text" formControlName="notes" class="form-control rounded-3"
+              placeholder="e.g. Window seat booked" />
+          </div>
+        </ng-container>
+
+        <!-- ── HOTEL ── -->
+        <ng-container *ngIf="currentCategory === 'hotel'">
+          <div class="col-12 col-md-5">
+            <label class="form-label small fw-semibold">Hotel Name</label>
+            <input type="text" formControlName="hotelName" class="form-control rounded-3"
+              [class.is-invalid]="itemForm.get('hotelName')?.invalid && itemForm.get('hotelName')?.touched"
+              placeholder="e.g. The Taj Mahal Palace" />
+            @if (itemForm.get('hotelName')?.touched) {
+            @if (itemForm.get('hotelName')?.hasError('required')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Hotel name is required.
+            </div>
+            } @else if (itemForm.get('hotelName')?.hasError('maxlength')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Cannot exceed 100
+              characters.</div>
+            }
+            }
+          </div>
+          <div class="col-12 col-md-3">
+            <label class="form-label small fw-semibold">City / Location</label>
+            <input type="text" formControlName="city" class="form-control rounded-3"
+              [class.is-invalid]="itemForm.get('city')?.invalid && itemForm.get('city')?.touched"
+              placeholder="e.g. Mumbai" />
+            @if (itemForm.get('city')?.touched) {
+            @if (itemForm.get('city')?.hasError('required')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>City is required.</div>
+            } @else if (itemForm.get('city')?.hasError('maxlength')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Cannot exceed 80
+              characters.</div>
+            }
+            }
+          </div>
+          <div class="col-12 col-md-3">
+            <label class="form-label small fw-semibold">Room Type <span
+                class="text-muted fw-normal">(optional)</span></label>
+            <input type="text" formControlName="roomType" class="form-control rounded-3"
+              placeholder="e.g. Deluxe Double" />
+          </div>
+          <div class="col-12 col-md-3">
+            <label class="form-label small fw-semibold">Check-in Date</label>
+            <input type="date" formControlName="checkIn" class="form-control rounded-3"
+              [class.is-invalid]="itemForm.get('checkIn')?.invalid && itemForm.get('checkIn')?.touched" [min]="today" />
+            @if (itemForm.get('checkIn')?.touched) {
+            @if (itemForm.get('checkIn')?.hasError('required')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Check-in date is
+              required.</div>
+            } @else if (itemForm.get('checkIn')?.hasError('pastDate')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Check-in date cannot be
+              in the past.</div>
+            }
+            }
+          </div>
+          <div class="col-12 col-md-3">
+            <label class="form-label small fw-semibold">Check-out Date</label>
+            <input type="date" formControlName="checkOut" class="form-control rounded-3"
+              [class.is-invalid]="itemForm.get('checkOut')?.invalid && itemForm.get('checkOut')?.touched"
+              [min]="itemForm.get('checkIn')?.value || today" />
+            @if (itemForm.get('checkOut')?.touched) {
+            @if (itemForm.get('checkOut')?.hasError('required')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Check-out date is
+              required.</div>
+            } @else if (itemForm.get('checkOut')?.hasError('checkOutBeforeCheckIn')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Check-out must be after
+              check-in.</div>
+            }
+            }
+          </div>
+          <div class="col-12">
+            <label class="form-label small fw-semibold">Notes <span
+                class="text-muted fw-normal">(optional)</span></label>
+            <input type="text" formControlName="notes" class="form-control rounded-3"
+              placeholder="e.g. Breakfast included" />
+          </div>
+        </ng-container>
+
+        <!-- ── ACTIVITY ── -->
+        <ng-container *ngIf="currentCategory === 'activity'">
+          <div class="col-12 col-md-5">
+            <label class="form-label small fw-semibold">Activity Name</label>
+            <input type="text" formControlName="activityName" class="form-control rounded-3"
+              [class.is-invalid]="itemForm.get('activityName')?.invalid && itemForm.get('activityName')?.touched"
+              placeholder="e.g. Taj Mahal Visit" />
+            @if (itemForm.get('activityName')?.touched) {
+            @if (itemForm.get('activityName')?.hasError('required')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Activity name is
+              required.</div>
+            } @else if (itemForm.get('activityName')?.hasError('minlength')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Activity name must be at
+              least 3 characters.</div>
+            } @else if (itemForm.get('activityName')?.hasError('maxlength')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Cannot exceed 100
+              characters.</div>
+            }
+            }
+          </div>
+          <div class="col-12 col-md-3">
+            <label class="form-label small fw-semibold">Location</label>
+            <input type="text" formControlName="location" class="form-control rounded-3"
+              [class.is-invalid]="itemForm.get('location')?.invalid && itemForm.get('location')?.touched"
+              placeholder="e.g. Agra" />
+            @if (itemForm.get('location')?.touched) {
+            @if (itemForm.get('location')?.hasError('required')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Location is required.
+            </div>
+            } @else if (itemForm.get('location')?.hasError('maxlength')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Cannot exceed 80
+              characters.</div>
+            }
+            }
+          </div>
+          <div class="col-12 col-md-3">
+            <label class="form-label small fw-semibold">Date</label>
+            <input type="date" formControlName="date" class="form-control rounded-3"
+              [class.is-invalid]="itemForm.get('date')?.invalid && itemForm.get('date')?.touched" [min]="today" />
+            @if (itemForm.get('date')?.touched) {
+            @if (itemForm.get('date')?.hasError('required')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Date is required.</div>
+            } @else if (itemForm.get('date')?.hasError('pastDate')) {
+            <div class="invalid-feedback d-block"><i class="bi bi-exclamation-circle me-1"></i>Date cannot be in the
+              past.</div>
+            }
+            }
+          </div>
+          <div class="col-12">
+            <label class="form-label small fw-semibold">Notes <span
+                class="text-muted fw-normal">(optional)</span></label>
+            <input type="text" formControlName="notes" class="form-control rounded-3"
+              placeholder="e.g. Book tickets in advance" />
+          </div>
+        </ng-container>
+
+        <!-- Submit row always at bottom -->
+        <div class="col-12 d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary px-4 fw-semibold rounded-3" [disabled]="itemForm.invalid">
+            Save to Timeline
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="timeline-wrapper position-relative">
+      <div class="timeline-line"></div>
+      <div *ngFor="let item of items; let i = index" class="timeline-item">
+        <div class="timeline-marker" [ngClass]="{
+            'category-travel':   item.category === 'travel',
+            'category-hotel':    item.category === 'hotel',
+            'category-activity': item.category === 'activity',
+            'category-default':  !item.category
+          }">
+          <svg *ngIf="item.category === 'travel'" viewBox="0 0 24 24" fill="none" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 2 11 13" />
+            <path d="m22 2-7 20-4-9-9-4 20-7z" />
+          </svg>
+          <svg *ngIf="item.category === 'hotel'" viewBox="0 0 24 24" fill="none" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+          </svg>
+          <svg *ngIf="item.category === 'activity' || !item.category" viewBox="0 0 24 24" fill="none" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+        </div>
+        <div class="timeline-card card rounded-4 p-3" [class.active]="selectedActivityId === item.id"
+          [style.cursor]="item.category === 'hotel' && !item.source_booking_ref ? 'pointer' : 'default'"
+          (click)="toggleActivity(item)">
+          <div class="d-flex justify-content-between align-items-start">
+
+            <!-- ── TRAVEL card body ── -->
+            <div class="flex-grow-1" *ngIf="item.category === 'travel'">
+              <small class="timeline-date" *ngIf="currentTrip?.type === 'custom' && item.date">
+                <i class="bi bi-calendar3 me-1"></i>{{ item.date | date:'mediumDate' }}
+              </small>
+              <p class="card-title mb-1">{{ travelMode(item) }}</p>
+              <div class="travel-route" *ngIf="travelRoute(item) as route">
+                <span class="route-city">{{ route.from }}</span>
+                <span class="route-arrow"><i class="bi bi-arrow-right"></i></span>
+                <span class="route-city">{{ route.to }}</span>
+              </div>
+              <div class="detail-chips mt-2">
+                <span class="detail-chip" *ngFor="let chip of notesChips(item.notes)">{{ chip }}</span>
+              </div>
+            </div>
+
+            <!-- ── HOTEL card body ── -->
+            <div class="flex-grow-1" *ngIf="item.category === 'hotel'">
+              <small class="timeline-date" *ngIf="currentTrip?.type === 'custom' && item.date">
+                <i class="bi bi-calendar3 me-1"></i>Check-in: {{ item.date | date:'mediumDate' }}
+                <ng-container *ngIf="hotelChipValue(item.notes, 'Check-out') as co">
+                  &nbsp;→&nbsp;Check-out: {{ co | date:'mediumDate' }}
+                </ng-container>
+              </small>
+              <p class="card-title mb-1">{{ item.title }}</p>
+              <small class="card-location"><i class="bi bi-geo-alt me-1"></i>{{ item.location }}</small>
+              <div class="detail-chips mt-2">
+                <span class="detail-chip detail-chip--room" *ngIf="hotelChipValue(item.notes, 'Room') as rt">
+                  <i class="bi bi-door-open me-1"></i>{{ rt }}
+                </span>
+                <span class="detail-chip" *ngFor="let chip of hotelExtraChips(item.notes)">{{ chip }}</span>
+              </div>
+            </div>
+
+            <!-- ── ACTIVITY card body ── -->
+            <div class="flex-grow-1" *ngIf="item.category === 'activity' || !item.category">
+              <small class="timeline-date" *ngIf="currentTrip?.type === 'custom' && item.date">
+                <i class="bi bi-calendar3 me-1"></i>{{ item.date | date:'mediumDate' }}
+              </small>
+              <p class="card-title mb-1">{{ item.title }}</p>
+              <small class="card-location"><i class="bi bi-geo-alt me-1"></i>{{ item.location }}</small>
+              <div class="detail-chips mt-2" *ngIf="item.notes">
+                <span class="detail-chip" *ngFor="let chip of notesChips(item.notes)">{{ chip }}</span>
+              </div>
+            </div>
+
+            <div class="d-flex flex-column align-items-end gap-2 ms-3 flex-shrink-0">
+              <span class="category-badge" [ngClass]="item.category">{{ item.category }}</span>
+              <ng-container *ngIf="currentTrip?.type === 'custom'">
+                <ng-container *ngIf="pendingDeleteId !== (item._id ?? item.id); else confirmDeleteTpl">
+                  <button class="delete-btn" title="Delete"
+                    (click)="requestDeleteItem(item); $event.stopPropagation()">🗑️</button>
+                </ng-container>
+                <ng-template #confirmDeleteTpl>
+                  <div class="delete-confirm" (click)="$event.stopPropagation()">
+                    <span class="delete-confirm__label">Delete?</span>
+                    <button class="delete-confirm__yes" (click)="confirmDeleteItem(item)">Yes</button>
+                    <button class="delete-confirm__no" (click)="pendingDeleteId = null">No</button>
+                  </div>
+                </ng-template>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="items.length === 0" class="empty-state">
+        <span class="empty-icon">🗺️</span>
+        <p>No activities yet.</p>
+        <small *ngIf="currentTrip?.type === 'custom'">Click &quot;+ Add Activity&quot; to start building your
+          timeline.</small>
+        <small *ngIf="currentTrip?.type === 'std'">This is a curated trip idea. Browse and get inspired!</small>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal-backdrop" *ngIf="showDeleteModal" (click)="cancelDelete()"></div>
+<div class="confirm-modal" *ngIf="showDeleteModal">
+  <div class="confirm-modal__icon">🗑️</div>
+  <h5 class="confirm-modal__title">Delete this trip?</h5>
+  <p class="confirm-modal__body">This will permanently remove <strong>{{ currentTrip?.trip_name }}</strong> and all its
+    activities. This cannot be undone.</p>
+  <div class="confirm-modal__actions">
+    <button class="btn btn-outline-secondary rounded-3" (click)="cancelDelete()">Cancel</button>
+    <button class="btn btn-danger rounded-3 fw-semibold" (click)="confirmDelete()">Yes, Delete</button>
+  </div>
+</div>
+
+<!-- Sync Bookings Panel -->
+<div class="modal-backdrop" *ngIf="showSyncPanel" (click)="closeSyncPanel()"></div>
+<div class="sync-modal" *ngIf="showSyncPanel">
+  <div class="sync-modal__header">
+    <h5 class="sync-modal__title"><i class="bi bi-arrow-repeat me-2"></i>Sync Bookings</h5>
+    <button class="sync-modal__close" (click)="closeSyncPanel()"><i class="bi bi-x-lg"></i></button>
+  </div>
+
+  <div *ngIf="syncLoading" class="sync-modal__loading">
+    <span class="spinner-border spinner-border-sm me-2"></span> Loading your bookings…
+  </div>
+
+  <div *ngIf="!syncLoading" class="sync-modal__body">
+
+    <!-- Travel Bookings Section -->
+    <div class="sync-section">
+      <p class="sync-section__label"><i class="bi bi-airplane me-1"></i> Travel Bookings</p>
+      <div *ngIf="syncTravelBookings.length === 0" class="sync-empty">No travel bookings found.</div>
+      <div *ngFor="let b of syncTravelBookings" class="booking-card"
+        [class.booking-card--added]="alreadySyncedRefs.has(b.bookingReference)"
+        [class.booking-card--selected]="selectedRefs.has(b.bookingReference)"
+        (click)="toggleSelection(b.bookingReference)">
+        <div class="booking-card__check" *ngIf="!alreadySyncedRefs.has(b.bookingReference)">
+          <i class="bi" [ngClass]="selectedRefs.has(b.bookingReference) ? 'bi-check-circle-fill' : 'bi-circle'"></i>
+        </div>
+        <div class="booking-card__info">
+          <p class="booking-card__title">{{ b.serviceSnapshot?.operatorName }} {{ b.serviceSnapshot?.serviceNumber }}
+            &mdash; {{ b.serviceSnapshot?.from }} → {{ b.serviceSnapshot?.to }}</p>
+          <small class="booking-card__meta">{{ b.serviceSnapshot?.departureTime | date:'mediumDate' }} &nbsp;·&nbsp;
+            Ref: {{ b.bookingReference }}</small>
+        </div>
+        <span class="booking-card__added-label" *ngIf="alreadySyncedRefs.has(b.bookingReference)">Already added</span>
+      </div>
+    </div>
+
+    <!-- Hotel Bookings Section -->
+    <div class="sync-section">
+      <p class="sync-section__label"><i class="bi bi-building me-1"></i> Hotel Bookings</p>
+      <div *ngIf="syncHotelBookings.length === 0" class="sync-empty">No hotel bookings found.</div>
+      <div *ngFor="let b of syncHotelBookings" class="booking-card"
+        [class.booking-card--added]="alreadySyncedRefs.has(b.bookingReference)"
+        [class.booking-card--selected]="selectedRefs.has(b.bookingReference)"
+        (click)="toggleSelection(b.bookingReference)">
+        <div class="booking-card__check" *ngIf="!alreadySyncedRefs.has(b.bookingReference)">
+          <i class="bi" [ngClass]="selectedRefs.has(b.bookingReference) ? 'bi-check-circle-fill' : 'bi-circle'"></i>
+        </div>
+        <div class="booking-card__info">
+          <p class="booking-card__title">{{ b.hotelName ?? b.hotelId }}</p>
+          <small class="booking-card__meta">Check-in: {{ b.checkIn | date:'mediumDate' }} &nbsp;·&nbsp; {{ b.numNights
+            }} nights &nbsp;·&nbsp; Ref: {{ b.bookingReference }}</small>
+        </div>
+        <span class="booking-card__added-label" *ngIf="alreadySyncedRefs.has(b.bookingReference)">Already added</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sync-modal__footer" *ngIf="!syncLoading">
+    <button class="btn btn-outline-secondary rounded-3" (click)="closeSyncPanel()">Cancel</button>
+    <button class="btn btn-primary rounded-3 fw-semibold" [disabled]="selectedCount === 0"
+      (click)="addSelectedBookings()">
+      Add Selected ({{ selectedCount }})
+    </button>
+  </div>
+</div>

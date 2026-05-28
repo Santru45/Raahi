@@ -1,0 +1,143 @@
+<div class="itinerary-wrap hotel-bg">
+
+  <div class="itinerary-hero">
+    <div class="itinerary-hero__fade"></div>
+    <!-- Bottom fade — dissolves into .hotel-bg background color -->
+    <div style="position:absolute; bottom:0; left:0; width:100%; height:260px;
+                background: linear-gradient(to bottom,
+                  rgba(234,249,253,0)   0%,
+                  rgba(234,249,253,0.15) 20%,
+                  rgba(234,249,253,0.4)  40%,
+                  rgba(234,249,253,0.7)  62%,
+                  rgba(234,249,253,0.9)  80%,
+                  rgba(234,249,253,1.0) 100%
+                );"></div>
+  </div>
+
+  <!-- Top-of-doodle fade — blends hero bottom into doodle pattern -->
+  <div style="position:relative; z-index:2; margin-top:-80px; height:80px; pointer-events:none;
+              background: linear-gradient(to bottom,
+                rgba(234,249,253,1.0)  0%,
+                rgba(234,249,253,0.5) 55%,
+                rgba(234,249,253,0.0) 100%
+              );"></div>
+
+  <div class="itinerary-page">
+    <header>
+      <h1>Where to Next?</h1>
+      <div class="d-flex justify-content-center">
+        <div class="tabs-container">
+          <button [class.active]="activeTab === 'std'" (click)="setTab('std')">
+            Inspire Me
+          </button>
+          <button [class.active]="activeTab === 'custom'" (click)="setTab('custom')">
+            My Plans
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Inspire Me Tab -->
+    <div class="row g-4" *ngIf="activeTab === 'std'">
+      <div class="col-sm-6 col-lg-4 col-xl-3" *ngFor="let trip of standardList">
+        <app-itinerary-card [data]="trip"></app-itinerary-card>
+      </div>
+    </div>
+
+    <!-- My Plans Tab -->
+    <div *ngIf="activeTab === 'custom'">
+
+      <!-- Create Form -->
+      <div class="create-form-wrap" *ngIf="isLoggedIn && showCreateForm">
+        <div class="create-form-card">
+          <h5 class="create-form-title">✈️ Plan a New Trip</h5>
+          <form [formGroup]="createForm" (ngSubmit)="onCreateSubmit()">
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">Trip Name</label>
+              <input type="text" formControlName="trip_name" class="form-control rounded-3"
+                [class.is-invalid]="createForm.get('trip_name')?.invalid && createForm.get('trip_name')?.touched"
+                placeholder="e.g. Goa Weekend Getaway" />
+              @if (createForm.get('trip_name')?.touched) {
+              @if (createForm.get('trip_name')?.hasError('required')) {
+              <div class="invalid-feedback d-block">
+                <i class="bi bi-exclamation-circle me-1"></i>Trip name is required.
+              </div>
+              } @else if (createForm.get('trip_name')?.hasError('minlength')) {
+              <div class="invalid-feedback d-block">
+                <i class="bi bi-exclamation-circle me-1"></i>Trip name must be at least 3 characters.
+              </div>
+              } @else if (createForm.get('trip_name')?.hasError('maxlength')) {
+              <div class="invalid-feedback d-block">
+                <i class="bi bi-exclamation-circle me-1"></i>Trip name cannot exceed 60 characters.
+              </div>
+              }
+              }
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">Destination <span
+                  class="text-muted fw-normal">(optional)</span></label>
+              <input type="text" formControlName="destination" class="form-control rounded-3"
+                [class.is-invalid]="createForm.get('destination')?.invalid && createForm.get('destination')?.touched"
+                placeholder="e.g. Goa, India" />
+              @if (createForm.get('destination')?.touched && createForm.get('destination')?.hasError('maxlength')) {
+              <div class="invalid-feedback d-block">
+                <i class="bi bi-exclamation-circle me-1"></i>Destination cannot exceed 80 characters.
+              </div>
+              }
+            </div>
+            <div class="mb-4">
+              <label class="form-label small fw-semibold">Cover Image URL <span
+                  class="text-muted fw-normal">(optional)</span></label>
+              <input type="text" formControlName="image_url" class="form-control rounded-3"
+                [class.is-invalid]="createForm.get('image_url')?.invalid && createForm.get('image_url')?.touched"
+                placeholder="https://..." />
+              @if (createForm.get('image_url')?.touched && createForm.get('image_url')?.hasError('pattern')) {
+              <div class="invalid-feedback d-block">
+                <i class="bi bi-exclamation-circle me-1"></i>Please enter a valid URL starting with http:// or https://.
+              </div>
+              }
+            </div>
+            <div class="d-flex justify-content-center gap-2">
+              <button type="button" class="btn btn-outline-secondary rounded-3 px-4"
+                (click)="toggleCreateForm()">Cancel</button>
+              <button type="submit" class="btn btn-primary rounded-3 px-4 fw-bold">Create Trip</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Empty State: Not logged in -->
+      <div class="text-center py-5" *ngIf="!isLoggedIn && !showCreateForm">
+        <div style="font-size:2.5rem">🔒</div>
+        <p class="fw-semibold text-dark mt-2 mb-1">Your personal travel journal lives here</p>
+        <p class="text-secondary small mb-3">Log in to create and manage your own trip itineraries.</p>
+        <a routerLink="/login" class="btn btn-primary rounded-3 px-4 fw-semibold">Log In to Get Started</a>
+      </div>
+
+      <!-- Empty State: Logged in, no trips yet -->
+      <div class="text-center py-5" *ngIf="isLoggedIn && customList.length === 0 && !showCreateForm">
+        <div style="font-size:2.5rem">🗺️</div>
+        <p class="fw-semibold text-dark mt-2 mb-1">No trips planned yet!</p>
+        <p class="text-secondary small mb-3">Start building your travel journal — add activities, sync bookings, and
+          export to calendar.</p>
+        <button class="btn btn-primary rounded-3 px-4 fw-semibold" (click)="toggleCreateForm()">+ Create Your First
+          Trip</button>
+      </div>
+
+      <!-- Cards -->
+      <div class="row g-4">
+        <div class="col-sm-6 col-lg-4 col-xl-3" *ngFor="let trip of customList">
+          <app-itinerary-card [data]="trip" (delete)="onDeleteItinerary($event)">
+          </app-itinerary-card>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAB -->
+    <button *ngIf="activeTab === 'custom' && isLoggedIn" class="fab-btn btn btn-primary shadow"
+      (click)="toggleCreateForm()" [title]="showCreateForm ? 'Close' : 'New Trip'">
+      {{ showCreateForm ? "✕" : "+" }}
+    </button>
+  </div>
+
+</div>

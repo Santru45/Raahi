@@ -1,0 +1,72 @@
+<!-- src/app/components/travel/boarding-point/boarding-point.component.html -->
+
+<div class="boarding-container">
+  <h3 class="section-title">
+    <i class="bi bi-pin-map-fill"></i> Select Boarding & Drop Points
+  </h3>
+
+  @if (isLoading) {
+    <div class="loading">
+      <i class="bi bi-arrow-repeat spin"></i> Loading points...
+    </div>
+  } @else {
+    <!-- Boarding Points -->
+    <div class="points-section">
+      <span class="section-label">
+        <i class="bi bi-geo-alt"></i> Boarding Point
+      </span>
+
+      @if (boardingPoints.length === 0) {
+        <p class="no-points">No boarding points available</p>
+      }
+
+      @for (point of boardingPoints; track point.name) {
+        <div
+          class="point-card"
+          [class.selected]="selectedBoarding === point.name"
+          (click)="selectBoarding(point)"
+        >
+          <div class="point-info">
+            <span class="point-name">{{ point.name }}</span>
+            <span class="point-landmark">{{ point.landmark }}</span>
+          </div>
+          <span class="point-time">{{ point.time }}</span>
+        </div>
+      }
+    </div>
+
+    <!-- Dropping Points -->
+    <div class="points-section">
+      <span class="section-label">
+        <i class="bi bi-geo-alt-fill"></i> Drop Point
+      </span>
+
+      @if (droppingPoints.length === 0) {
+        <p class="no-points">No drop points available</p>
+      }
+
+      @for (point of droppingPoints; track point.name) {
+        <div
+          class="point-card"
+          [class.selected]="selectedDropping === point.name"
+          (click)="selectDropping(point)"
+        >
+          <div class="point-info">
+            <span class="point-name">{{ point.name }}</span>
+            <span class="point-landmark">{{ point.landmark }}</span>
+          </div>
+          <span class="point-time">{{ point.time }}</span>
+        </div>
+      }
+    </div>
+
+    <!-- Confirm Button -->
+    <button
+      class="btn-confirm-points"
+      [disabled]="!canConfirm"
+      (click)="onConfirm()"
+    >
+      Continue <i class="bi bi-arrow-right"></i>
+    </button>
+  }
+</div>

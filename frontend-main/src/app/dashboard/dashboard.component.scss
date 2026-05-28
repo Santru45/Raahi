@@ -1,0 +1,119 @@
+// ── Page Background
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #c0f3fc;
+}
+
+// ── Users table wrapper — horizontal scroll on small screens
+.users-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+// ── Shared column widths (header + rows stay in sync)
+.users-header,
+.user-row {
+  min-width: 520px;
+}
+
+.users-col-name {
+  flex: 1 1 180px;
+  min-width: 180px;
+}
+.users-col-phone {
+  flex: 0 0 130px;
+}
+.users-col-stat {
+  flex: 0 0 100px;
+}
+.users-col-action {
+  flex: 0 0 160px;
+  justify-content: center;
+}
+
+// ── Sticky column header bar
+.users-header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 1;
+}
+
+.users-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+// ── Row hover
+.user-row {
+  transition: background-color 0.15s ease;
+  &:hover {
+    background-color: rgba(200, 240, 247, 0.5);
+  }
+}
+
+// ── Avatar bubble
+.user-avatar {
+  width: 42px;
+  height: 42px;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+// ── Invisible placeholder so delete button never shifts position
+.delete-placeholder {
+  display: inline-block;
+  width: 86px;
+  visibility: hidden;
+}
+
+// ── Toolbar row — fixed height so it never collapses or grows
+.users-toolbar {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  overflow: hidden;
+}
+
+// ── Fixed height scroll areas
+.bookings-scroll-area {
+  height: 320px;
+  max-height: unset;
+  overflow-x: hidden;
+}
+
+.hotels-scroll-area {
+  min-height: 0;
+  max-height: 320px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.users-scroll-area {
+  height: 420px;
+  max-height: unset;
+  overflow-x: hidden;
+}
+
+// ── Recent Bookings row separation
+// border-bottom on tr is overridden by Bootstrap, use td approach instead
+.bookings-table tbody tr td {
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+  border-top: 1px solid #8feeff;
+}
+
+.bookings-table tbody tr:first-child td {
+  border-top: none;
+}
+
+.user-row {
+  border-bottom: 1px solid #8feeff;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}

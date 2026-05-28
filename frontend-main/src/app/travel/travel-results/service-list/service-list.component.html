@@ -1,0 +1,34 @@
+<!-- src/app/components/travel/service-list/service-list.component.html -->
+
+@if ((trips().length || transportService.availableTrips().length) > 0) {
+  <div class="results-header">
+    <h3>
+      Available
+      @if (transportService.selectedMode() === "flight") {
+        Flights
+      } @else if (transportService.selectedMode() === "train") {
+        Trains
+      } @else {
+        Buses
+      }
+    </h3>
+    <span class="results-count">
+      {{ trips().length || transportService.availableTrips().length }} results
+      found
+    </span>
+  </div>
+}
+
+@for (
+  trip of trips().length ? trips() : transportService.availableTrips();
+  track trip._id
+) {
+  <app-service-card [trip]="trip" (tripSelected)="onTripSelected($event)" />
+}
+
+@if ((trips().length || transportService.availableTrips().length) === 0) {
+  <div class="empty-state">
+    <i class="bi bi-search"></i>
+    <p>No results match your filters</p>
+  </div>
+}

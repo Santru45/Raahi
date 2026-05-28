@@ -1,0 +1,362 @@
+<!-- booking-summary.component.html -->
+
+@if (paymentState() !== "idle") {
+<div class="popup-overlay">
+  <div class="card popup-card border-0 shadow-lg text-center p-4 p-md-5">
+    @if (paymentState() === "processing") {
+    <div class="popup-icon processing mx-auto mb-3">
+      <i class="bi bi-arrow-repeat spin-large"></i>
+    </div>
+    <h4 class="fw-bold mb-1">Payment Processing</h4>
+    <p class="text-muted small mb-3">
+      Please wait while we process your payment...
+    </p>
+    <div class="d-flex justify-content-center gap-1">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+    }
+    @if (paymentState() === "confirmed") {
+    <div class="popup-icon confirmed mx-auto mb-3">
+      <i class="bi bi-check-circle-fill"></i>
+    </div>
+    <h4 class="fw-bold text-success mb-1">Booking Confirmed!</h4>
+    <p class="text-muted small">Redirecting to your ticket...</p>
+    }
+  </div>
+</div>
+}
+
+<!-- ═══════════ MAIN SUMMARY ═══════════ -->
+<div class="card border-0 shadow-sm p-3">
+  <h5 class="fw-bold mb-3">
+    <i class="bi bi-receipt text-primary me-1"></i> Booking Summary
+  </h5>
+
+  <!-- ── NOT LOGGED IN ── -->
+  @if (!isLoggedIn) {
+  <div class="text-center py-4">
+    <i class="bi bi-lock display-5 text-info d-block mb-2"></i>
+    <p class="text-muted mb-3">Please log in to complete your booking.</p>
+    <div class="d-flex justify-content-center gap-2 mb-2">
+      <button class="btn btn-primary btn-sm px-3" (click)="goToLogin()">
+        <i class="bi bi-box-arrow-in-right me-1"></i> Login
+      </button>
+      <button class="btn btn-outline-primary btn-sm px-3" (click)="goToSignup()">
+        <i class="bi bi-person-plus me-1"></i> Sign Up
+      </button>
+    </div>
+    <small class="text-muted">Your booking details will be saved.</small>
+  </div>
+  }
+
+  <!-- ── LOGGED IN + HAS PRICING ── -->
+  <!-- Capture getPricing() once per render to avoid repeated calls -->
+  @if (isLoggedIn) {
+  @if (pricing) {
+  <!-- Passenger List -->
+  <div class="border-bottom pb-2 mb-3">
+    <small class="text-uppercase text-muted fw-semibold ls-1">Passengers</small>
+    @for (p of transportService.passengerData(); track $index) {
+    <div class="d-flex justify-content-between align-items-center py-1">
+      <span class="small fw-medium">
+        {{ p.firstName }} {{ p.lastName }}
+        @if ($index === 0) {
+        <span class="text-muted small">(Primary)</span>
+        }
+      </span>
+      <small class="text-muted">{{ p.gender }} · {{ p.age }}y</small>
+    </div>
+    }
+  </div>
+
+  <!-- Price Breakdown -->
+  <div class="mb-3">
+    <div class="d-flex justify-content-between small py-1">
+      <span>Base Fare ({{ transportService.passengerData().length }} pax)</span>
+      <span>₹{{ pricing.baseAmount }}</span>
+    </div>
+    <div class="d-flex justify-content-between small py-1">
+      <span>Tax</span>
+      <span>₹{{ pricing.taxAmount }}</span>
+    </div>
+
+    @if (pricing.loyaltyDiscount > 0) {
+    <div class="d-flex justify-content-between small py-1 text-warning fw-semibold">
+      <span><i class="bi bi-coin me-1"></i>Loyalty Discount ({{
+        pricing.coinsUsed
+        }}
+        coins)</span>
+      <span>- ₹{{ pricing.loyaltyDiscount }}</span>
+    </div>
+    }
+
+    <div class="d-flex justify-content-between border-top pt-2 mt-1 fw-bold">
+      <span>Total Amount</span>
+      <span>₹{{ pricing.totalAmount }}</span>
+    </div>
+
+    @if (pricing.savings > 0) {
+    <div class="small text-success fw-semibold mt-1">
+      <i class="bi bi-tag me-1"></i>You save ₹{{ pricing.savings }} vs
+      market rate
+    </div>
+    }
+  </div>
+
+  <!-- ═══════════ LOYALTY COINS ═══════════ -->
+  @if (loyaltyAccount && !isLoadingLoyalty) {
+  <div class="rounded-3 p-3 mb-3" style="background-color: #fffbeb; border: 1px solid #fcd34d">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-coin text-warning fs-5"></i>
+        <div>
+          <p class="fw-semibold mb-0 small" style="color: #92400e">
+            Loyalty Coins
+          </p>
+          <p class="mb-0" style="font-size: 10px; color: #92400e">
+            @if (loyaltyAccount.coinBalance >= 0) {
+            Balance: <strong>{{ coinBalance }}</strong> coins · Max
+            redeemable: <strong>{{ effectiveMaxCoins }}</strong> coins
+            } @else {
+            Balance: <strong style="color: #dc2626">{{ loyaltyAccount.coinBalance }}</strong> coins (Debt)
+            }
+          </p>
+        </div>
+      </div>
+
+      <!-- Tier badge -->
+      <span class="badge" style="background-color: #f59e0b; color: white; font-size: 10px">
+        @if (loyaltyAccount.tier === "bronze") {
+        <i class="bi bi-award me-1"></i>
+        } @else if (loyaltyAccount.tier === "silver") {
+        <i class="bi bi-trophy me-1"></i>
+        } @else if (loyaltyAccount.tier === "gold") {
+        <i class="bi bi-trophy-fill me-1"></i>
+        } @else {
+        <i class="bi bi-gem me-1"></i>
+        }
+        {{ loyaltyAccount.tier | titlecase }} ·
+        {{ loyaltyAccount.earnMultiplier }}x
+      </span>
+    </div>
+
+    <!-- Debt warning -->
+    @if (loyaltyAccount.coinBalance < 0) { <div class="d-flex align-items-center gap-2 p-2 rounded-3 mb-2"
+      style="background: #fee2e2; font-size: 12px; color: #b91c1c">
+      <span>⚠️</span>
+      <span>Your balance is <strong>{{ loyaltyAccount.coinBalance }}</strong> coins. Redemption blocked until
+        debt clears on your next booking.</span>
+  </div>
+  }
+
+  @if (loyaltyAccount.coinBalance >= 0 && effectiveMaxCoins > 0) {
+  <!-- Coin input row -->
+  <div class="d-flex align-items-center gap-2 mb-2">
+    <input type="number" class="form-control form-control-sm coin-input" style="max-width: 110px"
+      [(ngModel)]="coinsToRedeem" (ngModelChange)="onCoinsChange()" (input)="onCoinsInput($event)" [min]="0"
+      [max]="effectiveMaxCoins" placeholder="0" />
+    <span class="small" style="color: #92400e">
+      = ₹{{ loyaltyDiscountDisplay }} off
+    </span>
+    <!-- Apply Max / Remove -->
+    @if (coinsToRedeem === 0) {
+    <button class="btn btn-sm ms-auto fw-semibold" style="
+                    background-color: #f59e0b;
+                    color: white;
+                    font-size: 11px;
+                    border-radius: 8px;
+                    border: none;
+                  " type="button" (click)="useMaxCoins()">
+      Apply Max
+    </button>
+    } @else {
+    <button class="btn btn-sm ms-auto" style="
+                    background-color: #fee2e2;
+                    color: #ef4444;
+                    font-size: 11px;
+                    border-radius: 8px;
+                    border: none;
+                  " type="button" (click)="removeCoins()">
+      Remove
+    </button>
+    }
+  </div>
+
+  <!-- Error -->
+  @if (loyaltyError) {
+  <p class="mb-1 mt-0" style="font-size: 11px; color: #ef4444">
+    <i class="bi bi-exclamation-circle me-1"></i>{{ loyaltyError }}
+  </p>
+  }
+
+  <!-- Discount applied confirmation -->
+  @if (loyaltyDiscountDisplay > 0) {
+  <div class="d-flex justify-content-between align-items-center pt-2" style="border-top: 1px dashed #fcd34d">
+    <span class="small text-success"><i class="bi bi-check-circle me-1"></i>Coin discount
+      applied</span>
+    <span class="small fw-bold text-success">- ₹{{ loyaltyDiscountDisplay }}</span>
+  </div>
+  }
+  } @else {
+  @if (coinBalance < 0) { <!-- Debt warning -->
+    <div class="d-flex align-items-center gap-2 p-2 rounded-3"
+      style="background: #fee2e2; font-size: 12px; color: #b91c1c">
+      <span>⚠️</span>
+      <span>Your coin balance is <strong>{{ coinBalance }}</strong>. Redemption blocked until debt clears on your next
+        booking.</span>
+    </div>
+    } @else {
+    <small style="color: #92400e; font-size: 11px">
+      No coins to redeem. You'll earn
+      <strong>{{ coinsEarnedFromBooking }}</strong> coins from this
+      booking!
+    </small>
+    }
+    }
+
+    <!-- Earn preview -->
+    <div class="d-flex align-items-center gap-1 small text-success pt-2 mt-1" style="border-top: 1px dashed #fcd34d">
+      <i class="bi bi-plus-circle"></i>
+      <span>You'll earn
+        <strong>{{ coinsEarnedFromBooking }} coins</strong> from this
+        booking</span>
+    </div>
+</div>
+} @else if (isLoadingLoyalty) {
+<div class="rounded-3 p-3 mb-3 text-center text-muted small"
+  style="background-color: #fffbeb; border: 1px solid #fcd34d">
+  <i class="bi bi-coin me-1 text-warning"></i> Loading loyalty info...
+</div>
+}
+
+<!-- ═══════════ PAYMENT METHOD ═══════════ -->
+<div class="border-top pt-2 mb-3">
+  <small class="text-uppercase text-muted fw-semibold ls-1">Payment Method</small>
+
+  @for (method of paymentMethods; track method.key) {
+  <div class="d-flex justify-content-between align-items-center p-2 rounded-3 mb-1 payment-option"
+    [class.active]="selectedPayment === method.key" [class.disabled]="!method.enabled"
+    (click)="selectPayment(method.key)">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi fs-5 text-primary" [class]="method.icon"></i>
+      <div class="d-flex flex-column">
+        <span class="small fw-semibold">{{ method.name }}</span>
+        @if (method.key === "wallet") {
+        @if (isLoadingWallet) {
+        <small class="text-muted">Loading balance...</small>
+        } @else {
+        <small class="text-muted">Balance: ₹{{ transportService.walletBalance() }}</small>
+        }
+        }
+        @if (method.key === "razorpay") {
+        <small class="text-muted">Cards, NetBanking, Wallet & Pay Later</small>
+        }
+        @if (!method.enabled) {
+        <small class="text-muted">Coming Soon</small>
+        }
+      </div>
+    </div>
+    @if (selectedPayment === method.key) {
+    <i class="bi bi-check-circle-fill text-primary"></i>
+    }
+  </div>
+  }
+
+  @if (paymentMessage) {
+  <div class="alert alert-info py-1 px-2 small d-flex align-items-center gap-1 mt-1 payment-msg-anim">
+    <i class="bi bi-info-circle"></i> {{ paymentMessage }}
+  </div>
+  }
+</div>
+
+<!-- Wallet Details -->
+@if (!isLoadingWallet && selectedPayment === "wallet") {
+<div class="rounded-3 p-2 mb-3 wallet-box">
+  @if (insufficientBalance) {
+  <div class="alert alert-danger py-1 px-2 small mb-0 d-flex align-items-center gap-1">
+    <i class="bi bi-exclamation-triangle"></i>
+    Insufficient balance. You need ₹{{
+    pricing.totalAmount - walletBalance
+    }}
+    more.
+  </div>
+  } @else {
+  <div class="d-flex justify-content-between small text-danger fw-medium mb-1">
+    <span>Amount to deduct</span>
+    <span>- ₹{{ pricing.totalAmount }}</span>
+  </div>
+  <div class="d-flex justify-content-between small text-muted">
+    <span>Remaining balance</span>
+    <span>₹{{ walletBalance - pricing.totalAmount }}</span>
+  </div>
+  }
+</div>
+}
+
+<!-- Razorpay Details -->
+@if (selectedPayment === "razorpay") {
+<div class="rounded-3 p-2 mb-3" style="background-color: #f0f9ff; border: 1px solid #0891b2">
+  <div class="d-flex align-items-center gap-2 mb-2">
+    <i class="bi bi-shield-check text-primary"></i>
+    <small class="fw-semibold" style="color: #0891b2">Secure Payment via Razorpay</small>
+  </div>
+  <small class="text-muted d-block mb-1" style="font-size: 11px">
+    ✓ Pay using Cards, NetBanking, Wallet, or Pay Later
+  </small>
+  <small class="text-muted d-block" style="font-size: 11px">
+    ✓ Amount will be deducted from your Virtual Wallet after successful
+    payment
+  </small>
+  @if (walletBalance < pricing.totalAmount) { <div
+    class="alert alert-danger py-1 px-2 small mb-0 mt-2 d-flex align-items-center gap-1">
+    <i class="bi bi-exclamation-triangle"></i>
+    Insufficient wallet balance. You need ₹{{
+    pricing.totalAmount - walletBalance
+    }}
+    more.
+</div>
+}
+</div>
+}
+
+<!-- Error -->
+@if (bookingError) {
+<div class="alert alert-danger py-2 px-3 small d-flex align-items-center gap-1 mb-3">
+  <i class="bi bi-exclamation-circle"></i> {{ bookingError }}
+</div>
+}
+
+<!-- Confirm Button -->
+<button class="btn btn-primary w-100 py-2 fw-semibold d-flex align-items-center justify-content-center gap-2"
+  [disabled]="
+          paymentState() !== 'idle' ||
+          (selectedPayment === 'wallet' && insufficientBalance) ||
+          isLoadingWallet ||
+          isLoadingLoyalty
+        " (click)="onConfirmBooking()">
+  @if (selectedPayment === "razorpay") {
+  <i class="bi bi-credit-card-2-front"></i> Pay ₹{{
+  pricing.totalAmount
+  }}
+  via Razorpay
+  } @else {
+  <i class="bi bi-shield-check"></i> Pay ₹{{ pricing.totalAmount }} &
+  Confirm Booking
+  }
+</button>
+
+<p class="text-center text-muted mt-2 mb-0 small">
+  <i class="bi bi-lock small"></i> Your payment is secure and encrypted
+</p>
+} @else {
+<!-- Logged in but no passenger data yet -->
+<div class="text-center py-4 text-muted">
+  <i class="bi bi-cart-x display-5 d-block mb-2 opacity-50"></i>
+  <p class="small mb-0">Please fill in passenger details first.</p>
+</div>
+}
+}
+</div>

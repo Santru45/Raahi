@@ -1,0 +1,931 @@
+<div
+  class="container-fluid py-4 px-3 px-md-5 hotel-bg"
+  style="min-height: 100vh"
+>
+  <!-- Back to search -->
+  <button
+    class="btn btn-sm mb-3 d-inline-flex align-items-center gap-1 fw-semibold"
+    style="
+      background-color: var(--light-cyan);
+      color: var(--bright-teal-blue);
+      border: 1px solid var(--bright-teal-blue);
+      border-radius: 20px;
+    "
+    (click)="goBack()"
+  >
+    ← Back to Search
+  </button>
+
+  <!-- Desktop image gallery -->
+  <div class="row g-3 mb-4 d-none d-md-flex">
+    <div class="col-md-8">
+      <div
+        class="rounded-4 overflow-hidden"
+        style="height: 350px; background: #0077b6"
+      >
+        <img
+          [src]="hotels?.images?.[0]"
+          class="w-100 h-100 object-fit-cover"
+          alt="Hotel Main"
+        />
+      </div>
+    </div>
+    <div class="col-md-4 d-flex flex-column gap-3">
+      <div
+        class="rounded-4 overflow-hidden flex-fill"
+        style="
+          background: linear-gradient(135deg, #00b4d8, #90e0ef);
+          max-height: 168px;
+        "
+      >
+        <img
+          [src]="hotels?.images?.[1]"
+          class="w-100 h-100 object-fit-cover"
+          alt="Hotel 2"
+        />
+      </div>
+      <div
+        class="rounded-4 overflow-hidden flex-fill"
+        style="
+          background: linear-gradient(135deg, #48cae4, #caf0f8);
+          max-height: 168px;
+        "
+      >
+        <img
+          [src]="hotels?.images?.[2]"
+          class="w-100 h-100 object-fit-cover"
+          alt="Hotel 3"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile image slideshow -->
+  <div
+    class="d-md-none mb-4 rounded-4 overflow-hidden position-relative"
+    style="height: 220px"
+  >
+    <img
+      [src]="hotels?.images?.[hotelImageIndex]"
+      class="w-100 h-100"
+      style="object-fit: cover"
+      alt="Hotel Image"
+    />
+    <button
+      (click)="prevHotelImage()"
+      style="
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.4);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      ‹
+    </button>
+    <button
+      (click)="nextHotelImage()"
+      style="
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.4);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      ›
+    </button>
+    <div
+      style="position: absolute; bottom: 10px; width: 100%; text-align: center"
+    >
+      <span
+        *ngFor="let img of hotels?.images; let i = index"
+        style="
+          display: inline-block;
+          border-radius: 50%;
+          margin: 0 3px;
+          cursor: pointer;
+        "
+        [style.width]="i === hotelImageIndex ? '8px' : '6px'"
+        [style.height]="i === hotelImageIndex ? '8px' : '6px'"
+        [style.background]="
+          i === hotelImageIndex ? '#fff' : 'rgba(255,255,255,0.5)'
+        "
+        (click)="hotelImageIndex = i"
+      ></span>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- LEFT SIDE -->
+    <div class="col-12 col-md-8 order-1 order-md-1">
+      <!-- Hotel Info -->
+      <div class="bg-white rounded-4 shadow p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <div>
+            <span
+              class="badge rounded-pill px-3 py-1 mb-2 d-inline-block text-capitalize"
+              style="
+                background-color: var(--light-cyan);
+                color: var(--bright-teal-blue);
+                font-size: 11px;
+              "
+            >
+              {{ hotels?.hotelType }}
+            </span>
+            <h3 class="fw-bold mb-1" style="color: var(--deep-twilight)">
+              {{ hotels?.name }}
+            </h3>
+            <span class="text-muted small">
+              📍 {{ hotels?.location?.address }}, {{ hotels?.location?.city }},
+              {{ hotels?.location?.country }}
+            </span>
+          </div>
+          <div class="text-center flex-shrink-0 ms-3">
+            <div
+              class="d-flex align-items-center justify-content-center gap-1 px-3 py-2 rounded-3"
+              style="background: linear-gradient(135deg, #0077b6, #00b4d8)"
+            >
+              <span class="text-white fw-bold fs-5">{{
+                hotels?.starRating
+              }}</span>
+              <span class="text-white" style="font-size: 16px">★</span>
+            </div>
+            <p class="text-muted mb-0 mt-1" style="font-size: 10px">
+              Star Hotel
+            </p>
+          </div>
+        </div>
+        <hr class="my-3" />
+        <p class="text-muted mb-3" style="font-size: 14px; line-height: 1.7">
+          {{ hotels?.description }}
+        </p>
+        <hr class="my-3" />
+        <div>
+          <p
+            class="text-muted mb-2"
+            style="
+              font-size: 11px;
+              font-weight: 600;
+              letter-spacing: 0.5px;
+              text-transform: uppercase;
+            "
+          >
+            Hotel Amenities
+          </p>
+          <div class="d-flex gap-2 flex-wrap">
+            <span
+              *ngFor="let amenity of hotels?.amenities"
+              class="d-flex align-items-center gap-1 px-3 py-2 rounded-3"
+              style="
+                background-color: var(--light-cyan);
+                color: var(--bright-teal-blue);
+                font-size: 13px;
+              "
+            >
+              {{ amenity }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Room Selection (grouped by type) -->
+      <div class="bg-white rounded-4 shadow p-4 mb-4" *ngIf="hotels">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h6 class="fw-bold mb-0">Select a Room Type</h6>
+          <!-- Availability status badge -->
+          <span
+            *ngIf="checkingAvailability"
+            class="badge text-bg-warning d-flex align-items-center gap-1"
+          >
+            <span
+              class="spinner-border spinner-border-sm"
+              style="width: 12px; height: 12px"
+            ></span>
+            Checking availability…
+          </span>
+          <span
+            *ngIf="!checkingAvailability && checkIn && checkOut"
+            class="badge text-bg-success"
+          >
+            ✓ Showing for {{ checkIn | date: "d MMM" }} –
+            {{ checkOut | date: "d MMM" }}
+          </span>
+          <span
+            *ngIf="!checkingAvailability && (!checkIn || !checkOut)"
+            class="text-muted small"
+          >
+            Set dates to check availability
+          </span>
+        </div>
+
+        <!-- Prompt when no dates selected -->
+        <div
+          *ngIf="!checkIn || !checkOut"
+          class="rounded-3 p-3 mb-3 d-flex align-items-center gap-2"
+          style="background: #fff3cd; border: 1px solid #ffc107"
+        >
+          <span style="font-size: 18px">📅</span>
+          <span class="small text-warning-emphasis fw-semibold"
+            >Please select check-in &amp; check-out dates to see live room
+            availability.</span
+          >
+        </div>
+
+        <div class="row g-3">
+          <div class="col-12" *ngFor="let group of roomTypeGroups">
+            <!-- Room Type Card -->
+            <div
+              class="rounded-4 overflow-hidden position-relative"
+              [ngStyle]="{
+                border: isTypeSelected(group)
+                  ? '2px solid var(--bright-teal-blue)'
+                  : '2px solid #dee2e6',
+                opacity:
+                  group.availableCount === 0 || !roomFitsParty(group)
+                    ? '0.55'
+                    : '1',
+                cursor:
+                  group.availableCount === 0 || !roomFitsParty(group)
+                    ? 'not-allowed'
+                    : 'pointer',
+                'pointer-events':
+                  group.availableCount === 0 || !roomFitsParty(group)
+                    ? 'none'
+                    : 'auto',
+              }"
+              (click)="selectType(group)"
+            >
+              <!-- Disabled overlay for sold-out rooms only -->
+              <div
+                *ngIf="group.availableCount === 0"
+                class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+                style="
+                  z-index: 5;
+                  background: rgba(255, 255, 255, 0.45);
+                  border-radius: inherit;
+                "
+              >
+                <span
+                  class="badge fs-6 px-3 py-2"
+                  style="
+                    background: #ef4444;
+                    color: #fff;
+                    letter-spacing: 0.5px;
+                  "
+                >
+                  🚫 Sold Out
+                </span>
+              </div>
+              <!-- Image -->
+              <div style="height: 180px; overflow: hidden; position: relative">
+                <img
+                  [src]="group.images[getGroupImageIndex(group.type)]"
+                  class="w-100 h-100"
+                  style="object-fit: cover"
+                  [alt]="group.type + ' room'"
+                />
+
+                <ng-container *ngIf="group.images.length > 1">
+                  <button
+                    class="btn btn-sm position-absolute top-50 start-0 translate-middle-y ms-1"
+                    style="
+                      background: rgba(0, 0, 0, 0.4);
+                      color: #fff;
+                      border: none;
+                      border-radius: 50%;
+                      width: 28px;
+                      height: 28px;
+                      padding: 0;
+                    "
+                    (click)="
+                      prevGroupImage(group.type, group.images.length, $event)
+                    "
+                  >
+                    ‹
+                  </button>
+                  <button
+                    class="btn btn-sm position-absolute top-50 end-0 translate-middle-y me-1"
+                    style="
+                      background: rgba(0, 0, 0, 0.4);
+                      color: #fff;
+                      border: none;
+                      border-radius: 50%;
+                      width: 28px;
+                      height: 28px;
+                      padding: 0;
+                    "
+                    (click)="
+                      nextGroupImageStop(
+                        group.type,
+                        group.images.length,
+                        $event
+                      )
+                    "
+                  >
+                    ›
+                  </button>
+                </ng-container>
+
+                <!-- Availability badge -->
+                <span
+                  class="badge position-absolute top-0 end-0 m-2"
+                  [class.bg-success]="group.availableCount > 0"
+                  [class.bg-danger]="group.availableCount === 0"
+                >
+                  {{
+                    group.availableCount > 0
+                      ? group.availableCount + " available"
+                      : "Sold out"
+                  }}
+                </span>
+                <!-- Fits party badge — NEW -->
+                <span
+                  *ngIf="group.availableCount > 0"
+                  class="badge position-absolute top-0 start-0 m-2"
+                  [ngStyle]="{
+                    'background-color': roomFitsParty(group)
+                      ? '#d1fae5'
+                      : '#fee2e2',
+                    color: roomFitsParty(group) ? '#065f46' : '#991b1b',
+                  }"
+                >
+                  {{
+                    roomFitsParty(group)
+                      ? "✓ Fits your party"
+                      : "✗ Too small for party"
+                  }}
+                </span>
+              </div>
+
+              <!-- Room type info -->
+              <div
+                class="p-3"
+                [ngStyle]="{
+                  'background-color': isTypeSelected(group)
+                    ? 'var(--light-cyan)'
+                    : '#f8f9fa',
+                }"
+              >
+                <div
+                  class="d-flex justify-content-between align-items-center mb-2"
+                >
+                  <span class="fw-semibold text-capitalize"
+                    >{{ group.type }} Room</span
+                  >
+                  <span class="text-muted small">{{ group.bedType }} Bed</span>
+                </div>
+                <p class="text-muted small mb-2">
+                  🛏️ {{ group.bedType }} &nbsp;|&nbsp; 👤 Max
+                  {{ group.maxOccupancy }} per room &nbsp;|&nbsp; 🧑‍🤝‍🧑 Fits
+                  {{ group.maxOccupancy * selectedQuantity }} for
+                  {{ selectedQuantity }} room{{
+                    selectedQuantity > 1 ? "s" : ""
+                  }}
+                </p>
+                <div class="d-flex flex-wrap gap-1 mb-2">
+                  <span
+                    *ngFor="let a of group.amenities"
+                    class="badge rounded-pill"
+                    style="
+                      background-color: var(--light-cyan);
+                      color: var(--bright-teal-blue);
+                      font-size: 11px;
+                    "
+                  >
+                    {{ a }}
+                  </span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <p
+                    class="fw-bold mb-0"
+                    style="color: var(--bright-teal-blue)"
+                  >
+                    ₹{{
+                      group.basePricePerNight * (hotels.seasonalMultiplier || 1)
+                        | number
+                    }}
+                    /night
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rate Plans (shown when this type is selected) -->
+            <div
+              class="bg-white rounded-4 border p-3 mt-2"
+              *ngIf="isTypeSelected(group) && ratePlans.length"
+            >
+              <h6 class="fw-bold mb-1" style="color: var(--deep-twilight)">
+                Select a Rate Plan
+              </h6>
+              <p class="text-muted small mb-3">
+                Meal charges are per person · per night
+              </p>
+              <div class="row g-3">
+                <div
+                  class="col-12 col-md-6"
+                  *ngFor="let plan of ratePlans"
+                  [hidden]="!plan.planName"
+                >
+                  <div
+                    class="rounded-4 p-3 h-100 d-flex flex-column"
+                    style="cursor: pointer"
+                    [ngStyle]="{
+                      border:
+                        selectedPlan?._id === plan._id
+                          ? '2px solid var(--bright-teal-blue)'
+                          : '2px solid #dee2e6',
+                      'background-color':
+                        selectedPlan?._id === plan._id
+                          ? 'var(--light-cyan)'
+                          : '#f8f9fa',
+                    }"
+                    (click)="selectPlan(plan)"
+                  >
+                    <!-- Plan name + price delta badge -->
+                    <div
+                      class="d-flex justify-content-between align-items-start mb-2"
+                    >
+                      <span
+                        class="fw-bold small"
+                        style="color: var(--deep-twilight); line-height: 1.3"
+                      >
+                        {{ plan.planName }}
+                      </span>
+                      <span
+                        class="badge rounded-pill ms-1 flex-shrink-0"
+                        [ngStyle]="{
+                          'background-color':
+                            getMealAddOnForPlan(plan) === 0
+                              ? '#d1fae5'
+                              : 'var(--light-cyan)',
+                          color:
+                            getMealAddOnForPlan(plan) === 0
+                              ? '#065f46'
+                              : 'var(--bright-teal-blue)',
+                        }"
+                      >
+                        {{
+                          getMealAddOnForPlan(plan) === 0
+                            ? "Lowest rate"
+                            : "+₹" +
+                              (getMealAddOnForPlan(plan) | number) +
+                              "/person"
+                        }}
+                      </span>
+                    </div>
+
+                    <!-- Meals included -->
+                    <div class="d-flex gap-2 flex-wrap mb-2">
+                      <span
+                        class="badge rounded-pill"
+                        style="
+                          background: #d1fae5;
+                          color: #065f46;
+                          font-size: 11px;
+                        "
+                        *ngIf="plan.includesBreakfast"
+                      >
+                        🍳 Breakfast
+                      </span>
+                      <span
+                        class="badge rounded-pill"
+                        style="
+                          background: #dbeafe;
+                          color: #1e40af;
+                          font-size: 11px;
+                        "
+                        *ngIf="plan.includesLunch"
+                      >
+                        🍽️ Lunch
+                      </span>
+                      <span
+                        class="badge rounded-pill"
+                        style="
+                          background: #fce7f3;
+                          color: #9d174d;
+                          font-size: 11px;
+                        "
+                        *ngIf="plan.includesDinner"
+                      >
+                        🌙 Dinner
+                      </span>
+                      <span
+                        class="badge rounded-pill"
+                        style="
+                          background: #f3f4f6;
+                          color: #6b7280;
+                          font-size: 11px;
+                        "
+                        *ngIf="
+                          !plan.includesBreakfast &&
+                          !plan.includesLunch &&
+                          !plan.includesDinner
+                        "
+                      >
+                        Room only
+                      </span>
+                    </div>
+
+                    <!-- Description -->
+                    <p
+                      class="text-muted mb-2 flex-grow-1"
+                      style="font-size: 11px; line-height: 1.4"
+                    >
+                      {{ plan.description }}
+                    </p>
+
+                    <!-- Cancellation -->
+                    <div
+                      class="mt-auto d-flex align-items-center gap-1"
+                      style="font-size: 11px"
+                    >
+                      <ng-container *ngIf="plan.isRefundable">
+                        <span style="color: #059669">✓</span>
+                        <span class="text-muted"
+                          >Free cancellation within
+                          {{ plan.freeCancellationHours }}h</span
+                        >
+                      </ng-container>
+                      <ng-container *ngIf="!plan.isRefundable">
+                        <span style="color: #dc2626">✕</span>
+                        <span class="text-muted">Non-refundable</span>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <app-review-page [entityId]="entityId" [entityType]="hotels?.hotelType"></app-review-page>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="col-12 col-md-4 order-1 order-md-2">
+      <div
+        class="bg-white rounded-4 shadow-sm p-4"
+        style="position: sticky; top: 80px"
+      >
+        <!-- ── Price summary ── -->
+        <div class="mb-3">
+          <ng-container *ngIf="!selectedType">
+            <div class="d-flex align-items-baseline gap-2">
+              <h4 class="fw-bold mb-0" style="color: var(--deep-twilight)">
+                {{ getStartingPrice() | currency: "INR" : "symbol" : "1.0-0" }}
+              </h4>
+              <span class="text-muted small">/ night</span>
+            </div>
+            <p class="text-muted small mb-0 mt-1">
+              Starting price · {{ selectedQuantity }} room{{
+                selectedQuantity > 1 ? "s" : ""
+              }}
+            </p>
+          </ng-container>
+
+          <ng-container *ngIf="selectedType">
+            <div class="d-flex align-items-baseline gap-2">
+              <h4 class="fw-bold mb-0" style="color: var(--bright-teal-blue)">
+                {{ totalAmount | currency: "INR" : "symbol" : "1.0-0" }}
+              </h4>
+              <span class="text-muted small">total</span>
+            </div>
+            <p class="text-muted small mb-1">
+              {{ selectedQuantity }} room{{ selectedQuantity > 1 ? "s" : "" }} ·
+              {{ calculateNights() }} night{{
+                calculateNights() > 1 ? "s" : ""
+              }}
+              · incl. tax
+            </p>
+            <!-- Breakdown pill -->
+            <div
+              class="rounded-3 p-2 small"
+              style="background: var(--light-cyan)"
+            >
+              <!-- Room cost line -->
+              <div class="d-flex justify-content-between text-muted mb-1">
+                <span class="text-capitalize">
+                  🚪 {{ selectedType.type }} × {{ selectedQuantity }} ×
+                  {{ calculateNights() }}n
+                </span>
+                <span class="fw-semibold" style="color: var(--deep-twilight)">
+                  ₹{{
+                    selectedType.basePricePerNight *
+                      (hotels?.seasonalMultiplier || 1) *
+                      selectedQuantity *
+                      calculateNights() | number: "1.0-0"
+                  }}
+                </span>
+              </div>
+              <!-- Meal add-on line (only when a meal plan is selected) -->
+              <div
+                *ngIf="selectedPlan && getPlanMealAddOn() > 0"
+                class="d-flex justify-content-between text-muted mb-1"
+              >
+                <span>
+                  🍽️ {{ getPlanLabel() }} meals · {{ guests + children }} pax ×
+                  {{ calculateNights() }}n
+                </span>
+                <span class="fw-semibold" style="color: var(--deep-twilight)">
+                  ₹{{
+                    getPlanMealAddOn() * calculateNights() | number: "1.0-0"
+                  }}
+                </span>
+              </div>
+              <!-- Tax line -->
+              <div class="d-flex justify-content-between text-muted mb-1">
+                <span>Tax ({{ hotels?.taxPercent }}%)</span>
+                <span class="fw-semibold" style="color: var(--deep-twilight)">
+                  ₹{{ taxAmount | number: "1.0-0" }}
+                </span>
+              </div>
+              <hr class="my-1" />
+              <div
+                class="d-flex justify-content-between fw-bold"
+                style="color: var(--bright-teal-blue)"
+              >
+                <span>Total</span>
+                <span>{{
+                  totalAmount | currency: "INR" : "symbol" : "1.0-0"
+                }}</span>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+
+        <hr class="my-3" />
+
+        <!-- ── Dates ── -->
+        <p
+          class="small fw-bold text-uppercase mb-2"
+          style="
+            color: var(--deep-twilight);
+            letter-spacing: 0.5px;
+            font-size: 11px;
+          "
+        >
+          Dates
+        </p>
+        <div class="row g-2 mb-3">
+          <div class="col-6">
+            <label class="form-label small text-muted mb-1">Check-in</label>
+            <input
+              type="date"
+              class="form-control form-control-sm"
+              [(ngModel)]="checkIn"
+              [min]="today"
+              (ngModelChange)="onCheckInChange()"
+            />
+          </div>
+          <div class="col-6">
+            <label class="form-label small text-muted mb-1">Check-out</label>
+            <input
+              type="date"
+              class="form-control form-control-sm"
+              [(ngModel)]="checkOut"
+              [min]="minCheckOut"
+              [max]="maxCheckOut"
+              (ngModelChange)="onCheckOutChange()"
+            />
+          </div>
+          <div class="col-12" *ngIf="checkOutError">
+            <small class="text-danger">Stay cannot exceed 9 nights.</small>
+          </div>
+          <div
+            class="col-12"
+            *ngIf="
+              checkIn && checkOut && !checkOutError && calculateNights() > 0
+            "
+          >
+            <small class="text-muted">
+              🌙 {{ calculateNights() }} night{{
+                calculateNights() > 1 ? "s" : ""
+              }}
+            </small>
+          </div>
+        </div>
+
+        <hr class="my-3" />
+
+        <!-- ── Guests & Rooms ── -->
+        <p
+          class="small fw-bold text-uppercase mb-2"
+          style="
+            color: var(--deep-twilight);
+            letter-spacing: 0.5px;
+            font-size: 11px;
+          "
+        >
+          Rooms &amp; Guests
+        </p>
+
+        <!-- Rooms row -->
+        <div
+          class="d-flex justify-content-between align-items-center py-2 border-bottom"
+        >
+          <div>
+            <div class="small fw-semibold" style="color: var(--deep-twilight)">
+              🚪 Rooms
+            </div>
+            <div
+              class="text-muted"
+              style="font-size: 11px"
+              *ngIf="selectedType"
+            >
+              {{ selectedType.availableCount }} available for dates
+            </div>
+            <div
+              class="text-muted"
+              style="font-size: 11px"
+              *ngIf="!selectedType"
+            >
+              Capped on room selection
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <button
+              type="button"
+              class="btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center"
+              style="width: 30px; height: 30px; font-size: 16px"
+              [disabled]="selectedQuantity <= 1"
+              (click)="changeRooms(-1)"
+            >
+              −
+            </button>
+            <span
+              class="fw-semibold"
+              style="min-width: 22px; text-align: center"
+              >{{ selectedQuantity }}</span
+            >
+            <button
+              type="button"
+              class="btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center"
+              style="width: 30px; height: 30px; font-size: 16px"
+              [disabled]="selectedQuantity >= getMaxRooms()"
+              (click)="changeRooms(1)"
+            >
+              +
+            </button>
+          </div>
+        </div>
+
+        <!-- Adults row -->
+        <div
+          class="d-flex justify-content-between align-items-center py-2 border-bottom"
+        >
+          <div>
+            <div class="small fw-semibold" style="color: var(--deep-twilight)">
+              👤 Adults
+            </div>
+            <div class="text-muted" style="font-size: 11px">
+              Ages 13 or above
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <button
+              type="button"
+              class="btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center"
+              style="width: 30px; height: 30px; font-size: 16px"
+              [disabled]="guests <= selectedQuantity"
+              (click)="changeGuests(-1)"
+            >
+              −
+            </button>
+            <span
+              class="fw-semibold"
+              style="min-width: 22px; text-align: center"
+              >{{ guests }}</span
+            >
+            <button
+              type="button"
+              class="btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center"
+              style="width: 30px; height: 30px; font-size: 16px"
+              [disabled]="guests >= getMaxGuests()"
+              (click)="changeGuests(1)"
+            >
+              +
+            </button>
+          </div>
+        </div>
+
+        <!-- Children row -->
+        <div
+          class="d-flex justify-content-between align-items-center py-2 border-bottom"
+        >
+          <div>
+            <div class="small fw-semibold" style="color: var(--deep-twilight)">
+              🧒 Children
+            </div>
+            <div class="text-muted" style="font-size: 11px">Ages 2–12</div>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <button
+              type="button"
+              class="btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center"
+              style="width: 30px; height: 30px; font-size: 16px"
+              [disabled]="children <= 0"
+              (click)="changeChildren(-1)"
+            >
+              −
+            </button>
+            <span
+              class="fw-semibold"
+              style="min-width: 22px; text-align: center"
+              >{{ children }}</span
+            >
+            <button
+              type="button"
+              class="btn btn-outline-secondary rounded-circle p-0 d-flex align-items-center justify-content-center"
+              style="width: 30px; height: 30px; font-size: 16px"
+              [disabled]="
+                getMaxChildren() === 0 || children >= getMaxChildren()
+              "
+              (click)="changeChildren(1)"
+            >
+              +
+            </button>
+          </div>
+        </div>
+
+        <!-- Infants row — display only -->
+        <div
+          class="d-flex justify-content-between align-items-center py-2"
+          *ngIf="infants > 0"
+        >
+          <div>
+            <div class="small fw-semibold" style="color: var(--deep-twilight)">
+              👶 Infants
+            </div>
+            <div class="text-muted" style="font-size: 11px">
+              Under 2 — no charge
+            </div>
+          </div>
+          <span class="fw-semibold text-muted">{{ infants }}</span>
+        </div>
+
+        <hr class="my-3" />
+
+        <!-- ── Room selection reminder ── -->
+        <div
+          *ngIf="!selectedType"
+          class="rounded-3 p-2 mb-3 d-flex align-items-center gap-2 small"
+          style="background: #fff3cd; border: 1px solid #ffc107; color: #856404"
+        >
+          <span>🛏️</span>
+          <span>Select a room type below to proceed</span>
+        </div>
+
+        <!-- ── Reserve button ── -->
+        <button
+          class="btn w-100 py-2 fw-bold mb-2"
+          style="
+            background: linear-gradient(135deg, #0077b6, #00b4d8);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+          "
+          [disabled]="
+            !selectedType ||
+            !checkIn ||
+            !checkOut ||
+            calculateNights() <= 0 ||
+            guests < 1 ||
+            checkOutError
+          "
+          (click)="reserveNow()"
+        >
+          Reserve Now
+          <span *ngIf="selectedQuantity > 1" class="small fw-normal opacity-75">
+            · {{ selectedQuantity }} rooms
+          </span>
+        </button>
+
+        <p class="text-muted small text-center mb-0" style="font-size: 11px">
+          🔒 You won't be charged yet
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

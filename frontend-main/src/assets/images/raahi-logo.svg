@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 160" width="520" height="160">
+
+  <!-- R -->
+  <text x="28" y="128" font-family="Arial Black, sans-serif" font-weight="900"
+        font-size="120" fill="white" letter-spacing="-2">R</text>
+
+  <!-- A (first) -->
+  <text x="118" y="128" font-family="Arial Black, sans-serif" font-weight="900"
+        font-size="120" fill="white" letter-spacing="-2">A</text>
+
+  <!-- A (second) — shifted right to leave space for suitcase between A and H -->
+  <text x="268" y="128" font-family="Arial Black, sans-serif" font-weight="900"
+        font-size="120" fill="white" letter-spacing="-2">H</text>
+
+  <!-- I -->
+  <text x="368" y="128" font-family="Arial Black, sans-serif" font-weight="900"
+        font-size="120" fill="white" letter-spacing="-2">I</text>
+
+  <!-- Suitcase icon — sits between A and H (roughly x=210) -->
+  <!-- Body -->
+  <rect x="202" y="52" width="52" height="44" rx="5" fill="none" stroke="white" stroke-width="5"/>
+  <!-- Handle -->
+  <rect x="218" y="40" width="20" height="14" rx="4" fill="none" stroke="white" stroke-width="4.5"/>
+  <!-- Center divider line -->
+  <line x1="228" y1="52" x2="228" y2="96" stroke="white" stroke-width="3" opacity="0.6"/>
+  <!-- Horizontal band -->
+  <line x1="202" y1="74" x2="254" y2="74" stroke="white" stroke-width="3" opacity="0.6"/>
+  <!-- Wheels -->
+  <circle cx="213" cy="98" r="4" fill="white"/>
+  <circle cx="243" cy="98" r="4" fill="white"/>
+
+  <!-- Swoosh arc — curves from lower-left under the text to mid-right -->
+  <path d="M 30 138 Q 160 165 310 148 Q 390 138 430 118"
+        fill="none" stroke="white" stroke-width="4.5"
+        stroke-linecap="round" opacity="0.85"/>
+
+  <!-- Plane — takes off from the swoosh toward upper right -->
+  <!-- Body -->
+  <ellipse cx="440" cy="105" rx="26" ry="7" fill="white"
+           transform="rotate(-32 440 105)"/>
+  <!-- Nose cone -->
+  <ellipse cx="457" cy="92" rx="8" ry="5" fill="white"
+           transform="rotate(-32 457 92)"/>
+  <!-- Main wing -->
+  <path d="M 438 108 L 418 126 L 448 115 Z" fill="white"/>
+  <!-- Tail wing -->
+  <path d="M 428 112 L 416 122 L 432 118 Z" fill="white"/>
+  <!-- Tail fin -->
+  <path d="M 424 112 L 420 98 L 432 108 Z" fill="white"/>
+
+  <!-- Flight trail dots from plane going lower-left -->
+  <circle cx="400" cy="122" r="2.5" fill="white" opacity="0.7"/>
+  <circle cx="372" cy="130" r="2.5" fill="white" opacity="0.55"/>
+  <circle cx="344" cy="136" r="2.5" fill="white" opacity="0.4"/>
+  <circle cx="310" cy="140" r="2.5" fill="white" opacity="0.28"/>
+
+</svg>

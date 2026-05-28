@@ -1,0 +1,196 @@
+﻿// ── Tabs ─────────────────────────────────────────────────────
+.tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  border-radius: 24px;
+  border: 1.5px solid #e2e8f0;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: var(--bright-teal-blue);
+    color: var(--bright-teal-blue);
+  }
+
+  &.active {
+    background: var(--bright-teal-blue);
+    border-color: var(--bright-teal-blue);
+    color: #fff;
+  }
+
+  .tab-count {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    padding: 1px 7px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  &:not(.active) .tab-count {
+    background: #f1f5f9;
+    color: #64748b;
+  }
+}
+
+// ── Filter Pills ──────────────────────────────────────────────
+.filter-pill {
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1.5px solid #e2e8f0;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover {
+    border-color: #94a3b8;
+  }
+
+  &.active {
+    background: var(--deep-twilight, #03045e);
+    border-color: var(--deep-twilight, #03045e);
+    color: #fff;
+  }
+  &.confirmed.active {
+    background: #059669;
+    border-color: #059669;
+    color: #fff;
+  }
+  &.cancelled.active {
+    background: #dc2626;
+    border-color: #dc2626;
+    color: #fff;
+  }
+}
+
+// ── Booking Card ──────────────────────────────────────────────
+.booking-card {
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  &.cancelled-card {
+    opacity: 0.7;
+  }
+}
+
+.status-stripe {
+  width: 5px;
+  flex-shrink: 0;
+}
+
+.booking-card-body {
+  flex: 1;
+  padding: 14px 16px;
+}
+
+.booking-card-arrow {
+  display: flex;
+  align-items: center;
+  padding: 0 14px 0 4px;
+  color: #cbd5e1;
+}
+
+// ── Info Chip ─────────────────────────────────────────────────
+.info-chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  color: #64748b;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+
+// ── Ref Badge ─────────────────────────────────────────────────
+.ref-badge {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  color: var(--bright-teal-blue, #0077b6);
+  background: #e0f2fe;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-weight: 600;
+}
+
+// ── Pagination ────────────────────────────────────────────────
+.page-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1.5px solid #e2e8f0;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+
+  &:hover:not([disabled]) {
+    border-color: var(--bright-teal-blue);
+    color: var(--bright-teal-blue);
+  }
+  &.active {
+    background: var(--bright-teal-blue);
+    border-color: var(--bright-teal-blue);
+    color: #fff;
+  }
+  &[disabled] {
+    opacity: 0.35;
+    cursor: default;
+  }
+}
+
+// ── Extra small button ────────────────────────────────────────
+.btn-xs {
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 20px;
+}
+
+// ── Animations ────────────────────────────────────────────────
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

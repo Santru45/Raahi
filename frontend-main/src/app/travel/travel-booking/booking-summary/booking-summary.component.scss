@@ -1,0 +1,190 @@
+// booking-summary.component.scss
+// Only custom styles that Bootstrap doesn't cover
+
+// ═══════════ POPUP OVERLAY ═══════════════════════════════
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: overlayIn 0.3s ease;
+}
+
+.popup-card {
+  min-width: 320px;
+  max-width: 420px;
+  border-radius: 20px !important;
+  animation: popupIn 0.4s ease;
+}
+
+.popup-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  i {
+    font-size: 2.5rem;
+  }
+
+  &.processing {
+    background: var(--light-cyan);
+    i {
+      color: var(--bright-teal-blue);
+    }
+  }
+
+  &.confirmed {
+    background: #ecfdf5;
+    animation: popIn 0.5s ease;
+    i {
+      color: #059669;
+      font-size: 3rem;
+    }
+  }
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bright-teal-blue);
+  animation: dotBounce 1.4s infinite ease-in-out both;
+  &:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  &:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+}
+
+.spin-large {
+  display: inline-block;
+  animation: spin 1.2s linear infinite;
+}
+
+// ═══════════ LOYALTY COIN INPUT ══════════════════════════
+// Suppress number spinners on the coin input
+input[type="number"].coin-input {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  color: #92400e;
+  font-weight: 600;
+  border-color: #fde68a;
+
+  &:focus {
+    border-color: #d97706;
+    box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.15);
+  }
+}
+
+// ═══════════ PAYMENT OPTIONS ═════════════════════════════
+.payment-option {
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  &:hover:not(.disabled) {
+    background: var(--light-cyan);
+    border-color: var(--sky-aqua);
+  }
+  &.active {
+    background: var(--light-cyan);
+    border-color: var(--bright-teal-blue);
+  }
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #f8fafc;
+  }
+}
+
+.payment-msg-anim {
+  animation: fadeIn 0.3s ease;
+}
+
+// ═══════════ WALLET BOX ══════════════════════════════════
+.wallet-box {
+  background: var(--light-cyan);
+  border: 1px solid var(--frosted-blue-light);
+}
+
+// ═══════════ LETTER SPACING UTILITY ══════════════════════
+.ls-1 {
+  letter-spacing: 0.5px;
+}
+
+// ═══════════ ANIMATIONS ══════════════════════════════════
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popupIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes dotBounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0.4);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

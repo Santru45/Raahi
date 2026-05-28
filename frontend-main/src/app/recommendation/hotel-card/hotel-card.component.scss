@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  width: 22rem;
+
+  @media (max-width: 768px) { width: 18rem; }
+  @media (max-width: 576px) { width: 75vw; }
+}
+
+.card {
+  width: 100% !important;
+  height: 27rem;
+}
+
+.card-img-top {
+  height: 210px;
+  object-fit: cover;
+}
+
+.position-relative {
+  height: 210px;
+  overflow: hidden;
+
+  img { width: 100%; height: 100%; object-fit: cover; }
+}

@@ -1,0 +1,12 @@
+// src/app/components/travel/travel-main/travel-main.component.scss
+
+.travel-layout-wrapper {
+  min-height: 100vh;
+  padding-bottom: 40px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  .search-wrapper {
+    max-width: 750px;
+    margin: 0 auto;
+  }
+}

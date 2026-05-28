@@ -1,0 +1,243 @@
+// src/app/components/travel/service-card/service-card.component.scss
+
+.service-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #e8f0fe;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border-color: #c5d4f0;
+  }
+}
+
+// ─── ROW 1: Header ───────────────────────────────────────
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.operator-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.mode-icon {
+  font-size: 1.4rem;
+  padding: 0.4rem;
+  border-radius: 8px;
+
+  &.flight {
+    color: #0d6efd;
+    background: #e8f0fe;
+  }
+
+  &.train {
+    color: #059669;
+    background: #d1fae5;
+  }
+
+  &.bus {
+    color: #dc6b18;
+    background: #fff3e0;
+  }
+}
+
+.operator-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #1a2d50;
+}
+
+.service-number {
+  font-size: 0.78rem;
+  color: #888;
+}
+
+.class-badge {
+  background: #f0f4ff;
+  color: #3b5998;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+// ─── ROW 2: Route ────────────────────────────────────────
+.route-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 0.75rem 0;
+}
+
+.time-block {
+  display: flex;
+  flex-direction: column;
+  min-width: 80px;
+
+  &.arrival {
+    text-align: right;
+  }
+}
+
+.time {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a2d50;
+}
+
+.location {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.2rem;
+}
+
+.connector {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.duration {
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 0.4rem;
+}
+
+.connector-line {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.line {
+  flex: 1;
+  height: 2px;
+
+  &.flight-line {
+    border-top: 2px dotted #0d6efd;
+  }
+
+  &.train-line {
+    height: 4px;
+    border-top: 1.5px solid #059669;
+    border-bottom: 1.5px solid #059669;
+    background: transparent;
+  }
+
+  &.bus-line {
+    border-top: 2px dashed #dc6b18;
+  }
+}
+
+.connector-icon {
+  font-size: 0.85rem;
+  margin: 0 0.4rem;
+  color: #888;
+}
+
+// ─── ROW 3: Amenities ────────────────────────────────────
+.amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.amenity-pill {
+  font-size: 0.7rem;
+  color: #555;
+  background: #f5f7fa;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  border: 1px solid #eee;
+}
+
+// ─── ROW 4: Footer ───────────────────────────────────────
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.price-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fare {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a2d50;
+}
+
+.market-rate {
+  font-size: 0.85rem;
+  color: #aaa;
+  text-decoration: line-through;
+}
+
+.savings-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #059669;
+  background: #d1fae5;
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+}
+
+.availability-and-action {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.seats-info {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.seats-warning {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #dc3545;
+}
+
+.btn-select {
+  background: #0d6efd;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #0b5ed7;
+  }
+}

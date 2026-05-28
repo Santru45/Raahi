@@ -1,0 +1,144 @@
+// src/app/components/travel/boarding-point/boarding-point.component.scss
+
+.boarding-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8f0fe;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a2d50;
+  margin-bottom: 1.25rem;
+
+  i {
+    color: #dc6b18;
+    margin-right: 0.4rem;
+  }
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #888;
+  font-size: 0.9rem;
+
+  .spin {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+    margin-right: 0.4rem;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ─── Points Section ──────────────────────────────────────
+.points-section {
+  margin-bottom: 1.5rem;
+}
+
+.section-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a2d50;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+
+  i {
+    color: #dc6b18;
+  }
+}
+
+.no-points {
+  font-size: 0.85rem;
+  color: #aaa;
+  padding: 0.5rem 0;
+}
+
+// ─── Point Card ──────────────────────────────────────────
+.point-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border: 1.5px solid #e8f0fe;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #dc6b18;
+    background: #fff8f3;
+  }
+
+  &.selected {
+    border-color: #dc6b18;
+    background: #fff3e0;
+    box-shadow: 0 2px 8px rgba(220, 107, 24, 0.15);
+  }
+}
+
+.point-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.point-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1a2d50;
+}
+
+.point-landmark {
+  font-size: 0.78rem;
+  color: #888;
+  margin-top: 0.15rem;
+}
+
+.point-time {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #dc6b18;
+  white-space: nowrap;
+}
+
+// ─── Confirm Button ──────────────────────────────────────
+.btn-confirm-points {
+  width: 100%;
+  padding: 0.7rem;
+  background: linear-gradient(135deg, #dc6b18 0%, #c25e15 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    background: #b0c4de;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}

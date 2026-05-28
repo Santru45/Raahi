@@ -1,0 +1,850 @@
+<div class="container-fluid p-4 hotel-bg" style="min-height: 100vh">
+  <!-- Header -->
+  <div class="mt-4 mb-2 d-flex justify-content-between align-items-center">
+    <h1 class="fw-bold mb-0" style="color: var(--deep-twilight)">
+      Admin Dashboard
+    </h1>
+    <small class="fs-4">{{ today | date: "EEEE, MMMM d, y" }}</small>
+  </div>
+  <p class="text-muted mb-4" style="color: var(--deep-twilight)">
+    Welcome back, Administrator
+  </p>
+
+  <!-- Spinner -->
+  @if (isLoading) {
+    <div
+      class="d-flex justify-content-center align-items-center gap-2"
+      style="min-height: calc(100vh - 200px)"
+    >
+      @for (item of [1, 2, 3]; track $index) {
+        <div
+          class="spinner-grow"
+          style="color: var(--bright-teal-blue)"
+          role="status"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Server Error -->
+  @if (serverError && !isLoading) {
+    <div
+      class="d-flex flex-column align-items-center justify-content-center"
+      style="min-height: calc(100vh - 200px)"
+    >
+      <i
+        class="bi bi-exclamation-triangle-fill fs-1 mb-3"
+        style="color: #dc3545"
+      ></i>
+      <h5 class="fw-bold text-danger">Something went wrong</h5>
+      <p class="text-muted">{{ serverError }}</p>
+      <button
+        class="btn btn-outline-danger rounded-3 mt-2"
+        (click)="ngOnInit()"
+      >
+        <i class="bi bi-arrow-clockwise me-1"></i>Retry
+      </button>
+    </div>
+  }
+
+  @if (stats() && !isLoading && !serverError) {
+    <app-stats-cards [stats]="stats()!"></app-stats-cards>
+    <app-success-stories
+      [stats]="stats()!"
+      [topHotelName]="topHotels.length ? topHotels[0].name : 'No Top Hotel'"
+    ></app-success-stories>
+
+    <!-- Recent Bookings + Top Hotels -->
+    <div class="row g-4 mb-4">
+      <!-- Recent Bookings -->
+      <div class="col-12 col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+          <div class="card-body p-4">
+            <!-- Title + badge -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="fw-bold mb-0" style="color: var(--deep-twilight)">
+                Recent Bookings
+              </h5>
+              <span
+                class="badge rounded-pill px-3 py-2"
+                style="
+                  background-color: var(--light-cyan);
+                  color: var(--bright-teal-blue);
+                "
+              >
+                @if (isBookingFiltered) {
+                  {{ bookingTotal }} / {{ stats()!.totalBookings }}
+                } @else {
+                  {{ bookingTotal }} bookings
+                }
+              </span>
+            </div>
+
+            <!-- Toolbar -->
+            <div
+              class="d-flex justify-content-end align-items-center gap-2 mb-3 flex-wrap"
+            >
+              <!-- Search -->
+              <div
+                class="d-flex align-items-center gap-2 px-3 py-2 rounded-pill"
+                style="background-color: var(--light-cyan)"
+              >
+                <i
+                  class="bi bi-search"
+                  style="color: var(--bright-teal-blue); font-size: 13px"
+                ></i>
+                <input
+                  type="text"
+                  class="border-0 bg-transparent p-0 m-0"
+                  style="
+                    outline: none;
+                    font-size: 13px;
+                    width: 130px;
+                    color: var(--deep-twilight);
+                  "
+                  placeholder="Search user…"
+                  [(ngModel)]="bookingSearchQuery"
+                />
+                @if (bookingSearchQuery) {
+                  <i
+                    class="bi bi-x"
+                    style="
+                      color: var(--bright-teal-blue);
+                      font-size: 15px;
+                      cursor: pointer;
+                      line-height: 1;
+                    "
+                    (click)="bookingSearchQuery = ''"
+                  ></i>
+                }
+              </div>
+
+              <div
+                style="width: 1px; height: 28px; background: rgba(0, 0, 0, 0.1)"
+              ></div>
+
+              <!-- Type filter -->
+              <div
+                class="d-flex align-items-center gap-2 px-3 py-2 rounded-pill"
+                style="background-color: var(--light-cyan)"
+              >
+                <i
+                  class="bi bi-tag"
+                  style="color: var(--bright-teal-blue); font-size: 12px"
+                ></i>
+                <select
+                  class="border-0 bg-transparent p-0 m-0 fw-semibold"
+                  style="
+                    outline: none;
+                    font-size: 13px;
+                    color: var(--deep-twilight);
+                    cursor: pointer;
+                    appearance: auto;
+                  "
+                  [(ngModel)]="bookingTypeFilter"
+                >
+                  <option value="all">All Types</option>
+                  <option value="hotel">Hotel</option>
+                  <option value="flight">Flight</option>
+                  <option value="train">Train</option>
+                  <option value="bus">Bus</option>
+                </select>
+              </div>
+
+              <!-- Status filter -->
+              <div
+                class="d-flex align-items-center gap-2 px-3 py-2 rounded-pill"
+                style="background-color: var(--light-cyan)"
+              >
+                <i
+                  class="bi bi-circle-half"
+                  style="color: var(--bright-teal-blue); font-size: 12px"
+                ></i>
+                <select
+                  class="border-0 bg-transparent p-0 m-0 fw-semibold"
+                  style="
+                    outline: none;
+                    font-size: 13px;
+                    color: var(--deep-twilight);
+                    cursor: pointer;
+                    appearance: auto;
+                  "
+                  [(ngModel)]="bookingStatusFilter"
+                >
+                  <option value="all">All Status</option>
+                  <option value="confirmed">Confirmed</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
+
+              <!-- Amount sort -->
+              <div
+                class="d-flex align-items-center gap-2 px-3 py-2 rounded-pill"
+                style="background-color: var(--light-cyan)"
+              >
+                <i
+                  class="bi bi-cash"
+                  style="color: var(--bright-teal-blue); font-size: 12px"
+                ></i>
+                <select
+                  class="border-0 bg-transparent p-0 m-0 fw-semibold"
+                  style="
+                    outline: none;
+                    font-size: 13px;
+                    color: var(--deep-twilight);
+                    cursor: pointer;
+                    appearance: auto;
+                  "
+                  [(ngModel)]="bookingAmountSort"
+                >
+                  <option value="none">Amount</option>
+                  <option value="desc">↓ High to Low</option>
+                  <option value="asc">↑ Low to High</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Table -->
+            <div class="scroll-container bookings-scroll-area">
+              <table
+                class="table table-hover table-borderless align-middle text-center bookings-table"
+              >
+                <thead>
+                  <tr class="text-muted fw-semibold border-bottom">
+                    <th class="pb-3">User</th>
+                    <th class="pb-3">Type</th>
+                    <th class="pb-3">Destination</th>
+                    <th class="pb-3">Amount</th>
+                    <th class="pb-3">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @if (filteredBookings.length === 0) {
+                    <tr>
+                      <td colspan="5" class="py-5 text-center text-muted">
+                        <i
+                          class="bi bi-inbox fs-1 d-block mb-2"
+                          style="color: var(--frosted-blue)"
+                        ></i>
+                        <p class="mb-0">No bookings match your filters</p>
+                      </td>
+                    </tr>
+                  }
+                  @for (
+                    booking of filteredBookings;
+                    track booking.bookingReference
+                  ) {
+                    <tr>
+                      <td class="py-3 fw-medium">{{ booking.userName }}</td>
+                      <td class="py-3">
+                        <span
+                          class="badge rounded-pill px-3 py-2 w-100"
+                          [style.background-color]="
+                            booking.type === 'hotel'
+                              ? 'var(--turquoise-surf)'
+                              : booking.type === 'flight'
+                                ? 'var(--french-blue)'
+                                : 'var(--blue-green)'
+                          "
+                        >
+                          {{ booking.type | titlecase }}
+                        </span>
+                      </td>
+                      <td class="py-3 text-muted">{{ booking.destination }}</td>
+                      <td class="py-3 fw-medium">
+                        {{
+                          booking.amount | currency: "INR" : "symbol" : "1.0-0"
+                        }}
+                      </td>
+                      <td class="py-3">
+                        <span
+                          class="d-flex align-items-center justify-content-center gap-1 fw-medium"
+                          [style.color]="
+                            booking.bookingStatus === 'confirmed' ||
+                            booking.bookingStatus === 'completed'
+                              ? 'var(--turquoise-surf)'
+                              : booking.bookingStatus === 'pending'
+                                ? 'var(--sky-aqua)'
+                                : '#dc3545'
+                          "
+                        >
+                          <i
+                            class="bi"
+                            [class.bi-check-circle-fill]="
+                              booking.bookingStatus === 'confirmed' ||
+                              booking.bookingStatus === 'completed'
+                            "
+                            [class.bi-clock-fill]="
+                              booking.bookingStatus === 'pending'
+                            "
+                            [class.bi-x-circle-fill]="
+                              booking.bookingStatus === 'cancelled'
+                            "
+                          >
+                          </i>
+                          {{
+                            (booking.bookingStatus === "completed"
+                              ? "confirmed"
+                              : booking.bookingStatus
+                            ) | titlecase
+                          }}
+                        </span>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Hotels -->
+      <div class="col-12 col-lg-4">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+          <div class="card-body p-4">
+            <!-- Title + badge -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="fw-bold mb-0" style="color: var(--deep-twilight)">
+                Top Hotels
+              </h5>
+              <span
+                class="badge rounded-pill px-3 py-2"
+                style="
+                  background-color: var(--light-cyan);
+                  color: var(--bright-teal-blue);
+                "
+              >
+                @if (hotelSearchQuery.trim()) {
+                  {{ filteredHotels.length }} / {{ topHotels.length }}
+                } @else {
+                  {{ topHotels.length }} hotels
+                }
+              </span>
+            </div>
+
+            <!-- Toolbar -->
+            <div
+              class="d-flex justify-content-end align-items-center gap-2 mb-3 flex-wrap"
+            >
+              <!-- Search -->
+              <div
+                class="d-flex align-items-center gap-2 px-3 py-2 rounded-pill"
+                style="background-color: var(--light-cyan)"
+              >
+                <i
+                  class="bi bi-search"
+                  style="color: var(--bright-teal-blue); font-size: 13px"
+                ></i>
+                <input
+                  type="text"
+                  class="border-0 bg-transparent p-0 m-0"
+                  style="
+                    outline: none;
+                    font-size: 13px;
+                    width: 110px;
+                    color: var(--deep-twilight);
+                  "
+                  placeholder="Search hotel…"
+                  [(ngModel)]="hotelSearchQuery"
+                />
+                @if (hotelSearchQuery) {
+                  <i
+                    class="bi bi-x"
+                    style="
+                      color: var(--bright-teal-blue);
+                      font-size: 15px;
+                      cursor: pointer;
+                      line-height: 1;
+                    "
+                    (click)="hotelSearchQuery = ''"
+                  ></i>
+                }
+              </div>
+
+              <!-- Revenue sort -->
+              <div
+                class="d-flex align-items-center gap-2 px-3 py-2 rounded-pill"
+                style="background-color: var(--light-cyan)"
+              >
+                <i
+                  class="bi bi-cash"
+                  style="color: var(--bright-teal-blue); font-size: 12px"
+                ></i>
+                <select
+                  class="border-0 bg-transparent p-0 m-0 fw-semibold"
+                  style="
+                    outline: none;
+                    font-size: 13px;
+                    color: var(--deep-twilight);
+                    cursor: pointer;
+                    appearance: auto;
+                  "
+                  [(ngModel)]="hotelSortDir"
+                >
+                  <option value="desc">↓ Revenue</option>
+                  <option value="asc">↑ Revenue</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Hotel list -->
+            <div class="scroll-container hotels-scroll-area">
+              <div class="d-flex flex-column gap-3">
+                @for (hotel of filteredHotels; track hotel.name) {
+                  <div
+                    class="p-3 rounded-3 border"
+                    style="border-color: var(--frosted-blue-light) !important"
+                  >
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-1"
+                    >
+                      <span
+                        class="fw-semibold"
+                        style="color: var(--deep-twilight)"
+                      >
+                        {{ hotel.name }}
+                      </span>
+                      <span
+                        class="d-flex align-items-center gap-1 fw-semibold"
+                        style="color: var(--sky-aqua)"
+                      >
+                        <i class="bi bi-star-fill" style="font-size: 12px"></i>
+                        {{ hotel.starRating }}
+                      </span>
+                    </div>
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <small class="text-muted"
+                        >{{ hotel.bookingCount }} bookings</small
+                      >
+                      <small
+                        class="fw-medium"
+                        style="color: var(--bright-teal-blue)"
+                      >
+                        {{
+                          hotel.revenue | currency: "INR" : "symbol" : "1.0-0"
+                        }}
+                      </small>
+                    </div>
+                  </div>
+                }
+
+                @if (filteredHotels.length === 0) {
+                  <div class="text-center py-4 text-muted">
+                    <i
+                      class="bi bi-building fs-1 d-block mb-2"
+                      style="color: var(--frosted-blue)"
+                    ></i>
+                    @if (topHotels.length === 0) {
+                      <p class="mb-0 fw-semibold">No hotel bookings yet</p>
+                      <small
+                        >Hotels will appear here once bookings are made</small
+                      >
+                    } @else {
+                      <p class="mb-0">No hotels match your search</p>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Management Cards -->
+    <div class="mb-4">
+      <h5 class="fw-bold mb-3" style="color: var(--deep-twilight)">
+        User Management
+      </h5>
+      @if (deleteError) {
+        <div
+          class="alert alert-danger d-flex align-items-center gap-2 rounded-3 py-2 px-3 mb-3"
+          role="alert"
+        >
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          <span>{{ deleteError }}</span>
+        </div>
+      }
+      <div class="row g-3">
+        <!-- Total Customers -->
+        <div class="col-12 col-md-4">
+          <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+              <div
+                class="d-flex justify-content-between align-items-start mb-3"
+              >
+                <div
+                  class="d-inline-flex align-items-center justify-content-center rounded-3 p-2"
+                  style="background-color: var(--light-cyan)"
+                >
+                  <i
+                    class="bi bi-people-fill fs-5"
+                    style="color: var(--bright-teal-blue)"
+                  ></i>
+                </div>
+                <span
+                  class="rounded-circle"
+                  style="
+                    width: 10px;
+                    height: 10px;
+                    display: inline-block;
+                    background-color: var(--bright-teal-blue);
+                  "
+                >
+                </span>
+              </div>
+              <h4 class="fw-bold mb-1" style="color: var(--deep-twilight)">
+                {{ stats()!.totalCustomers | number }}
+              </h4>
+              <small class="text-muted d-block">Total Customers</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Avg Bookings per Customer -->
+        <div class="col-12 col-md-4">
+          <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+              <div
+                class="d-flex justify-content-between align-items-start mb-3"
+              >
+                <div
+                  class="d-inline-flex align-items-center justify-content-center rounded-3 p-2"
+                  style="background-color: var(--light-cyan)"
+                >
+                  <i
+                    class="bi bi-graph-up fs-5"
+                    style="color: var(--bright-teal-blue)"
+                  ></i>
+                </div>
+                <span
+                  class="rounded-circle"
+                  style="
+                    width: 10px;
+                    height: 10px;
+                    display: inline-block;
+                    background-color: var(--bright-teal-blue);
+                  "
+                >
+                </span>
+              </div>
+              <h4 class="fw-bold mb-1" style="color: var(--deep-twilight)">
+                {{ stats()!.avgBookingsPerCustomer }}
+                <small class="fs-6 fw-normal text-muted">/ customer</small>
+              </h4>
+              <small class="text-muted d-block"
+                >Avg. Bookings per Customer</small
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Cancellation Rate + Most Popular Type -->
+        <div class="col-12 col-md-4">
+          <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+              <div
+                class="d-flex justify-content-between align-items-start mb-3"
+              >
+                <div
+                  class="d-inline-flex align-items-center justify-content-center rounded-3 p-2"
+                  style="background-color: var(--light-cyan)"
+                >
+                  <i
+                    class="bi bi-x-circle fs-5"
+                    style="color: var(--bright-teal-blue)"
+                  ></i>
+                </div>
+                <span
+                  class="rounded-circle"
+                  style="
+                    width: 10px;
+                    height: 10px;
+                    display: inline-block;
+                    background-color: var(--bright-teal-blue);
+                  "
+                >
+                </span>
+              </div>
+              <h4 class="fw-bold mb-1" style="color: var(--deep-twilight)">
+                {{ stats()!.cancellationRate
+                }}<span class="fs-6 fw-normal text-muted"> %</span>
+              </h4>
+              <small class="text-muted d-block mb-3">Cancellation Rate</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- All Users Table -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4">
+      <div class="card-body p-4">
+        <!-- Card Title + Badge -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="fw-bold mb-0" style="color: var(--deep-twilight)">
+            All Users
+          </h5>
+          <span
+            class="badge rounded-pill px-3 py-2"
+            style="
+              background-color: var(--light-cyan);
+              color: var(--bright-teal-blue);
+            "
+          >
+            {{ userTotal }} customers
+          </span>
+        </div>
+
+        <!-- Toolbar -->
+        <div
+          class="d-flex justify-content-end align-items-center gap-2 mb-3 flex-wrap"
+        >
+          <!-- Search -->
+          <div
+            class="d-flex align-items-center gap-2 px-3 py-2 rounded-pill"
+            style="
+              background-color: var(--light-cyan);
+              border: 1.5px solid transparent;
+              transition: border-color 0.2s;
+            "
+          >
+            <i
+              class="bi bi-search"
+              style="color: var(--bright-teal-blue); font-size: 13px"
+            ></i>
+            <input
+              type="text"
+              class="border-0 bg-transparent p-0 m-0"
+              style="
+                outline: none;
+                font-size: 13px;
+                width: 160px;
+                color: var(--deep-twilight);
+              "
+              placeholder="Search by name…"
+              [(ngModel)]="userSearchQuery"
+            />
+            @if (userSearchQuery) {
+              <i
+                class="bi bi-x"
+                style="
+                  color: var(--bright-teal-blue);
+                  font-size: 15px;
+                  cursor: pointer;
+                  line-height: 1;
+                "
+                (click)="userSearchQuery = ''"
+              ></i>
+            }
+          </div>
+
+          <div
+            style="width: 1px; height: 28px; background: rgba(0, 0, 0, 0.1)"
+          ></div>
+
+          <!-- Sort Field -->
+          <div
+            class="d-flex align-items-center gap-2 px-3 py-2 rounded-pill"
+            style="background-color: var(--light-cyan)"
+          >
+            <i
+              class="bi bi-arrow-down-up"
+              style="color: var(--bright-teal-blue); font-size: 12px"
+            ></i>
+            <select
+              class="border-0 bg-transparent p-0 m-0 fw-semibold"
+              style="
+                outline: none;
+                font-size: 13px;
+                color: var(--deep-twilight);
+                cursor: pointer;
+                appearance: auto;
+              "
+              [(ngModel)]="sortKey"
+            >
+              <option value="name">Name</option>
+              <option value="bookings">Bookings</option>
+              <option value="spent">Total Spent</option>
+            </select>
+          </div>
+
+          <!-- Sort Direction -->
+          <div
+            class="d-flex align-items-center gap-2 px-3 py-2 rounded-pill"
+            style="background-color: var(--light-cyan)"
+          >
+            <select
+              class="border-0 bg-transparent p-0 m-0 fw-semibold"
+              style="
+                outline: none;
+                font-size: 13px;
+                color: var(--deep-twilight);
+                cursor: pointer;
+                appearance: auto;
+              "
+              [(ngModel)]="sortDir"
+            >
+              <option value="asc">↑ Asc</option>
+              <option value="desc">↓ Desc</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Column Headers -->
+        <div class="users-table-wrapper">
+          <div
+            class="users-header d-flex align-items-center gap-3 px-3 pb-2 mb-1"
+          >
+            <div style="width: 42px; flex-shrink: 0"></div>
+            <div class="users-col-name">
+              <small
+                class="text-muted fw-semibold"
+                style="
+                  font-size: 11px;
+                  letter-spacing: 0.5px;
+                  text-transform: uppercase;
+                "
+                >Customer</small
+              >
+            </div>
+            <div class="users-col-phone d-none d-md-block">
+              <small
+                class="text-muted fw-semibold"
+                style="
+                  font-size: 11px;
+                  letter-spacing: 0.5px;
+                  text-transform: uppercase;
+                "
+                >Phone</small
+              >
+            </div>
+            <div class="users-col-stat text-center">
+              <small
+                class="text-muted fw-semibold"
+                style="
+                  font-size: 11px;
+                  letter-spacing: 0.5px;
+                  text-transform: uppercase;
+                "
+                >Bookings</small
+              >
+            </div>
+            <div class="users-col-stat text-center">
+              <small
+                class="text-muted fw-semibold"
+                style="
+                  font-size: 11px;
+                  letter-spacing: 0.5px;
+                  text-transform: uppercase;
+                "
+                >Total Spent</small
+              >
+            </div>
+            <div class="users-col-action"></div>
+          </div>
+
+          <div class="users-divider mb-2"></div>
+
+          <!-- Rows -->
+          <div class="scroll-container users-scroll-area">
+            <div class="d-flex flex-column gap-1 users-list">
+              @for (user of filteredUsers; track user._id) {
+                <div
+                  class="user-row d-flex align-items-center gap-3 p-3 rounded-3"
+                >
+                  <div
+                    class="user-avatar flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle fw-bold"
+                    [style.background-color]="
+                      avatarColors[$index % avatarColors.length].bg
+                    "
+                    [style.color]="
+                      avatarColors[$index % avatarColors.length].text
+                    "
+                  >
+                    {{ user.name.charAt(0).toUpperCase() }}
+                  </div>
+
+                  <div class="users-col-name min-width-0">
+                    <div
+                      class="fw-semibold text-truncate"
+                      style="color: var(--deep-twilight)"
+                    >
+                      {{ user.name | titlecase }}
+                    </div>
+                    <small class="text-muted text-truncate d-block">
+                      <i class="bi bi-envelope me-1"></i>{{ user.email }}
+                    </small>
+                  </div>
+
+                  <div class="users-col-phone d-none d-md-block">
+                    <small class="text-muted"
+                      ><i class="bi bi-phone me-1"></i>{{ user.phone }}</small
+                    >
+                  </div>
+
+                  <div class="users-col-stat text-center">
+                    <div class="fw-bold" style="color: var(--deep-twilight)">
+                      {{ user.bookingCount }}
+                    </div>
+                  </div>
+
+                  <div class="users-col-stat text-center">
+                    <div class="fw-bold" style="color: var(--bright-teal-blue)">
+                      {{
+                        user.totalSpent | currency: "INR" : "symbol" : "1.0-0"
+                      }}
+                    </div>
+                  </div>
+
+                  <div
+                    class="users-col-action d-flex align-items-center justify-content-center gap-2"
+                  >
+                    @if (deleteConfirmId === user._id) {
+                      <small class="text-danger fw-semibold">Sure?</small>
+                      <button
+                        class="btn btn-danger btn-sm rounded-3 px-2 py-1"
+                        (click)="confirmDeleteUser(user._id)"
+                      >
+                        Yes
+                      </button>
+                      <button
+                        class="btn btn-outline-secondary btn-sm rounded-3 px-2 py-1"
+                        (click)="deleteConfirmId = null"
+                      >
+                        No
+                      </button>
+                    } @else {
+                      <span class="delete-placeholder"></span>
+                      <button
+                        class="btn btn-outline-danger btn-sm rounded-3 px-2 py-1"
+                        (click)="deleteConfirmId = user._id"
+                      >
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    }
+                  </div>
+                </div>
+              }
+
+              @if (users.length === 0) {
+                <div class="text-center py-5 text-muted">
+                  <i
+                    class="bi bi-person-x fs-1 d-block mb-2"
+                    style="color: var(--frosted-blue)"
+                  ></i>
+                  <p class="mb-0">No users match your search</p>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

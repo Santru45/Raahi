@@ -1,0 +1,180 @@
+.travel-bg {
+  min-height: 100vh;
+}
+
+.success-page {
+  max-width: 520px;
+  margin: 2rem auto;
+  padding: 2rem 1rem;
+}
+
+// ─── Success Icon ────────────────────────────────────────
+.success-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #ecfdf5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: popIn 0.6s ease;
+
+  i {
+    font-size: 3rem;
+    color: #059669;
+  }
+}
+
+// ─── Ticket Card ─────────────────────────────────────────
+.ticket-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.ticket-header {
+  background: var(--bright-teal-blue);
+  padding: 1.25rem 1.5rem;
+}
+
+.booking-ref {
+  font-family: "Courier New", monospace;
+  letter-spacing: 1px;
+  font-size: 0.95rem;
+}
+
+// ─── Tear Line (ticket perforation effect) ───────────────
+.tear-line {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 20px;
+  background: #fff;
+}
+
+.tear-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--frosted-blue, #f0f4f8);
+  position: absolute;
+
+  &.left {
+    left: -10px;
+  }
+
+  &.right {
+    right: -10px;
+  }
+}
+
+.tear-dashes {
+  flex: 1;
+  margin: 0 16px;
+  border-top: 2px dashed #e0e0e0;
+}
+
+// ─── Ticket Body ─────────────────────────────────────────
+.ticket-body {
+  padding: 1.25rem 1.5rem;
+}
+
+// ─── Route Section ───────────────────────────────────────
+.route-city {
+  font-size: 1.1rem;
+  color: var(--deep-twilight);
+}
+
+.route-connector {
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.route-icon {
+  font-size: 1.1rem;
+  color: var(--bright-teal-blue);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.route-line {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--sky-aqua) 15%,
+    var(--sky-aqua) 85%,
+    transparent 100%
+  );
+  margin: 0.3rem 0;
+}
+
+// ─── QR Section ──────────────────────────────────────────
+.qr-section {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.qr-image {
+  border-radius: 8px;
+  border: 2px solid #e2e8f0;
+}
+
+.ticket-id {
+  font-family: "Courier New", monospace;
+  font-size: 0.95rem;
+  color: var(--deep-twilight);
+  letter-spacing: 0.5px;
+}
+
+// ─── Utility ─────────────────────────────────────────────
+.ls-1 {
+  letter-spacing: 0.5px;
+}
+
+// ─── Print Styles ────────────────────────────────────────
+// When user clicks "Download Ticket", browser print dialog opens
+// This hides everything except the ticket card
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .ticket-card,
+  .ticket-card * {
+    visibility: visible;
+  }
+
+  .ticket-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  // Hide buttons and non-ticket content
+  .success-icon,
+  .success-page > .text-center:first-child,
+  .d-flex.gap-2.mt-4,
+  .success-page > p:last-child {
+    display: none !important;
+  }
+}
+
+// ─── Animations ──────────────────────────────────────────
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

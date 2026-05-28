@@ -1,0 +1,39 @@
+.suggestions__title {
+  color: var(--bright-teal-blue);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+.suggestions__window {
+  overflow: hidden;
+  cursor: pointer;
+  height: 27rem;
+}
+
+.suggestions__track {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+}
+ 
+app-hotel-card {
+  display: block;
+  flex: 0 0 22rem;
+  min-width: 22rem;
+
+  @media (max-width: 768px) {
+    flex: 0 0 18rem;
+    min-width: 18rem;
+  }
+
+  @media (max-width: 576px) {
+    flex: 0 0 75vw;
+    min-width: 75vw;
+  }
+}
+
+.card {
+  border: 1px solid var(--frosted-blue) !important;
+}

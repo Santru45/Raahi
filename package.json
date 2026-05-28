@@ -1,0 +1,18 @@
+{
+  "name": "7aftertravelanditi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "zip": "node zip.js",
+    "setup": "node setup.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "archiver": "^8.0.0",
+    "bestzip": "^2.2.5"
+  }
+}

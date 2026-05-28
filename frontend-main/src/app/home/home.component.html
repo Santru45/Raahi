@@ -1,0 +1,280 @@
+<app-review-prompt></app-review-prompt>
+<section class="hero position-relative overflow-hidden">
+  <div class="hero__bg">
+    <img src="https://images.unsplash.com/photo-1702743599501-a821d0b38b66?w=1920&q=80" alt="Hero"
+      class="w-100 h-100 object-fit-cover" />
+    <div class="hero__overlay"></div>
+  </div>
+
+  <div class="hero__content container position-relative h-100 d-flex align-items-center">
+    <div class="hero__text">
+      <!-- Badge -->
+      <div class="hero__badge d-inline-flex align-items-center gap-2 mb-4">
+        <i class="bi bi-stars"></i>
+        <span>Summer Sale &nbsp;·&nbsp; Up to 45% Off</span>
+      </div>
+
+      <h1 class="hero__title mb-3">
+        Discover Your<br /><span class="hero__title--accent">Perfect Escape</span>
+      </h1>
+      <p class="hero__sub mb-4">
+        Handpicked hotels, exclusive deals and seamless travel — all in one
+        place.
+      </p>
+
+      <!-- Quick-launch travel mode cards -->
+      <div class="hero__quicknav d-flex flex-wrap gap-3 mb-5">
+        <a routerLink="/hotel" class="hero__qcard">
+          <div class="hero__qcard-icon"><i class="bi bi-building"></i></div>
+          <div>
+            <div class="hero__qcard-title">Hotels</div>
+            <div class="hero__qcard-sub">18+ stays across India</div>
+          </div>
+        </a>
+        <a routerLink="/travel" class="hero__qcard">
+          <div class="hero__qcard-icon"><i class="bi bi-airplane"></i></div>
+          <div>
+            <div class="hero__qcard-title">Flights</div>
+            <div class="hero__qcard-sub">Domestic &amp; international</div>
+          </div>
+        </a>
+        <a routerLink="/travel" [queryParams]="{ mode: 'train' }" class="hero__qcard">
+          <div class="hero__qcard-icon"><i class="bi bi-train-front"></i></div>
+          <div>
+            <div class="hero__qcard-title">Trains</div>
+            <div class="hero__qcard-sub">Fast &amp; comfortable</div>
+          </div>
+        </a>
+        <a routerLink="/travel" [queryParams]="{ mode: 'bus' }" class="hero__qcard">
+          <div class="hero__qcard-icon"><i class="bi bi-bus-front"></i></div>
+          <div>
+            <div class="hero__qcard-title">Buses</div>
+            <div class="hero__qcard-sub">Affordable routes</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="hero__stats d-flex gap-4 mt-4">
+        <div class="d-flex align-items-center gap-2">
+          <i class="bi bi-building" style="color: var(--bright-teal-blue)"></i>
+          <span class="text-white small">500+ Hotels</span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <i class="bi bi-people" style="color: var(--bright-teal-blue)"></i>
+          <span class="text-white small">1M+ Travelers</span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <i class="bi bi-shield-check" style="color: var(--bright-teal-blue)"></i>
+          <span class="text-white small">Best Price Guarantee</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── POPULAR DESTINATIONS ────────────────────────────────────────────────── -->
+<section class="section container">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <p class="section__label mb-1">Explore</p>
+      <h2 class="section__title mb-0">Popular Destinations</h2>
+    </div>
+    <a routerLink="/hotel" class="btn btn-outline-primary btn-sm rounded-pill px-4">
+      View All <i class="bi bi-arrow-right ms-1"></i>
+    </a>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-6 col-md-3" *ngFor="let d of destinations">
+      <div class="dest-card rounded-4 overflow-hidden position-relative" (click)="goToDestination(d.city)"
+        style="cursor: pointer; height: 220px">
+        <img [src]="d.image" [alt]="d.city" class="w-100 h-100 object-fit-cover dest-card__img" />
+        <div class="dest-card__overlay"></div>
+        <div class="dest-card__info position-absolute bottom-0 start-0 p-3 text-white">
+          <h6 class="fw-bold mb-0">{{ d.city }}</h6>
+          <small class="opacity-75">{{ d.count }} hotel{{ d.count !== 1 ? "s" : "" }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY RAAHI ────────────────────────────────────────────────────────────── -->
+<section class="section why-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h1 class="section__label mb-1">Why Choose Us</h1>
+      <h2 class="section__title">Travel Smarter with Raahi</h2>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-6 col-md-3">
+        <div class="why-card text-center p-4 h-100">
+          <div class="why-card__icon mx-auto mb-3">
+            <i class="bi bi-wallet2 fs-4"></i>
+          </div>
+          <h6 class="fw-bold mb-2" style="color: var(--deep-twilight)">
+            Loyalty Coins
+          </h6>
+          <p class="text-muted small mb-0">
+            Earn coins on every booking and redeem for discounts
+          </p>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="why-card text-center p-4 h-100">
+          <div class="why-card__icon mx-auto mb-3">
+            <i class="bi bi-shield-check fs-4"></i>
+          </div>
+          <h6 class="fw-bold mb-2" style="color: var(--deep-twilight)">
+            Secure Payments
+          </h6>
+          <p class="text-muted small mb-0">
+            Virtual wallet with encrypted transactions
+          </p>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="why-card text-center p-4 h-100">
+          <div class="why-card__icon mx-auto mb-3">
+            <i class="bi bi-map fs-4"></i>
+          </div>
+          <h6 class="fw-bold mb-2" style="color: var(--deep-twilight)">
+            Smart Itineraries
+          </h6>
+          <p class="text-muted small mb-0">
+            Plan and sync your entire trip in one place
+          </p>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="why-card text-center p-4 h-100">
+          <div class="why-card__icon mx-auto mb-3">
+            <i class="bi bi-stars fs-4"></i>
+          </div>
+          <h6 class="fw-bold mb-2" style="color: var(--deep-twilight)">
+            Curated Deals
+          </h6>
+          <p class="text-muted small mb-0">
+            Exclusive offers handpicked for your travel style
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RECOMMENDATIONS ─────────────────────────────────────────────────────── -->
+<section class="section container">
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <div>
+      <p class="section__label mb-1">Personalised For You</p>
+      <h2 class="section__title mb-0">Hotels & Offers You'll Love</h2>
+    </div>
+    <a routerLink="/hotel" class="btn btn-outline-primary btn-sm rounded-pill px-4 d-none d-md-inline-flex">
+      Browse Hotels <i class="bi bi-arrow-right ms-1"></i>
+    </a>
+  </div>
+  <app-recommendation></app-recommendation>
+</section>
+
+<!-- ── CTA BANNER ───────────────────────────────────────────────────────────── -->
+<section class="cta-section">
+  <div class="container text-center">
+    <h2 class="cta-section__title mb-3">Ready to explore India?</h2>
+    <p class="cta-section__sub mb-5">
+      Flights, trains, buses and hotels — book everything in one trip.
+    </p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a routerLink="/hotel" class="btn cta-section__btn-primary px-5 py-3 rounded-pill fw-semibold">
+        <i class="bi bi-building me-2"></i>Book a Hotel
+      </a>
+      <a routerLink="/travel" class="btn cta-section__btn-outline px-5 py-3 rounded-pill fw-semibold">
+        <i class="bi bi-airplane me-2"></i>Book Travel
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row g-4 mb-5">
+      <div class="col-12 col-md-5">
+        <h3 class="site-footer__brand mb-3">Raahi</h3>
+        <p class="site-footer__desc mb-4">
+          Your trusted travel companion for hotels, flights, trains and buses
+          across India. Earn coins, save more, travel better.
+        </p>
+      </div>
+
+      <div class="col-6 col-md-3 offset-md-1">
+        <h6 class="site-footer__heading mb-3">Explore</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <a routerLink="/hotel" class="site-footer__link">Browse Hotels</a>
+          </li>
+          <li class="mb-2">
+            <a routerLink="/travel" class="site-footer__link">Book Flights</a>
+          </li>
+          <li class="mb-2">
+            <a routerLink="/travel" class="site-footer__link">Book Trains</a>
+          </li>
+          <li class="mb-2">
+            <a routerLink="/travel" class="site-footer__link">Book Buses</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <h6 class="site-footer__heading mb-3">Quick Links</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <a routerLink="/" class="site-footer__link">Home</a>
+          </li>
+          <li class="mb-2">
+            <a routerLink="/itinerary" class="site-footer__link">Itineraries</a>
+          </li>
+          <li class="mb-2">
+            <a routerLink="/login" class="site-footer__link">Sign In</a>
+          </li>
+          <li class="mb-2">
+            <a routerLink="/signup" class="site-footer__link">Sign Up</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Contact & Support Section -->
+    <div class="row g-4 mb-4 pt-4 border-top">
+      <div class="col-12 col-md-6">
+        <h6 class="site-footer__heading mb-3">
+          <i class="bi bi-headset me-2"></i>Contact & Support
+        </h6>
+        <p class="site-footer__desc mb-3">
+          For suggestions or complaints, reach out to us:
+        </p>
+        <div class="d-flex flex-column gap-2">
+          <div class="d-flex align-items-center gap-2 site-footer__desc">
+            <i class="bi bi-envelope-fill" style="color: var(--turquoise-surf);"></i>
+            <span>support&#64;raahi.com</span>
+          </div>
+          <div class="d-flex align-items-center gap-2 site-footer__desc">
+            <i class="bi bi-telephone-fill" style="color: var(--turquoise-surf);"></i>
+            <span>+91 1800 123 456</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <p class="site-footer__bottom-text mb-0">
+        © 2026 Raahi. All rights reserved.
+      </p>
+      <p class="site-footer__bottom-text mb-0">Your journey begins here ✈️</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,83 @@
+<div class="trip-card rounded-4 overflow-hidden">
+  <div class="trip-card__image">
+    <div class="trip-card__img-fallback">
+      <div class="trip-card__img-fallback-hint">
+        <i class="bi bi-camera"></i>
+        <span>Add a cover image</span>
+      </div>
+    </div>
+    <img
+      *ngIf="imgSrc"
+      [src]="imgSrc"
+      alt="Trip Image"
+      (error)="onImgError()"
+    />
+  </div>
+
+  <div class="trip-card__content">
+    <h5 class="trip-card__title">{{ data.trip_name }}</h5>
+    <p class="trip-card__dest" *ngIf="data.destination">
+      <i class="bi bi-geo-alt-fill me-1"></i>{{ data.destination }}
+    </p>
+
+    <p
+      class="trip-card__dates"
+      *ngIf="data.type === 'custom' && data.start_date && data.end_date"
+    >
+      <i class="bi bi-calendar3"></i>
+      {{ data.start_date | date: "mediumDate" }} —
+      {{ data.end_date | date: "mediumDate" }}
+    </p>
+    <p
+      class="trip-card__dates text-muted fst-italic"
+      *ngIf="data.type === 'custom' && (!data.start_date || !data.end_date)"
+    >
+      <i class="bi bi-calendar-x me-1"></i>No activities planned yet
+    </p>
+    <p
+      class="trip-card__dates trip-card__dates--std"
+      *ngIf="data.type === 'std'"
+    >
+      <i class="bi bi-stars"></i> Curated trip idea
+    </p>
+
+    <div class="trip-card__actions">
+      <!-- View Details always shown -->
+      <button
+        class="trip-card__btn"
+        [routerLink]="['/itinerary/details', data.id ?? data._id]"
+      >
+        View Details
+      </button>
+
+      <!-- Delete controls — custom only -->
+      <ng-container *ngIf="data.type === 'custom'">
+        <button
+          *ngIf="!confirmDelete"
+          class="trip-card__btn trip-card__btn--delete"
+          (click)="onDelete($event)"
+          title="Delete trip"
+        >
+          <i class="bi bi-trash"></i>
+        </button>
+
+        <ng-container *ngIf="confirmDelete">
+          <button
+            class="trip-card__btn trip-card__btn--confirm"
+            (click)="onDelete($event)"
+            title="Confirm delete"
+          >
+            <i class="bi bi-check-lg"></i>
+          </button>
+          <button
+            class="trip-card__btn trip-card__btn--cancel"
+            (click)="cancelDelete($event)"
+            title="Cancel"
+          >
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>

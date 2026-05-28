@@ -1,0 +1,380 @@
+// ─── home.component.scss ──────────────────────────────────────────────────────
+
+// ── Hero
+.hero {
+  height: 100vh;
+  min-height: 600px;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(3, 4, 94, 0.88) 0%,
+      rgba(2, 62, 138, 0.65) 55%,
+      rgba(0, 180, 216, 0.15) 100%
+    );
+  }
+
+  &__content {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  &__text {
+    max-width: 700px;
+  }
+
+  &__badge {
+    background: rgba(72, 202, 228, 0.15);
+    border: 1px solid rgba(72, 202, 228, 0.4);
+    backdrop-filter: blur(8px);
+    border-radius: 999px;
+    padding: 10px 20px;
+    color: #caf0f8;
+    font-size: 14px;
+    i {
+      color: #48cae4;
+    }
+  }
+
+  &__title {
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    &--accent {
+      color: #48cae4;
+    }
+  }
+
+  &__sub {
+    font-size: 1.15rem;
+    color: #caf0f8;
+    max-width: 520px;
+  }
+
+  &__search {
+    border-radius: 16px !important;
+    background: rgba(255, 255, 255, 0.97);
+    max-width: 680px;
+
+    .form-control {
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      font-size: 14px;
+      &:focus {
+        border-color: var(--bright-teal-blue);
+        box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.12);
+      }
+    }
+  }
+
+  &__search-btn {
+    background: linear-gradient(
+      135deg,
+      var(--bright-teal-blue),
+      var(--deep-twilight)
+    );
+    color: #fff;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    &:hover {
+      opacity: 0.9;
+      color: #fff;
+    }
+  }
+
+  &__stats {
+    flex-wrap: wrap;
+  }
+
+  // Quick-launch travel cards
+  &__quicknav {
+    max-width: 680px;
+  }
+
+  &__qcard {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    text-decoration: none;
+    flex: 1 1 120px;
+    min-width: 130px;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 180, 216, 0.25);
+      text-decoration: none;
+    }
+  }
+
+  &__qcard-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--bright-teal-blue), #0077b6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+    color: #fff;
+  }
+
+  &__qcard-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  &__qcard-sub {
+    font-size: 11px;
+    color: rgba(202, 240, 248, 0.8);
+    margin-top: 2px;
+    line-height: 1.3;
+  }
+}
+
+// ── Shared section spacing
+.section {
+  padding: 72px 0;
+}
+
+.section__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--bright-teal-blue);
+}
+
+.section__title {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--deep-twilight);
+}
+
+// ── Destinations
+.dest-card {
+  &__img {
+    transition: transform 0.5s ease;
+  }
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(3, 4, 94, 0.75) 0%,
+      transparent 60%
+    );
+  }
+  &:hover .dest-card__img {
+    transform: scale(1.07);
+  }
+}
+
+// ── Why section
+.why-section {
+  background: linear-gradient(160deg, #0077b6 0%, #023e8a 50%, #03045e 100%);
+}
+
+.why-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  &__icon {
+    background: rgba(72, 202, 228, 0.2);
+    color: #48cae4;
+  }
+
+  // override the inline dark colors for text
+  h6 {
+    color: #fff !important;
+  }
+  p {
+    color: #90e0ef !important;
+  }
+}
+
+// section label + title colors on dark bg
+.why-section {
+  .section__label {
+    color: #48cae4;
+  }
+  .section__title {
+    color: #fff;
+  }
+}
+// ── CTA
+.cta-section {
+  padding: 80px 0;
+  background: linear-gradient(
+    135deg,
+    var(--deep-twilight) 0%,
+    #023e8a 50%,
+    #0077b6 100%
+  );
+
+  &__title {
+    font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    color: #fff;
+  }
+
+  &__sub {
+    color: #90e0ef;
+    font-size: 1.1rem;
+  }
+
+  &__btn-primary {
+    background: #48cae4;
+    color: var(--deep-twilight);
+    border: none;
+    &:hover {
+      background: #90e0ef;
+      color: var(--deep-twilight);
+    }
+  }
+
+  &__btn-outline {
+    border: 2px solid #48cae4;
+    color: #48cae4;
+    background: transparent;
+    &:hover {
+      background: rgba(72, 202, 228, 0.1);
+      color: #caf0f8;
+      border-color: #90e0ef;
+    }
+  }
+}
+
+// ── Footer
+.site-footer {
+  background: var(--deep-twilight);
+  padding: 64px 0 32px;
+
+  &__brand {
+    color: #48cae4;
+    font-weight: 800;
+    font-size: 1.8rem;
+  }
+
+  &__desc {
+    color: #90e0ef; // ← replaces text-muted
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  &__heading {
+    color: #48cae4;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  &__link {
+    color: #90e0ef; // ← replaces text-muted
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  &__bottom {
+    border-top: 1px solid rgba(0, 119, 182, 0.4);
+    padding-top: 24px;
+  }
+
+  &__bottom-text {
+    color: #90e0ef; // ← replaces text-muted
+    font-size: 13px;
+  }
+}
+
+// ── Validation message pill ────────────────────────────────────────────────────
+.field-error {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 6px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  background-color: rgba(220, 53, 69, 0.07);
+  border-left: 3px solid #dc3545;
+  color: #b91c1c;
+
+  i {
+    font-size: 13px;
+    flex-shrink: 0;
+    color: #dc3545;
+  }
+
+  &--enter {
+    animation: errorIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  &--timed {
+    animation:
+      errorIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both,
+      errorOut 0.4s cubic-bezier(0.55, 0, 1, 0.45) 2.6s both;
+  }
+}
+
+@keyframes errorIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes errorOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.97);
+  }
+}

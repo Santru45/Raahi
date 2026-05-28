@@ -1,0 +1,55 @@
+// ── Validation message pill ────────────────────────────────────────────────────
+.field-error {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 6px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  background-color: rgba(220, 53, 69, 0.07);
+  border-left: 3px solid #dc3545;
+  color: #b91c1c;
+
+  i {
+    font-size: 13px;
+    flex-shrink: 0;
+    color: #dc3545;
+  }
+
+  // Smooth entrance
+  &--enter {
+    animation: errorIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  // Auto-dismiss: stays visible for ~2.4s then fades out
+  // Total lifecycle = 3s (matches the setTimeout in the component)
+  &--timed {
+    animation:
+      errorIn  0.35s cubic-bezier(0.22, 1, 0.36, 1) both,
+      errorOut 0.4s  cubic-bezier(0.55, 0, 1, 0.45)  2.6s both;
+  }
+}
+
+@keyframes errorIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes errorOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.97);
+  }
+}
